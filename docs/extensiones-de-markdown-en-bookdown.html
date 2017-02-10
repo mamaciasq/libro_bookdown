@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook." />
+  <meta name="github-repo" content="mamaciasq/libro_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
+  
+  <meta name="twitter:description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook." />
+  <meta name="twitter:image" content="images/cover.png" />
+
+<meta name="author" content="Yihui Xie">
+
+
+<meta name="date" content="2017-02-10">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="sintaxis-de-markdown.html">
+<link rel="next" href="codigo-en-r.html">
+
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/datatables-binding/datatables.js"></script>
+<link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">bookdown: Escritura de libros con R Markdown</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a><ul>
+<li class="chapter" data-level="" data-path="por-que-leer-este-libro.html"><a href="por-que-leer-este-libro.html"><i class="fa fa-check"></i>¿Por qué leer este libro?</a></li>
+<li class="chapter" data-level="" data-path="estructura-del-libro.html"><a href="estructura-del-libro.html"><i class="fa fa-check"></i>Estructura del libro</a></li>
+<li class="chapter" data-level="" data-path="informacion-acerca-del-software-y-convenciones.html"><a href="informacion-acerca-del-software-y-convenciones.html"><i class="fa fa-check"></i>Información acerca del software y convenciones</a></li>
+<li class="chapter" data-level="" data-path="agradecimientos.html"><a href="agradecimientos.html"><i class="fa fa-check"></i>Agradecimientos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="acerca-del-autor.html"><a href="acerca-del-autor.html"><i class="fa fa-check"></i>Acerca del Autor</a></li>
+<li class="chapter" data-level="1" data-path="introduccion.html"><a href="introduccion.html"><i class="fa fa-check"></i><b>1</b> Introducción</a><ul>
+<li class="chapter" data-level="1.1" data-path="motivacion.html"><a href="motivacion.html"><i class="fa fa-check"></i><b>1.1</b> Motivación</a></li>
+<li class="chapter" data-level="1.2" data-path="comenzando.html"><a href="comenzando.html"><i class="fa fa-check"></i><b>1.2</b> Comenzando</a></li>
+<li class="chapter" data-level="1.3" data-path="uso.html"><a href="uso.html"><i class="fa fa-check"></i><b>1.3</b> Uso</a></li>
+<li class="chapter" data-level="1.4" data-path="new-session.html"><a href="new-session.html"><i class="fa fa-check"></i><b>1.4</b> Dos enfoques de representación</a></li>
+<li class="chapter" data-level="1.5" data-path="algunos-tips.html"><a href="algunos-tips.html"><i class="fa fa-check"></i><b>1.5</b> Algunos tips</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="componentes.html"><a href="componentes.html"><i class="fa fa-check"></i><b>2</b> Componentes</a><ul>
+<li class="chapter" data-level="2.1" data-path="sintaxis-de-markdown.html"><a href="sintaxis-de-markdown.html"><i class="fa fa-check"></i><b>2.1</b> Sintaxis de Markdown</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="sintaxis-de-markdown.html"><a href="sintaxis-de-markdown.html#formateo-en-linea"><i class="fa fa-check"></i><b>2.1.1</b> Formateo en línea</a></li>
+<li class="chapter" data-level="2.1.2" data-path="sintaxis-de-markdown.html"><a href="sintaxis-de-markdown.html#elementos-de-nivel-bloque"><i class="fa fa-check"></i><b>2.1.2</b> Elementos de nivel bloque</a></li>
+<li class="chapter" data-level="2.1.3" data-path="sintaxis-de-markdown.html"><a href="sintaxis-de-markdown.html#expresiones-matematicas-en-latex"><i class="fa fa-check"></i><b>2.1.3</b> Expresiones matemáticas en LaTeX</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="extensiones-de-markdown-en-bookdown.html"><a href="extensiones-de-markdown-en-bookdown.html"><i class="fa fa-check"></i><b>2.2</b> Extensiones de Markdown en bookdown</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="extensiones-de-markdown-en-bookdown.html"><a href="extensiones-de-markdown-en-bookdown.html#ecuaciones"><i class="fa fa-check"></i><b>2.2.1</b> Numerar y referenciar ecuaciones</a></li>
+<li class="chapter" data-level="2.2.2" data-path="extensiones-de-markdown-en-bookdown.html"><a href="extensiones-de-markdown-en-bookdown.html#teoremas"><i class="fa fa-check"></i><b>2.2.2</b> Teoremas y demostraciones</a></li>
+<li class="chapter" data-level="2.2.3" data-path="extensiones-de-markdown-en-bookdown.html"><a href="extensiones-de-markdown-en-bookdown.html#encabezados-especiales"><i class="fa fa-check"></i><b>2.2.3</b> Encabezados especiales</a></li>
+<li class="chapter" data-level="2.2.4" data-path="extensiones-de-markdown-en-bookdown.html"><a href="extensiones-de-markdown-en-bookdown.html#referencias-de-textos"><i class="fa fa-check"></i><b>2.2.4</b> Referencias de textos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="codigo-en-r.html"><a href="codigo-en-r.html"><i class="fa fa-check"></i><b>2.3</b> Código en R</a></li>
+<li class="chapter" data-level="2.4" data-path="figuras.html"><a href="figuras.html"><i class="fa fa-check"></i><b>2.4</b> Figuras</a></li>
+<li class="chapter" data-level="2.5" data-path="tablas.html"><a href="tablas.html"><i class="fa fa-check"></i><b>2.5</b> Tablas</a></li>
+<li class="chapter" data-level="2.6" data-path="referencias-cruzadas.html"><a href="referencias-cruzadas.html"><i class="fa fa-check"></i><b>2.6</b> Referencias cruzadas</a></li>
+<li class="chapter" data-level="2.7" data-path="bloques-personalizados.html"><a href="bloques-personalizados.html"><i class="fa fa-check"></i><b>2.7</b> Bloques personalizados</a></li>
+<li class="chapter" data-level="2.8" data-path="citas.html"><a href="citas.html"><i class="fa fa-check"></i><b>2.8</b> Citas</a></li>
+<li class="chapter" data-level="2.9" data-path="latex-index.html"><a href="latex-index.html"><i class="fa fa-check"></i><b>2.9</b> Índices</a></li>
+<li class="chapter" data-level="2.10" data-path="html-widgets.html"><a href="html-widgets.html"><i class="fa fa-check"></i><b>2.10</b> HTML Widgets</a></li>
+<li class="chapter" data-level="2.11" data-path="paginas-web-y-aplicaciones-shiny.html"><a href="paginas-web-y-aplicaciones-shiny.html"><i class="fa fa-check"></i><b>2.11</b> Páginas web y aplicaciones Shiny</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="formatos-de-salida.html"><a href="formatos-de-salida.html"><i class="fa fa-check"></i><b>3</b> Formatos de salida</a><ul>
+<li class="chapter" data-level="3.1" data-path="html.html"><a href="html.html"><i class="fa fa-check"></i><b>3.1</b> HTML</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="html.html"><a href="html.html#estilo-gitbook"><i class="fa fa-check"></i><b>3.1.1</b> El estilo GitBook</a></li>
+<li class="chapter" data-level="3.1.2" data-path="html.html"><a href="html.html#el-estilo-bootstrap"><i class="fa fa-check"></i><b>3.1.2</b> El estilo Bootstrap</a></li>
+<li class="chapter" data-level="3.1.3" data-path="html.html"><a href="html.html#el-estilo-tufte"><i class="fa fa-check"></i><b>3.1.3</b> El estilo Tufte</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="latexpdf.html"><a href="latexpdf.html"><i class="fa fa-check"></i><b>3.2</b> LaTeX/PDF</a></li>
+<li class="chapter" data-level="3.3" data-path="e-books.html"><a href="e-books.html"><i class="fa fa-check"></i><b>3.3</b> E-Books</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="e-books.html"><a href="e-books.html#epub"><i class="fa fa-check"></i><b>3.3.1</b> EPUB</a></li>
+<li class="chapter" data-level="3.3.2" data-path="e-books.html"><a href="e-books.html#mobi"><i class="fa fa-check"></i><b>3.3.2</b> MOBI</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="un-documento-sencillo.html"><a href="un-documento-sencillo.html"><i class="fa fa-check"></i><b>3.4</b> Un documento sencillo</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="personalizacion.html"><a href="personalizacion.html"><i class="fa fa-check"></i><b>4</b> Personalización</a><ul>
+<li class="chapter" data-level="4.1" data-path="opciones-yaml.html"><a href="opciones-yaml.html"><i class="fa fa-check"></i><b>4.1</b> Opciones YAML</a></li>
+<li class="chapter" data-level="4.2" data-path="temas.html"><a href="temas.html"><i class="fa fa-check"></i><b>4.2</b> Temas</a></li>
+<li class="chapter" data-level="4.3" data-path="plantillas.html"><a href="plantillas.html"><i class="fa fa-check"></i><b>4.3</b> Plantillas</a></li>
+<li class="chapter" data-level="4.4" data-path="configuracion.html"><a href="configuracion.html"><i class="fa fa-check"></i><b>4.4</b> Configuración</a></li>
+<li class="chapter" data-level="4.5" data-path="internacionalizacion.html"><a href="internacionalizacion.html"><i class="fa fa-check"></i><b>4.5</b> Internacionalización</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="edicion.html"><a href="edicion.html"><i class="fa fa-check"></i><b>5</b> Edición</a><ul>
+<li class="chapter" data-level="5.1" data-path="construyendo-el-libro.html"><a href="construyendo-el-libro.html"><i class="fa fa-check"></i><b>5.1</b> Construyendo el libro</a></li>
+<li class="chapter" data-level="5.2" data-path="previsualizar-un-capitulo.html"><a href="previsualizar-un-capitulo.html"><i class="fa fa-check"></i><b>5.2</b> Previsualizar un capítulo</a></li>
+<li class="chapter" data-level="5.3" data-path="presentar-el-libro.html"><a href="presentar-el-libro.html"><i class="fa fa-check"></i><b>5.3</b> Presentar el libro</a></li>
+<li class="chapter" data-level="5.4" data-path="ide-rstudio.html"><a href="ide-rstudio.html"><i class="fa fa-check"></i><b>5.4</b> IDE RStudio</a></li>
+<li class="chapter" data-level="5.5" data-path="colaboracion.html"><a href="colaboracion.html"><i class="fa fa-check"></i><b>5.5</b> Colaboración</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="publicacion.html"><a href="publicacion.html"><i class="fa fa-check"></i><b>6</b> Publicación</a><ul>
+<li class="chapter" data-level="6.1" data-path="rstudio-connect.html"><a href="rstudio-connect.html"><i class="fa fa-check"></i><b>6.1</b> RStudio Connect</a></li>
+<li class="chapter" data-level="6.2" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>6.2</b> GitHub</a></li>
+<li class="chapter" data-level="6.3" data-path="editores.html"><a href="editores.html"><i class="fa fa-check"></i><b>6.3</b> Editores</a></li>
+</ul></li>
+<li class="appendix"><span><b>Apéndice</b></span></li>
+<li class="chapter" data-level="A" data-path="herramientas-de-software.html"><a href="herramientas-de-software.html"><i class="fa fa-check"></i><b>A</b> Herramientas de Software</a><ul>
+<li class="chapter" data-level="A.1" data-path="r-y-sus-paquetes.html"><a href="r-y-sus-paquetes.html"><i class="fa fa-check"></i><b>A.1</b> R y sus paquetes</a></li>
+<li class="chapter" data-level="A.2" data-path="pandoc.html"><a href="pandoc.html"><i class="fa fa-check"></i><b>A.2</b> Pandoc</a></li>
+<li class="chapter" data-level="A.3" data-path="latex.html"><a href="latex.html"><i class="fa fa-check"></i><b>A.3</b> LaTeX</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="uso-de-software.html"><a href="uso-de-software.html"><i class="fa fa-check"></i><b>B</b> Uso de Software</a><ul>
+<li class="chapter" data-level="B.1" data-path="knitr.html"><a href="knitr.html"><i class="fa fa-check"></i><b>B.1</b> knitr</a></li>
+<li class="chapter" data-level="B.2" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>B.2</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="faq.html"><a href="faq.html"><i class="fa fa-check"></i><b>C</b> FAQ</a></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">bookdown: Escritura de libros y documentos técnicos con R Markdown</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="extensiones-de-markdown-en-bookdown" class="section level2">
+<h2><span class="header-section-number">2.2</span> Extensiones de Markdown en bookdown</h2>
+<p>A pesar de que Pandoc de Markdown es mucho más rico que la sintaxis de Markdown original, aún existe una serie de cosas que podemos necesitar para la escritura académica. Por ejemplo, es compatible con ecuaciones matemáticas, pero no se puede numerar y referenciar ecuaciones en varias páginas HTML o en salida EPUB. Se ha proporcionado un par de extensiones de Markdown en <strong>bookdown</strong> para llenar estos vacíos.</p>
+<div id="ecuaciones" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Numerar y referenciar ecuaciones</h3>
+<p>Para numerar y referenciar ecuaciones, póngalas dentro de entornos de ecuaciones y asígneles etiquetas mediante la sintaxis <code>(\#eq:label)</code>, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\begin{equation} 
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  \label{eq:binom}
+\end{equation} </code></pre></div>
+<p>Esto muestra la siguiente ecuación:</p>
+<span class="math display" id="eq:binom">\[\begin{equation}
+f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k} \tag{2.1}
+\end{equation}\]</span>
+<p>Puede hacer referencia a la ecuación mediante <code>\@ref(eq:binom)</code>, por ejemplo, véase la ecuación <a href="extensiones-de-markdown-en-bookdown.html#eq:binom">(2.1)</a>.</p>
+
+<div class="rmdcaution">
+Las etiquetas de una ecuación deben comenzar con el prefijo <code>eq:</code> en <strong>bookdown</strong>. Las referencias a una ecuación funcionan mejor para la producción de LaTeX/PDF, y no están bien soportadas en la producción de Word o libros electrónicos. Para la salida HTML, <strong>bookdown</strong> sólo puede numerar las ecuaciones con etiquetas. Por favor asegúrese de que las ecuaciones sin etiquetas no estén numeradas ya sea usando el entorno <code>equation*</code> o adicionando <code>\nonumber</code> o <code>\notag</code> a sus ecuaciones. Las mismas reglas se aplican a otros entornos de matemáticas, tales como <code>eqnarray</code>,<code>gather</code>, <code>align</code>, etc. (por ejemplo, se puede utilizar el entorno <code>align*</code>).
+</div>
+<p></p>
+<p>Demostramos unos entornos más de ecuaciones matemáticas abajo. Aquí está una ecuación sin numerar utilizando el entorno <code>equation*</code>:</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\begin{equation*} 
+\frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x)
+\end{equation*} </code></pre></div>
+<span class="math display">\[\begin{equation*}
+\frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x)
+\end{equation*}\]</span>
+<p>Abajo hay un entorno <code>align</code> <a href="extensiones-de-markdown-en-bookdown.html#eq:align">(2.2)</a>:</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\begin{align} 
+g(X_{n}) &amp;= g(\theta)+g&#39;({\tilde{\theta}})(X_{n}-\theta) \notag \\
+\sqrt{n}[g(X_{n})-g(\theta)] &amp;= g&#39;\left({\tilde{\theta}}\right)
+  \sqrt{n}[X_{n}-\theta ] (\#eq:align)
+\end{align} </code></pre></div>
+<span class="math display" id="eq:align">\[\begin{align}
+g(X_{n}) &amp;= g(\theta)+g&#39;({\tilde{\theta}})(X_{n}-\theta) \notag \\
+\sqrt{n}[g(X_{n})-g(\theta)] &amp;= g&#39;\left({\tilde{\theta}}\right)
+  \sqrt{n}[X_{n}-\theta ] \tag{2.2}
+\end{align}\]</span>
+<p>El entorno <code>split</code> dentro de <code>equation</code> de manera que todas las líneas comparten el mismo número <a href="extensiones-de-markdown-en-bookdown.html#eq:var-beta">(2.3)</a>. Por defecto, cada línea en el entorno <code>align</code> se le asignará un número de ecuación. Suprimimos el número de la primera línea en el ejemplo anterior usando <code>\notag</code>. En este ejemplo, a todo el entorno <code>split</code> se le asignó un único número.</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\begin{equation} 
+\begin{split}
+\mathrm{Var}(\hat{\beta}) &amp; =\mathrm{Var}((X&#39;X)^{-1}X&#39;y)\\
+ &amp; =(X&#39;X)^{-1}X&#39;\mathrm{Var}(y)((X&#39;X)^{-1}X&#39;)&#39;\\
+ &amp; =(X&#39;X)^{-1}X&#39;\mathrm{Var}(y)X(X&#39;X)^{-1}\\
+ &amp; =(X&#39;X)^{-1}\sigma^{2}
+\end{split}
+(\#eq:var-beta)
+\end{equation} </code></pre></div>
+<span class="math display" id="eq:var-beta">\[\begin{equation}
+\begin{split}
+\mathrm{Var}(\hat{\beta}) &amp; =\mathrm{Var}((X&#39;X)^{-1}X&#39;y)\\
+ &amp; =(X&#39;X)^{-1}X&#39;\mathrm{Var}(y)((X&#39;X)^{-1}X&#39;)&#39;\\
+ &amp; =(X&#39;X)^{-1}X&#39;\mathrm{Var}(y)X(X&#39;X)^{-1}\\
+ &amp; =(X&#39;X)^{-1}\sigma^{2}
+\end{split}
+\tag{2.3}
+\end{equation}\]</span>
+</div>
+<div id="teoremas" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Teoremas y demostraciones</h3>
+<p>Los teoremas y las demostraciones se utilizan comúnmente en artículos y libros en matemáticas. Sin embargo, no se deje engañar por los nombres: un “teorema” es sólo un entorno numerado/etiquetado, y no tiene que ser un teorema matemático (por ejemplo, puede ser un ejemplo irrelevante para las matemáticas). Del mismo modo, una “demostración” es un entorno no numerado. En esta sección, siempre usamos los significados generales de un “teorema” y “demostración” a menos que se indique explícitamente.</p>
+<p>En <strong>bookdown</strong>, los tipos de entornos de teoremas soportados están en la tabla <a href="extensiones-de-markdown-en-bookdown.html#tab:theorem-envs">2.1</a>. Para escribir un teorema, puede usar la siguiente sintaxis:</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```{theorem}
+Aquí está mi teorema.
+```</code></pre></div>
+
+<table>
+<caption><span id="tab:theorem-envs">Tabla 2.1: </span>Entornos de teoremas en <strong>bookdown</strong>.</caption>
+<thead>
+<tr class="header">
+<th align="left">Environment</th>
+<th align="left">Printed Name</th>
+<th align="left">Label Prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">theorem</td>
+<td align="left">Theorem</td>
+<td align="left">thm</td>
+</tr>
+<tr class="even">
+<td align="left">lemma</td>
+<td align="left">Lemma</td>
+<td align="left">lem</td>
+</tr>
+<tr class="odd">
+<td align="left">definition</td>
+<td align="left">Definition</td>
+<td align="left">def</td>
+</tr>
+<tr class="even">
+<td align="left">corollary</td>
+<td align="left">Corollary</td>
+<td align="left">cor</td>
+</tr>
+<tr class="odd">
+<td align="left">proposition</td>
+<td align="left">Proposition</td>
+<td align="left">prp</td>
+</tr>
+<tr class="even">
+<td align="left">example</td>
+<td align="left">Example</td>
+<td align="left">ex</td>
+</tr>
+</tbody>
+</table>
+<p>Para escribir otros entornos de teoremas, reemplace <code>```{theorem}</code> por otros nombres de entornos en la tabla <a href="extensiones-de-markdown-en-bookdown.html#tab:theorem-envs">2.1</a>, por ejemplo, <code>```{lemma}</code>.</p>
+<p>Un teorema puede tener una opción <code>name</code> con lo cual su nombre se imprimirá, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```{theorem, name=&quot;Teorema de Pitágoras&quot;}
+Para un triángulo rectángulo, si $c$ denota la longitud de la hipotenusa
+y $a$ y $b$ denotan las longitudes de los otros dos lados, se tiene que
+$$a^2 + b^2 = c^2$$
+```</code></pre></div>
+<p>Si desea referirse a un teorema, debe etiquetarlo. La etiqueta puede escribirse después de <code>```{theorem</code>, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```{theorem, label=&quot;foo&quot;}
+Un teorema etiquetado aquí.
+```</code></pre></div>
+<p>La opción <code>label</code> puede ser implícita, por ejemplo, el siguiente teorema tiene la etiqueta <code>bar</code>:</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```{theorem, bar}
+Un teorema etiquetado aquí
+```</code></pre></div>
+<p>Después de etiquetar un teorema, puede referirse a él usando la sintaxis <code>\@ref(prefix:label)</code>.  Consulte la columna <code>Label Prefix</code> en la tabla <a href="extensiones-de-markdown-en-bookdown.html#tab:theorem-envs">2.1</a> para el valor de <code>prefix</code> en cada entorno. Por ejemplo, tenemos un teorema etiquetado y llamado a continuación, y <code>\@ref(thm:pyth)</code> nos da su número de teorema <a href="extensiones-de-markdown-en-bookdown.html#thm:pyth">2.1</a>:</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```{theorem, pyth, name=&quot;Pythagorean theorem&quot;}
+Para un triángulo rectángulo, si $c$ denota la longitud de la hipotenusa
+y $a$ y $b$ denotan las longitudes de los otros dos lados, se tiene que
+
+$$a^2 + b^2 = c^2$$
+```</code></pre></div>
+
+<div class="theorem">
+<p><span id="thm:pyth" class="theorem"><strong>Teorema 2.1  (Teorema de Pitágoras) </strong></span>Para un triángulo rectángulo, si <span class="math inline">\(c\)</span> denota la longitud de la hipotenusa y <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span> denotan las longitudes de los otros dos lados, se tiene que</p>
+<span class="math display">\[a^2 + b^2 = c^2\]</span>
+</div>
+<p></p>
+<p>Los entornos de demostración que actualmente se soportan <code>proof</code> and <code>remark</code>. La sintaxis es similar a los entornos de teoremas, y los entornos de demostración también pueden ser nombrados. La única diferencia es que, puesto que no tienen número, no se puede hacer referencia a ellos.</p>
+<p>Hemos tratado de hacer que todos estos entornos de teorema y demostración funcionen fuera de lo normal, no importa si su salida es PDF, HTML o EPUB. Si es un experto en LaTeX o HTML, quizá desee personalizar el estilo de estos entornos de todos modos (consulte el capítulo <a href="personalizacion.html#personalizacion">4</a>). La personalización en HTML es fácil con CSS, y cada entorno está encerrado en <code>&lt;div&gt;&lt;/div&gt;</code> con la clase CSS siendo el nombre del entorno, por ejemplo, <code>&lt;div class=&quot;lemma&quot;&gt;&lt;/div&gt;</code>. Para la salida de LaTeX, hemos predefinido el estilo para que sea <code>definición</code> para entornos <code>definition</code> and <code>example</code> y <code>remark</code> para entornos <code>proof</code> and <code>remark</code>. Todos los demás entornos usan el estilo <code>plain</code>. La definición de estilo se realiza a través del comando <code>\theoremstyle{}</code> del paquete <strong>amsthm</strong>.</p>
+<p>Por defecto, los teoremas están numerados por capítulos. Si no hay capítulos en su documento, en su lugar se numeran por secciones. Si todo el documento no tiene número (la opción de formato de salida <code>number_sections = FALSE</code>), todos los teoremas están numerados secuencialmente de 1, 2, …, N. LaTeX soporta numeración de un entorno de teorema después de otro, por ejemplo, teoremas y lemas comparten el mismo contador. Esto no es compatible con la salida HTML/EPUB en <strong>bookdown</strong>. Puede cambiar el esquema de numeración en el preámbulo de LaTeX definiendo sus propios entornos de teorema, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}</code></pre></div>
+<p>Cuando <strong>bookdown</strong> detecta <code>\newtheorem{theorem}</code> en su preámbulo de LaTeX, no escribirá sus definiciones de teorema por defecto, lo que significa que usted tiene que definir todos los entornos de teorema por su propia cuenta. Por razones de simplicidad y consistencia, no recomendamos que lo haga. Puede ser confuso cuando el Teorema 18 en PDF se convierte en el Teorema 2.4 en HTML.</p>
+<p>Los entornos de teorema y demostración quedarán ocultos si la opción de bloqueo <code>echo</code> se establece en <code>FALSE</code>. Para asegurarse de que siempre se muestren, puede agregar la opción de bloqueo <code>echo = TRUE</code>, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```{theorem, echo=TRUE}
+Aquí está mi teorema.
+```</code></pre></div>
+<p>A continuación, mostramos más ejemplos<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> de los entornos teorema y demostración, para que pueda ver los estilos por defecto en <strong>bookdown</strong>.</p>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-9" class="definition"><strong>Definición 2.1 </strong></span>La función característica de una variable aleatoria <span class="math inline">\(X\)</span> está definida por</p>
+<span class="math display">\[\varphi _{X}(t)=\operatorname {E} \left[e^{itX}\right], \; t\in\mathcal{R}\]</span>
+</div>
+<p></p>
+
+<div class="example">
+<p><span id="ex:unnamed-chunk-10" class="example"><strong>Ejemplo 2.1 </strong></span>Derivamos la función característica de <span class="math inline">\(X\sim U(0,1)\)</span> con la función de densidad de probabilidad <span class="math inline">\(f(x)=\mathbf{1}_{x \in [0,1]}\)</span>.</p>
+<span class="math display">\[\begin{equation*}
+\begin{split}
+\varphi _{X}(t) &amp;= \operatorname {E} \left[e^{itX}\right]\\
+ &amp; =\int e^{itx}f(x)dx\\
+ &amp; =\int_{0}^{1}e^{itx}dx\\
+ &amp; =\int_{0}^{1}\left(\cos(tx)+i\sin(tx)\right)dx\\
+ &amp; =\left.\left(\frac{\sin(tx)}{t}-i\frac{\cos(tx)}{t}\right)\right|_{0}^{1}\\
+ &amp; =\frac{\sin(t)}{t}-i\left(\frac{\cos(t)-1}{t}\right)\\
+ &amp; =\frac{i\sin(t)}{it}+\frac{\cos(t)-1}{it}\\
+ &amp; =\frac{e^{it}-1}{it}
+\end{split}
+\end{equation*}\]</span>
+Note que usamos el hecho <span class="math inline">\(e^{ix}=\cos(x)+i\sin(x)\)</span> dos veces.
+</div>
+<p></p>
+
+<div class="lemma">
+<p><span id="lem:chf-pdf" class="lemma"><strong>Lema 2.1 </strong></span>Para dos variables aleatorias cualquiera <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, ambas tienen la misma distribución de probabilidad si y solo si</p>
+<span class="math display">\[\varphi _{X_1}(t)=\varphi _{X_2}(t)\]</span>
+</div>
+<p></p>
+
+<div class="theorem">
+<p><span id="thm:chf-sum" class="theorem"><strong>Teorema 2.2 </strong></span>Si <span class="math inline">\(X_1\)</span>, …, <span class="math inline">\(X_n\)</span> son variables aleatorias independientes, y <span class="math inline">\(a_1\)</span>, …, <span class="math inline">\(a_n\)</span> son constantes, entonces la función característica de la combinación lineal <span class="math inline">\(S_n=\sum_{i=1}^na_iX_i\)</span> es</p>
+<span class="math display">\[\varphi _{S_{n}}(t)=\prod_{i=1}^n\varphi _{X_i}(a_{i}t)=\varphi _{X_{1}}(a_{1}t)\cdots \varphi _{X_{n}}(a_{n}t)\]</span>
+</div>
+<p></p>
+
+<div class="proposition">
+<span id="prp:unnamed-chunk-11" class="proposition"><strong>Proposición 2.1 </strong></span>La distribución de la suma de variables aleatorias independientes Poisson <span class="math inline">\(X_i \sim \mathrm{Pois}(\lambda_i),\: i=1,2,\cdots,n\)</span> es <span class="math inline">\(\mathrm{Pois}(\sum_{i=1}^n\lambda_i)\)</span>.
+</div>
+<p></p>
+
+<div class="proof">
+<p><span class="proof"><em>Demostración. </em></span> La función característica de <span class="math inline">\(X\sim\mathrm{Pois}(\lambda)\)</span> es <span class="math inline">\(\varphi _{X}(t)=e^{\lambda (e^{it}-1)}\)</span>. Sea <span class="math inline">\(P_n=\sum_{i=1}^nX_i\)</span>. Se sabe del teorema <a href="extensiones-de-markdown-en-bookdown.html#thm:chf-sum">2.2</a> que</p>
+<span class="math display">\[\begin{equation*}
+\begin{split}
+\varphi _{P_{n}}(t) &amp; =\prod_{i=1}^n\varphi _{X_i}(t) \\
+&amp; =\prod_{i=1}^n e^{\lambda_i (e^{it}-1)} \\
+&amp; = e^{\sum_{i=1}^n \lambda_i (e^{it}-1)}
+\end{split}
+\end{equation*}\]</span>
+Esta es la función característica de una variable aleatoria Poisson con parámetro <span class="math inline">\(\lambda=\sum_{i=1}^n \lambda_i\)</span>. Del Lemma <a href="extensiones-de-markdown-en-bookdown.html#lem:chf-pdf">2.1</a>, se sabe que la distribución de <span class="math inline">\(P_n\)</span> es <span class="math inline">\(\mathrm{Pois}(\sum_{i=1}^n\lambda_i)\)</span>.
+</div>
+<p></p>
+
+<div class="remark">
+<span class="remark"><em>Observación. </em></span> En algunos casos, es muy conveniente y fácil calcular la distribución de la suma de variables aleatorias independientes usando funciones características.
+</div>
+<p></p>
+
+<div class="corollary">
+<p><span id="cor:unnamed-chunk-14" class="corollary"><strong>Corolario 2.1 </strong></span>La función característica de la suma de dos variables aleatorias independientes <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span> es el producto de las funciones características de <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>, por ejemplo,</p>
+<span class="math display">\[\varphi _{X_1+X_2}(t)=\varphi _{X_1}(t) \varphi _{X_2}(t)\]</span>
+</div>
+<p></p>
+</div>
+<div id="encabezados-especiales" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> Encabezados especiales</h3>
+<p>Hay unos cuantos tipos especiales de encabezados de primer nivel que serán procesados de forma diferente en <strong>bookdown</strong>. El primer tipo es un enzacebzado sin numerar que se inicia con el token <code>(PART)</code>. Este tipo de encabezados se traducen en títulos de parte. Si está familiarizado con LaTeX, esto significa básicamente <code>\part{}</code>. Cuando su libro tenga un gran número de capítulos, es posible que desee organizarlos en partes, por ejemplo,</p>
+<pre><code># (PART) Parte I {-} 
+
+# Capítulo Uno
+
+# Capítulo Dos
+
+# (PART) Parte II {-} 
+
+# Capítulo Tres</code></pre>
+<p>El segundo tipo es un encabezado sin numeración que comienza con <code>(APPENDIX)</code>, lo que indica que todos los capítulos después de este encabezado son apéndices , por ejemplo,</p>
+<pre><code># Capítulo Uno 
+
+# Capítulo Dos
+
+# (APPENDIX) Apéndice {-} 
+
+# Apéndice A
+
+# Apéndice B</code></pre>
+<p>El estilo de numeración de los apéndices se cambiará automáticamente en la salida LaTeX/PDF y HTML (por lo general de la forma A, A.1, A.2, B, B.1, …). Esta función no está disponible para libros electrónicos o de salida Word</p>
+</div>
+<div id="referencias-de-textos" class="section level3">
+<h3><span class="header-section-number">2.2.4</span> Referencias de textos</h3>
+<p>Se puede asignar un texto a una etiqueta y hacer referencia al texto usando la etiqueta en otro lugar del documento. Esto puede ser particularmente útil para títulos largos de figuras/cuadros (sección <a href="figuras.html#figuras">2.4</a> y <a href="tablas.html#tablas">2.5</a>), en cuyo caso normalmente tiene que escribir toda la cadena de caracteres en el encabezado del chunk (por ejemplo, <code>fig.cap = &quot;Un título de figura larguísimo&quot;</code>) o su código en R (por ejemplo, <code>kable(caption = &quot;Un título de tabla larguísimo.&quot;)</code>). También es útil cuando estos títulos contienen caracteres especiales HTML o LaTeX, por ejemplo, si el pie de figura contiene un guión bajo, que funciona en la salida HTML, pero no pueden trabajar en la producción de LaTeX ya que el guión bajo debe ser omitido en LaTeX.</p>
+<p>La sintaxis de una referencia de texto es <code>(ref:label)text</code>, donde <code>label</code> es una etiqueta única<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a> en todo el documento para <code>text</code>. Debe estar en un párrafo separado mediante líneas vacías por encima y por debajo de ella. Por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">(ref:foo) Defina una referencia de texto **aquí**. </code></pre></div>
+<p>A continuación, puede usar <code>(ref: foo)</code> en sus pies de figura/tabla. El texto puede contener cualquier cosa que Markdown soporte, siempre y cuando sea un solo párrafo. Aquí hay un ejemplo completo:</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">Un párrafo normal.
+
+(ref:foo) Un diagrama de dispersión de los datos <span class="bn">`cars`</span> usando las gráficas de la **base** de R. 
+
+```{r foo, fig.cap=&#39;(ref:foo)&#39;}
+plot(cars)  # a scatterplot
+```</code></pre></div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>Algunos ejemplos se adaptan de la página de Wikipedia <a href="https://en.wikipedia.org/wiki/Caracteristic_function_(probability_theory)" class="uri">https://en.wikipedia.org/wiki/Caracteristic_function_(probability_theory)</a><a href="extensiones-de-markdown-en-bookdown.html#fnref4">↩</a></p></li>
+<li id="fn5"><p>Usted puede considerar el uso de las etiquetas de chunk.<a href="extensiones-de-markdown-en-bookdown.html#fnref5">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sintaxis-de-markdown.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="codigo-en-r.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mamaciasq/libro_bookdown02-components.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
