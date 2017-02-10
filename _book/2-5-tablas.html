@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="bookdown: Escritura de libros con R Markdown" />
+<meta property="og:type" content="book" />
+
+<meta property="og:image" content="images/cover.png" />
+<meta property="og:description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook." />
+<meta name="github-repo" content="rstudio/bookdown" />
+
+<meta name="author" content="Yihui Xie" />
+
+<meta name="date" content="2017-02-03" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
+
+<title>bookdown: Escritura de libros con R Markdown</title>
+
+<script src="libs/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap/shim/respond.min.js"></script>
+<script src="libs/navigation/tabsets.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/datatables-binding/datatables.js"></script>
+<link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="has-sub"><a href="index.html#prefacio">Prefacio</a><ul>
+<li><a href="por-que-leer-este-libro.html#por-que-leer-este-libro">¿Por qué leer este libro?</a></li>
+<li><a href="informacion-acerca-del-software-y-convenciones.html#informacion-acerca-del-software-y-convenciones">Información acerca del software y convenciones</a></li>
+<li><a href="agradecimientos.html#agradecimientos">Agradecimientos</a></li>
+</ul></li>
+<li><a href="acerca-del-autor.html#acerca-del-autor">Acerca del Autor</a></li>
+<li class="has-sub"><a href="1-introduccion.html#introduccion"><span class="toc-section-number">1</span> Introducción</a><ul>
+<li><a href="1-1-motivacion.html#motivacion"><span class="toc-section-number">1.1</span> Motivación</a></li>
+<li><a href="1-2-comenzando.html#comenzando"><span class="toc-section-number">1.2</span> Comenzando</a></li>
+<li><a href="1-3-uso.html#uso"><span class="toc-section-number">1.3</span> Uso</a></li>
+<li><a href="1-4-new-session.html#new-session"><span class="toc-section-number">1.4</span> Dos enfoques de representación</a></li>
+<li><a href="1-5-algunos-tips.html#algunos-tips"><span class="toc-section-number">1.5</span> Algunos tips</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-componentes.html#componentes"><span class="toc-section-number">2</span> Componentes</a><ul>
+<li class="has-sub"><a href="2-1-sintaxis-de-markdown.html#sintaxis-de-markdown"><span class="toc-section-number">2.1</span> Sintaxis de Markdown</a><ul>
+<li><a href="2-1-sintaxis-de-markdown.html#formateo-en-linea"><span class="toc-section-number">2.1.1</span> Formateo en línea</a></li>
+<li><a href="2-1-sintaxis-de-markdown.html#elementos-de-nivel-bloque"><span class="toc-section-number">2.1.2</span> Elementos de nivel bloque</a></li>
+<li><a href="2-1-sintaxis-de-markdown.html#expresiones-matematicas-en-latex"><span class="toc-section-number">2.1.3</span> Expresiones matemáticas en LaTeX</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-2-extensiones-de-markdown-en-bookdown.html#extensiones-de-markdown-en-bookdown"><span class="toc-section-number">2.2</span> Extensiones de Markdown en bookdown</a><ul>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#ecuaciones"><span class="toc-section-number">2.2.1</span> Numerar y referenciar ecuaciones</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#teoremas"><span class="toc-section-number">2.2.2</span> Teoremas y demostraciones</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#encabezados-especiales"><span class="toc-section-number">2.2.3</span> Encabezados especiales</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#referencias-de-textos"><span class="toc-section-number">2.2.4</span> Referencias de textos</a></li>
+</ul></li>
+<li><a href="2-3-codigo-en-r.html#codigo-en-r"><span class="toc-section-number">2.3</span> Código en R</a></li>
+<li><a href="2-4-figuras.html#figuras"><span class="toc-section-number">2.4</span> Figuras</a></li>
+<li><a href="2-5-tablas.html#tablas"><span class="toc-section-number">2.5</span> Tablas</a></li>
+<li><a href="2-6-referencias-cruzadas.html#referencias-cruzadas"><span class="toc-section-number">2.6</span> Referencias cruzadas</a></li>
+<li><a href="2-7-bloques-personalizados.html#bloques-personalizados"><span class="toc-section-number">2.7</span> Bloques personalizados</a></li>
+<li><a href="2-8-citas.html#citas"><span class="toc-section-number">2.8</span> Citas</a></li>
+<li><a href="2-9-latex-index.html#latex-index"><span class="toc-section-number">2.9</span> Index</a></li>
+<li><a href="2-10-html-widgets.html#html-widgets"><span class="toc-section-number">2.10</span> HTML Widgets</a></li>
+<li><a href="2-11-paginas-web-y-aplicaciones-shiny.html#paginas-web-y-aplicaciones-shiny"><span class="toc-section-number">2.11</span> Páginas web y aplicaciones Shiny</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-formatos-de-salida.html#formatos-de-salida"><span class="toc-section-number">3</span> Formatos de salida</a><ul>
+<li class="has-sub"><a href="3-1-html.html#html"><span class="toc-section-number">3.1</span> HTML</a><ul>
+<li><a href="3-1-html.html#estilo-gitbook"><span class="toc-section-number">3.1.1</span> El estilo GitBook</a></li>
+<li><a href="3-1-html.html#el-estilo-bootstrap"><span class="toc-section-number">3.1.2</span> El estilo Bootstrap</a></li>
+<li><a href="3-1-html.html#el-estilo-tufte"><span class="toc-section-number">3.1.3</span> El estilo Tufte</a></li>
+</ul></li>
+<li><a href="3-2-latexpdf.html#latexpdf"><span class="toc-section-number">3.2</span> LaTeX/PDF</a></li>
+<li class="has-sub"><a href="3-3-e-books.html#e-books"><span class="toc-section-number">3.3</span> E-Books</a><ul>
+<li><a href="3-3-e-books.html#epub"><span class="toc-section-number">3.3.1</span> EPUB</a></li>
+<li><a href="3-3-e-books.html#mobi"><span class="toc-section-number">3.3.2</span> MOBI</a></li>
+</ul></li>
+<li><a href="3-4-un-documento-sencillo.html#un-documento-sencillo"><span class="toc-section-number">3.4</span> Un documento sencillo</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-personalizacion.html#personalizacion"><span class="toc-section-number">4</span> Personalización</a><ul>
+<li><a href="4-1-opciones-yaml.html#opciones-yaml"><span class="toc-section-number">4.1</span> Opciones YAML</a></li>
+<li><a href="4-2-temas.html#temas"><span class="toc-section-number">4.2</span> Temas</a></li>
+<li><a href="4-3-plantillas.html#plantillas"><span class="toc-section-number">4.3</span> Plantillas</a></li>
+<li><a href="4-4-configuracion.html#configuracion"><span class="toc-section-number">4.4</span> Configuración</a></li>
+<li><a href="4-5-internacionalizacion.html#internacionalizacion"><span class="toc-section-number">4.5</span> Internacionalización</a></li>
+</ul></li>
+<li class="has-sub"><a href="5-edicion.html#edicion"><span class="toc-section-number">5</span> Edición</a><ul>
+<li><a href="5-1-construyendo-el-libro.html#construyendo-el-libro"><span class="toc-section-number">5.1</span> Construyendo el libro</a></li>
+<li><a href="5-2-previsualizar-un-capitulo.html#previsualizar-un-capitulo"><span class="toc-section-number">5.2</span> Previsualizar un capítulo</a></li>
+<li><a href="5-3-presentar-el-libro.html#presentar-el-libro"><span class="toc-section-number">5.3</span> Presentar el libro</a></li>
+<li><a href="5-4-ide-rstudio.html#ide-rstudio"><span class="toc-section-number">5.4</span> IDE RStudio</a></li>
+</ul></li>
+<li class="has-sub"><a href="6-publicacion.html#publicacion"><span class="toc-section-number">6</span> Publicación</a><ul>
+<li><a href="6-1-rstudio-connect.html#rstudio-connect"><span class="toc-section-number">6.1</span> RStudio Connect</a></li>
+<li><a href="6-2-github.html#github"><span class="toc-section-number">6.2</span> GitHub</a></li>
+<li><a href="6-3-editores.html#editores"><span class="toc-section-number">6.3</span> Editores</a></li>
+</ul></li>
+<li class="appendix"><span><b>Apéndice</b></span></li>
+<li class="has-sub"><a href="A-herramientas-de-software.html#herramientas-de-software"><span class="toc-section-number">A</span> Herramientas de Software</a><ul>
+<li><a href="A-1-r-y-sus-paquetes.html#r-y-sus-paquetes"><span class="toc-section-number">A.1</span> R y sus paquetes</a></li>
+<li><a href="A-2-pandoc.html#pandoc"><span class="toc-section-number">A.2</span> Pandoc</a></li>
+<li><a href="A-3-latex.html#latex"><span class="toc-section-number">A.3</span> LaTeX</a></li>
+</ul></li>
+<li class="has-sub"><a href="B-uso-de-software.html#uso-de-software"><span class="toc-section-number">B</span> Uso de Software</a><ul>
+<li><a href="B-1-knitr.html#knitr"><span class="toc-section-number">B.1</span> knitr</a></li>
+<li><a href="B-2-r-markdown.html#r-markdown"><span class="toc-section-number">B.2</span> R Markdown</a></li>
+</ul></li>
+<li><a href="C-faq.html#faq"><span class="toc-section-number">C</span> FAQ</a></li>
+<li><a href="referencias.html#referencias">Referencias</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="tablas" class="section level2">
+<h2><span class="header-section-number">2.5</span> Tablas</h2>
+<p>Por ahora, la forma más conveniente para generar una tabla es la función <code>knitr::kable()</code>, porque hay algunos trucos internos en <strong>knitr</strong> para que funcione con <strong>bookdown</strong> y los usuarios no tienen necesidad de preocuparse por estos detalles de implementación. Adelante se explicará cómo utilizar otros paquetes y funciones más detalladamente en esta sección.</p>
+<p>Al igual que las figuras, las tablas con títulos también estarán numeradas y podrán ser referenciadas. La función <code>kable()</code> generará automáticamente una etiqueta para un entorno de la tabla, que es el prefijo <code>tab:</code> más la etiqueta del chunk. Por ejemplo, la etiqueta de la tabla para un chunk con la etiqueta <code>foo</code> será: <code>tab:foo</code>, y usar la sintaxis <code>\@ref(etiqueta)</code> para hacer referencia a la tabla. La tabla <a href="2-5-tablas.html#tab:table-single">2.1</a> es un ejemplo sencillo.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(
+  <span class="kw">head</span>(mtcars, <span class="dv">10</span>), <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,
+  <span class="dt">caption =</span> <span class="st">&#39;Una tabla de las primeras 10 filas de la base de datos mtcars.&#39;</span>
+)</code></pre></div>
+<table>
+<caption><span id="tab:table-single">Tabla 2.1: </span>Una tabla de las primeras 10 filas de la base de datos mtcars.</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">mpg</th>
+<th align="right">cyl</th>
+<th align="right">disp</th>
+<th align="right">hp</th>
+<th align="right">drat</th>
+<th align="right">wt</th>
+<th align="right">qsec</th>
+<th align="right">vs</th>
+<th align="right">am</th>
+<th align="right">gear</th>
+<th align="right">carb</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mazda RX4</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160.0</td>
+<td align="right">110</td>
+<td align="right">3.90</td>
+<td align="right">2.620</td>
+<td align="right">16.46</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td>Mazda RX4 Wag</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160.0</td>
+<td align="right">110</td>
+<td align="right">3.90</td>
+<td align="right">2.875</td>
+<td align="right">17.02</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td>Datsun 710</td>
+<td align="right">22.8</td>
+<td align="right">4</td>
+<td align="right">108.0</td>
+<td align="right">93</td>
+<td align="right">3.85</td>
+<td align="right">2.320</td>
+<td align="right">18.61</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td>Hornet 4 Drive</td>
+<td align="right">21.4</td>
+<td align="right">6</td>
+<td align="right">258.0</td>
+<td align="right">110</td>
+<td align="right">3.08</td>
+<td align="right">3.215</td>
+<td align="right">19.44</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td>Hornet Sportabout</td>
+<td align="right">18.7</td>
+<td align="right">8</td>
+<td align="right">360.0</td>
+<td align="right">175</td>
+<td align="right">3.15</td>
+<td align="right">3.440</td>
+<td align="right">17.02</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td>Valiant</td>
+<td align="right">18.1</td>
+<td align="right">6</td>
+<td align="right">225.0</td>
+<td align="right">105</td>
+<td align="right">2.76</td>
+<td align="right">3.460</td>
+<td align="right">20.22</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td>Duster 360</td>
+<td align="right">14.3</td>
+<td align="right">8</td>
+<td align="right">360.0</td>
+<td align="right">245</td>
+<td align="right">3.21</td>
+<td align="right">3.570</td>
+<td align="right">15.84</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td>Merc 240D</td>
+<td align="right">24.4</td>
+<td align="right">4</td>
+<td align="right">146.7</td>
+<td align="right">62</td>
+<td align="right">3.69</td>
+<td align="right">3.190</td>
+<td align="right">20.00</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td>Merc 230</td>
+<td align="right">22.8</td>
+<td align="right">4</td>
+<td align="right">140.8</td>
+<td align="right">95</td>
+<td align="right">3.92</td>
+<td align="right">3.150</td>
+<td align="right">22.90</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td>Merc 280</td>
+<td align="right">19.2</td>
+<td align="right">6</td>
+<td align="right">167.6</td>
+<td align="right">123</td>
+<td align="right">3.92</td>
+<td align="right">3.440</td>
+<td align="right">18.30</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+<p>Si desea colocar varias tablas en un único entorno de tablas, simplemente empaquete los objetos de datos (usualmente en data frames en R) dentro de una lista. Véase la tabla <a href="2-5-tablas.html#tab:table-multi">2.2</a> para un ejemplo.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(
+  <span class="kw">list</span>(
+    <span class="kw">head</span>(iris[,<span class="dv">1</span>:<span class="dv">2</span>],<span class="dv">3</span>),
+    <span class="kw">head</span>(mtcars[,<span class="dv">1</span>:<span class="dv">3</span>],<span class="dv">5</span>)
+  ),
+  <span class="dt">caption =</span> <span class="st">&#39;Una trama de dos tablas.&#39;</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>
+)</code></pre></div>
+<table class="kable_wrapper">
+<caption>
+<span id="tab:table-multi">Tabla 2.2: </span>Una trama de dos tablas.
+</caption>
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Sepal.Length</th>
+<th align="right">Sepal.Width</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+</tr>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">3.0</td>
+</tr>
+<tr class="odd">
+<td align="right">4.7</td>
+<td align="right">3.2</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">mpg</th>
+<th align="right">cyl</th>
+<th align="right">disp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mazda RX4</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160</td>
+</tr>
+<tr class="even">
+<td>Mazda RX4 Wag</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160</td>
+</tr>
+<tr class="odd">
+<td>Datsun 710</td>
+<td align="right">22.8</td>
+<td align="right">4</td>
+<td align="right">108</td>
+</tr>
+<tr class="even">
+<td>Hornet 4 Drive</td>
+<td align="right">21.4</td>
+<td align="right">6</td>
+<td align="right">258</td>
+</tr>
+<tr class="odd">
+<td>Hornet Sportabout</td>
+<td align="right">18.7</td>
+<td align="right">8</td>
+<td align="right">360</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Cuando no se quiera una tabla flotante en PDF, es posible utilizar el paquete de LaTeX [<strong>longtable</strong>] (<a href="https://www.ctan.org/pkg/longtable" class="uri">https://www.ctan.org/pkg/longtable</a>), que puede dividir una tabla a través de múltiples páginas. Para utilizar <strong>longtable</strong>, sólo tiene que poner <code>longtable = TRUE</code> en <code>kable()</code>, y asegurarse de incluir <code>\usepackage{longtable}</code> en el preámbulo de LaTeX (véase la sección <a href="4-1-opciones-yaml.html#opciones-yaml">4.1</a> para saber cómo personalizar el preámbulo LaTeX). Por supuesto, esto es irrelevante para la salida HTML, ya que las tablas de HTML no necesitan flotar.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(
+  iris[<span class="dv">1</span>:<span class="dv">100</span>, ], <span class="dt">longtable =</span> <span class="ot">TRUE</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,
+  <span class="dt">caption =</span> <span class="st">&#39;Una tabla generada mediante el paquete `longtable`.&#39;</span>
+)</code></pre></div>
+<table>
+<caption><span id="tab:longtable">Tabla 2.3: </span>Una tabla generada mediante el paquete <code>longtable</code>.</caption>
+<thead>
+<tr class="header">
+<th align="right">Sepal.Length</th>
+<th align="right">Sepal.Width</th>
+<th align="right">Petal.Length</th>
+<th align="right">Petal.Width</th>
+<th align="left">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.7</td>
+<td align="right">3.2</td>
+<td align="right">1.3</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.6</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.0</td>
+<td align="right">3.6</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.4</td>
+<td align="right">3.9</td>
+<td align="right">1.7</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.6</td>
+<td align="right">3.4</td>
+<td align="right">1.4</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.0</td>
+<td align="right">3.4</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.4</td>
+<td align="right">2.9</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.1</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.4</td>
+<td align="right">3.7</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.8</td>
+<td align="right">3.4</td>
+<td align="right">1.6</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.8</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+<td align="right">0.1</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.3</td>
+<td align="right">3.0</td>
+<td align="right">1.1</td>
+<td align="right">0.1</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.8</td>
+<td align="right">4.0</td>
+<td align="right">1.2</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.7</td>
+<td align="right">4.4</td>
+<td align="right">1.5</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.4</td>
+<td align="right">3.9</td>
+<td align="right">1.3</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+<td align="right">1.4</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.7</td>
+<td align="right">3.8</td>
+<td align="right">1.7</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.1</td>
+<td align="right">3.8</td>
+<td align="right">1.5</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.4</td>
+<td align="right">3.4</td>
+<td align="right">1.7</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.1</td>
+<td align="right">3.7</td>
+<td align="right">1.5</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.6</td>
+<td align="right">3.6</td>
+<td align="right">1.0</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.1</td>
+<td align="right">3.3</td>
+<td align="right">1.7</td>
+<td align="right">0.5</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.8</td>
+<td align="right">3.4</td>
+<td align="right">1.9</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.0</td>
+<td align="right">3.0</td>
+<td align="right">1.6</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.0</td>
+<td align="right">3.4</td>
+<td align="right">1.6</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.2</td>
+<td align="right">3.5</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.2</td>
+<td align="right">3.4</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.7</td>
+<td align="right">3.2</td>
+<td align="right">1.6</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.8</td>
+<td align="right">3.1</td>
+<td align="right">1.6</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.4</td>
+<td align="right">3.4</td>
+<td align="right">1.5</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.2</td>
+<td align="right">4.1</td>
+<td align="right">1.5</td>
+<td align="right">0.1</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.5</td>
+<td align="right">4.2</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.9</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.0</td>
+<td align="right">3.2</td>
+<td align="right">1.2</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.5</td>
+<td align="right">3.5</td>
+<td align="right">1.3</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">3.6</td>
+<td align="right">1.4</td>
+<td align="right">0.1</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.4</td>
+<td align="right">3.0</td>
+<td align="right">1.3</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.1</td>
+<td align="right">3.4</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.0</td>
+<td align="right">3.5</td>
+<td align="right">1.3</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.5</td>
+<td align="right">2.3</td>
+<td align="right">1.3</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.4</td>
+<td align="right">3.2</td>
+<td align="right">1.3</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.0</td>
+<td align="right">3.5</td>
+<td align="right">1.6</td>
+<td align="right">0.6</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.1</td>
+<td align="right">3.8</td>
+<td align="right">1.9</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.8</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.1</td>
+<td align="right">3.8</td>
+<td align="right">1.6</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.6</td>
+<td align="right">3.2</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.3</td>
+<td align="right">3.7</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.0</td>
+<td align="right">3.3</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">7.0</td>
+<td align="right">3.2</td>
+<td align="right">4.7</td>
+<td align="right">1.4</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">6.4</td>
+<td align="right">3.2</td>
+<td align="right">4.5</td>
+<td align="right">1.5</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">6.9</td>
+<td align="right">3.1</td>
+<td align="right">4.9</td>
+<td align="right">1.5</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">5.5</td>
+<td align="right">2.3</td>
+<td align="right">4.0</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">6.5</td>
+<td align="right">2.8</td>
+<td align="right">4.6</td>
+<td align="right">1.5</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">5.7</td>
+<td align="right">2.8</td>
+<td align="right">4.5</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">6.3</td>
+<td align="right">3.3</td>
+<td align="right">4.7</td>
+<td align="right">1.6</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">2.4</td>
+<td align="right">3.3</td>
+<td align="right">1.0</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">6.6</td>
+<td align="right">2.9</td>
+<td align="right">4.6</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">5.2</td>
+<td align="right">2.7</td>
+<td align="right">3.9</td>
+<td align="right">1.4</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.0</td>
+<td align="right">2.0</td>
+<td align="right">3.5</td>
+<td align="right">1.0</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">5.9</td>
+<td align="right">3.0</td>
+<td align="right">4.2</td>
+<td align="right">1.5</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">6.0</td>
+<td align="right">2.2</td>
+<td align="right">4.0</td>
+<td align="right">1.0</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">6.1</td>
+<td align="right">2.9</td>
+<td align="right">4.7</td>
+<td align="right">1.4</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.6</td>
+<td align="right">2.9</td>
+<td align="right">3.6</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">6.7</td>
+<td align="right">3.1</td>
+<td align="right">4.4</td>
+<td align="right">1.4</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.6</td>
+<td align="right">3.0</td>
+<td align="right">4.5</td>
+<td align="right">1.5</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">5.8</td>
+<td align="right">2.7</td>
+<td align="right">4.1</td>
+<td align="right">1.0</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">6.2</td>
+<td align="right">2.2</td>
+<td align="right">4.5</td>
+<td align="right">1.5</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">5.6</td>
+<td align="right">2.5</td>
+<td align="right">3.9</td>
+<td align="right">1.1</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.9</td>
+<td align="right">3.2</td>
+<td align="right">4.8</td>
+<td align="right">1.8</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">6.1</td>
+<td align="right">2.8</td>
+<td align="right">4.0</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">6.3</td>
+<td align="right">2.5</td>
+<td align="right">4.9</td>
+<td align="right">1.5</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">6.1</td>
+<td align="right">2.8</td>
+<td align="right">4.7</td>
+<td align="right">1.2</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">6.4</td>
+<td align="right">2.9</td>
+<td align="right">4.3</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">6.6</td>
+<td align="right">3.0</td>
+<td align="right">4.4</td>
+<td align="right">1.4</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">6.8</td>
+<td align="right">2.8</td>
+<td align="right">4.8</td>
+<td align="right">1.4</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">6.7</td>
+<td align="right">3.0</td>
+<td align="right">5.0</td>
+<td align="right">1.7</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">6.0</td>
+<td align="right">2.9</td>
+<td align="right">4.5</td>
+<td align="right">1.5</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">5.7</td>
+<td align="right">2.6</td>
+<td align="right">3.5</td>
+<td align="right">1.0</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.5</td>
+<td align="right">2.4</td>
+<td align="right">3.8</td>
+<td align="right">1.1</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">5.5</td>
+<td align="right">2.4</td>
+<td align="right">3.7</td>
+<td align="right">1.0</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.8</td>
+<td align="right">2.7</td>
+<td align="right">3.9</td>
+<td align="right">1.2</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">6.0</td>
+<td align="right">2.7</td>
+<td align="right">5.1</td>
+<td align="right">1.6</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.4</td>
+<td align="right">3.0</td>
+<td align="right">4.5</td>
+<td align="right">1.5</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">6.0</td>
+<td align="right">3.4</td>
+<td align="right">4.5</td>
+<td align="right">1.6</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">6.7</td>
+<td align="right">3.1</td>
+<td align="right">4.7</td>
+<td align="right">1.5</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">6.3</td>
+<td align="right">2.3</td>
+<td align="right">4.4</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.6</td>
+<td align="right">3.0</td>
+<td align="right">4.1</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">5.5</td>
+<td align="right">2.5</td>
+<td align="right">4.0</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.5</td>
+<td align="right">2.6</td>
+<td align="right">4.4</td>
+<td align="right">1.2</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">6.1</td>
+<td align="right">3.0</td>
+<td align="right">4.6</td>
+<td align="right">1.4</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.8</td>
+<td align="right">2.6</td>
+<td align="right">4.0</td>
+<td align="right">1.2</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">5.0</td>
+<td align="right">2.3</td>
+<td align="right">3.3</td>
+<td align="right">1.0</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.6</td>
+<td align="right">2.7</td>
+<td align="right">4.2</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">5.7</td>
+<td align="right">3.0</td>
+<td align="right">4.2</td>
+<td align="right">1.2</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.7</td>
+<td align="right">2.9</td>
+<td align="right">4.2</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">6.2</td>
+<td align="right">2.9</td>
+<td align="right">4.3</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.1</td>
+<td align="right">2.5</td>
+<td align="right">3.0</td>
+<td align="right">1.1</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="even">
+<td align="right">5.7</td>
+<td align="right">2.8</td>
+<td align="right">4.1</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+</tbody>
+</table>
+<p>Si decide utilizar otros paquetes para generar tablas, tiene que asegurarse de que la etiqueta para el ambiente de la tabla aparezca al comienzo de la leyenda de la tabla de la forma <code>(\#label)</code>, donde <code>label</code> debe tener el prefijo <code>tab:</code>. Tiene que tenerse mucho cuidado con la <em>portabilidad</em> de la función que genera la tabla: deberá trabajar tanto para la salida HTML como para LaTeX de forma automática, por lo que debe tener en cuenta el formato de salida internamente (revise <code>knitr::opts_knit$get('pandoc.to')</code>). Al escribir una tabla HTML, el título debe ser escrito en la etiqueta <code>&lt;caption&gt;&lt;/caption&gt;</code>. Para las tablas simples, <code>kable()</code> debería ser suficiente. Si usted tiene que crear tablas complicadas (por ejemplo, con ciertas celdas que atraviesen múltiples columnas/filas), tendrá que tomar las cuestiones mencionadas en consideración.</p>
+</div>
+<p style="text-align: center;">
+<a href="2-4-figuras.html"><button class="btn btn-default">Previous</button></a>
+<a href="2-6-referencias-cruzadas.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

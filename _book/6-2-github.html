@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="bookdown: Escritura de libros con R Markdown" />
+<meta property="og:type" content="book" />
+
+<meta property="og:image" content="images/cover.png" />
+<meta property="og:description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook." />
+<meta name="github-repo" content="rstudio/bookdown" />
+
+<meta name="author" content="Yihui Xie" />
+
+<meta name="date" content="2017-02-03" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
+
+<title>bookdown: Escritura de libros con R Markdown</title>
+
+<script src="libs/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap/shim/respond.min.js"></script>
+<script src="libs/navigation/tabsets.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/datatables-binding/datatables.js"></script>
+<link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="has-sub"><a href="index.html#prefacio">Prefacio</a><ul>
+<li><a href="por-que-leer-este-libro.html#por-que-leer-este-libro">¿Por qué leer este libro?</a></li>
+<li><a href="informacion-acerca-del-software-y-convenciones.html#informacion-acerca-del-software-y-convenciones">Información acerca del software y convenciones</a></li>
+<li><a href="agradecimientos.html#agradecimientos">Agradecimientos</a></li>
+</ul></li>
+<li><a href="acerca-del-autor.html#acerca-del-autor">Acerca del Autor</a></li>
+<li class="has-sub"><a href="1-introduccion.html#introduccion"><span class="toc-section-number">1</span> Introducción</a><ul>
+<li><a href="1-1-motivacion.html#motivacion"><span class="toc-section-number">1.1</span> Motivación</a></li>
+<li><a href="1-2-comenzando.html#comenzando"><span class="toc-section-number">1.2</span> Comenzando</a></li>
+<li><a href="1-3-uso.html#uso"><span class="toc-section-number">1.3</span> Uso</a></li>
+<li><a href="1-4-new-session.html#new-session"><span class="toc-section-number">1.4</span> Dos enfoques de representación</a></li>
+<li><a href="1-5-algunos-tips.html#algunos-tips"><span class="toc-section-number">1.5</span> Algunos tips</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-componentes.html#componentes"><span class="toc-section-number">2</span> Componentes</a><ul>
+<li class="has-sub"><a href="2-1-sintaxis-de-markdown.html#sintaxis-de-markdown"><span class="toc-section-number">2.1</span> Sintaxis de Markdown</a><ul>
+<li><a href="2-1-sintaxis-de-markdown.html#formateo-en-linea"><span class="toc-section-number">2.1.1</span> Formateo en línea</a></li>
+<li><a href="2-1-sintaxis-de-markdown.html#elementos-de-nivel-bloque"><span class="toc-section-number">2.1.2</span> Elementos de nivel bloque</a></li>
+<li><a href="2-1-sintaxis-de-markdown.html#expresiones-matematicas-en-latex"><span class="toc-section-number">2.1.3</span> Expresiones matemáticas en LaTeX</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-2-extensiones-de-markdown-en-bookdown.html#extensiones-de-markdown-en-bookdown"><span class="toc-section-number">2.2</span> Extensiones de Markdown en bookdown</a><ul>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#ecuaciones"><span class="toc-section-number">2.2.1</span> Numerar y referenciar ecuaciones</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#teoremas"><span class="toc-section-number">2.2.2</span> Teoremas y demostraciones</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#encabezados-especiales"><span class="toc-section-number">2.2.3</span> Encabezados especiales</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#referencias-de-textos"><span class="toc-section-number">2.2.4</span> Referencias de textos</a></li>
+</ul></li>
+<li><a href="2-3-codigo-en-r.html#codigo-en-r"><span class="toc-section-number">2.3</span> Código en R</a></li>
+<li><a href="2-4-figuras.html#figuras"><span class="toc-section-number">2.4</span> Figuras</a></li>
+<li><a href="2-5-tablas.html#tablas"><span class="toc-section-number">2.5</span> Tablas</a></li>
+<li><a href="2-6-referencias-cruzadas.html#referencias-cruzadas"><span class="toc-section-number">2.6</span> Referencias cruzadas</a></li>
+<li><a href="2-7-bloques-personalizados.html#bloques-personalizados"><span class="toc-section-number">2.7</span> Bloques personalizados</a></li>
+<li><a href="2-8-citas.html#citas"><span class="toc-section-number">2.8</span> Citas</a></li>
+<li><a href="2-9-latex-index.html#latex-index"><span class="toc-section-number">2.9</span> Index</a></li>
+<li><a href="2-10-html-widgets.html#html-widgets"><span class="toc-section-number">2.10</span> HTML Widgets</a></li>
+<li><a href="2-11-paginas-web-y-aplicaciones-shiny.html#paginas-web-y-aplicaciones-shiny"><span class="toc-section-number">2.11</span> Páginas web y aplicaciones Shiny</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-formatos-de-salida.html#formatos-de-salida"><span class="toc-section-number">3</span> Formatos de salida</a><ul>
+<li class="has-sub"><a href="3-1-html.html#html"><span class="toc-section-number">3.1</span> HTML</a><ul>
+<li><a href="3-1-html.html#estilo-gitbook"><span class="toc-section-number">3.1.1</span> El estilo GitBook</a></li>
+<li><a href="3-1-html.html#el-estilo-bootstrap"><span class="toc-section-number">3.1.2</span> El estilo Bootstrap</a></li>
+<li><a href="3-1-html.html#el-estilo-tufte"><span class="toc-section-number">3.1.3</span> El estilo Tufte</a></li>
+</ul></li>
+<li><a href="3-2-latexpdf.html#latexpdf"><span class="toc-section-number">3.2</span> LaTeX/PDF</a></li>
+<li class="has-sub"><a href="3-3-e-books.html#e-books"><span class="toc-section-number">3.3</span> E-Books</a><ul>
+<li><a href="3-3-e-books.html#epub"><span class="toc-section-number">3.3.1</span> EPUB</a></li>
+<li><a href="3-3-e-books.html#mobi"><span class="toc-section-number">3.3.2</span> MOBI</a></li>
+</ul></li>
+<li><a href="3-4-un-documento-sencillo.html#un-documento-sencillo"><span class="toc-section-number">3.4</span> Un documento sencillo</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-personalizacion.html#personalizacion"><span class="toc-section-number">4</span> Personalización</a><ul>
+<li><a href="4-1-opciones-yaml.html#opciones-yaml"><span class="toc-section-number">4.1</span> Opciones YAML</a></li>
+<li><a href="4-2-temas.html#temas"><span class="toc-section-number">4.2</span> Temas</a></li>
+<li><a href="4-3-plantillas.html#plantillas"><span class="toc-section-number">4.3</span> Plantillas</a></li>
+<li><a href="4-4-configuracion.html#configuracion"><span class="toc-section-number">4.4</span> Configuración</a></li>
+<li><a href="4-5-internacionalizacion.html#internacionalizacion"><span class="toc-section-number">4.5</span> Internacionalización</a></li>
+</ul></li>
+<li class="has-sub"><a href="5-edicion.html#edicion"><span class="toc-section-number">5</span> Edición</a><ul>
+<li><a href="5-1-construyendo-el-libro.html#construyendo-el-libro"><span class="toc-section-number">5.1</span> Construyendo el libro</a></li>
+<li><a href="5-2-previsualizar-un-capitulo.html#previsualizar-un-capitulo"><span class="toc-section-number">5.2</span> Previsualizar un capítulo</a></li>
+<li><a href="5-3-presentar-el-libro.html#presentar-el-libro"><span class="toc-section-number">5.3</span> Presentar el libro</a></li>
+<li><a href="5-4-ide-rstudio.html#ide-rstudio"><span class="toc-section-number">5.4</span> IDE RStudio</a></li>
+</ul></li>
+<li class="has-sub"><a href="6-publicacion.html#publicacion"><span class="toc-section-number">6</span> Publicación</a><ul>
+<li><a href="6-1-rstudio-connect.html#rstudio-connect"><span class="toc-section-number">6.1</span> RStudio Connect</a></li>
+<li><a href="6-2-github.html#github"><span class="toc-section-number">6.2</span> GitHub</a></li>
+<li><a href="6-3-editores.html#editores"><span class="toc-section-number">6.3</span> Editores</a></li>
+</ul></li>
+<li class="appendix"><span><b>Apéndice</b></span></li>
+<li class="has-sub"><a href="A-herramientas-de-software.html#herramientas-de-software"><span class="toc-section-number">A</span> Herramientas de Software</a><ul>
+<li><a href="A-1-r-y-sus-paquetes.html#r-y-sus-paquetes"><span class="toc-section-number">A.1</span> R y sus paquetes</a></li>
+<li><a href="A-2-pandoc.html#pandoc"><span class="toc-section-number">A.2</span> Pandoc</a></li>
+<li><a href="A-3-latex.html#latex"><span class="toc-section-number">A.3</span> LaTeX</a></li>
+</ul></li>
+<li class="has-sub"><a href="B-uso-de-software.html#uso-de-software"><span class="toc-section-number">B</span> Uso de Software</a><ul>
+<li><a href="B-1-knitr.html#knitr"><span class="toc-section-number">B.1</span> knitr</a></li>
+<li><a href="B-2-r-markdown.html#r-markdown"><span class="toc-section-number">B.2</span> R Markdown</a></li>
+</ul></li>
+<li><a href="C-faq.html#faq"><span class="toc-section-number">C</span> FAQ</a></li>
+<li><a href="referencias.html#referencias">Referencias</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="github" class="section level2">
+<h2><span class="header-section-number">6.2</span> GitHub</h2>
+<p>Puede alojar su libro en GitHub  de forma gratuita a través de GitHub Pages (<a href="https://pages.github.com" class="uri">https://pages.github.com</a>). GitHub sopporta Jekyll (<a href="http://jekyllrb.com" class="uri">http://jekyllrb.com</a>), un constructor de sitios web estático, para construir un sitio web a partir de archivos Markdown. Ese puede ser el caso de uso más común de GitHub pages, pero GitHub también es compatible con archivos HTML estáticos arbitrarios, por ende puede albergar los archivos de salida HTML de su libro en GitHub.</p>
+<p>Un enfoque para publicar su libro como un sitio de GitHub Pages de una carpeta <code>/docs</code> en su rama <code>master</code> como se describe en [GitHub Ayuda] (<a href="http://bit.ly/2cvloKV" class="uri">http://bit.ly/2cvloKV</a>). En primer lugar establecer el directorio de salida de su libro para que sea <code>/docs</code> añadiendo la línea <code>output_dir: &quot;docs&quot;</code> al archivo de configuración <code>_bookdown.yml</code>. A continuación, después de empujar los cambios en GitHub ir a la configuración de su repositorio y en “GitHub Pages” cambiar la “Fuente” por “rama maestra / carpeta de documentos”.</p>
+<p>Un enfoque alternativo es crear una rama <code>gh-pages</code> en su repositorio, construir el libro, poner la salida HTML (incluyendo todos los recursos externos, como imágenes, CSS y archivos JavaScript) en esta rama, y empujar la rama al repositorio remoto. Si el repositorio de libro no tiene la rama <code>gh-pages</code>, puede utilizar los siguientes comandos para crear una:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># assume you have initialized the git repository,</span>
+<span class="co"># and are under the directory of the book repository now</span>
+
+<span class="co"># create a branch named gh-pages and clean up everything</span>
+<span class="kw">git</span> checkout --orphan gh-pages
+<span class="kw">git</span> rm -rf .
+
+<span class="co"># create a hidden file .nojekyll</span>
+<span class="kw">touch</span> .nojekyll
+<span class="kw">git</span> add .nojekyll
+
+<span class="kw">git</span> commit -m<span class="st">&quot;Initial commit&quot;</span>
+<span class="kw">git</span> push origin gh-pages</code></pre></div>
+<p>El archivo oculto <code>.nojekyll</code> le dice a GitHub que su sitio web no debe ser construido a través de Jekyll, ya que la salida <strong>bookdown</strong> HTML ya es un sitio web independiente. Si está en Windows, puede que no tenga el comando <code>touch</code>, y sólo se pueda crear el archivo en R usando <code>file.create('.nojekyll')</code>.</p>
+<p>Después de haber configurado GIT, el resto del trabajo puede ser automatizado a través de una secuencia de comandos (Shell, R o Makefile, dependiendo de su preferencia). Básicamente, se compila el libro a HTML, a continuación, ejecuta los comandos git para empujar los archivos en GitHub, pero es probable que no quiera hacer esto una y otra vez de forma manual y localmente. Puede ser muy útil para automatizar el proceso de publicación por completo en la nube, por lo que una vez que se haya configurado correctamente, todo lo que tiene que hacer ahora es escribir el libro y empujar los archivos de origen Rmd a GitHub, y su libro siempre será construido de forma automática y publicado hacia el servidor.</p>
+<p>Un servicio que se puede utilizar es Travis CI (<a href="https://travis-ci.org" class="uri">https://travis-ci.org</a>). . Es libre para repositorios públicos en GitHub, y fue diseñado para la integración continua (CI) de los paquetes de software. Travis CI se puede conectar a GitHub en el sentido de que cada vez que se empuja a GitHub, Travis puede ser activado para ejecutar ciertos comandos/scripts en la versión más reciente de su repositorio.<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a> Estos comandos se especifican en un archivo YAML llamado <code>.travis.yml</code> en el directorio raíz de su repositorio, y están por lo general con el propósito de pruebas de software, pero en realidad son bastante abiertos, lo que significa que puede ejecutar arbitrariamente programas en una máquina Travis (virtual). Esto significa que sin duda puede ejecutar sus propios scripts para construir su libro sobre Travis. <em>Nota</em>: Travis sólo es compatible con Ubuntu y Mac OS X en este momento, por lo que debe tener algunos conocimientos básicos acerca de los comandos de Linux/Unix.</p>
+<p>La siguiente pregunta es, cómo publicar el libro construido sobre Travis a GitHub? Básicamente tiene que conceder acceso de escritura a Travis a su repositorio GitHub. Esta autorización se puede hacer a través de varias maneras, y la más fácil a los principiantes puede ser una señal de acceso personal. A continuación se presentan algunos pasos que puede seguir:</p>
+<ol style="list-style-type: decimal">
+<li>Crear un [token de acceso personal] (<a href="http://bit.ly/2cEBYWB" class="uri">http://bit.ly/2cEBYWB</a>) para su cuenta en GitHub (asegúrese de que sea posible el funcionamiento “repo”, por lo que el uso de esta muestra permitirá escrito a sus repositorios de GitHub);</li>
+<li>Cifrarlo en la variable de entorno <code>GITHUB_PAT</code> a través de la línea de comandos <code>travis encrypt</code> y almacenarlo en <code>.travis.yml</code>, por ejemplo <code>travis encrypt GITHUB_PAT=TOKEN</code>. Si usted no sabe cómo instalar o utilizar la herramienta de línea de comandos Travis, simplemente guarde esta variable de entorno a través de <a href="https://travis-ci.org/user/repo/settings" class="uri">https://travis-ci.org/user/repo/settings</a> donde <code>user</code> es su ID de GitHub, y <code>repo</code> es el nombre del repositorio;</li>
+<li>Puede clonar esta rama <code>gh-pages</code> en Travis utilizando el token de GitHub, añadir los archivos HTML de salida de R Markdown (no se olvide de añadir figuras y archivos de estilo CSS, también), y empujar al repositorio remoto.</li>
+</ol>
+<p>Suponga que usted está en la rama <code>master</code> en este momento (donde pone los archivos de origen Rmd), y ha compilado el libro en el directorio <code>_book</code>. Lo que puede hacer al lado de Travis es:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># configure your name and email if you have not done so</span>
+<span class="kw">git</span> config --global user.email <span class="st">&quot;you@example.com&quot;</span>
+<span class="kw">git</span> config --global user.name <span class="st">&quot;Your Name&quot;</span>
+
+<span class="co"># clone the repository to the book-output directory</span>
+<span class="kw">git</span> clone -b gh-pages \
+  https://<span class="ot">${GITHUB_PAT}</span>@github.com/<span class="ot">${TRAVIS_REPO_SLUG}</span>.git \
+  book-output
+<span class="kw">cd</span> book-output
+<span class="kw">cp</span> -r ../_book/* ./
+<span class="kw">git</span> add --all *
+<span class="kw">git</span> commit -m<span class="st">&quot;Update the book&quot;</span>
+<span class="kw">git</span> push origin gh-pages</code></pre></div>
+<p>El nombre de la variable <code>GITHUB_PAT</code> y el nombre del directorio <code>book-output</code> son arbitrarios, y se puede usar cualquier nombre que desee, siempre y cuando los nombres no entren en conflicto con los nombres de variables de entorno existentes o nombres de directorio. Esta secuencia de comandos, junto con la escritura de la estructura mencionamos en la sección <a href="#construir-el-libro"><strong>??</strong></a>, se puede poner en la rama <code>master</code> como scripts de shell, por ejemplo, puede nombrarlos a ellos como <code>_build.sh</code> y <code>_deploy.sh</code>. Luego, su <code>.travis.yml</code> puede tener este aspecto:</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">language:</span> r
+
+<span class="fu">env:</span>
+  <span class="fu">global:</span>
+    <span class="kw">-</span> <span class="fu">secure:</span> A_LONG_ENCRYPTED_STRING
+
+<span class="fu">before_script:</span>
+  <span class="kw">-</span> chmod +x ./_build.sh
+  <span class="kw">-</span> chmod +x ./_deploy.sh
+
+<span class="fu">script:</span>
+  <span class="kw">-</span> ./_build.sh
+  <span class="kw">-</span> ./_deploy.sh</code></pre></div>
+<p>La clave <code>language</code> le dice a Travis que utilice una máquina virtual que ha instalado R. La clave <code>secure</code> es el token de acceso personal encriptada. Si ya ha guardado la variable <code>GITHUB_PAT</code> utilizando la interfaz Web Travis en lugar de la herramienta de línea de comandos <code>travis encrypt</code>, puede dejar de lado esta clave.</p>
+<p>Como este servicio Travis es principalmente para el control de paquetes en R, también se necesita un (falso) archivo de <code>DESCRIPTION</code> como si el repositorio de libro fuera un paquete R. La única cosa en este archivo que realmente importa es la especificación de las dependencias. Todas las dependencias se instalarán a través deL paquete <strong>devtools</strong>. Si una dependencia está en CRAN o BioConductor, sólo tiene que incluirla en el campo <code>Imports</code> del archivo <code>DESCRIPTION</code>. Si está en GitHub, puede utilizar el campo <code>Remotes</code> para listar el nombre de su repositorio. A continuación se muestra un ejemplo:</p>
+<pre class="dcf"><code>Package: placeholder
+Title: Does not matter.
+Version: 0.0.1
+Imports: bookdown, ggplot2
+Remotes: rstudio/bookdown</code></pre>
+<p>Si se utiliza la [infraestructura basada en contenedores] (<a href="https://docs.travis-ci.com/user/workers/container-based-infrastructure/" class="uri">https://docs.travis-ci.com/user/workers/container-based-infrastructure/</a>) de Travis, puede habilitar el almacenamiento en caché mediante el uso de <code>sudo:false</code> en <code>.travis.yml</code>. Normalmente debería almacenar en caché al menos dos tipos de directorios: el directorio de la figura (por ejemplo, <code>_main_files</code>) y el directorio de caché (por ejemplo,<code>_main_cache</code>). Estos nombres de los directorios también pueden ser diferentes si se ha especificado las opciones del chunk <strong>knitr</strong> `<code>`fig.path</code> y <code>cache.path</code>, pero se recomienda encarecidamente que no cambie estas opciones. Los directorios de las figuras y de caché se almacenan en el directorio <code>_bookdown_files</code> del directorio raíz del libro. Un archivo <code>.travis.yml</code> que ha permitido el almacenamiento en caché de la figura <strong>knitr</strong> los y directorios de caché pueden tener configuraciones adicionales<code>`sudo</code> y <code>cache</code> como este:</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">sudo:</span> false
+
+<span class="fu">cache:</span>
+  <span class="fu">packages:</span> yes
+  <span class="fu">directories:</span>
+    <span class="kw">-</span> $TRAVIS_BUILD_DIR/_bookdown_files</code></pre></div>
+<p>Si el libro consume mucho tiempo para construir, puede utilizar las configuraciones anteriores de Travis para ahorrar tiempo. Note que <code>paquetes: yes</code> significa que los paquetes instalados en R Travis también están almacenados en caché.</p>
+<p>Todas las secuencias de comandos y configuraciones anteriores se pueden encontrar en el repositorio <code>bookdown-demo</code>: <a href="https://github.com/rstudio/bookdown-demo/" class="uri">https://github.com/rstudio/bookdown-demo/</a>. Si los copia a su propio repositorio, por favor recuerde que debe cambiar la tecla <code>secure</code> en <code>.travis.yml</code> usando su propia variable de cifrado <code>GITHUB_PAT</code>.</p>
+<p>GitHub y Travis CI ciertamente no son las únicas opciones para construir y publicar su libro. Usted es libre para almacenar y publicar el libro en su propio servidor.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="12">
+<li id="fn12"><p>Debe autorizar el servicio Travis CI para su repositorio en GitHub primero . Ver <a href="https://docs.travis-ci.com/user/getting-started/" class="uri">https://docs.travis-ci.com/user/getting-started/</a> de cómo empezar con Travis CI.<a href="6-2-github.html#fnref12">↩</a></p></li>
+</ol>
+</div>
+<p style="text-align: center;">
+<a href="6-1-rstudio-connect.html"><button class="btn btn-default">Previous</button></a>
+<a href="6-3-editores.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

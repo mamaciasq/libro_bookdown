@@ -1,0 +1,95 @@
+\cleardoublepage 
+
+# (APPENDIX) Apéndice {-}
+
+# Herramientas de Software
+
+Para aquellos que no están familiarizados con los paquetes de software necesarios para el uso de R Markdown, a continuación se presenta una breve introducción a la instalación y mantenimiento de estos paquetes.
+
+## R y sus paquetes  
+
+R puede ser descargado e instalado desde cualquier repositorio CRAN (the Comprehensive R Archive Network, en inglés), por ejemplo, https://cran.rstudio.com. Tenga en cuenta que habrá algunas nuevas versiones de R cada año, y es posible que desea actualizar R ocasionalmente.
+
+Para instalar el paquete **bookdown** , puede escribir esto en R:
+
+```{r eval=FALSE}
+install.packages("bookdown")
+```
+
+Esto instala todos los paquetes de R necesarios. También puede optar por instalar todos los paquetes opcionales, si no le importa demasiado si estos paquetes se van a usar para compilar su libro (como  **htmlwidgets**):
+
+```{r eval=FALSE}
+install.packages("bookdown", dependencies = TRUE)
+```
+
+Si desea probar la versión de desarrollo de **bookdown** en GitHub, es necesario instalar primero **devtools** :
+
+```{r eval=FALSE}
+if (!requireNamespace('devtools')) install.packages('devtools')
+devtools::install_github('rstudio/bookdown')
+```
+
+Los paquetes de R son constantemente actualizados en el CRAN o en GitHub, por lo que es posible que desee actualizarlos de vez en cuando:
+
+```{r eval=FALSE}
+update.packages(ask = FALSE)
+```
+
+Aunque no se requiere, el IDE RStudio puede hacer un montón de cosas mucho más fáciles cuando se trabaja en proyectos relacionados con R. El IDE RStudio se puede descargar desde https://www.rstudio.com.
+
+## Pandoc
+
+Un documento de R Markdown (`*.Rmd`) se compila primero Markdown (`*.md`) a través del paquete **knitr**, y después Markdown se compila a otros formatos de salida (como el LaTeX o HTML) a través de Pandoc.\index{Pandoc}  Este proceso está automatizado por el paquete **rmarkdown**. No es necesario instalar **knitr** o **rmarkdown**  por separado, ya que son los paquetes necesarios de **bookdown** y se instalarán automáticamente al instalar **bookdown**. Sin embargo, Pandoc no es un paquete de R, por lo que no se instalará automáticamente al instalar **bookdown**. Puede seguir las instrucciones de instalación en la página Pandoc (http://pandoc.org) para instalar Pandoc, pero si se utiliza el IDE RStudio, realmente no se necesita instalar Pandoc por separado, puesto que RStudio ha incluido una copia de Pandoc en él. El número de versión Pandoc puede obtenerse a través de:
+
+```{r collapse=TRUE}
+rmarkdown::pandoc_version()
+```
+
+Si cree que esta versión es demasiado baja y hay características de Pandoc que aparecen en una versión posterior, puede instalar una versión posterior de Pandoc, y **rmarkdown** va a llamar a la versión más reciente en lugar de su versión incorporada.
+
+## LaTeX
+
+LaTeX\index{LaTeX} sólo es necesario si desea convertir su libro en PDF. La elección típica de la distribución de LaTeX depende de su sistema operativo. Los usuarios de Windows pueden considerar MiKTeX (http://miktex.org), los usuarios de Mac OS X pueden instalar MacTeX (http://www.tug.org/mactex/), y los usuarios de Linux pueden instalar TeXLive (http://www.tug.org/texlive). Ver https://www.latex-project.org/get/ para obtener más información sobre LaTeX y su instalación.
+
+La mayoría de las distribuciones de LaTeX proporcionan un paquete mínimo/básico y un paquete completo. Puede instalar el paquete básico si tiene espacio en disco limitado y conoce cómo instalar paquetes de LaTeX más adelante. El paquete completo es, a menudo, mucho más grande en tamaño, ya que contiene todos los paquetes de LaTeX, y es poco probable encontrarse con el problema de que falten paquetes en LaTeX.
+
+Los mensajes de error en LaTeX pueden ser oscuros para los principiantes, pero es posible encontrar soluciones mediante la búsqueda de un mensaje de error en línea (tiene buenas posibilidades de acabar en [StackExchange](http://tex.stackexchange.com)). De hecho, el código LaTeX convertido desde R Markdown debe ser lo suficientemente seguro y con frecuencia no se deben tener problemas en LaTeX a menos que se introduzca contenido de LaTeX en lenguaje natural en sus documentos Rmd. El problema más común en LaTeX debería ser la falta de paquetes, y el error puede tener este aspecto:
+
+```latex
+! LaTeX Error: File `titling.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.107 ^^M
+
+pandoc: Error producing PDF
+Error: pandoc document conversion failed with error 43
+Execution halted
+```
+
+Esto quiere decir que utilizó un paquete que contiene `titling.sty`, pero no se ha instalado. Los nombres de los paquetes de LaTeX son a menudo los mismos que los nombres de fichero `*.sty`, por lo que en este caso, se puede tratar de instalar el paquete `titling`. Tanto MiKTeX como MacTeX proporcionan una interfaz gráfica de usuario para administrar paquetes. Puede encontrar el gestor de paquetes MiKTeX desde el menú de inicio, y el gestor de paquetes de MacTeX de la aplicación "Utilidad de TeX Live". Escriba el nombre del paquete, o el nombre del archivo para buscar el paquete e instalarlo. TeXLive puede ser un poco más complicado: si utiliza los paquetes pre-construidos TexLive de la distribución de Linux, es necesario buscar en el repositorio de paquetes y sus palabras clave pueden coincidir con otros paquetes que no contengan LaTeX. En lo personal resulta frustrante usar las colecciones pre-construidos de paquetes en Linux, y mucho más fácil de instalar sólo TeXLive de la fuente, en cuyo caso se pueden gestionar los paquetes utilizando el comando `tlmgr`. Por ejemplo, puede buscar `titling.sty` desde el repositorio de paquetes TeXLive:
+
+```bash
+tlmgr search --global --file titling.sty
+# titling:
+#	 texmf-dist/tex/latex/titling/titling.sty
+```
+
+Una vez que haya averiguado el nombre del paquete, se puede instalar mediante:
+
+```bash
+tlmgr install titling  # quizás requiera sudo
+```
+
+Las distribuciones de látex y los paquetes también se actualizan de vez en cuando, y es posible considerar este proceso, especialmente cuando se encuentra con problemas en LaTeX. Puede averiguar la versión de su distribución LaTeX mediante:
+
+```{r echo=1, collapse=TRUE}
+system('pdflatex --version')
+cat(system('pdflatex --version', intern = TRUE), sep = '\n')
+```
+

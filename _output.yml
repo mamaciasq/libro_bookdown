@@ -1,0 +1,29 @@
+bookdown::gitbook:
+  highlight: tango
+  css: css/style.css
+  split_by: section
+  config:
+    toc:
+      collapse: subsection
+      before: |
+        <li><a href="./">bookdown: Escritura de libros con R Markdown</a></li>
+      after: |
+        <li><a href="https://bookdown.org" target="blank">Publicado con bookdown</a></li>
+    edit:
+      link: https://github.com/mamaciasq/libro_bookdown%s
+      text: "Edit"
+bookdown::pdf_book:
+  includes:
+    in_header: latex/preamble.tex
+    before_body: latex/before_body.tex
+    after_body: latex/after_body.tex
+  keep_tex: yes
+  dev: "cairo_pdf"
+  latex_engine: xelatex
+  citation_package: natbib
+  template: null
+  pandoc_args: "--chapters"
+  toc_unnumbered: no
+  toc_appendix: yes
+  quote_footer: ["\\VA{", "}{}"]
+bookdown::epub_book: default

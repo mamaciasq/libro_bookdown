@@ -1,0 +1,20 @@
+book_filename: bookdown
+chapter_name: "Capítulo "
+repo: https://github.com/mamaciasq/libro_bookdown
+output_dir: _book
+#clean: [packages.bib, bookdown.bbl]
+language:
+  label:
+    fig: "Figura "
+    tab: "Tabla "
+    eq: "Ecuación "
+    thm: "Teorema "
+    lem: "Lema "
+    def: "Definición "
+    cor: "Corolario "
+    prp: "Proposición "
+    ex: "Ejemplo "
+    proof: "Demostración. "
+    remark: "Observación. "
+  ui:
+    edit: "Edit"

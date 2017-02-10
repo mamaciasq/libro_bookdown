@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="bookdown: Escritura de libros con R Markdown" />
+<meta property="og:type" content="book" />
+
+<meta property="og:image" content="images/cover.png" />
+<meta property="og:description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook." />
+<meta name="github-repo" content="rstudio/bookdown" />
+
+<meta name="author" content="Yihui Xie" />
+
+<meta name="date" content="2017-02-03" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
+
+<title>bookdown: Escritura de libros con R Markdown</title>
+
+<script src="libs/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap/shim/respond.min.js"></script>
+<script src="libs/navigation/tabsets.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/datatables-binding/datatables.js"></script>
+<link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="has-sub"><a href="index.html#prefacio">Prefacio</a><ul>
+<li><a href="por-que-leer-este-libro.html#por-que-leer-este-libro">¿Por qué leer este libro?</a></li>
+<li><a href="informacion-acerca-del-software-y-convenciones.html#informacion-acerca-del-software-y-convenciones">Información acerca del software y convenciones</a></li>
+<li><a href="agradecimientos.html#agradecimientos">Agradecimientos</a></li>
+</ul></li>
+<li><a href="acerca-del-autor.html#acerca-del-autor">Acerca del Autor</a></li>
+<li class="has-sub"><a href="1-introduccion.html#introduccion"><span class="toc-section-number">1</span> Introducción</a><ul>
+<li><a href="1-1-motivacion.html#motivacion"><span class="toc-section-number">1.1</span> Motivación</a></li>
+<li><a href="1-2-comenzando.html#comenzando"><span class="toc-section-number">1.2</span> Comenzando</a></li>
+<li><a href="1-3-uso.html#uso"><span class="toc-section-number">1.3</span> Uso</a></li>
+<li><a href="1-4-new-session.html#new-session"><span class="toc-section-number">1.4</span> Dos enfoques de representación</a></li>
+<li><a href="1-5-algunos-tips.html#algunos-tips"><span class="toc-section-number">1.5</span> Algunos tips</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-componentes.html#componentes"><span class="toc-section-number">2</span> Componentes</a><ul>
+<li class="has-sub"><a href="2-1-sintaxis-de-markdown.html#sintaxis-de-markdown"><span class="toc-section-number">2.1</span> Sintaxis de Markdown</a><ul>
+<li><a href="2-1-sintaxis-de-markdown.html#formateo-en-linea"><span class="toc-section-number">2.1.1</span> Formateo en línea</a></li>
+<li><a href="2-1-sintaxis-de-markdown.html#elementos-de-nivel-bloque"><span class="toc-section-number">2.1.2</span> Elementos de nivel bloque</a></li>
+<li><a href="2-1-sintaxis-de-markdown.html#expresiones-matematicas-en-latex"><span class="toc-section-number">2.1.3</span> Expresiones matemáticas en LaTeX</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-2-extensiones-de-markdown-en-bookdown.html#extensiones-de-markdown-en-bookdown"><span class="toc-section-number">2.2</span> Extensiones de Markdown en bookdown</a><ul>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#ecuaciones"><span class="toc-section-number">2.2.1</span> Numerar y referenciar ecuaciones</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#teoremas"><span class="toc-section-number">2.2.2</span> Teoremas y demostraciones</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#encabezados-especiales"><span class="toc-section-number">2.2.3</span> Encabezados especiales</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#referencias-de-textos"><span class="toc-section-number">2.2.4</span> Referencias de textos</a></li>
+</ul></li>
+<li><a href="2-3-codigo-en-r.html#codigo-en-r"><span class="toc-section-number">2.3</span> Código en R</a></li>
+<li><a href="2-4-figuras.html#figuras"><span class="toc-section-number">2.4</span> Figuras</a></li>
+<li><a href="2-5-tablas.html#tablas"><span class="toc-section-number">2.5</span> Tablas</a></li>
+<li><a href="2-6-referencias-cruzadas.html#referencias-cruzadas"><span class="toc-section-number">2.6</span> Referencias cruzadas</a></li>
+<li><a href="2-7-bloques-personalizados.html#bloques-personalizados"><span class="toc-section-number">2.7</span> Bloques personalizados</a></li>
+<li><a href="2-8-citas.html#citas"><span class="toc-section-number">2.8</span> Citas</a></li>
+<li><a href="2-9-latex-index.html#latex-index"><span class="toc-section-number">2.9</span> Index</a></li>
+<li><a href="2-10-html-widgets.html#html-widgets"><span class="toc-section-number">2.10</span> HTML Widgets</a></li>
+<li><a href="2-11-paginas-web-y-aplicaciones-shiny.html#paginas-web-y-aplicaciones-shiny"><span class="toc-section-number">2.11</span> Páginas web y aplicaciones Shiny</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-formatos-de-salida.html#formatos-de-salida"><span class="toc-section-number">3</span> Formatos de salida</a><ul>
+<li class="has-sub"><a href="3-1-html.html#html"><span class="toc-section-number">3.1</span> HTML</a><ul>
+<li><a href="3-1-html.html#estilo-gitbook"><span class="toc-section-number">3.1.1</span> El estilo GitBook</a></li>
+<li><a href="3-1-html.html#el-estilo-bootstrap"><span class="toc-section-number">3.1.2</span> El estilo Bootstrap</a></li>
+<li><a href="3-1-html.html#el-estilo-tufte"><span class="toc-section-number">3.1.3</span> El estilo Tufte</a></li>
+</ul></li>
+<li><a href="3-2-latexpdf.html#latexpdf"><span class="toc-section-number">3.2</span> LaTeX/PDF</a></li>
+<li class="has-sub"><a href="3-3-e-books.html#e-books"><span class="toc-section-number">3.3</span> E-Books</a><ul>
+<li><a href="3-3-e-books.html#epub"><span class="toc-section-number">3.3.1</span> EPUB</a></li>
+<li><a href="3-3-e-books.html#mobi"><span class="toc-section-number">3.3.2</span> MOBI</a></li>
+</ul></li>
+<li><a href="3-4-un-documento-sencillo.html#un-documento-sencillo"><span class="toc-section-number">3.4</span> Un documento sencillo</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-personalizacion.html#personalizacion"><span class="toc-section-number">4</span> Personalización</a><ul>
+<li><a href="4-1-opciones-yaml.html#opciones-yaml"><span class="toc-section-number">4.1</span> Opciones YAML</a></li>
+<li><a href="4-2-temas.html#temas"><span class="toc-section-number">4.2</span> Temas</a></li>
+<li><a href="4-3-plantillas.html#plantillas"><span class="toc-section-number">4.3</span> Plantillas</a></li>
+<li><a href="4-4-configuracion.html#configuracion"><span class="toc-section-number">4.4</span> Configuración</a></li>
+<li><a href="4-5-internacionalizacion.html#internacionalizacion"><span class="toc-section-number">4.5</span> Internacionalización</a></li>
+</ul></li>
+<li class="has-sub"><a href="5-edicion.html#edicion"><span class="toc-section-number">5</span> Edición</a><ul>
+<li><a href="5-1-construyendo-el-libro.html#construyendo-el-libro"><span class="toc-section-number">5.1</span> Construyendo el libro</a></li>
+<li><a href="5-2-previsualizar-un-capitulo.html#previsualizar-un-capitulo"><span class="toc-section-number">5.2</span> Previsualizar un capítulo</a></li>
+<li><a href="5-3-presentar-el-libro.html#presentar-el-libro"><span class="toc-section-number">5.3</span> Presentar el libro</a></li>
+<li><a href="5-4-ide-rstudio.html#ide-rstudio"><span class="toc-section-number">5.4</span> IDE RStudio</a></li>
+</ul></li>
+<li class="has-sub"><a href="6-publicacion.html#publicacion"><span class="toc-section-number">6</span> Publicación</a><ul>
+<li><a href="6-1-rstudio-connect.html#rstudio-connect"><span class="toc-section-number">6.1</span> RStudio Connect</a></li>
+<li><a href="6-2-github.html#github"><span class="toc-section-number">6.2</span> GitHub</a></li>
+<li><a href="6-3-editores.html#editores"><span class="toc-section-number">6.3</span> Editores</a></li>
+</ul></li>
+<li class="appendix"><span><b>Apéndice</b></span></li>
+<li class="has-sub"><a href="A-herramientas-de-software.html#herramientas-de-software"><span class="toc-section-number">A</span> Herramientas de Software</a><ul>
+<li><a href="A-1-r-y-sus-paquetes.html#r-y-sus-paquetes"><span class="toc-section-number">A.1</span> R y sus paquetes</a></li>
+<li><a href="A-2-pandoc.html#pandoc"><span class="toc-section-number">A.2</span> Pandoc</a></li>
+<li><a href="A-3-latex.html#latex"><span class="toc-section-number">A.3</span> LaTeX</a></li>
+</ul></li>
+<li class="has-sub"><a href="B-uso-de-software.html#uso-de-software"><span class="toc-section-number">B</span> Uso de Software</a><ul>
+<li><a href="B-1-knitr.html#knitr"><span class="toc-section-number">B.1</span> knitr</a></li>
+<li><a href="B-2-r-markdown.html#r-markdown"><span class="toc-section-number">B.2</span> R Markdown</a></li>
+</ul></li>
+<li><a href="C-faq.html#faq"><span class="toc-section-number">C</span> FAQ</a></li>
+<li><a href="referencias.html#referencias">Referencias</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="editores" class="section level2">
+<h2><span class="header-section-number">6.3</span> Editores</h2>
+<p>Además de publicar su libro en línea, sin duda puede considerar la publicación con un editor index{publisher}. Por ejemplo, este libro fue publicado con Chapman &amp; Hall/CRC, y también hay una versión en línea gratis en <a href="https://bookdown.org/yihui/bookdown/" class="uri">https://bookdown.org/yihui/bookdown/</a> (con un acuerdo con la editorial). Otra opción que puede considerar es la auto-publicación (<a href="https://en.wikipedia.org/wiki/Self-publishing" class="uri">https://en.wikipedia.org/wiki/Self-publishing</a>) si no desea trabajar con una editorial establecida.</p>
+<p>Será mucho más fácil publicar un libro escrito con <strong>bookdown</strong> si el editor que elija es compatible con LaTeX.  Por ejemplo, Chapman &amp; Hall proporciona una clase de LaTeX llamado <code>krantz.cls</code>, y Springer ofrece<code>svmono.cls</code>. Para aplicar estas clases de látex para sus libros en PDF, sólo establezca <code>documentclass</code> en los metadatos de YAML en el <code>index.Rmd</code> al nombre del archivo de clase (sin la extensión <code>.cls</code>).</p>
+<p>La clase LaTeX es el escenario más importante de los metadatos YAML. Controla el estilo general del libro PDF. A menudo hay otros ajustes que desea modificar, y se mostrarán algunos detalles sobre este libro a continuación.</p>
+<p>Los metadatos YAML de este libro contiene los siguientes ajustes:</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">documentclass:</span> krantz
+<span class="fu">lot:</span> yes
+<span class="fu">lof:</span> yes
+<span class="fu">fontsize:</span> 12pt
+<span class="fu">monofont:</span> <span class="st">&quot;Source Code Pro&quot;</span>
+<span class="fu">monofontoptions:</span> <span class="st">&quot;Scale=0.7&quot;</span></code></pre></div>
+<p>El campo <code>lote: yes</code> significa que queremos la “Lista de tablas”, y de manera similar, <code>lof</code> significa “Lista de figuras”. El tamaño de la fuente base es <code>12pt</code>, y usamos&quot; [Source Code Pro] (<a href="https://www.fontsquirrel.com/fonts/source-code-pro" class="uri">https://www.fontsquirrel.com/fonts/source-code-pro</a>) “como el tipo de letra monoespaciada (ancho fijo), la cual es aplicada a todo el código del programa en este libro.</p>
+<p>En el preámbulo LaTeX (Sección <a href="#opciones-YAML"><strong>??</strong></a>), se tienen unos cuantos ajustes. En primer lugar, se propuso la principal fuente  como “[Alegreya] (<a href="https://www.fontsquirrel.com/fonts/alegreya" class="uri">https://www.fontsquirrel.com/fonts/alegreya</a>)”, y dado que esta fuente no tiene la función <span style="font-variant: small-caps;">Small Capitals</span>, se utilizó la fuente “Alegreya SC”.</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\setmainfont[
+  UprightFeatures={SmallCapsFont=AlegreyaSC-Regular}
+]{Alegreya}</code></pre></div>
+<p>Los siguientes comandos hacen entornos flotantes  con menos probabilidades de flotar al permitirles ocupar grandes fracciones de páginas sin flotar.</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}</code></pre></div>
+<p>Como <code>krantz.cls</code> proporcionar un entorno<code>VF</code> para las citas, hay que redefinir el entorno <code>quote</code> estándar a <code>VF</code>. Se puede ver su estilo en la sección  <span class="citation">(<span class="citeproc-not-found" data-reference-id="ref"><strong>???</strong></span>)</span>(sintaxis-de-markdown).</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\renewenvironment{quote}{\begin{VF}}{\end{VF}}</code></pre></div>
+<p>Entonces volvemos a definir hipervínculos como notas al pie, porque cuando el libro está impreso en papel, los lectores no son capaces de hacer clic en algunos enlaces de texto. Las notas al pie les dirán que los enlaces son reales.</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\let\oldhref\href
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}</code></pre></div>
+<p>También tenemos algunos ajustes para el formato <code>bookdown:: pdf_book</code> en <code>_output.yaml</code> index{_output.yml} :</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">bookdown:</span>:pdf_book:
+  <span class="fu">includes:</span>
+    <span class="fu">in_header:</span> latex/preamble.tex
+    <span class="fu">before_body:</span> latex/before_body.tex
+    <span class="fu">after_body:</span> latex/after_body.tex
+  <span class="fu">keep_tex:</span> yes
+  <span class="fu">dev:</span> <span class="st">&quot;cairo_pdf&quot;</span>
+  <span class="fu">latex_engine:</span> xelatex
+  <span class="fu">citation_package:</span> natbib
+  <span class="fu">template:</span> <span class="dt">null</span>
+  <span class="fu">pandoc_args:</span> <span class="st">&quot;--chapters&quot;</span>
+  <span class="fu">toc_unnumbered:</span> no
+  <span class="fu">toc_appendix:</span> yes
+  <span class="fu">quote_footer:</span> <span class="kw">[</span><span class="st">&quot;\\VA{&quot;</span><span class="kw">,</span> <span class="st">&quot;}{}&quot;</span><span class="kw">]</span></code></pre></div>
+<p>Todos los ajustes de preámbulo que hemos mencionado anteriormente están en el archivo <code>latex/preamble.tex</code>. En <code>latex/before_body.tex</code>, insertamos algunas páginas en blanco que requeridas por el editor, escribimos la página dedicación, y especificamos que el asunto delante comienza:</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\frontmatter</code></pre></div>
+<p>Antes del primer capítulo del libro, insertamos</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\mainmatter</code></pre></div>
+<p>por lo que el látex sabe cambiar el estilo de numeración de las páginas de los números romanos (por el asunto frontal) para números arábigos (para el cuerpo del libro).</p>
+<p>Imprimimos el índice en <code>latex/after_body.tex</code> (Sección <a href="2-9-latex-index.html#latex-index">2.9</a>).</p>
+<p>El dispositivo gráfico (<code>dev</code>) para guardar gráficos se establece en <code>cairo_pdf</code> de manera que las fuentes están incrustadas en los gráficos, ya que el dispositivo predeterminado <code>PDF</code> no incrusta fuentes. Su corrector de estilo es probable que requiera incrustar todas las fuentes utilizadas en el PDF, por lo que el libro se puede imprimir exactamente como lo que se ve, de lo contrario algunas fuentes pueden ser sustituidos y el tipo de letra puede ser impredecible.</p>
+<p>El campo <code>quote_footer</code> aseguraba que los pies de página de la cita estaban alineados a la derecha: el comando LaTeX <code>\{VA}</code> fuera proporcionado por <code>krantz.cls</code> para incluir el pie de cita.</p>
+<p>El libro fue compilado a PDF a través de <code>xelatex</code> para que sea más fácil para nosotros usar fuentes personalizadas.</p>
+<p>Todos los ajustes anteriores, excepto el entorno <code>VF</code> y el comando <code>\{VA}</code> se pueden aplicar a cualquier otra clase de documentos LaTeX.</p>
+<p>En caso de que quiera trabajar con Chapman &amp; Hall, es posible comenzar con la copia de <code>krantz.cls</code> en nuestro repositorio (<a href="https://github.com/rstudio/bookdown/tree/master/inst/examples" class="uri">https://github.com/rstudio/bookdown/tree/master/inst/examples</a>) en lugar de la copia que recibe de su editor. Hemos trabajado con la recepción de LaTeX ayudan a fijar un buen número de problemas con esta clase de LaTeX, así que espero que funcione bien para su libro si utiliza <strong>bookdown</strong></p>
+
+<p></p>
+</div>
+</div>
+
+
+<!--  -->
+<p style="text-align: center;">
+<a href="6-2-github.html"><button class="btn btn-default">Previous</button></a>
+<a href="A-herramientas-de-software.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

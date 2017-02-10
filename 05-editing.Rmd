@@ -1,0 +1,139 @@
+# Edición
+
+En este capítulo, se explica cómo editar, crear, previsualizar y presentar el libro localmente. Se puede utilizar cualquier editor de texto para editar el libro, y mostraremos algunos consejos sobre la IDE RStudio. Vamos a introducir las funciones de R subyacentes para la construcción, previsualización, y presentación del libro antes de presentar al editor, quien realmente entiende lo que sucede detrás de cámaras cuando se hace clic en un botón determinado en la IDE RStudio, y también puede personalizar otros editores llamando estas funciones.
+
+## Construyendo el libro
+
+Para conformar todos los archivos Rmd en un libro, puede llamar a la función `render_book()` en **bookdown**. A continuación se presentan los argumentos de `render_book()`:
+
+```{r eval=FALSE, code=formatR::usage(bookdown::render_book, output=FALSE)}
+```
+
+El argumento más importante es `output_format`, que puede tomar una cadena de caracteres del formato de salida (por ejemplo,`'bookdown::gitbook'`). Puede dejar este argumento vacío, y el formato de salida por defecto será el primer formato de salida especificado en los metadatos YAML del primer archivo Rmd o un archivo YAML por separado `_output.yml`, como se mencionó en la sección \@ref(configuracion). Si va a generar múltiples formatos de salida para un libro, se recomienda especificar todos los formatos en `_output.yml`.
+
+Una vez que todos los formatos se especifican en el `_output.yml`, es fácil escribir un script en R o en Shell o Makefile para compilar el libro. A continuación se muestra un ejemplo sencillo del uso de un script de Shell para compilar un libro a HTML (con el estilo GitBook) y PDF:
+
+```bash
+#!/usr/bin/env Rscript
+
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+```
+
+El script de Shell no funciona en Windows (no es estrictamente cierto), pero espero que se entienda la idea.
+
+El argumento `...`  se pasa a la función de formato de salida. Los argumentos `clean` y `envir` se pasan a `rmarkdown::render()`, para decidir si se deben limpiar los archivos intermedios, y especificar el entorno para evaluar el código en R, respectivamente.
+
+El directorio de salida del libro se puede especificar a través del argumento `output_dir`. Por defecto, el libro se genera en el directorio `_book`. Esto también se puede ajustar por medio del campo `output_dir` en el archivo de configuración `_bookdown.yml`, de modo que no se tiene que especificar varias veces para la presentación de un libro a múltiples formatos de salida. El argumento `new_session` se explicó en la sección \@ref(#new-session). Al configurar `preview = TRUE`, sólo los archivos Rmd especificados en el argumento `input` se compilan, lo que puede ser conveniente al previsualizar un determinado capítulo, ya que no se vuelve a compilar el libro entero, sino cuando se publica un libro, este argumento sin duda se debe establecer a FALSE.
+
+Al reproducir el libro en múltiples formatos en la misma sesión de R, hay que tener cuidado porque el siguiente formato podrá tener acceso a los objetos R creados a partir del formato anterior. Se recomienda reproducir el libro con un ambiente limpio para cada formato de salida. El argumento `clean_envir` se puede utilizar para limpiar todos los objetos en el entorno especificado por `envir`. De forma predeterminada, es `TRUE` para las sesiones de R no interactivos (por ejemplo, en modo batch). Note que incluso `clean_envir = TRUE` en realidad no garantiza que la sesión R esté limpia. Por ejemplo, los paquetes cargados cuando se reproduce el formato anterior permanecerán en la sesión para el siguiente formato de salida. Para asegurarse de que cada formato se reproduce en una sesión de R completamente limpia, debe iniciar una nueva sesión de R para generar cada formato, por ejemplo, utilizar la línea de comandos
+
+```sh
+Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
+Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book')"
+```
+
+Una serie de archivos de salida se generarán mediante `render_book()`. A veces es posible que desee limpiar el directorio del libro y empezar todo de nuevo, por ejemplo, eliminar los archivos de caché que se generaron de forma automática desde **knitr**. La función `clean_book()` fue diseñada para este propósito. Por defecto, esta le indica qué archivos posiblemente son los de salida y que pueden borrarse. Si usted ha revisado esta lista de archivos, y está seguro de que ningún archivo se identificó erróneamente como archivo de salida (claramente no desea borrar un archivo de entrada que haya creado manualmente), puede eliminar todos ellos usando `bookdown::clean_book(TRUE)`. Como la eliminación de archivos es una operación relativamente peligrosa, le recomendamos que conserve su libro a través de herramientas de control de versiones como GIT, o un servicio que soporte copias de seguridad y restauración, con el fin de no perder algunos archivos para siempre una vez los elimine por error.
+
+## Previsualizar un capítulo
+
+La conformación de todo el libro puede ser lenta cuando el tamaño del libro es grande. Hay dos cosas que pueden afectar la velocidad de la conformación de un libro: el cómputo de chunks en R, y la conversión de Markdown a otros formatos a través de Pandoc. El primero se puede mejorar permitiendo el almacenamiento en caché en **knitr**  usando la opción de chunk `cache = TRUE`, y no hay mucho que se pueda hacer para que el segundo sea más rápido. Sin embargo, se puede optar por compilar un sólo capítulo utilizando la función `preview_chapter()` en **bookdown** , y, por lo general, esto será mucho más rápido que compilar todo el libro. Sólo los archivos Rmd pasados a `preview_chapter()` se reproducirán.
+
+La previsualización del capítulo actual es muy útil cuando sólo se está enfocando en ese capítulo, ya que se puede ver rápidamente la salida actual a medida que agrega más contenido o revisar el capítulo. Aunque la vista previa funciona para todos los formatos de salida, se recomienda previsualizar la salida HTML.
+
+Una desventaja de la vista previa de un capítulo es que las referencias cruzadas a otros capítulos no funcionarán, ya que **bookdown** en ese momento desconoce la situación de otros capítulos. Ese es un precio razonablemente pequeño a pagar por la ganancia en velocidad. Como la vista previa de un capítulo sólo muestra el resultado de ese capítulo específico, no se debe esperar que el contenido de otros capítulos se procese  también de forma correcta. Por ejemplo, cuando se navega a un capítulo diferente, en realidad está viendo la antigua salida de ese capítulo (que incluso puede no existir).
+
+## Presentar el libro
+
+En lugar de ejecutar `render_book()` o `preview_chapter()` una y otra vez, se puede previsualizar el libro "en vivo" en el navegador web, y lo único que hay que hacer es guardar el archivo Rmd. La función `serve_book()` en **bookdown**  puede iniciar un servidor web local para presentar la salida HTML basada en el paquete **servr** [@R-servr].
+
+```{r serve-book-usage, eval=FALSE, code=formatR::usage(bookdown::serve_book, output=FALSE)}
+```
+
+Sólo tiene que pasar el directorio raíz del libro al argumento `dir`, y esta función iniciará un servidor web local para que pueda ver la salida del libro usando el servidor. La dirección URL predeterminada para acceder a la salida del libro es `http://127.0.0.1:4321`. Si ejecuta esta función en una sesión interactiva de R, este URL se abrirá automáticamente en su navegador web. Si se encuentra en la IDE RStudio, el visor de RStudio se utilizará como el navegador web por defecto, por lo que se podrá escribir en los archivos de origen Rmd y ver la salida en el mismo entorno (por ejemplo, la fuente en la izquierda y la salida en el derecha).
+
+El servidor atenderá a los cambios en el directorio raíz del libro: siempre que modifique los archivos en el directorio de libro, `serve_book()` puede detectar los cambios, volver a compilar los archivos Rmd, y refrescar el navegador web de forma automática. Si los archivos modificados no incluyen archivos Rmd, sólo se actualiza el navegador (por ejemplo, si sólo actualizó un determinado archivo CSS). Esto significa que una vez que se inicie el servidor, todo lo que tiene que hacer es simplemente escribir el libro y guardar los archivos. La compilación y previsualización se llevarán a cabo automáticamente al guardar archivos.
+
+Si en realidad no se toma demasiado tiempo para volver a compilar todo el libro, es posible establecer el argumento `preview = FALSE`, de modo que cada vez que se actualice el libro, todo el libro se vuelve a compilar, de lo contrario sólo los capítulos modificados se vuelven a compilar a través de `preview_chapter()`.
+
+Los argumentos `...`  se pasan a `servr::httw()`, y debe consultarse la página de ayuda para conocer todas las opciones posibles, como `port` y `daemon`. Hay ventajas y desventajas al utilizar `in_session = TRUE` o `FALSE`:
+
+- Para `in_session = TRUE`, tendrá acceso a todos los objetos creados en el libro en la sesión actual de R: si utiliza un servidor endemoniado (a través del argumento `daemon = TRUE`), puede revisar los objetos en cualquier momento cuando la sesión de R actual no esté ocupado; de lo contrario tendrá que detener el servidor antes de poder revisar los objetos. Esto puede ser útil cuando necesite explorar de forma interactiva los objetos de R en el libro. La desventaja de `in_session = TRUE` es que la salida puede ser diferente con el libro compilado a partir de una sesión de R fresca, porque el estado de la sesión de R actual puede no estar limpio.
+
+- Para `in_sesion = FALSE`, no tiene acceso a los objetos del libro en la sesión actual de R, pero es más probable que la salida  sea reproducible, ya que todo se crea a partir de las nuevas sesiones de R. Como esta función es sólo para propósitos de previsualización, la limpieza de la sesión de R no puede es una gran preocupación.
+
+Usted puede elegir `in_session = TRUE` o `FALSE` dependiendo de sus casos de uso específicos. Con el tiempo, se debe ejecutar `render_book()` desde una sesión de R fresca para generar una copia fiable de la salida del libro.
+
+## IDE RStudio 
+
+Se recomienda utilizar [la versión preliminar de RStudio](https://www.rstudio.com/products/rstudio/download/preview/)\index{RStudio IDE} si su versión RStudio es inferior a 1.0.0. Como se mencionó en la sección \@ref(uso), todos los archivos R Markdown deben ser codificados en UTF-8. Esto es importante sobre todo cuando sus archivos contienen caracteres de varios bytes. Para guardar un archivo con la codificación UTF-8, puede utilizar el menú `Archivo -> Guardar con Encoding`, y elija `  UTF-8`.
+
+Cuando se hace click en el botón `knit` para compilar un documento R Markdown en el IDE RStudio, la función por defecto llamada por RStudio es `rmarkdown::render()`, que no es la que se quiere para los libros. Para llamar a la función `bookdown::render_book()` en lugar de la anterior, se puede establecer el campo `site` a `bookdown::bookdown_site` en los metadatos YAML del documento R Markdown llamado `index.Rmd, por ejemplo,
+
+```yaml
+---
+title: "Un libro chévere"
+knit: bookdown::render_book
+output:
+  bookdown::gitbook: default
+---
+```
+
+Cuando haya configurado `site:bookdown::bookdown_site` en` index.Rmd`, RStudio será capaz de encontrar el directorio como un directorio de origen del libro ^[Este directorio tiene que ser un proyecto RStudio.], y verá una botón `Build Book` en el panel` Build`. Puede hacer clic en el botón para construir todo el libro en diferentes formatos, y si hace clic en el botón `Knit` en la barra de herramientas, RStudio va a obtener una vista previa de forma automática del capítulo actual, sin tener que usar `preview_chapter()` explícitamente.
+
+El paquete **bookdown** viene con unos pocos addins para RStudio. Si no está familiarizado con los addins de RStudio, es posible echarle un vistazo a la documentación en http://rstudio.github.io/rstudioaddins/. Después de haber instalado el paquete **bookdown** y utilizar RStudio v0.99.878 o versiones anteriores, verá un menú desplegable en la barra de herramientas denominado "Complementos" y elementos en el menú tales como "Preview Book" y "Input LaTeX Math" después de abrir el menú.
+
+
+El complemento "Preview Book" llama a `bookdown::serve_book()` para compilar y presentar el libro. Se bloqueará la sesión actual de R, es decir, cuando `serve_book()` se esté ejecutando, no se podrá ejecutar ninguna operación en la consola de R. Para evitar el bloqueo de la sesión de R, se puede demonizar el servidor usando `bookdown::serve_book (daemon = TRUE)`. Tenga en cuenta que este complemento debe ser usado cuando el documento actual abierto en RStudio esté bajo el directorio raíz de su libro, de lo contrario `serve_book()` puede que no encuentre el origen del libro.
+
+El complemento de "entrada de LaTeX Math" es esencialmente una pequeña aplicación Shiny que proporciona un cuadro de texto para ayudarle a escribir expresiones matemáticas de LaTeX (Figure \@ref(fig:mathquill)). A medida que escribe, verá la vista previa de la expresión matemática y su código fuente LaTeX. Esto hará que sea mucho menos propenso a errores para escribir expresiones matemáticas --- cuando se escribe una expresión matemática LaTeX sin previsualizar, es fácil cometer errores como `X_ij` cuando la intención era `X_ {ij} `, u omitiendo un paréntesis de cierre. Si ha seleccionado una expresión matemática de LaTeX en el editor RStudio antes de hacer clic en el complemento, la expresión se carga y representa en el cuadro de texto de forma automática. Este complemento fue construido con base en la biblioteca MathQuill (http://mathquill.com). No está destinado a proporcionar apoyo total a todos los comandos de látex para las expresiones matemáticas, sino que debe ayudarle a escribir algunas expresiones matemáticas comunes.
+
+```{r mathquill, echo=FALSE, fig.align='center', fig.cap='The RStudio addin to help input LaTeX math.'}
+knitr::include_graphics('images/mathquill.png', dpi = NA)
+```
+
+También existen otros paquetes que proporcionan complementos de R para ayudarle al autor de libros. El paquete **citr**  [@R-citr] proporciona un complemento llamado "Insertar citas", lo que resuelve fácilmente la inserción de citas \index{citation} en documentos de R Markdown. Este complemento analiza las bases de datos bibliográficas, y muestra todos las citas en un menú desplegable, para que se pueda elegir de la lista, recordando qué cita corresponde a qué elemento de la cita (figure \@ref(fig:citr)).
+
+```{r citr, echo=FALSE, fig.align='center', fig.cap='The RStudio addin to help insert citations.'}
+knitr::include_graphics('images/citr.png', dpi = NA)
+```
+
+## Colaboración
+
+Escribir un libro casi de seguro involucrará a más de una sola persona. Usted puede tener co-autores, y los lectores que le dan retroalimentación de vez en cuando.
+
+Dado que todos los capítulos de libros son archivos de texto sin formato, son perfectos para herramientas de control de versiones, lo que significa que si todos sus coautores y colaboradores tienen conocimientos básicos de una herramienta de control de versiones como GIT, pueden colaborar con ellos en el contenido del libro usando estas herramientas. De hecho, la colaboración con GIT es posible incluso si no saben cómo usar GIT, porque GitHub \index{GitHub} ha hecho posible crear y editar archivos en línea directamente en su navegador web. La persona sólo tiene que estar familiarizada con GIT, y puede configurar el repositorio de libros. El resto de los colaboradores pueden aportar contenido en línea, aunque tendrán más libertad si conocen el uso básico de GIT para trabajar localmente.
+
+Los lectores pueden contribuir de dos maneras. Una forma es aportar contenido directamente, y la forma más fácil, es a través de [GitHub pull requests](https://help.github.com/articles/about-pull-requests/) si la fuente de su libro está alojada en GitHub. Básicamente, cualquier usuario de GitHub puede hacer clic en el botón de edición en la página de un archivo de origen Rmd, editar el contenido y enviar los cambios a su aprobación. Si está satisfecho con los cambios propuestos (puede ver claramente lo que se cambió exactamente), puede hacer clic en un botón "Combinar" para combinar los cambios. Si no está satisfecho, puede proporcionar su retroalimentación en la solicitud de extracción, por lo que el lector puede revisarla de acuerdo a sus necesidades. Hemos mencionado el botón de edición en el estilo de GitBook en la sección \@ref(estilo-gitbook). Este botón está vinculado a la fuente Rmd de cada página y puede guiarlo para crear la solicitud de extracción. No hay necesidad de escribir correos electrónicos de ida y vuelta para comunicar cambios sencillos, como arreglar un error tipográfico.
+
+Otra forma de que los lectores contribuyan a su libro es dejar comentarios. Los comentarios se pueden dejar en múltiples formas: correos electrónicos, problemas de GitHub o comentarios de páginas HTML. Aquí utilizamos Disqus (ver Sección \@ref(opciones-yaml)) como ejemplo. Disqus es un servicio para integrar un área de discusión en sus páginas web, y se puede cargar a través de JavaScript. Puede encontrar el código JavaScript después de registrarte y crear un nuevo foro en Disqus, que tiene este aspecto:
+
+```html
+<div id="disqus_thread"></div>
+<script>
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//yihui.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the
+<a href="https://disqus.com/?ref_noscript">
+  comments powered by Disqus.</a></noscript>
+```
+
+Tenga en cuenta que tendrá que reemplazar el nombre `yihui` con su propio nombre de foro (este nombre debe proporcionarse al crear un nuevo foro de Disqus). Puede guardar el código en un archivo HTML denominado, por ejemplo, `disqus.html`. A continuación, puede incrustarlo al final de cada página a través de la opción `after_body` (Figura \@ref(fig: disqus) muestra cómo se ve el área de discusión):
+
+```yaml
+---
+output:
+  bookdown::gitbook:
+    includes:
+      after_body: disqus.html
+---
+```
+
+```{r disqus, fig.cap='Una página del ibro con un área de discusión.', out.width='100%', echo=FALSE}
+knitr::include_graphics('images/disqus.png', dpi = NA)
+```

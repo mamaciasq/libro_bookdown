@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="bookdown: Escritura de libros con R Markdown" />
+<meta property="og:type" content="book" />
+
+<meta property="og:image" content="images/cover.png" />
+<meta property="og:description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook." />
+<meta name="github-repo" content="rstudio/bookdown" />
+
+<meta name="author" content="Yihui Xie" />
+
+<meta name="date" content="2017-02-03" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
+
+<title>bookdown: Escritura de libros con R Markdown</title>
+
+<script src="libs/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap/shim/respond.min.js"></script>
+<script src="libs/navigation/tabsets.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/datatables-binding/datatables.js"></script>
+<link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="has-sub"><a href="index.html#prefacio">Prefacio</a><ul>
+<li><a href="por-que-leer-este-libro.html#por-que-leer-este-libro">¿Por qué leer este libro?</a></li>
+<li><a href="informacion-acerca-del-software-y-convenciones.html#informacion-acerca-del-software-y-convenciones">Información acerca del software y convenciones</a></li>
+<li><a href="agradecimientos.html#agradecimientos">Agradecimientos</a></li>
+</ul></li>
+<li><a href="acerca-del-autor.html#acerca-del-autor">Acerca del Autor</a></li>
+<li class="has-sub"><a href="1-introduccion.html#introduccion"><span class="toc-section-number">1</span> Introducción</a><ul>
+<li><a href="1-1-motivacion.html#motivacion"><span class="toc-section-number">1.1</span> Motivación</a></li>
+<li><a href="1-2-comenzando.html#comenzando"><span class="toc-section-number">1.2</span> Comenzando</a></li>
+<li><a href="1-3-uso.html#uso"><span class="toc-section-number">1.3</span> Uso</a></li>
+<li><a href="1-4-new-session.html#new-session"><span class="toc-section-number">1.4</span> Dos enfoques de representación</a></li>
+<li><a href="1-5-algunos-tips.html#algunos-tips"><span class="toc-section-number">1.5</span> Algunos tips</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-componentes.html#componentes"><span class="toc-section-number">2</span> Componentes</a><ul>
+<li class="has-sub"><a href="2-1-sintaxis-de-markdown.html#sintaxis-de-markdown"><span class="toc-section-number">2.1</span> Sintaxis de Markdown</a><ul>
+<li><a href="2-1-sintaxis-de-markdown.html#formateo-en-linea"><span class="toc-section-number">2.1.1</span> Formateo en línea</a></li>
+<li><a href="2-1-sintaxis-de-markdown.html#elementos-de-nivel-bloque"><span class="toc-section-number">2.1.2</span> Elementos de nivel bloque</a></li>
+<li><a href="2-1-sintaxis-de-markdown.html#expresiones-matematicas-en-latex"><span class="toc-section-number">2.1.3</span> Expresiones matemáticas en LaTeX</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-2-extensiones-de-markdown-en-bookdown.html#extensiones-de-markdown-en-bookdown"><span class="toc-section-number">2.2</span> Extensiones de Markdown en bookdown</a><ul>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#ecuaciones"><span class="toc-section-number">2.2.1</span> Numerar y referenciar ecuaciones</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#teoremas"><span class="toc-section-number">2.2.2</span> Teoremas y demostraciones</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#encabezados-especiales"><span class="toc-section-number">2.2.3</span> Encabezados especiales</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#referencias-de-textos"><span class="toc-section-number">2.2.4</span> Referencias de textos</a></li>
+</ul></li>
+<li><a href="2-3-codigo-en-r.html#codigo-en-r"><span class="toc-section-number">2.3</span> Código en R</a></li>
+<li><a href="2-4-figuras.html#figuras"><span class="toc-section-number">2.4</span> Figuras</a></li>
+<li><a href="2-5-tablas.html#tablas"><span class="toc-section-number">2.5</span> Tablas</a></li>
+<li><a href="2-6-referencias-cruzadas.html#referencias-cruzadas"><span class="toc-section-number">2.6</span> Referencias cruzadas</a></li>
+<li><a href="2-7-bloques-personalizados.html#bloques-personalizados"><span class="toc-section-number">2.7</span> Bloques personalizados</a></li>
+<li><a href="2-8-citas.html#citas"><span class="toc-section-number">2.8</span> Citas</a></li>
+<li><a href="2-9-latex-index.html#latex-index"><span class="toc-section-number">2.9</span> Index</a></li>
+<li><a href="2-10-html-widgets.html#html-widgets"><span class="toc-section-number">2.10</span> HTML Widgets</a></li>
+<li><a href="2-11-paginas-web-y-aplicaciones-shiny.html#paginas-web-y-aplicaciones-shiny"><span class="toc-section-number">2.11</span> Páginas web y aplicaciones Shiny</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-formatos-de-salida.html#formatos-de-salida"><span class="toc-section-number">3</span> Formatos de salida</a><ul>
+<li class="has-sub"><a href="3-1-html.html#html"><span class="toc-section-number">3.1</span> HTML</a><ul>
+<li><a href="3-1-html.html#estilo-gitbook"><span class="toc-section-number">3.1.1</span> El estilo GitBook</a></li>
+<li><a href="3-1-html.html#el-estilo-bootstrap"><span class="toc-section-number">3.1.2</span> El estilo Bootstrap</a></li>
+<li><a href="3-1-html.html#el-estilo-tufte"><span class="toc-section-number">3.1.3</span> El estilo Tufte</a></li>
+</ul></li>
+<li><a href="3-2-latexpdf.html#latexpdf"><span class="toc-section-number">3.2</span> LaTeX/PDF</a></li>
+<li class="has-sub"><a href="3-3-e-books.html#e-books"><span class="toc-section-number">3.3</span> E-Books</a><ul>
+<li><a href="3-3-e-books.html#epub"><span class="toc-section-number">3.3.1</span> EPUB</a></li>
+<li><a href="3-3-e-books.html#mobi"><span class="toc-section-number">3.3.2</span> MOBI</a></li>
+</ul></li>
+<li><a href="3-4-un-documento-sencillo.html#un-documento-sencillo"><span class="toc-section-number">3.4</span> Un documento sencillo</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-personalizacion.html#personalizacion"><span class="toc-section-number">4</span> Personalización</a><ul>
+<li><a href="4-1-opciones-yaml.html#opciones-yaml"><span class="toc-section-number">4.1</span> Opciones YAML</a></li>
+<li><a href="4-2-temas.html#temas"><span class="toc-section-number">4.2</span> Temas</a></li>
+<li><a href="4-3-plantillas.html#plantillas"><span class="toc-section-number">4.3</span> Plantillas</a></li>
+<li><a href="4-4-configuracion.html#configuracion"><span class="toc-section-number">4.4</span> Configuración</a></li>
+<li><a href="4-5-internacionalizacion.html#internacionalizacion"><span class="toc-section-number">4.5</span> Internacionalización</a></li>
+</ul></li>
+<li class="has-sub"><a href="5-edicion.html#edicion"><span class="toc-section-number">5</span> Edición</a><ul>
+<li><a href="5-1-construyendo-el-libro.html#construyendo-el-libro"><span class="toc-section-number">5.1</span> Construyendo el libro</a></li>
+<li><a href="5-2-previsualizar-un-capitulo.html#previsualizar-un-capitulo"><span class="toc-section-number">5.2</span> Previsualizar un capítulo</a></li>
+<li><a href="5-3-presentar-el-libro.html#presentar-el-libro"><span class="toc-section-number">5.3</span> Presentar el libro</a></li>
+<li><a href="5-4-ide-rstudio.html#ide-rstudio"><span class="toc-section-number">5.4</span> IDE RStudio</a></li>
+</ul></li>
+<li class="has-sub"><a href="6-publicacion.html#publicacion"><span class="toc-section-number">6</span> Publicación</a><ul>
+<li><a href="6-1-rstudio-connect.html#rstudio-connect"><span class="toc-section-number">6.1</span> RStudio Connect</a></li>
+<li><a href="6-2-github.html#github"><span class="toc-section-number">6.2</span> GitHub</a></li>
+<li><a href="6-3-editores.html#editores"><span class="toc-section-number">6.3</span> Editores</a></li>
+</ul></li>
+<li class="appendix"><span><b>Apéndice</b></span></li>
+<li class="has-sub"><a href="A-herramientas-de-software.html#herramientas-de-software"><span class="toc-section-number">A</span> Herramientas de Software</a><ul>
+<li><a href="A-1-r-y-sus-paquetes.html#r-y-sus-paquetes"><span class="toc-section-number">A.1</span> R y sus paquetes</a></li>
+<li><a href="A-2-pandoc.html#pandoc"><span class="toc-section-number">A.2</span> Pandoc</a></li>
+<li><a href="A-3-latex.html#latex"><span class="toc-section-number">A.3</span> LaTeX</a></li>
+</ul></li>
+<li class="has-sub"><a href="B-uso-de-software.html#uso-de-software"><span class="toc-section-number">B</span> Uso de Software</a><ul>
+<li><a href="B-1-knitr.html#knitr"><span class="toc-section-number">B.1</span> knitr</a></li>
+<li><a href="B-2-r-markdown.html#r-markdown"><span class="toc-section-number">B.2</span> R Markdown</a></li>
+</ul></li>
+<li><a href="C-faq.html#faq"><span class="toc-section-number">C</span> FAQ</a></li>
+<li><a href="referencias.html#referencias">Referencias</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="previsualizar-un-capitulo" class="section level2">
+<h2><span class="header-section-number">5.2</span> Previsualizar un capítulo</h2>
+<p>La conformación de todo el libro puede ser lenta cuando el tamaño del libro es grande. Hay dos cosas que pueden afectar la velocidad de la conformación de un libro: el cómputo de chunks en R, y la conversión de Markdown a otros formatos a través de Pandoc. El primero se puede mejorar permitiendo el almacenamiento en caché en <strong>knitr</strong> usando la opción de chunk <code>cache = TRUE</code>, y no hay mucho que se pueda hacer para que el segundo sea más rápido. Sin embargo, se puede optar por compilar un sólo capítulo utilizando la función <code>preview_chapter()</code> en <strong>bookdown</strong> , y, por lo general, esto será mucho más rápido que compilar todo el libro. Sólo los archivos Rmd pasados a <code>preview_chapter()</code> se reproducirán.</p>
+<p>La previsualización del capítulo actual es muy útil cuando sólo se está enfocando en ese capítulo, ya que se puede ver rápidamente la salida actual a medida que agrega más contenido o revisar el capítulo. Aunque la vista previa funciona para todos los formatos de salida, se recomienda previsualizar la salida HTML.</p>
+<p>Una desventaja de la vista previa de un capítulo es que las referencias cruzadas a otros capítulos no funcionarán, ya que <strong>bookdown</strong> en ese momento desconoce la situación de otros capítulos. Ese es un precio razonablemente pequeño a pagar por la ganancia en velocidad. Como la vista previa de un capítulo sólo muestra el resultado de ese capítulo específico, no se debe esperar que el contenido de otros capítulos se procese también de forma correcta. Por ejemplo, cuando se navega a un capítulo diferente, en realidad está viendo la antigua salida de ese capítulo (que incluso puede no existir).</p>
+</div>
+<p style="text-align: center;">
+<a href="5-1-construyendo-el-libro.html"><button class="btn btn-default">Previous</button></a>
+<a href="5-3-presentar-el-libro.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

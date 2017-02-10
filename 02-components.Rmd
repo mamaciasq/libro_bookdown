@@ -1,0 +1,753 @@
+# Componentes
+
+En este capítulo, se muestra la sintaxis de algunos componentes básicos de un libro, incluyendo el código en R, figuras, tablas, citas, y demás. Primero empezamos con la sintaxis de Markdown Pandoc.
+
+## Sintaxis de Markdown
+
+En esta sección se da una breve introducción a Markdown de Pandoc. Los lectores que estén familiarizados con Markdown pueden omitir esta sección. La sintaxis completa de Markdown de Pandoc se puede encontrar en el sitio web de Pandoc <http://pandoc.org>.
+
+### Formateo en línea
+
+Puede producir texto en _cursiva_  rodeándolo con guiones o asteriscos, por ejemplo, `_texto_` o `*texto*`. Para texto en **negrita**, utilice dos guiones bajos ( `__texto__`) o asteriscos (`**texto**`). El texto rodeado por `~` se convertirá en un subíndice (por ejemplo, `H~2~SO~4~` muestra H~2~SO~4~), y de manera similar, dos signos de intercalación `^` producen un superíndice (por ejemplo, `ClO^-^` muestra ClO^-^). Para marcar el texto como `código en línea`, utilice un par de acentos abiertos, por ejemplo, `` `code` ``^[Para incluir acentos abiertos literales, sólo tiene que utilizar más acentos abiertos en el exterior, por ejemplo, se pueden utilizar dos comillas sencillas para preservar un acento grave en el interior: ``` `` ` code ` `` ```.]. Las versalitas se pueden producir con la etiqueta HTML `span`, por ejemplo, `<span style="font-variant:small-caps;">Versalitas</span>` muestra <span style="font-variant:small-caps;">Versalitas</span>. Los enlaces se crean usando `[texto](link)`, por ejemplo, `[RStudio](http://www.rstudio.com)`, y la sintaxis de las imágenes es similar: sólo tiene que añadir un signo de exclamación, por ejemplo, `![título de la imagen](ruta)`. Las notas al pie se colocan dentro de corchetes cuadrados después de un acento circunflejo  `^[]`, por ejemplo,`^[Esta es una nota al pie.]`. Se hablará de las citas en la sección \@ref(citas). 
+
+### Elementos de nivel bloque
+
+Los encabezados de sección se pueden escribir después de una serie de símbolos de numeral, por ejemplo,
+
+
+```markdown
+# Encabezado de primer nivel
+
+## Encabezado de segundo nivel
+
+### Encabezado de tercer nivel
+```
+
+Si no desea que un determinado encabezado sea numerado, puede agregar `{-}` después del encabezado, por ejemplo,
+
+```markdown
+# Prefacio {-}
+```
+
+Los elementos de la lista no ordenada comienzan con `*` `-`, o `+`, y se puede anidar una lista dentro de otra lista sangrando la sub-lista con cuatro espacios, por ejemplo,
+
+```markdown
+- un item
+- un item
+- un item
+    - un item
+    - un item
+```
+
+La salida es:
+
+- un item
+- un item
+- un item
+    - un item
+    - un item
+    
+Los elementos de la lista ordenada comienzan con números (la regla para las listas anidadas es el mismo que en el anterior), por ejemplo,
+
+```markdown
+1. primer item
+2. segundo item
+3. tercer item
+```
+
+La salida no se ve demasiado diferente que en Markdown:
+
+1. primer item
+2. segundo item
+3. tercero item
+
+Un párrafo citado se escribe después de `>`, por ejemplo:
+
+```markdown
+> "I thoroughly disapprove of duels. If a man should challenge me,
+  I would take him kindly and forgivingly by the hand and lead him
+  to a quiet place and kill him."
+>
+> --- Mark Twain
+```
+
+Y la salida es (se personalizó el estilo de las comillas en este libro):
+
+> "I thoroughly disapprove of duels. If a man should challenge me,
+  I would take him kindly and forgivingly by the hand and lead him
+  to a quiet place and kill him."
+>
+> --- Mark Twain
+
+Los bloques de código sin formato se pueden escribir después de tres o más acentos abiertos, y también se puede aplicar sangría a los bloques de cuatro espacios, por ejemplo,
+
+````markdown
+```
+Este texto se muestra verbatim
+```
+
+O sangrándolo con cuatro espacios:
+
+    Este texto se muestra verbatim
+````
+
+### Expresiones matemáticas en LaTeX
+
+Las ecuaciones en LaTeX se pueden escribir dentro de un par de signos peso usando la sintaxis de LaTeX, por ejemplo `$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$` (cuya salida es: $f(k)={n \choose k}p^{k}(1-p)^{n-k}$); las expresiones matemáticas también pueden centrarse en la página si se ponen entre dobles signos peso, por ejemplo: `$$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$$`, cuya salida se vería como:
+
+$$f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k}$$
+
+También puede utilizar entornos matemáticos dentro de `$ $`  o `$$ $$`, por ejemplo,
+
+```latex
+$$\begin{array}{ccc}
+x_{11} & x_{12} & x_{13}\\
+x_{21} & x_{22} & x_{23}
+\end{array}$$
+```
+
+$$\begin{array}{ccc}
+x_{11} & x_{12} & x_{13}\\
+x_{21} & x_{22} & x_{23}
+\end{array}$$
+
+```latex
+$$X = \begin{bmatrix}1 & x_{1}\\
+1 & x_{2}\\
+1 & x_{3}
+\end{bmatrix}$$
+```
+
+$$X = \begin{bmatrix}1 & x_{1}\\
+1 & x_{2}\\
+1 & x_{3}
+\end{bmatrix}$$
+
+```latex
+$$\begin{vmatrix}a & b\\
+c & d
+\end{vmatrix}=ad-bc$$
+```
+
+$$\begin{vmatrix}a & b\\
+c & d
+\end{vmatrix}=ad-bc$$
+
+## Extensiones de Markdown en bookdown
+
+A pesar de que Pandoc de Markdown es mucho más rico que la sintaxis de Markdown original, aún existe una serie de cosas que podemos necesitar para la escritura académica. Por ejemplo, es compatible con ecuaciones matemáticas, pero no se puede numerar y referenciar ecuaciones en varias páginas HTML o en salida EPUB. Se ha proporcionado un par de extensiones de Markdown en **bookdown** para llenar estos vacíos.
+
+### Numerar y referenciar ecuaciones {#ecuaciones}
+
+Para numerar\index{ecuación} y referenciar ecuaciones\index{referencia-cruzada}, póngalas dentro de entornos de ecuaciones y asígneles etiquetas mediante la sintaxis `(\#eq:label)`, por ejemplo,
+
+```latex
+\begin{equation} 
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  \label{eq:binom}
+\end{equation} 
+```
+
+Esto muestra la siguiente ecuación:
+
+\begin{equation}
+f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k} (\#eq:binom)
+\end{equation}
+
+Puede hacer referencia a la ecuación mediante `\@ref(eq:binom)`, por ejemplo, véase la ecuación \@ref(eq:binom). 
+
+```{block2, type='rmdcaution'}
+Las etiquetas de una ecuación deben comenzar con el prefijo `eq:` en **bookdown**. Las referencias a una ecuación funcionan mejor para la producción de LaTeX/PDF, y no están bien soportadas en la producción de Word o libros electrónicos. Para la salida HTML, **bookdown**  sólo puede numerar las ecuaciones con etiquetas. Por favor asegúrese de que las ecuaciones sin etiquetas no estén numeradas ya sea usando el entorno `equation*` o adicionando `\nonumber` o `\notag` a sus ecuaciones. Las mismas reglas se aplican a otros entornos de matemáticas, tales como `eqnarray`,` gather`, `align`, etc. (por ejemplo, se puede utilizar el entorno `align*`).
+```
+
+
+Demostramos unos entornos más de ecuaciones matemáticas abajo. Aquí está una ecuación sin numerar utilizando el entorno `equation*`:
+
+```latex
+\begin{equation*} 
+\frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x)
+\end{equation*} 
+```
+
+\begin{equation*}
+\frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x)
+\end{equation*}
+
+Abajo hay un entorno `align` \@ref(eq:align):
+
+```latex
+\begin{align} 
+g(X_{n}) &= g(\theta)+g'({\tilde{\theta}})(X_{n}-\theta) \notag \\
+\sqrt{n}[g(X_{n})-g(\theta)] &= g'\left({\tilde{\theta}}\right)
+  \sqrt{n}[X_{n}-\theta ] (\#eq:align)
+\end{align} 
+```
+
+\begin{align}
+g(X_{n}) &= g(\theta)+g'({\tilde{\theta}})(X_{n}-\theta) \notag \\
+\sqrt{n}[g(X_{n})-g(\theta)] &= g'\left({\tilde{\theta}}\right)
+  \sqrt{n}[X_{n}-\theta ] (\#eq:align)
+\end{align}
+
+El entorno `split` dentro de `equation` de manera que todas las líneas comparten el mismo número \@ref(eq:var-beta). Por defecto, cada línea en el entorno `align` se le asignará un número de ecuación. Suprimimos el número de la primera línea en el ejemplo anterior usando `\notag`. En este ejemplo, a todo el entorno `split` se le asignó un único número.
+
+```latex
+\begin{equation} 
+\begin{split}
+\mathrm{Var}(\hat{\beta}) & =\mathrm{Var}((X'X)^{-1}X'y)\\
+ & =(X'X)^{-1}X'\mathrm{Var}(y)((X'X)^{-1}X')'\\
+ & =(X'X)^{-1}X'\mathrm{Var}(y)X(X'X)^{-1}\\
+ & =(X'X)^{-1}\sigma^{2}
+\end{split}
+(\#eq:var-beta)
+\end{equation} 
+```
+
+\begin{equation}
+\begin{split}
+\mathrm{Var}(\hat{\beta}) & =\mathrm{Var}((X'X)^{-1}X'y)\\
+ & =(X'X)^{-1}X'\mathrm{Var}(y)((X'X)^{-1}X')'\\
+ & =(X'X)^{-1}X'\mathrm{Var}(y)X(X'X)^{-1}\\
+ & =(X'X)^{-1}\sigma^{2}
+\end{split}
+(\#eq:var-beta)
+\end{equation}
+
+### Teoremas y demostraciones {#teoremas}
+
+Los teoremas y las demostraciones se utilizan comúnmente en artículos y libros en matemáticas. Sin embargo, no se deje engañar por los nombres: un "teorema" es sólo un entorno numerado/etiquetado, y no tiene que ser un teorema matemático (por ejemplo, puede ser un ejemplo irrelevante para las matemáticas). Del mismo modo, una "demostración" es un entorno no numerado. En esta sección, siempre usamos los significados generales de un "teorema" y "demostración" a menos que se indique explícitamente.
+
+En **bookdown**, los tipos de entornos de teoremas soportados están en la tabla \@ref(tab:theorem-envs). Para escribir un teorema, puede usar la siguiente sintaxis:
+
+````markdown
+`r ''````{theorem}
+Aquí está mi teorema.
+```
+````
+
+(ref:theorem-envs) Entornos de teoremas en **bookdown**.
+
+```{r theorem-envs, echo=FALSE}
+knitr::kable(data.frame(
+  Environment = names(bookdown:::theorem_abbr),
+  `Printed Name` = unname(unlist(bookdown:::label_names_math)),
+  `Label Prefix` = unname(bookdown:::theorem_abbr),
+  stringsAsFactors = FALSE, check.names = FALSE
+), caption = '(ref:theorem-envs)', booktabs = TRUE)
+```
+
+Para escribir otros entornos de teoremas, reemplace ```` ```{theorem} ```` por otros nombres de entornos en la tabla \@ref(tab:theorem-envs), por ejemplo, ```` ```{lemma} ````.
+
+Un teorema puede tener una opción `name` con lo cual su nombre se imprimirá, por ejemplo,
+
+````markdown
+`r ''````{theorem, name="Teorema de Pitágoras"}
+Para un triángulo rectángulo, si $c$ denota la longitud de la hipotenusa
+y $a$ y $b$ denotan las longitudes de los otros dos lados, se tiene que
+$$a^2 + b^2 = c^2$$
+```
+````
+
+Si desea referirse a un teorema, debe etiquetarlo. La etiqueta puede escribirse después de ```` ```{theorem````, por ejemplo,
+
+````markdown
+`r ''````{theorem, label="foo"}
+Un teorema etiquetado aquí.
+```
+````
+
+La opción `label` puede ser implícita, por ejemplo, el siguiente teorema tiene la etiqueta `bar`:
+
+````markdown
+`r ''````{theorem, bar}
+Un teorema etiquetado aquí
+```
+````
+
+Después de etiquetar un teorema, puede referirse a él usando la sintaxis `\@ref(prefix:label)`. \index{cross-reference} Consulte la columna `Label Prefix` en la tabla \@ref(tab:theorem-envs) para el valor de `prefix` en cada entorno. Por ejemplo, tenemos un teorema etiquetado y llamado a continuación, y `\@ref(thm:pyth)` nos da su número de teorema \@ref(thm:pyth):
+
+````markdown
+`r ''````{theorem, pyth, name="Pythagorean theorem"}
+Para un triángulo rectángulo, si $c$ denota la longitud de la hipotenusa
+y $a$ y $b$ denotan las longitudes de los otros dos lados, se tiene que
+
+$$a^2 + b^2 = c^2$$
+```
+````
+
+```{theorem, pyth, name="Teorema de Pitágoras"}
+Para un triángulo rectángulo, si $c$ denota la longitud de la hipotenusa
+y $a$ y $b$ denotan las longitudes de los otros dos lados, se tiene que
+
+$$a^2 + b^2 = c^2$$
+```
+
+Los entornos de demostración que actualmente se soportan `r knitr::combine_words(names(bookdown:::label_names_math2), before = '\x60')`. La sintaxis es similar a los entornos de teoremas, y los entornos de demostración también pueden ser nombrados. La única diferencia es que, puesto que no tienen número, no se puede hacer referencia a ellos.
+
+Hemos tratado de hacer que todos estos entornos de teorema y demostración funcionen fuera de lo normal, no importa si su salida es PDF, HTML o EPUB. Si es un experto en LaTeX o HTML, quizá desee personalizar el estilo de estos entornos de todos modos (consulte el capítulo \@ref(personalizacion)). La personalización en HTML es fácil con CSS, y cada entorno está encerrado en `<div></div>` con la clase CSS siendo el nombre del entorno, por ejemplo, `<div class="lemma"></div>`. Para la salida de LaTeX, hemos predefinido el estilo para que sea `definición` para entornos `r knitr::combine_words(bookdown:::style_definition, before='\x60')` y `remark` para entornos `r knitr::combine_words(c('proof', bookdown:::style_remark), before='\x60')`. Todos los demás entornos usan el estilo `plain`. La definición de estilo se realiza a través del comando `\theoremstyle{}` del paquete **amsthm**.
+
+Por defecto, los teoremas están numerados por capítulos. Si no hay capítulos en su documento, en su lugar se numeran por secciones. Si todo el documento no tiene número (la opción de formato de salida `number_sections = FALSE`), todos los teoremas están numerados secuencialmente de 1, 2, ..., N. LaTeX soporta numeración de un entorno de teorema después de otro, por ejemplo, teoremas y lemas comparten el mismo contador. Esto no es compatible con la salida HTML/EPUB en **bookdown**. Puede cambiar el esquema de numeración en el preámbulo de LaTeX definiendo sus propios entornos de teorema, por ejemplo,
+
+```latex
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+```
+
+Cuando **bookdown** detecta `\newtheorem{theorem}` en su preámbulo de LaTeX, no escribirá sus definiciones de teorema por defecto, lo que significa que usted tiene que definir todos los entornos de teorema por su propia cuenta. Por razones de simplicidad y consistencia, no recomendamos que lo haga. Puede ser confuso cuando el Teorema 18 en PDF se convierte en el Teorema 2.4 en HTML.
+
+Los entornos de teorema y demostración quedarán ocultos si la opción de bloqueo `echo` se establece en `FALSE`. Para asegurarse de que siempre se muestren, puede agregar la opción de bloqueo `echo = TRUE`, por ejemplo,
+
+````markdown
+`r ''````{theorem, echo=TRUE}
+Aquí está mi teorema.
+```
+````
+
+A continuación, mostramos más ejemplos ^[Algunos ejemplos se adaptan de la página de Wikipedia https://en.wikipedia.org/wiki/Caracteristic_function_(probability_theory)] de los entornos teorema y demostración, para que pueda ver los estilos por defecto en **bookdown**.
+
+```{definition}
+La función característica de una variable aleatoria $X$ está definida por
+
+$$\varphi _{X}(t)=\operatorname {E} \left[e^{itX}\right], \; t\in\mathcal{R}$$
+```
+
+
+```{example}
+Derivamos la función característica de $X\sim U(0,1)$ con la función de densidad de probabilidad $f(x)=\mathbf{1}_{x \in [0,1]}$.
+
+\begin{equation*}
+\begin{split}
+\varphi _{X}(t) &= \operatorname {E} \left[e^{itX}\right]\\
+ & =\int e^{itx}f(x)dx\\
+ & =\int_{0}^{1}e^{itx}dx\\
+ & =\int_{0}^{1}\left(\cos(tx)+i\sin(tx)\right)dx\\
+ & =\left.\left(\frac{\sin(tx)}{t}-i\frac{\cos(tx)}{t}\right)\right|_{0}^{1}\\
+ & =\frac{\sin(t)}{t}-i\left(\frac{\cos(t)-1}{t}\right)\\
+ & =\frac{i\sin(t)}{it}+\frac{\cos(t)-1}{it}\\
+ & =\frac{e^{it}-1}{it}
+\end{split}
+\end{equation*}
+
+Note que usamos el hecho $e^{ix}=\cos(x)+i\sin(x)$ dos veces.
+```
+
+```{lemma, chf-pdf}
+Para dos variables aleatorias cualquiera $X_1$, $X_2$, ambas tienen la misma distribución de probabilidad si y solo si
+
+$$\varphi _{X_1}(t)=\varphi _{X_2}(t)$$
+```
+
+```{theorem, chf-sum}
+Si $X_1$, ..., $X_n$ son variables aleatorias independientes, y $a_1$, ..., $a_n$ son constantes, entonces la función característica de la combinación lineal $S_n=\sum_{i=1}^na_iX_i$ es
+
+$$\varphi _{S_{n}}(t)=\prod_{i=1}^n\varphi _{X_i}(a_{i}t)=\varphi _{X_{1}}(a_{1}t)\cdots \varphi _{X_{n}}(a_{n}t)$$
+```
+
+```{proposition}
+La distribución de la suma de variables aleatorias independientes Poisson $X_i \sim \mathrm{Pois}(\lambda_i),\: i=1,2,\cdots,n$ es $\mathrm{Pois}(\sum_{i=1}^n\lambda_i)$.
+```
+
+```{proof}
+La función característica de $X\sim\mathrm{Pois}(\lambda)$ es $\varphi _{X}(t)=e^{\lambda (e^{it}-1)}$. Sea $P_n=\sum_{i=1}^nX_i$. Se sabe del teorema \@ref(thm:chf-sum) que
+
+\begin{equation*}
+\begin{split}
+\varphi _{P_{n}}(t) & =\prod_{i=1}^n\varphi _{X_i}(t) \\
+& =\prod_{i=1}^n e^{\lambda_i (e^{it}-1)} \\
+& = e^{\sum_{i=1}^n \lambda_i (e^{it}-1)}
+\end{split}
+\end{equation*}
+
+Esta es la función característica de una variable aleatoria Poisson con parámetro $\lambda=\sum_{i=1}^n \lambda_i$. Del Lemma \@ref(lem:chf-pdf), se sabe que la distribución de $P_n$ es $\mathrm{Pois}(\sum_{i=1}^n\lambda_i)$.
+```
+
+```{remark}
+En algunos casos, es muy conveniente y fácil calcular la distribución de la suma de variables aleatorias independientes usando funciones características.
+```
+
+```{corollary}
+La función característica de la suma de dos variables aleatorias independientes $X_1$ y $X_2$ es el producto de las funciones características de $X_1$ y $X_2$, por ejemplo,
+
+$$\varphi _{X_1+X_2}(t)=\varphi _{X_1}(t) \varphi _{X_2}(t)$$
+```
+
+### Encabezados especiales
+
+Hay unos cuantos tipos especiales de encabezados de primer nivel que serán procesados de forma diferente en  **bookdown**. El primer tipo es un enzacebzado sin numerar que se inicia con el token `(PART)`. Este tipo de encabezados se traducen en títulos de parte\index{parte}. Si está familiarizado con LaTeX, esto significa básicamente `\part{}`. Cuando su libro tenga un gran número de capítulos, es posible que desee organizarlos en partes, por ejemplo,
+
+```
+# (PART) Parte I {-} 
+
+# Capítulo Uno
+
+# Capítulo Dos
+
+# (PART) Parte II {-} 
+
+# Capítulo Tres
+```
+
+El segundo tipo es un encabezado sin numeración que comienza con `(APPENDIX)`, lo que indica que todos los capítulos después de este encabezado son apéndices \index{appendix}, por ejemplo,
+
+```
+# Capítulo Uno 
+
+# Capítulo Dos
+
+# (APPENDIX) Apéndice {-} 
+
+# Apéndice A
+
+# Apéndice B
+```
+El estilo de numeración de los apéndices se cambiará automáticamente en la salida LaTeX/PDF y HTML (por lo general de la forma A, A.1, A.2, B, B.1, ...). Esta función no está disponible para libros electrónicos o de salida Word
+
+### Referencias de textos
+
+Se puede asignar un texto a una etiqueta y hacer referencia al texto usando la etiqueta en otro lugar del documento. Esto puede ser particularmente útil para títulos largos de figuras/cuadros (sección \@ref(figuras) y \@ref(tablas)), en cuyo caso normalmente tiene que escribir toda la cadena de caracteres en el encabezado del chunk (por ejemplo, `fig.cap = "Un título de figura larguísimo"`) o su código en R (por ejemplo, `kable(caption = "Un título de tabla larguísimo.")`). También es útil cuando estos títulos contienen caracteres especiales HTML o LaTeX, por ejemplo, si el pie de figura contiene un guión bajo, que funciona en la salida HTML, pero no pueden trabajar en la producción de LaTeX ya que el guión bajo debe ser omitido en LaTeX.
+
+La sintaxis de una referencia de texto es `(ref:label)text`, donde `label` es una etiqueta única ^[Usted puede considerar el uso de las etiquetas de chunk.] en todo el documento para `text`. Debe estar en un párrafo separado mediante líneas vacías por encima y por debajo de ella. Por ejemplo,
+
+```markdown
+(ref:foo) Defina una referencia de texto **aquí**. 
+```
+
+A continuación, puede usar `(ref: foo)` en sus pies de figura/tabla. El texto puede contener cualquier cosa que Markdown soporte, siempre y cuando sea un solo párrafo. Aquí hay un ejemplo completo:
+
+````markdown
+Un párrafo normal.
+
+(ref:foo) Un diagrama de dispersión de los datos `cars` usando las gráficas de la **base** de R. 
+
+`r ''````{r foo, fig.cap='(ref:foo)'}
+plot(cars)  # a scatterplot
+```
+````
+
+## Código en R
+
+Hay dos tipos de código en R en documentos R Markdown/**knitr**: chunks de R y  código en línea R. La sintaxis de este último es `` ``r ''`r R_CODE` ``, y puede ser integrado en línea con otros elementos del documento. Los chunks de R parecen bloques de código plano, pero tienen `{r}`  después de los tres acentos abiertos y (opcionalmente) parámetros dentro del `{}`, por ejemplo,
+
+    `r ''````{r chunk-label, echo = FALSE, fig.cap = 'A figure caption.'}
+    1 + 1
+    rnorm(10)  # 10 random numbers
+    plot(dist ~ speed, cars)  # a scatterplot
+    ```
+    
+Para obtener más información sobre las opciones de trozos de código **knitr**, consulte @xie2015 o <http://yihui.name/knitr/options>. Para libros, código adicional en R puede ser ejecutado antes/después de cada capítulo; véase `before_chapter_script` y `after_chapter_script` en la sección \@ref(configuracion).
+
+## Figuras {#figuras}
+
+Por defecto, las figuras no tienen títulos en la salida generada por  **knitr**, lo que significa que solo pueden colocarse en el lugar en el que se generaron en el código en R. A continuación se muestra un ejemplo de ello.
+
+```{r no-caption, fig.asp=.7, fig.width=6, fig.align='center', out.width='80%'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, pch = 19, type = 'b')
+```
+
+La desventaja de realizar figuras de esta manera es que cuando no hay suficiente espacio en la página actual para colocar una figura, puede o bien llegar a la parte inferior de la página (por lo tanto excede el margen de la página), o ser empujada a la página siguiente, dejando un gran margen blanco en la parte inferior de la página actual. Esto es, básicamente, porque hay "ambientes flotantes" en LaTeX: los elementos que no se pueden dividir en varias páginas (como las figuras) se ponen en entornos flotantes, para que puedan deambular a una página que tenga espacio suficiente para sostenerlos. Sin embargo, claramente es una desventaja el hecho de que floten las cosas hacia adelante o hacia atrás. Es decir, los lectores pueden tener que saltar a una página diferente para encontrar la figura mencionada en la página actual. Esto es simplemente una consecuencia natural de tener que componer las cosas en varias páginas de tamaños fijos. Este problema no existe en HTML ya que todo se puede colocar de forma continua en una sola página (presumiblemente de altura infinita), y no hay necesidad de dividir nada a través de múltiples páginas del mismo tamaño de página.
+
+Si se asigna un pie de figura a un chunk a través de la opción `fig.cap`, los gráficos en R se pondrán dentro de entornos figura, que serán etiquetados y numerados de forma automática, y también pueden usarse como una referencia cruzada. La etiqueta de un entorno figura se genera a partir de la etiqueta del chunk, por ejemplo, si la etiqueta es `foo`, la etiqueta de la figura será` fig: foo` (el prefijo `fig` se añade antes de `foo`). Para hacer referencia a una figura, utilice la sintaxis `\@ref(etiqueta)` ^[No olvide de la barra invertida inicial! y también note el paréntesis ` () ` después de ` ref `; no hay corchetes ` {} ` .], donde `label` es la etiqueta de la figura, por ejemplo,`fig: foo`.
+
+Para aprovechar el formato Markdown en el subtítulo de la figura, necesitará usar referencias de texto (consulte la sección \@ref (referencias-de-texto)). Por ejemplo, una leyenda de la figura que contiene `_texto en bastardilla_` no funcionará cuando el formato de salida sea LaTeX/PDF, ya que el carácter de subrayado es un carácter especial en LaTeX, pero si utiliza referencias de texto,` _texto en bastardilla_` será traducido a código LaTeX cuando la salida sea LaTeX.
+
+```{block2, type='rmdimportant'}
+Si desea referencias cruzadas hacia figuras o tablas generadas a partir de  un chunk, por favor asegúrese de que la etiqueta del chunk sólo contenga  caracteres alfanuméricos (a-z, A-Z, 0-9), barras (/) o guiones (-). 
+```
+
+
+La opción del chunk `fig.asp` se puede utilizar para establecer la relación de aspecto de los gráficos, es decir, la relación entre la altura/anchura. Si el ancho de la figura es de 6 pulgadas (`fig.width = 6`) y` fig.asp = 0.7`, la altura de la figura se calcula automáticamente con `fig.width * fig.asp = 6 * 0,7 = 4.2`. La figura \@ref(fig:pressure2-plot) es un ejemplo utilizando las opciones del chunk `fig.asp = 0.7`, `fig.width = 6`, y `fig.align = 'center'`, generado a partir del código de abajo:
+
+```{r pressure2-plot, fig.asp=.7, fig.width=6, fig.cap='Un ejemplo de figura con el aspecto especificado, ancho, y alineación.', fig.align='center', out.width='80%'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, pch = 19, type = 'b')
+```
+
+El tamaño real de un gráfico se determina por las opciones del chunk `fig.width` y `fig.height` (el tamaño del gráfico generado desde un dispositivo gráfico), y se puede especificar el tamaño de salida de los gráficos a través de las opciones del chunk `out.width` y `out.height`. El valor posible de estas dos opciones depende del formato de salida del documento. Por ejemplo, `out.width = '30%'` es un valor válido para la salida HTML, pero no para la producción de documentos LaTeX/PDF. Sin embargo, **knitr**  convertirá automáticamente a un valor de porcentaje para `out.width` de la forma` `x%` a `(x / 100) \linewidth`, por ejemplo, `out.width = '70%'` se intrpretará como `.7 \linewidth` cuando el formato de salida es LaTeX. Esto hace que sea posible especificar una anchura relativa de un gráfico de una manera consistente. La figura \@ref(fig:cars-plot2) es un ejemplo de `out.width = 70%`.
+
+```{r cars-plot2, out.width='70%', fig.cap='Una figura de ejemplo con un ancho relativo de 70\\%.'}
+par(mar = c(4, 4, .1, .1))
+plot(cars, pch = 19)
+```
+
+Si desea poner varios gráficos en un entorno de figuras, debe utilizar la opción del chunk `fig.show = 'hold'` para disponer de múltiples gráficos en un chunk e incluirlas en un único entorno. También puede poner gráficos uno al lado del otro si la suma de la anchura de todas los gráficos es menor o igual a la anchura de la línea actual. Por ejemplo, si dos gráficos tienen la misma anchura `50%`, serán ubicados uno al lado del otro. Del mismo modo, puede especificar `out.width = '33% '` para organizar tres gráficos en una sola línea. La figura \@ref(fig:multi-plots2) es un ejemplo de dos gráficos, cada una con una anchura de `50%`.
+
+```{r multi-plots2, out.width='50%', fig.show='hold', fig.cap='Dos gráficos dispuestos uno al lado del otro.'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, pch = 19, type = 'b')
+plot(cars, pch = 19)
+```
+
+A veces es posible que tenga imágenes que no se generaron a partir de código en R. A pesar de esto, puede incluirlas en R Markdown a través de la función `knitr::include_graphics()`. La figura \@ref(fig:knitr-logo2) es un ejemplo de tres logotipos de **knitr** incluidos en un entorno gráfico. Se pueden incluir una o varias imágenes con la función `include_graphics()`, y todas las opciones del chunk que se aplican a los gráficos en R también se aplican a estas imágenes, por ejemplo, se puede usar `out.width = '33% '` para establecer las anchuras de estas imágenes en el documento de salida.
+
+```{r knitr-logo2, out.width='33%', fig.show='hold', fig.cap='Tres logos de knitr incluidos en el documento desde una imagen PNG externa.'}
+knitr::include_graphics(rep('images/knit-logo.png', 3))
+```
+
+Las ventajas de usar `include_graphics()` son:
+
+1. Usted no necesita preocuparse por el formato de salida de documentos, por ejemplo, cuando el formato de salida es LaTeX, puede que tenga que utilizar el comando LaTeX `\includegraphics{}` para incluir una imagen, y cuando el formato de salida es Markdown, usted tiene que usar `![]()`. La función `include_graphics()` en **knitr**  se ocupa de estos detalles de forma automática.
+1. La sintaxis para el control de los atributos de la imagen  es el mismo que cuando las imágenes se generan a partir de código en R, por ejemplo, las opciones del chunk `fig.cap`,`out.width`, y `fig.show` tienen todas la misma función.
+1. `include_graphics()` es lo suficientemente versátil como para utilizar gráficos PDF de forma automática cuando el formato de salida es LaTeX y existen gráficos en formato PDF, por ejemplo, una ruta de la imagen `foo/bar.png` puede sustituirse automáticamente por `foo/bar.PDF` si existe esta última. Las imágenes en PDF a menudo tienen mejores cualidades que las imágenes de mapa de bits en la producción de LaTeX/PDF. Por supuesto, se puede desactivar esta función `include_graphics(auto_pdf = FALSE)`.
+1. Se pueden escalar fácilmente estas imágenes de forma proporcional utilizando la misma razón. Esto se puede hacer a través del argumento `dpi` (puntos por pulgada), que toma el valor de la opción del chunk `dpi` por defecto. Si se trata de un valor numérico y la opción del chunk `out.width` no está establecida, el ancho de salida de una imagen será su anchura real (en píxeles) dividido por `dpi`, y sus unidades estarán en pulgadas. Por ejemplo, para una imagen de tamaño de 672 x 480, su anchura de salida será de 7 pulgadas (`7in`) cuando `dpi = 96`. Esta función requiere del paquete **png**  y/o  **jpeg**. Siempre se puede anular el cálculo automático del ancho en pulgadas, proporcionando un valor no nulo a la opción del chunk `out.wdith`, o usar` include_graphics(dpi = NA) `.
+
+## Tablas {#tablas}
+
+Por ahora, la forma más conveniente para generar una tabla es la función `knitr::kable()`, porque hay algunos trucos internos en **knitr**  para que funcione con **bookdown**  y los usuarios no tienen necesidad de preocuparse por estos detalles de implementación. Adelante se explicará cómo utilizar otros paquetes y funciones más detalladamente en esta sección.
+
+Al igual que las figuras, las tablas con títulos también estarán numeradas y podrán ser referenciadas. La función `kable()` generará automáticamente una etiqueta para un entorno de la tabla, que es el prefijo `tab:` más la etiqueta del chunk. Por ejemplo, la etiqueta de la tabla para un chunk con la etiqueta `foo` será: `tab:foo`, y usar la sintaxis `\@ref(etiqueta)` para hacer referencia a la tabla. La tabla \@ref(tab:table-single) es un ejemplo sencillo.
+
+```{r table-single, tidy=FALSE}
+knitr::kable(
+  head(mtcars, 10), booktabs = TRUE,
+  caption = 'Una tabla de las primeras 10 filas de la base de datos mtcars.'
+)
+```
+
+Si desea poner varias tablas en un único entorno de tablas, simplemente empaquete los objetos de datos (usualmente en data frames en R) dentro de una lista. Véase la tabla \@ref(tab:table-multi) para un ejemplo.
+
+```{r table-multi, tidy=FALSE}
+knitr::kable(
+  list(
+    head(iris[,1:2],3),
+    head(mtcars[,1:3],5)
+  ),
+  caption = 'Una trama de dos tablas.', booktabs = TRUE
+)
+```
+
+Cuando no se quiera una tabla flotante en PDF, es posible utilizar el paquete de LaTeX [**longtable**](https://www.ctan.org/pkg/longtable), que puede dividir una tabla a través de múltiples páginas. Para utilizar **longtable**, sólo tiene que poner `longtable = TRUE` en `kable()`, y asegurarse de incluir `\usepackage{longtable}` en el preámbulo de LaTeX (véase la sección \@ref(opciones-yaml) para saber cómo personalizar el preámbulo LaTeX). Por supuesto, esto es irrelevante para la salida HTML, ya que las tablas de HTML no necesitan flotar.
+
+```{r longtable, tidy=FALSE}
+knitr::kable(
+  iris[1:100, ], longtable = TRUE, booktabs = TRUE,
+  caption = 'Una tabla generada mediante el paquete `longtable`.'
+)
+```
+
+Si decide utilizar otros paquetes para generar tablas, tiene que asegurarse de que la etiqueta para el ambiente de la tabla aparezca al comienzo de la leyenda de la tabla de la forma `(\#label)`, donde `label` debe tener el prefijo `tab: `. Tiene que tenerse mucho cuidado con la _portabilidad_ de la función que genera la tabla: deberá trabajar tanto para la salida HTML como para LaTeX de forma automática, por lo que debe tener en cuenta el formato de salida internamente (revise `knitr::opts_knit$get('pandoc.to')`). Al escribir una tabla HTML, el título debe ser escrito en la etiqueta `<caption></caption>`. Para las tablas simples, `kable()` debería ser suficiente. Si usted tiene que crear tablas complicadas (por ejemplo, con ciertas celdas que atraviesen múltiples columnas/filas), tendrá que tomar las cuestiones mencionadas en consideración.
+
+## Referencias cruzadas 
+
+Se ha explicado cómo funcionan las referencias cruzadas para ecuaciones (Sección \@ref(ecuaciones)), teoremas (Sección \@ref(teoremas)), figuras (Sección \@ref(figuras)) y tablas (Sección \@ref(tablas)). De hecho, también se puede hacer referencia a secciones utilizando la misma sintaxis `\@ref(label)`, donde `label` es el identificador de una sección. De forma predeterminada, Pandoc generará un ID para todos los encabezados de sección, por ejemplo, una sección `# Hola Mundo` tendrá un ID `hola-mundo`. Se recomienda asignar manualmente un identificador para un encabezado de sección con el fin de asegurarse de que no se olvide actualizar la etiqueta de referencia después de cambiar el encabezado de sección. Para asignar un ID a un encabezado de sección, simplemente añada `{#id}` hasta el final del encabezado de sección.
+
+Cuando una etiqueta referenciada no se puede encontrar, verá dos signos de interrogación como \@ref(fig:no-existe), así como un mensaje de advertencia en la consola de R cuando se compila el libro.
+
+También pueden crearse enlaces basados en texto usando identificadores de sección explícita o automáticos e incluso el texto del encabezado de sección actual.
+
+- Si usted está satisfecho con el encabezado de sección como texto de enlace, úselo dentro de un único conjunto de paréntesis cuadrados:
+    - `[Texto en la sección de encabezado]`: ejemplo  "[Un documento sencillo]" a través de `[Un documento sencillo]`
+
+- Hay dos formas de especificar el texto del vínculo personalizado:
+    - `[Texto del vínculo][Sección texto de encabezado]`: [los libros que no están en inglés][Internacionalización] a través de `[libros no están en inglés] [Internacionalización]`
+    - `[Texto del enlace] (#ID)`: "[Tabla cosas](#tablas)" a través de `[Tabla cosas](#tablas)`
+
+La documentación acerca de Pandoc proporciona más detalles sobre [identificación automática de secciones](http://pandoc.org/README.html#extension-auto_identifiers) y  [referencias de cabecera implícitas](http://pandoc.org/README.html#extension- implicit_header_references).
+
+Las referencias cruzadas siguen funcionando incluso cuando se refiere a un item que no esté en la página actual de la salida PDF o HTML. Por ejemplo, véase la ecuación \@ref(eq:binom) y la figura \@ref(fig:knitr-logo2) 
+
+## Bloques personalizados
+
+Puede generar bloques personalizados \index{bloques personalizado}  utilizando el motor de `block` en **knitr** , es decir, la opción del chunk `engine = 'block'`, o la sintaxis más compacta ```` ```{block} ````. Este motor se debe utilizar en combinación con la opción del chunk `type`, que tiene una cadena de caracteres. Cuando se utiliza el motor de `block`, genera un `<div>` para envolver el contenido del chunk si el formato de salida es HTML, y un entorno de LaTeX si la salida es ésta. La opción `type` especifica la clase del `<div>` y el nombre del entorno de LaTeX. Por ejemplo, la salida HTML de este chunk
+
+    `r ''````{block, type='FOO'}
+    Some text for this block.
+    ```
+
+sería:
+
+```html
+<div class="FOO">
+Some text for this block.
+</div>
+```
+
+y la salida en LaTeX sería:
+
+
+```latex
+\begin{FOO}
+Some text for this block.
+\end{FOO}
+```
+
+Depende del autor del libro establecer cómo definir el estilo del bloque. Puede definir el estilo de `<div>` en CSS e incluirlo en la salida a través de la opción `includes` en los metadatos YAML. Del mismo modo, puede definir el entorno de LaTeX a través de `\newenvironment` e incluir la definición en la salida de LaTeX a través de la opción `includes`. Por ejemplo, podemos guardar el siguiente estilo en un archivo CSS, digamos, `style.css`:
+
+```css
+div.FOO {
+  font-weight: bold;
+  color: red;
+}
+```
+
+Y los metadatos YAML del documento R Markdown pueden ser:
+
+```yaml
+---
+output:
+  bookdown::html_book:
+    includes:
+      in_header: style.css
+---
+```
+Hemos definido algunos tipos de bloques para que este libro muestre notas, consejos y advertencias, etc. A continuación se presentan algunos ejemplos:
+
+```{block2, note-text, type='rmdnote'}
+R es software libre y viene con ABSOLUTAMENTE NINGUNA GARANTÍA.
+Le invitamos a redistribuirlo bajo los términos de la
+GNU General Public License versiones 2 o 3.
+Para más información sobre estos asuntos,
+http://www.gnu.org/licenses/.
+```
+
+```{block2, note-text, type='rmdcaution'}
+```
+
+
+```{block2, note-text, type='rmdimportant'}
+```
+
+```{block2, note-text, type='rmdtip'}
+```
+
+```{block2, note-text, type='rmdwarning'}
+```
+
+El motor **knitr** `block` fue diseñado para mostrar contenido simple (normalmente un párrafo de texto sin formato). Puede utilizar una sintaxis de formato simple, como hacer que ciertas palabras sean negritas o cursivas, pero la sintaxis más avanzada, como las citas y las referencias cruzadas, no funcionarán. Sin embargo, hay un motor alternativo denominado `block2` que soporta la sintaxis arbitraria de Markdown, por ejemplo,
+
+````markdown
+`r ''````{block2, type='FOO'}
+Some text for this block [@citation-key].
+
+- a list item
+- another item
+
+More text.
+```
+````
+
+El motor `block2` también debería ser más rápido que el motor `block` si tiene muchos bloques personalizados en el documento, pero su implementación se basó en [un hack,](https://github.com/jgm/pandoc/issues/2453) por lo que no estamos 100% seguros de si siempre va a funcionar en el futuro. No hemos visto problemas con Pandoc v1.17.2 todavía.
+
+Una advertencia más para el motor `block2`: si el último elemento del bloque no es un párrafo ordinario, debe dejar una línea en blanco al final, por ejemplo,
+
+````markdown
+`r ''````{block2, type='FOO'}
+Some text for this block [@citation-key].
+
+- a list item
+- another item
+- end the list with a blank line
+
+```
+````
+
+El teorema y los entornos de prueba en la sección \@ref(teoremas) se implementan en realidad a través del motor `block2`.
+
+Para todos los bloques personalizados basados en el motor `block` o `block2`, hay una opción de bloqueo `echo` que puede usar para mostrar (`echo = TRUE`) u ocultar (`echo = FALSE`) los bloques.
+
+## Citas {#citas}
+
+Aunque Pandoc soporta múltiples formas de escribir las citas, se recomienda que utilice las bases de datos BibTeX porque trabajan mejor con la salida de LaTeX/PDF. Pandoc puede procesar otros tipos de bases de datos bibliográficas con la utilidad `pandoc-citeproc` (<https://github.com/jgm/pandoc-citeproc>), pero no pone ciertos elementos de bibliografía correctamente (especialmente en el caso de múltiples autores). Con las bases de datos BibTeX, podrá definirse el estilo bibliográfico si se requiere por un determinado editor o revista.
+
+Una base de datos BibTeX es un archivo de texto (con la extensión de nombre de archivo convencional `.bib`) que consta de entradas bibliográficas como:
+
+```bibtex
+@Manual{R-base,
+  title = {R: A Language and Environment for Statistical Computing},
+  author = {{R Core Team}},
+  organization = {R Foundation for Statistical Computing},
+  address = {Vienna, Austria},
+  year = {2015},
+  url = {https://www.R-project.org/},
+}
+```
+
+Una entrada bibliográfica comienza con `{@type`, donde `type` puede ser `article`, `book`,` manual`, etc.^[El nombre del tipo no diferencia mayúsculas y minúsculas, por ende no importa si es `manual`, `Manual`, o `MANUAL`.]. A continuación hay una clave de citación, como `R-base` en el ejemplo anterior. Para citar una entrada, use `@ key` o `[@key]` (este último pone la cita entre paréntesis), por ejemplo, `@R-base` se compila como @R-base, y `[@ R-base]` genera "[@R-base]". Si no está familiarizado con el paquete **natbib** de LaTeX, `@key` es básicamente `\citet{key}` y `[@key]` es equivalente a `\citep{key}`.
+
+Hay una serie de campos en una entrada de bibliografía, tales como `title`, `author`, y `year`, etc. Puede visitar https://en.wikipedia.org/wiki/BibTeX para saber más sobre posibles tipos de entradas y campos en BibTeX.
+
+Hay una función auxiliar `write_bib()` en **knitr**  para generar entradas BibTeX automáticamente para paquetes en R. Tenga en cuenta que sólo genera una entrada de BibTeX para el propio paquete en el momento, mientras que un paquete puede contener múltiples entradas en el archivo `CITATION`, y algunas entradas versan sobre las publicaciones relacionadas con el paquete. Estas entradas son ignoradas por `write_bib()`.
+
+```{r write-bib, comment='', warning=FALSE}
+# el segundo argumento puede ser un archivo .bib
+knitr::write_bib(c('knitr', 'stringr'), '')
+```
+
+Una vez que tenga uno o varios archivos `.bib`, puede utilizar el campo `bibliography` en los metadatos del documento YAML  del documento R Markdown, y también se puede especificar el estilo de bibliografía a través de `biblio-style` (esto sólo se aplica a las salidas en PDF), por ejemplo,
+
+```yaml
+---
+bibliography: ["one.bib", "another.bib", "yet-another.bib"]
+biblio-style: "apalike"
+link-citations: true
+---
+```
+
+El campo `link-citations` se puede utilizar para añadir enlaces internos a partir del texto de la cita del estilo autor-año  de la entrada bibliográfica en la salida HTML.
+
+Cuando el formato de salida es LaTeX, las citas se colocarán automáticamente en un capítulo o sección. Para la salida no LaTeX, puede agregar un capítulo vacío como el último capítulo de su libro. Por ejemplo, si su último capítulo es el archivo Rmd `06-references.Rmd`, su contenido puede ser una expresión R en línea:
+
+```markdown
+`r "\x60r if (knitr:::is_html_output()) '# References {-}'\x60"`
+```
+
+## Índices {#latex-index}
+
+Actualmente el índice \index{index} sólo se admite para la producción de LaTeX/PDF. Para imprimir un índice después del libro, puede utilizar el paquete de LaTeX **makeindex**  en el preámbulo (véase la sección \@ref(opciones-yaml)):
+
+```latex
+\usepackage{makeidx}
+\makeindex
+```
+
+A continuación, inserte `\printindex` al final de su libro a través de la opción YAML `includes -> after_body`. Una entrada de índice se puede crear a través del comando `\{index}` en el cuerpo del libro, por ejemplo, `\index{GIT}`. 
+
+## HTML Widgets
+
+Aunque una de las mayores fortalezas de R es la visualización de datos, hay un gran número de librerías de JavaScript para la visualización de datos mucho más rica. Estas librerías se pueden utilizar para crear aplicaciones interactivas que pueden procesarse fácilmente en los navegadores web, por lo que los usuarios no necesitan instalar ningún paquete de software adicional para ver las visualizaciones. Una forma de llevar estas librerías JavaScript a R es a través del paquete [**htmlwidgets**](http://htmlwidgets.org) [@R-htmlwidgets]\index{HTML widget}. 
+
+Los HTML widgets pueden representarse como una página web independiente (al igual que un gráfico de R), o incrustarse en los documentos de R Markdown y aplicaciones Shiny. Fueron diseñados originalmente para salidas HTML solamente, y requieren la disponibilidad de JavaScript, por lo que no van a trabajar en formatos que no son HTML de salida, tales como LaTeX/PDF. Antes de la v1.13 de **knitr**, se obtenía un error cuando se procesaban widgets de HTML a un formato de salida que no era HTML. A partir de esta versión, los widgets de HTML se procesan automáticamente como imágenes tomadas a través del paquete **webshot** [@R-webshot]. Por supuesto, es necesario instalar el paquete **webshot**. Además, debe instalarse PhantomJS (http://phantomjs.org), ya que es lo que **webshot**  utiliza para capturar imágenes. Tanto **WebShot**  como PhantomJS se pueden instalar de forma automática desde R:
+
+```{r eval=FALSE}
+install.packages('webshot')
+webshot::install_phantomjs()
+```
+
+La función `install_phantomjs()` funciona para Windows, OSX, y Linux. También puede optar por descargar e instalar PhantomJS por sí mismo, si está familiarizado con la modificación del entorno del sistema variable de `PATH`.
+
+Cuando **knitr**  detecta un objeto widget de HTML en un chunk, o compila el widget normalmente cuando el formato de salida actual es HTML, o guarda el widget como una página HTML y llama a **webshot**  para capturar la pantalla de la página HTML cuando el formato de salida no es HTML. He aquí un ejemplo de una tabla creada a partir del paquete **DT** [@R-DT]:
+
+```{r DT-demo, fig.cap='Una tabla widget compilada a través del paquete DT.', dev='png', cache=TRUE, cache.extra=packageVersion('DT')}
+DT::datatable(iris)
+```
+
+Si usted está leyendo este libro como un página web ahora mismo, debería ver una tabla interactiva generada a partir del chunk anterior, por ejemplo, puede ordenar las columnas y generar la búsqueda en la tabla. Si está leyendo una versión que no sea HTML de este libro, debería ver una captura de pantalla de la tabla. La captura de pantalla puede tener un aspecto un poco diferente con el widget real mostrado en el navegador web, debido a la diferencia entre un navegador web real y navegador virtual PhantomJS '.
+
+Hay un número de opciones de chunk  de **knitr** relacionados con la captura de pantalla. En primer lugar, si usted no está satisfecho con la calidad de las capturas de pantalla automáticas, o desea una captura de pantalla del widget en un estado en particular (por ejemplo, después de hacer clic y ordenar una determinada columna de una tabla), puede capturar la pantalla de forma manual, y proporcionar su propia captura a través de la opción del chunk `screenshot.alt` (capturas de pantalla alternativas). Esta opción toma las ubicaciones de las imágenes. Si tiene varios widgets en un chunk, se puede proporcionar un vector con las rutas de las imágenes. Cuando esta opción está presente, **knitr**  ya no llamará a **webshot** para tomar capturas de pantalla automáticas.
+
+En segundo lugar, a veces es posible que desee forzar a **knitr** a utilizar imágenes estáticas en lugar de compilar los widgets incluso en páginas HTML. En este caso, se puede establecer la opción del chunk `screenshot.force = TRUE`, y los widgets siempre serán mostrados como imágenes estáticas. Debe tenerse en cuenta que aún puede optar por utilizar capturas de pantalla automáticas o personalizadas.
+
+En tercer lugar, **webshot** tiene algunas opciones para controlar las capturas de pantalla automáticas, y es posible especificar estas opciones a través de la opción en el chunk `screenshot.opts`, que toma una lista como `list(delay = 2, cliprect = 'viewport')`. Ver la página de ayuda `?` `webshot::webshot` para la lista completa de posibles opciones, y la [viñeta del paquete](https://cran.rstudio.com/web/packages/webshot/vignettes/intro.html) `vignette('intro', package = 'webshot')` ha ilustrado el efecto de estas opciones. Aquí la opción `delay` puede ser importante para los widgets que toman mucho tiempo en cargarse: `delay` especifica el número de segundos de espera antes de que PhantomJS capture la pantalla. Si ve una pantalla incompleta, es posible que desee especificar un retraso más largo (el valor predeterminado es 0,2 segundos).
+
+En cuarto lugar, si usted siente que esto es lento para capturar las imágenes, o no quieren hacerlo cada vez que ejecuta el chunk, se puede utilizar la opción del chunk `cache = TRUE` para almacenar en caché el chunk. El almacenamiento en caché funciona tanto para HTML como para formatos de salida que no son HTML.
+
+Las imágenes se comportan como gráficos normales en R en el sentido de que muchas opciones del chunk relacionadas con figuras también se aplican a las capturas, incluyendo `fig.width`,` fig.height`, `out.width`, `fig.cap`, etc. Así pues, puede especificarse el tamaño de las capturas de pantalla en el documento de salida, y asignar los pies de figura a ellos también. El formato de imagen de las capturas de pantalla automáticas puede especificarse mediante la opción `dev`, y los posibles valores son `PDF`, `png`, y `jpeg`. El valor predeterminado para la salida PDF es `PDF`, y `png` para otros tipos de salida. Nótese que `PDF` puede no funcionar tan fielmente como `png`: a veces hay ciertos elementos en una página HTML que no puede representarse en la captura de pantalla en PDF, por lo que es posible que desee utilizarse `dev = 'png'` incluso para la salida PDF. Depende de los casos específicos de widgets de HTML, y se puede intentar tanto `PDF` como `png` (o `jpeg`) antes de decidir qué formato es el más deseable.
+
+## Páginas web y aplicaciones Shiny
+
+Al igual que en los HTML widgets, los sitios web se pueden incrustar en el libro. Puede utilizar la función `knitr::include_url()` para incluir una página web a través de su URL. Cuando el formato de salida es HTML, se usa un `iframe`^[Un `iframe` es básicamente una caja en una página Web para incrustar otra página Web.]; en otros casos, **knitr** trata de tomar una captura de pantalla de la página web (o utilizar una captura de pantalla personalizada en la medida en que se haya pensado). Todas las opciones del chunk son las mismas que para los HTML widgets. Una opción que puede requerir atención especial es la opción `delay`: los HTML widgets se compilan a nivel local, por lo que por lo general son rápidos para cargar por PhantomJS para tomar capturas de pantalla, pero una URL arbitraria pueden tardar más tiempo en cargarse, por lo que es posible que desee utilizar un valor mayor de  `delay`, por ejemplo, utilizar la opción del chunk `screenshot.opts = list(delay = 5) `.
+
+Una función relacionada es `knitr::include_app()`, que es muy similar a `include_url()`, y fue diseñada para incrustar aplicaciones shiny a través de sus direcciones URL en la salida. Su única diferencia con `include_url()` es que añade automáticamente un parámetro de consulta `?showcase=0` a la URL, si no hay otros parámetros de consulta que estén presentes en la URL, desactiva el modo showcase de Shiny, lo que es poco probable que sea útil para las capturas de pantalla o iframes. Si se desea solo el modo showcase, únicamente use `include_url()` en lugar de `include_app()`. A continuación se muestra un ejemplo de aplicación Shiny (Figura \@ref(fig:miniUI)):
+
+\let\ooldhref\href
+\let\href\oldhref
+
+```{r miniUI, fig.cap='Una aplicación en Shiny creada mediante el paquete miniUI; puede ver una versiòn en vivo en: https://yihui.shinyapps.io/miniUI/.', screenshot.opts=list(delay=20,zoom=2), dev='png', cache=TRUE, fig.align='center', fig.width=8, fig.height=6}
+knitr::include_app('https://yihui.shinyapps.io/miniUI/', height = '600px')
+```
+
+\let\href\ooldhref
+
+Una vez más, verá una aplicación en vivo si está leyendo una versión HTML de este libro, y una captura de pantalla estática si está leyendo otros tipos de formatos. La aplicación Shiny anterior se ha creado usando el paquete **miniUI**  [@R-miniUI], que proporciona funciones de diseño que son particularmente agradables para aplicaciones Shiny en pantallas pequeñas. Si utiliza funciones de diseño Shiny normales, es probable que vea las barras de desplazamiento verticales y/o horizontales en los marcos flotantes debido a que el tamaño de página es demasiado grande para caber un marco flotante. Cuando el ancho predeterminado del marco flotante es demasiado pequeño, puede utilizar la opción del chunk `out.width` para cambiarlo. Para la altura del iframe, utilice el argumento `height`  característica de `include_url()` / `include_app()`.
+
+Las aplicaciones Shiny pueden tardar más tiempo en cargar que las URL habituales. Es posible que desee utilizar un valor conservador para la opción `delay`, por ejemplo, 10. Es evidente que tanto `include_url()` como `include_app()` requieren conexión a Internet, a menos que haya almacenado en caché previamente el chunk (pero páginas Web dentro de iframes aún no funcionan sin una conexión a Internet).

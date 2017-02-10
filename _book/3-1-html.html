@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="bookdown: Escritura de libros con R Markdown" />
+<meta property="og:type" content="book" />
+
+<meta property="og:image" content="images/cover.png" />
+<meta property="og:description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook." />
+<meta name="github-repo" content="rstudio/bookdown" />
+
+<meta name="author" content="Yihui Xie" />
+
+<meta name="date" content="2017-02-03" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
+
+<title>bookdown: Escritura de libros con R Markdown</title>
+
+<script src="libs/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap/shim/respond.min.js"></script>
+<script src="libs/navigation/tabsets.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/datatables-binding/datatables.js"></script>
+<link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="has-sub"><a href="index.html#prefacio">Prefacio</a><ul>
+<li><a href="por-que-leer-este-libro.html#por-que-leer-este-libro">¿Por qué leer este libro?</a></li>
+<li><a href="informacion-acerca-del-software-y-convenciones.html#informacion-acerca-del-software-y-convenciones">Información acerca del software y convenciones</a></li>
+<li><a href="agradecimientos.html#agradecimientos">Agradecimientos</a></li>
+</ul></li>
+<li><a href="acerca-del-autor.html#acerca-del-autor">Acerca del Autor</a></li>
+<li class="has-sub"><a href="1-introduccion.html#introduccion"><span class="toc-section-number">1</span> Introducción</a><ul>
+<li><a href="1-1-motivacion.html#motivacion"><span class="toc-section-number">1.1</span> Motivación</a></li>
+<li><a href="1-2-comenzando.html#comenzando"><span class="toc-section-number">1.2</span> Comenzando</a></li>
+<li><a href="1-3-uso.html#uso"><span class="toc-section-number">1.3</span> Uso</a></li>
+<li><a href="1-4-new-session.html#new-session"><span class="toc-section-number">1.4</span> Dos enfoques de representación</a></li>
+<li><a href="1-5-algunos-tips.html#algunos-tips"><span class="toc-section-number">1.5</span> Algunos tips</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-componentes.html#componentes"><span class="toc-section-number">2</span> Componentes</a><ul>
+<li class="has-sub"><a href="2-1-sintaxis-de-markdown.html#sintaxis-de-markdown"><span class="toc-section-number">2.1</span> Sintaxis de Markdown</a><ul>
+<li><a href="2-1-sintaxis-de-markdown.html#formateo-en-linea"><span class="toc-section-number">2.1.1</span> Formateo en línea</a></li>
+<li><a href="2-1-sintaxis-de-markdown.html#elementos-de-nivel-bloque"><span class="toc-section-number">2.1.2</span> Elementos de nivel bloque</a></li>
+<li><a href="2-1-sintaxis-de-markdown.html#expresiones-matematicas-en-latex"><span class="toc-section-number">2.1.3</span> Expresiones matemáticas en LaTeX</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-2-extensiones-de-markdown-en-bookdown.html#extensiones-de-markdown-en-bookdown"><span class="toc-section-number">2.2</span> Extensiones de Markdown en bookdown</a><ul>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#ecuaciones"><span class="toc-section-number">2.2.1</span> Numerar y referenciar ecuaciones</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#teoremas"><span class="toc-section-number">2.2.2</span> Teoremas y demostraciones</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#encabezados-especiales"><span class="toc-section-number">2.2.3</span> Encabezados especiales</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#referencias-de-textos"><span class="toc-section-number">2.2.4</span> Referencias de textos</a></li>
+</ul></li>
+<li><a href="2-3-codigo-en-r.html#codigo-en-r"><span class="toc-section-number">2.3</span> Código en R</a></li>
+<li><a href="2-4-figuras.html#figuras"><span class="toc-section-number">2.4</span> Figuras</a></li>
+<li><a href="2-5-tablas.html#tablas"><span class="toc-section-number">2.5</span> Tablas</a></li>
+<li><a href="2-6-referencias-cruzadas.html#referencias-cruzadas"><span class="toc-section-number">2.6</span> Referencias cruzadas</a></li>
+<li><a href="2-7-bloques-personalizados.html#bloques-personalizados"><span class="toc-section-number">2.7</span> Bloques personalizados</a></li>
+<li><a href="2-8-citas.html#citas"><span class="toc-section-number">2.8</span> Citas</a></li>
+<li><a href="2-9-latex-index.html#latex-index"><span class="toc-section-number">2.9</span> Index</a></li>
+<li><a href="2-10-html-widgets.html#html-widgets"><span class="toc-section-number">2.10</span> HTML Widgets</a></li>
+<li><a href="2-11-paginas-web-y-aplicaciones-shiny.html#paginas-web-y-aplicaciones-shiny"><span class="toc-section-number">2.11</span> Páginas web y aplicaciones Shiny</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-formatos-de-salida.html#formatos-de-salida"><span class="toc-section-number">3</span> Formatos de salida</a><ul>
+<li class="has-sub"><a href="3-1-html.html#html"><span class="toc-section-number">3.1</span> HTML</a><ul>
+<li><a href="3-1-html.html#estilo-gitbook"><span class="toc-section-number">3.1.1</span> El estilo GitBook</a></li>
+<li><a href="3-1-html.html#el-estilo-bootstrap"><span class="toc-section-number">3.1.2</span> El estilo Bootstrap</a></li>
+<li><a href="3-1-html.html#el-estilo-tufte"><span class="toc-section-number">3.1.3</span> El estilo Tufte</a></li>
+</ul></li>
+<li><a href="3-2-latexpdf.html#latexpdf"><span class="toc-section-number">3.2</span> LaTeX/PDF</a></li>
+<li class="has-sub"><a href="3-3-e-books.html#e-books"><span class="toc-section-number">3.3</span> E-Books</a><ul>
+<li><a href="3-3-e-books.html#epub"><span class="toc-section-number">3.3.1</span> EPUB</a></li>
+<li><a href="3-3-e-books.html#mobi"><span class="toc-section-number">3.3.2</span> MOBI</a></li>
+</ul></li>
+<li><a href="3-4-un-documento-sencillo.html#un-documento-sencillo"><span class="toc-section-number">3.4</span> Un documento sencillo</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-personalizacion.html#personalizacion"><span class="toc-section-number">4</span> Personalización</a><ul>
+<li><a href="4-1-opciones-yaml.html#opciones-yaml"><span class="toc-section-number">4.1</span> Opciones YAML</a></li>
+<li><a href="4-2-temas.html#temas"><span class="toc-section-number">4.2</span> Temas</a></li>
+<li><a href="4-3-plantillas.html#plantillas"><span class="toc-section-number">4.3</span> Plantillas</a></li>
+<li><a href="4-4-configuracion.html#configuracion"><span class="toc-section-number">4.4</span> Configuración</a></li>
+<li><a href="4-5-internacionalizacion.html#internacionalizacion"><span class="toc-section-number">4.5</span> Internacionalización</a></li>
+</ul></li>
+<li class="has-sub"><a href="5-edicion.html#edicion"><span class="toc-section-number">5</span> Edición</a><ul>
+<li><a href="5-1-construyendo-el-libro.html#construyendo-el-libro"><span class="toc-section-number">5.1</span> Construyendo el libro</a></li>
+<li><a href="5-2-previsualizar-un-capitulo.html#previsualizar-un-capitulo"><span class="toc-section-number">5.2</span> Previsualizar un capítulo</a></li>
+<li><a href="5-3-presentar-el-libro.html#presentar-el-libro"><span class="toc-section-number">5.3</span> Presentar el libro</a></li>
+<li><a href="5-4-ide-rstudio.html#ide-rstudio"><span class="toc-section-number">5.4</span> IDE RStudio</a></li>
+</ul></li>
+<li class="has-sub"><a href="6-publicacion.html#publicacion"><span class="toc-section-number">6</span> Publicación</a><ul>
+<li><a href="6-1-rstudio-connect.html#rstudio-connect"><span class="toc-section-number">6.1</span> RStudio Connect</a></li>
+<li><a href="6-2-github.html#github"><span class="toc-section-number">6.2</span> GitHub</a></li>
+<li><a href="6-3-editores.html#editores"><span class="toc-section-number">6.3</span> Editores</a></li>
+</ul></li>
+<li class="appendix"><span><b>Apéndice</b></span></li>
+<li class="has-sub"><a href="A-herramientas-de-software.html#herramientas-de-software"><span class="toc-section-number">A</span> Herramientas de Software</a><ul>
+<li><a href="A-1-r-y-sus-paquetes.html#r-y-sus-paquetes"><span class="toc-section-number">A.1</span> R y sus paquetes</a></li>
+<li><a href="A-2-pandoc.html#pandoc"><span class="toc-section-number">A.2</span> Pandoc</a></li>
+<li><a href="A-3-latex.html#latex"><span class="toc-section-number">A.3</span> LaTeX</a></li>
+</ul></li>
+<li class="has-sub"><a href="B-uso-de-software.html#uso-de-software"><span class="toc-section-number">B</span> Uso de Software</a><ul>
+<li><a href="B-1-knitr.html#knitr"><span class="toc-section-number">B.1</span> knitr</a></li>
+<li><a href="B-2-r-markdown.html#r-markdown"><span class="toc-section-number">B.2</span> R Markdown</a></li>
+</ul></li>
+<li><a href="C-faq.html#faq"><span class="toc-section-number">C</span> FAQ</a></li>
+<li><a href="referencias.html#referencias">Referencias</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="html" class="section level2">
+<h2><span class="header-section-number">3.1</span> HTML</h2>
+<p>La principal diferencia entre compilar un libro (usando <strong>bookdown</strong>) y compilar un simple documento R Markdown (utilizando <strong>rmarkdown</strong>) a HTML es que un libro generará múltiples páginas HTML de forma predeterminada — normalmente un archivo HTML por capítulo. Esto hace que sea más fácil de señalar un determinado capítulo o compartir su URL con otras personas a medida que se lee el libro, además de ser más rápido a la hora de cargar el libro en el navegador web. Actualmente se ha proporcionado un número de estilos diferentes para la salida HTML: el estilo GitBook, el estilo Bootstrap, y el estilo Tufte.</p>
+<div id="estilo-gitbook" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> El estilo GitBook</h3>
+<p>El estilo GitBook fue tomado de GitBook, un proyecto puesto en marcha por Friendcode, Inc (<a href="https://www.gitbook.com" class="uri">https://www.gitbook.com</a>) y se dedica a ayudar a los autores a escribir libros con Markdown. Proporciona un estilo bonito, con un diseño que consiste en una barra lateral que muestra la tabla de contenido en la parte izquierda de la pantalla, y el cuerpo principal del libro a la derecha. El diseño es sensible al tamaño de la ventana, por ejemplo, los botones de navegación se muestran a la izquierda/derecha del cuerpo del libro cuando la ventana es lo suficientemente ancha, y colapsa en la parte inferior cuando la ventana es estrecha para dar a los lectores más espacio horizontal para leer el cuerpo del libro.</p>
+<p>Se han hecho varias mejoras con respecto al proyecto original GitBook. El más significativo es que se ha sustituido el motor de Markdown con R Markdown v2 basado en Pandoc, por lo que hay muchas más características para utilizar cuando se escribe un libro. Por ejemplo,</p>
+<ul>
+<li>Puede incorporar chunks en R y expresiones en línea de R en Markdown, y esto hace que sea fácil crear documentos reproducibles y lo libera de sincronizar su cómputo con la salida actual (<strong>knitr</strong> se encargará de eso automáticamente);</li>
+<li>La sintaxis de Markdown es mucho más rica: se puede escribir cualquier cosa que Markdown de Pandoc soporte, como las expresiones matemáticas de LaTeX y citas;</li>
+<li>Puede incrustar contenido interactivo en el libro (para la salida HTML únicamente), tales como HTML widgets y aplicaciones Shiny;</li>
+</ul>
+<p>También se han añadido algunas características útiles en la interfaz de usuario que se introducirán en detalle a continuación. La función de formato de salida para el estilo GitBook en <strong>bookdown</strong> es <code>gitbook()</code>. A continuación se presentan sus argumentos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gitbook</span>(<span class="dt">fig_caption =</span> <span class="ot">TRUE</span>, <span class="dt">number_sections =</span> <span class="ot">TRUE</span>, <span class="dt">self_contained =</span> <span class="ot">FALSE</span>, 
+  <span class="dt">lib_dir =</span> <span class="st">&quot;libs&quot;</span>, ..., <span class="dt">split_by =</span> <span class="kw">c</span>(<span class="st">&quot;chapter&quot;</span>, <span class="st">&quot;chapter+number&quot;</span>, 
+    <span class="st">&quot;section&quot;</span>, <span class="st">&quot;section+number&quot;</span>, <span class="st">&quot;rmd&quot;</span>, <span class="st">&quot;none&quot;</span>), <span class="dt">split_bib =</span> <span class="ot">TRUE</span>, 
+  <span class="dt">config =</span> <span class="kw">list</span>())</code></pre></div>
+<p>La mayoría de los argumentos se pasan a <code>rmarkdown::html_document()</code>, incluyendo <code>fig_caption</code>, <code>lib_dir</code>, y <code>...</code> . Puede comprobarse en la página de ayuda de <code>rmarkdown::html_document()</code>, la lista completa de opciones posibles. Se recomienda encarecidamente utilizar <code>fig_caption = TRUE</code> por dos razones: 1) Es importante explicar las figuras con etiquetas; 2) permitir que los pies de figura representen figuras que se colocarán en entornos flotantes cuando la salida sea LaTeX, de lo contrario puede terminar con una gran cantidad de espacio en blanco en ciertas páginas. El formato de los números de figura/tabla depende de si las secciones están numeradas o no: si <code>number_sections = TRUE</code>, estos números serán del formato<code>X.i</code>, donde <code>X</code> es el número del capítulo, e <code>i</code> es un incremento numérico; si las secciones no están numeradas, todas las figuras/tablas serán numeradas secuencialmente a través del libro de 1, 2, …, N. Note que en cualquiera de los casos, las figuras y tablas se numerarán de forma independiente.</p>
+<p>Entre todos los argumentos posibles en <code>...</code> , es muy probable que utilice el argumento <code>css</code> para proporcionar uno o más archivos CSS personalizados para modificar el estilo CSS por defecto. Hay algunos argumentos de <code>html_document()</code> que se han codificado en <code>gitbook()</code> y no se pueden cambiar: <code>toc = TRUE</code> (debe haber una tabla de contenidos),<code>theme = null</code> (no usar ningún tema Bootstrap), y <code>template</code> (habrá una plantilla interna GitBook).</p>
+<p>Tenga en cuenta que si se cambia <code>self_contained = TRUE</code> para hacer páginas HTML independientes, el tamaño total de todos los archivos HTML puede aumentar de manera significativa, ya que hay muchos archivos JS y CSS que se incorporarán en cada archivo HTML.</p>
+<p>Además de estas opciones <code>html_document()</code>, <code>gitbook()</code> tiene otros dos argumentos: <code>split_by</code> y <code>config</code>. El argumento <code>split_by</code> especifica la forma en que desea dividir la salida HTML en varias páginas, y sus posibles valores son:</p>
+<ul>
+<li><code>rmd</code>: utiliza los nombres de archivo base de los archivos de entrada Rmd para crear los archivos HTML, por ejemplo <code>chapter3.html</code> para <code>chapter3.Rmd</code>;</li>
+<li><code>none</code>: no divide el archivo HTML (el libro será de un sólo archivo HTML);</li>
+<li><code>chapter</code>: divide el archivo por los encabezados de primer nivel;</li>
+<li><code>section</code>: divide el archivo por los encabezados de segundo nivel;</li>
+<li><code>chapter+number</code> y <code>section+number</code>: similar a <code>chapter</code> y <code>section</code>, pero los archivos se numerarán;</li>
+</ul>
+<p>Para <code>chapter</code> y <code>section</code>, los nombres de archivo HTML serán determinados por los identificadores de encabezado, por ejemplo, el nombre de archivo para el primer capítulo con un título del capítulo <code># Introducción</code> será <code>introducción.html</code> por defecto. Para <code>chapter+number</code> y <code>section+number</code>, los números de capítulo/sección se antepondrá a los nombres de archivo HTML, por ejemplo, <code>1-introduction.html</code> y<code>2-1-literature.html</code>. El identificador del encabezado se genera automáticamente a partir del texto del encabezado por defecto<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a>, y puede especificar manualmente un identificador utilizando la sintaxis <code>{#su-propio-id}</code> después del texto del encabezado, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu"># Una introducción {#introduccion}</span>
+
+El identificador por defecto es <span class="bn">`una-introduccion`</span> pero se cambió a <span class="bn">`introduccion`</span>.</code></pre></div>
+<p>Por defecto, la bibliografía se divide y los artículos de citas relevantes se ponen en la parte inferior de cada página, para que los lectores no tengan que desplazarse a una página de bibliografía diferente para ver los detalles de las citas. Esta característica se puede desactivar usando <code>split_bib = FALSE</code>, en cuyo caso todas las citas se colocan en una página separada.</p>
+<p>Hay varias sub-opciones en la opción <code>config</code> para poder ajustar algunos detalles en la interfaz de usuario. Vale recordar que todas las opciones de formatos de salida (no sólo para <code>bookdown::gitbook</code>) pueden transmitirse a la función de formato si se utiliza la interfaz de línea de comandos <code>bookdown::render_book()</code>, o escritos en los metadatos YAML. A continuación se muestran las sub-opciones predeterminadas de <code>config</code> en el formato <code>gitbook</code> como metadatos YAML (tenga en cuenta que se inserta debajo de la opción <code>config</code>):</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">bookdown:</span>:gitbook:
+  <span class="fu">config:</span>
+    <span class="fu">toc:</span>
+      <span class="fu">collapse:</span> subsection
+      <span class="fu">scroll_highlight:</span> true
+      <span class="fu">before:</span> <span class="dt">null</span>
+      <span class="fu">after:</span> <span class="dt">null</span>
+    <span class="fu">toolbar:</span>
+      <span class="fu">position:</span> fixed
+    <span class="fu">edit:</span>
+      <span class="fu">link:</span> <span class="dt">null</span>
+      <span class="fu">text:</span> <span class="dt">null</span>
+    <span class="fu">download:</span> <span class="dt">null</span>
+    <span class="fu">search:</span> true
+    <span class="fu">fontsettings:</span>
+      <span class="fu">theme:</span> white
+      <span class="fu">family:</span> sans
+      <span class="fu">size:</span> 2
+    <span class="fu">sharing:</span>
+      <span class="fu">facebook:</span> yes
+      <span class="fu">twitter:</span> yes
+      <span class="fu">google:</span> no
+      <span class="fu">weibo:</span> no
+      <span class="fu">instapper:</span> no
+      <span class="fu">vk:</span> no
+      <span class="fu">all:</span> <span class="kw">[</span><span class="st">&#39;facebook&#39;</span><span class="kw">,</span> <span class="st">&#39;google&#39;</span><span class="kw">,</span> <span class="st">&#39;twitter&#39;</span><span class="kw">,</span> <span class="st">&#39;weibo&#39;</span><span class="kw">,</span> <span class="st">&#39;instapaper&#39;</span><span class="kw">]</span></code></pre></div>
+<p>La opción <code>toc</code> controla el comportamiento de la tabla de contenido (TOC, por sus siglas en inglés). Puede contraer algunos items inicialmente cuando una página se carga a través de la opción <code>collapse</code>. Sus valores posibles son <code>subsection</code>,<code>section</code>, <code>none</code> (o <code>null</code>). Esta opción puede ser útil si la TOC es muy larga y tiene más de tres niveles de títulos: <code>subsection</code> para colapsar de todos los items del índice para las subsecciones (X.X.X), <code>section</code> entenderá que colapse los items para las secciones (X.X) por lo que sólo los encabezados de nivel superior se muestran inicialmente, y <code>none</code> significa que no colapse ningún ítem en la tabla de contenido. Para aquellos ítems de la TOC colapsados, puede alternar su visibilidad haciendo clic en los ítems de jerarquía superior. Por ejemplo, puede hacer clic en un título de capítulo en la tabla de contenido para mostrar/ocultar sus secciones.</p>
+<p>La opción <code>scroll_highlight</code> en <code>toc</code> se utiliza para activar el resaltado de elementos de la TOC a medida que se desplaza el cuerpo del libro (por defecto, esta función está activada). Cada vez que un nuevo encabezado entra en la ventana gráfica actual a medida que se desplaza hacia abajo/arriba, se resaltará el elemento correspondiente en la tabla de contenido de la izquierda.</p>
+<p>Como la barra lateral tiene una anchura fija, cuando un elemento en la tabla de contenido se trunca porque el texto del encabezado es demasiado amplio, puede pasar el cursor sobre él para ver una información sobre herramientas que muestran el texto completo.</p>
+<p>Es posible añadir más ítems antes y después del TOC utilizando la etiqueta HTML <code>&lt;li&gt;</code>. Estos ítems se separarán de la tabla de contenido utilizando un divisor horizontal. Se puede utilizar el carácter de barra vertical <code>|</code> por lo que no es necesario omitir ningún carácter en estos ítems siguientes de la sintaxis YAML, por ejemplo,</p>
+<pre><code>    toc:
+      before: |
+        &lt;li&gt;&lt;a href=&quot;...&quot;&gt;My Awesome Book&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;...&quot;&gt;John Smith&lt;/a&gt;&lt;/li&gt;
+      after: |
+        &lt;li&gt;&lt;a href=&quot;https://github.com/rstudio/bookdown&quot;&gt;
+        Proudly published with bookdown&lt;/a&gt;&lt;/li&gt;</code></pre>
+<p>A medida que navega a través de diferentes páginas HTML, se preservará la posición de desplazamiento de la TOC. Normalmente verá la barra de desplazamiento en la tabla de contenido en una posición fija, incluso si se desplaza a la siguiente página. Sin embargo, si el ítem de la TOC para el capítulo/sección actual no es visible cuando se carga la página, se desplazará automáticamente la tabla de contenido para que sea visible.</p>
+<div class="figure"><span id="fig:gitbook-toolbar"></span>
+<img src="images/gitbook.png" alt="La barra de herramientas de GitBook." width="100%" />
+<p class="caption">
+Figura 3.1: La barra de herramientas de GitBook.
+</p>
+</div>
+<p>El estilo GitBook tiene una barra de herramientas en la parte superior de cada página que le permite cambiar dinámicamente la configuración de los libros. La opción <code>toolbar</code> tiene una sub-opción <code>position</code>, que puede tomar valores <code>fixed</code> o <code>static</code>. El valor por defecto es que la barra de herramientas se mantenga fija en la parte superior de la página, por lo que incluso si se desplaza hacia abajo de la página, la barra de herramientas es aún visible allí. Si se trata de <code>static</code>, la barra de herramientas no se desplazará con la página, es decir, una vez que se desplaza lejos, ya no podrá verla.</p>
+<p>El primer botón de la barra de herramientas puede cambiar la visibilidad de la barra lateral. También puede pulsar la tecla <code>s</code> en el teclado para hacer lo mismo. El estilo GitBook puede recordar el estado de visibilidad de la barra lateral, por ejemplo, si se ha cerrado la barra lateral, permanecerá cerrada la próxima vez que abra el libro. De hecho, el estilo GitBook recuerda muchas otras configuraciones, así como la palabra clave de búsqueda y la configuración de la tipografía.</p>
+<p>El segundo botón en la barra de herramientas es el botón de búsqueda. Su combinación de teclas es <code>F</code> (Buscar). Cuando se hace clic en el botón, verá un cuadro de búsqueda en la parte superior de la barra lateral. A medida que escribe en el cuadro, la TOC se filtra para mostrar las secciones que coincidan con la palabra clave de búsqueda. Ahora bien, puede utilizar las teclas de flecha <code>Up</code>/<code>Down</code> para resaltar la siguiente palabra clave en la página actual. Al hacer clic en el botón de búsqueda de nuevo (o digitar la tecla <code>F</code> fuera del cuadro de búsqueda), la palabra clave de búsqueda se vacía y la caja de búsqueda se oculta. Para deshabilitar la búsqueda, establezca la opción <code>search: no</code> en <code>config</code>.</p>
+<p>El tercer botón es para la configuración de fuente/tema. Se puede cambiar el tamaño de la fuente (aumentar o reducir), la familia de fuentes (serif o sans serif), y el tema (<code>White</code>, <code>Sepia</code>, o <code>Night</code>). Estos ajustes se pueden modificar a través de la opción <code>fontsettings</code>.</p>
+<p>La opción <code>edit</code> es la misma que la opción que se mencióno en la sección <a href="4-4-configuracion.html#configuracion">4.4</a>. Si no está vacío, un botón de edición se añadirá a la barra de herramientas. Esto fue diseñado para posibles contribuyentes del libro para su edición en GitHub después de hacer clic en el botón y enviar solicitudes de extracción.</p>
+<p>Si el libro tiene otros formatos de salida para que los lectores puedan descargarlo, es posible proporcionar la opción <code>download</code> para que un botón de descarga se pueda agregar a la barra de herramientas. Esta opción tiene ya sea un vector de caracteres, o una lista de vectores de caracteres con la longitud de cada vector. Cuando se trata de un vector de caracteres, debe ser o bien un vector de nombres de archivo, o las extensiones nombre de archivo, por ejemplo, los dos siguientes ajustes están bien:</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml">    <span class="fu">download:</span> <span class="kw">[</span><span class="st">&quot;book.pdf&quot;</span><span class="kw">,</span> <span class="st">&quot;book.epub&quot;</span><span class="kw">]</span>
+    <span class="fu">download:</span> <span class="kw">[</span><span class="st">&quot;pdf&quot;</span><span class="kw">,</span> <span class="st">&quot;epub&quot;</span><span class="kw">,</span> <span class="st">&quot;mobi&quot;</span><span class="kw">]</span></code></pre></div>
+<p>Cuando sólo proporciona las extensiones del nombre de archivo, el nombre del archivo se deriva del nombre del archivo libro del archivo de configuración <code>_bookdown.yml</code> (Sección <a href="4-4-configuracion.html#configuracion">4.4</a>). Cuando <code>download</code> es <code>null</code>, <code>gitbook()</code> buscará PDF, EPUB y MOBI en el directorio de salida del libro, y añadirá automáticamente la opción <code>download</code>. Si lo que desea es suprimir el botón de descarga, usar <code>download: no</code>. Todos los archivos que los lectores descarguen se muestran en un menú desplegable, y las extensiones de nombre de archivo se utilizan como en el texto del menú. Cuando el único formato disponible para los lectores para descargar es PDF, el botón de descarga será un solo botón PDF en lugar de un menú desplegable.</p>
+<p>Una forma alternativa para el valor de la opción <code>download</code> es una lista de vectores de longitud 2, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml">    <span class="fu">download:</span> <span class="kw">[[</span><span class="st">&quot;book.pdf&quot;</span><span class="kw">,</span> <span class="st">&quot;PDF&quot;</span><span class="kw">],</span> <span class="kw">[</span><span class="st">&quot;book.epub&quot;</span><span class="kw">,</span> <span class="st">&quot;EPUB&quot;</span><span class="kw">]]</span></code></pre></div>
+<p>También puede escribirse como:</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml">    <span class="fu">download:</span>
+      <span class="kw">-</span> <span class="kw">[</span><span class="st">&quot;book.pdf&quot;</span><span class="kw">,</span> <span class="st">&quot;PDF&quot;</span><span class="kw">]</span>
+      <span class="kw">-</span> <span class="kw">[</span><span class="st">&quot;book.epub&quot;</span><span class="kw">,</span> <span class="st">&quot;EPUB&quot;</span><span class="kw">]</span></code></pre></div>
+<p>Cada vector en la lista consiste en el nombre del archivo y el texto que se mostrará en el menú. En comparación con la primera forma, esta le permite personalizar el texto del menú, por ejemplo, puede tener dos copias diferentes de PDF para los lectores para descargar y tendrá que hacer los elementos de menú diferente.</p>
+<p>A la derecha de la barra de herramientas, hay algunos botones para compartir el enlace en sitios web de redes sociales como Twitter, Facebook y Google+. Puede utilizar la opción <code>sharing</code> para decidir qué botones activar. Si desea deshacerse de estos botones en su totalidad, sólo tiene que utilizar <code>sharing: null</code> (o <code>no</code>).</p>
+<p>Por último, hay algunas opciones de más alto nivel en los metadatos YAML que se puede utilizar en la plantilla GitBook HTML a través de Pandoc. Puede que no tengan efectos visibles claros sobre la salida HTML, pero pueden ser útiles cuando se implementa la salida HTML como una página web. Estas opciones incluyen:</p>
+<ul>
+<li><code>description</code>: Una cadena de caracteres que se escribe en el atributo <code>content</code> del tag <code>&lt;meta name=&quot;description&quot; content=&quot;&quot;&gt;</code> en el encabezado del HTML (si falta, se usará el título del libro). Esto puede ser útil para efectos de optimización de motores de búsqueda (SEO). Debe ser texto plano sin ningún formato Markdown talcomo <em>itálica</em> o <strong>negrita</strong>;</li>
+<li><code>url</code>: La URL de la página web del libro, por ejemplo, <code>https\://bookdown.org/yihui/bookdown/</code><a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a>;</li>
+<li><code>github-repo</code>: El repositorio GitHub del libro de la forma: <code>user/repo</code>;</li>
+<li><code>cover-image</code>: la ruta de la imagen de la carátula del libro;</li>
+<li><code>apple-touch-icon</code>: Una ruta a un ícono (e.g., una imagen PNG). Esto funciona sólo para iOS: cuando la página web se añade a la pantalla de inicio, el vínculo se representa por este ícono.</li>
+<li><code>apple-touch-icon-size</code>: El tamaño del ícono (por defecto, 152 x 152 pixels).</li>
+<li><code>favicon</code>: Una ruta al “ícono favorito”. Típicamente este ícono se muestra en la barra de dirección del buscador, o al frente de la página del título, si el buscador lo soporta.</li>
+</ul>
+<p>Abajo se muestra un ejemplo de metadatos YAML (de nuevo note que existen opciones <em>top-level</em> ):</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
+<span class="fu">title:</span> <span class="st">&quot;Un libro impresionante&quot;</span>
+<span class="fu">author:</span> <span class="st">&quot;Daniel Rodríguez&quot;</span>
+<span class="fu">description:</span> <span class="st">&quot;Este libro introduce la teoría ABC, y ...&quot;</span>
+<span class="fu">url:</span> <span class="st">&quot;https\://bookdown.org/john/awesome/&quot;</span>
+<span class="fu">github-repo:</span> <span class="st">&quot;john/awesome&quot;</span>
+<span class="fu">cover-image:</span> <span class="st">&quot;images/cover.png&quot;</span>
+<span class="fu">apple-touch-icon:</span> <span class="st">&quot;touch-icon.png&quot;</span>
+<span class="fu">apple-touch-icon-size:</span> 120
+<span class="fu">favicon:</span> <span class="st">&quot;favicon.ico&quot;</span>
+<span class="ot">---</span></code></pre></div>
+<p>Un buen efecto para establecer <code>description</code> y <code>cover-image</code> es que cuando se comparte el enlace de su libro sobre algunos sitios web de redes sociales como Twitter, el enlace se puede ampliar de forma automática a una tarjeta de la imagen del libro y la descripción del libro.</p>
+</div>
+<div id="el-estilo-bootstrap" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> El estilo Bootstrap</h3>
+<p>Si ha utilizado R Markdown antes, debe estar familiarizado con el estilo Bootstrap (<a href="http://getbootstrap.com" class="uri">http://getbootstrap.com</a>), que es el estilo por defecto de la salida HTML de R Markdown. La función del formato de salida en <strong>rmarkdown</strong> es <code>html_document()</code>, y se tiene un formato correspondiente <code>html_book()</code> en <strong>bookdown</strong> usando <code>html_document()</code> como formato de base. De hecho, hay un formato más general <code>html_chapters()</code> en <strong>bookdown</strong> y <code>html_book()</code> es sólo su caso especial:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">html_chapters</span>(<span class="dt">toc =</span> <span class="ot">TRUE</span>, <span class="dt">number_sections =</span> <span class="ot">TRUE</span>, <span class="dt">fig_caption =</span> <span class="ot">TRUE</span>, 
+  <span class="dt">lib_dir =</span> <span class="st">&quot;libs&quot;</span>, <span class="dt">template =</span> <span class="kw">bookdown_file</span>(<span class="st">&quot;templates/default.html&quot;</span>), 
+  ..., <span class="dt">base_format =</span> rmarkdown::html_document, <span class="dt">split_bib =</span> <span class="ot">TRUE</span>, 
+  <span class="dt">page_builder =</span> build_chapter, <span class="dt">split_by =</span> <span class="kw">c</span>(<span class="st">&quot;section+number&quot;</span>, 
+    <span class="st">&quot;section&quot;</span>, <span class="st">&quot;chapter+number&quot;</span>, <span class="st">&quot;chapter&quot;</span>, <span class="st">&quot;rmd&quot;</span>, <span class="st">&quot;none&quot;</span>))</code></pre></div>
+<p>Tenga en cuenta que tiene un argumento <code>base_format</code> que tiene una función base de formato de salida, y <code>html_book()</code> es, básicamente, <code>html_chapters(base_format = rmarkdown::html_document)</code>. Todos los argumentos de <code>html_book()</code> se pueden utilizar en <code>html_chapters()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">html_book</span>(...)</code></pre></div>
+<p>Esto significa que puede utilizar la mayoría de los argumentos de <code>rmarkdown::html_document</code>, como <code>toc</code> (si desea mostrar la tabla de contenidos), <code>number_sections</code> (si quiere numerar encabezados de sección), y así sucesivamente. Una vez más, vale la pena visitar la página de ayuda de <code>rmarkdown::html_document</code> para ver la lista completa de posibles opciones. Tenga en cuenta que el argumento <code>self_contained</code> no es modificable a <code>FALSE</code> internamente, por lo que no puede cambiar el valor de este argumento. Ya hemos explicado el argumento <code>split_by</code> en la sección anterior.</p>
+<p>La argumentos <code>template</code> y <code>page_builder</code> son para usuarios avanzados, y no es necesario entenderlos a menos que tenga una imperiosa necesidad de personalizar la salida HTML, y la gran variedad de opciones de que dispone <code>rmarkdown::html_document()</code> no le muestren el resultado deseado.</p>
+<p>Si desea pasar una plantilla HTML diferente al argumento <code>template</code>, la plantilla debe contener tres pares de comentarios HTML, y cada comentario tiene que estar en una línea separada:</p>
+<ul>
+<li><code>&lt;!--bookdown:title:start--&gt;</code> y <code>&lt;!--bookdown:title:end--&gt;</code> para marcar la sección de título del libro. Esta sección se pondrá en la primera página del libro compilado.</li>
+<li><code>&lt;!--bookdown:toc:start--&gt;</code> y <code>&lt;!--bookdown:toc:end--&gt;</code> para marcar la sección de tabla de contenidos. Esta sección se pondrá en todas las páginas HTML.</li>
+<li><code>&lt;!--bookdown:body:start--&gt;</code> y <code>&lt;!--bookdown:body:end--&gt;</code> para marcar el cuerpo HTML del libro, y el cuerpo HTML se dividirá en múltiples páginas separadas. Recuerde que se combinan todos los archivos Mrkdown y R Markdown, se compilan en un solo archivo HTML y se dividen.</li>
+</ul>
+<p>Puede abrir la plantilla HTML por defecto para ver donde se insertaron estos comentarios:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bookdown:::<span class="kw">bookdown_file</span>(<span class="st">&#39;templates/default.html&#39;</span>)
+<span class="co"># puede usar file.edit() para abrir este archivo</span></code></pre></div>
+<p>Una vez que sepa cómo <strong>bookdown</strong> trabaja internamente para generar varias páginas HTML de salida, será más fácil entender el argumento <code>page_builder</code>, que es una función para componer cada página HTML individual utilizando los fragmentos HTML extraídos de la ficha de comentario anterior. El valor por defecto de <code>page_builder</code> es una función <code>build_chapter</code> en <strong>bookdown</strong> , y su código fuente es relativamente simple (ignore esas funciones internas como <code>button_link()</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">build_chapter =<span class="st"> </span>function(
+  head, toc, chapter, link_prev, link_next, rmd_cur, html_cur, foot
+) {
+  <span class="co"># add a has-sub class to the &lt;li&gt; items that has sub lists</span>
+  toc =<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&#39;^(&lt;li&gt;)(.+&lt;ul&gt;)$&#39;</span>, <span class="st">&#39;&lt;li class=&quot;has-sub&quot;&gt;</span><span class="ch">\\</span><span class="st">2&#39;</span>, toc)
+  <span class="kw">paste</span>(<span class="kw">c</span>(
+    head,
+    <span class="st">&#39;&lt;div class=&quot;row&quot;&gt;&#39;</span>,
+    <span class="st">&#39;&lt;div class=&quot;col-sm-12&quot;&gt;&#39;</span>,
+    toc,
+    <span class="st">&#39;&lt;/div&gt;&#39;</span>,
+    <span class="st">&#39;&lt;/div&gt;&#39;</span>,
+    <span class="st">&#39;&lt;div class=&quot;row&quot;&gt;&#39;</span>,
+    <span class="st">&#39;&lt;div class=&quot;col-sm-12&quot;&gt;&#39;</span>,
+    chapter,
+    <span class="st">&#39;&lt;p style=&quot;text-align: center;&quot;&gt;&#39;</span>,
+    <span class="kw">button_link</span>(link_prev, <span class="st">&#39;Previous&#39;</span>),
+    <span class="kw">edit_link</span>(rmd_cur),
+    <span class="kw">button_link</span>(link_next, <span class="st">&#39;Next&#39;</span>),
+    <span class="st">&#39;&lt;/p&gt;&#39;</span>,
+    <span class="st">&#39;&lt;/div&gt;&#39;</span>,
+    <span class="st">&#39;&lt;/div&gt;&#39;</span>,
+    foot
+  ), <span class="dt">collapse =</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)
+}</code></pre></div>
+<p>Básicamente, esta función toma un número de componentes como el encabezado de HTML, la tabla de contenido, el cuerpo del capítulo, etc., y se espera que devuelva una cadena de caracteres que es el código fuente HTML de una página HTML completa. Es posible manipular todos los componentes de esta función utilizando las funciones de procesamiento de textos como <code>gsub()</code> y <code>paste()</code>.</p>
+<p>Lo que el constructor de página por defecto hace es poner la tabla de contenido en la primera fila, el cuerpo en la segunda fila, los botones de navegación en la parte inferior del cuerpo, y concatenarlos con el encabezado y el final del HTML. Aquí hay un boceto del código fuente HTML que pueden ayudarle a entender la salida de <code>build_chapter ()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;html&gt;</span>
+  <span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;title&gt;</span>A Nice Book<span class="kw">&lt;/title&gt;</span>
+  <span class="kw">&lt;/head&gt;</span>
+  <span class="kw">&lt;body&gt;</span>
+  
+    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;row&quot;</span><span class="kw">&gt;</span>TOC<span class="kw">&lt;/div&gt;</span>
+    
+    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;row&quot;</span><span class="kw">&gt;</span>
+      CHAPTER BODY
+      <span class="kw">&lt;p&gt;</span>
+        <span class="kw">&lt;button&gt;</span>PREVIOUS<span class="kw">&lt;/button&gt;</span>
+        <span class="kw">&lt;button&gt;</span>NEXT<span class="kw">&lt;/button&gt;</span>
+      <span class="kw">&lt;/p&gt;</span>
+    <span class="kw">&lt;/div&gt;</span>
+  
+  <span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;/html&gt;</span></code></pre></div>
+<p>Para todas las páginas HTML, la principal diferencia es el cuerpo del capítulo, y la mayoría del resto de elementos son los mismos. La salida por defecto de <code>html_book()</code> incluirá la Bootstrap CSS y los archivos JavaScript en la etiqueta <code>&lt;head&gt;</code>.</p>
+<p>La tabla de contenidos se utiliza a menudo para fines de navegación. En el estilo GitBook, el índice se mostrará en la barra lateral. Para el estilo Bootstrap, no se aplica un estilo especial a ella, por lo que se muestra como una lista desordenada normal (en la etiqueta HTML <code>&lt;ul&gt;</code>). Es fácil dar vuelta a esta lista en una barra de navegación con algunas técnicas de CSS. Se ha proporcionado un archivo CSS <code>toc.css</code> en este paquete que se puede utilizar, y se puede encontrar aquí: <a href="https://github.com/rstudio/bookdown/blob/master/inst/examples/css/toc.css" class="uri">https://github.com/rstudio/bookdown/blob/master/inst/examples/css/toc.css</a></p>
+<p>Puede copiar este archivo en el directorio raíz de su libro, y aplicarla a la salida HTML a través de la opción <code>css</code>, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
+<span class="fu">output:</span>
+  <span class="fu">bookdown:</span>:html_book:
+    <span class="fu">toc:</span> yes
+    <span class="fu">css:</span> toc.css
+<span class="ot">---</span></code></pre></div>
+<p>Hay muchas maneras posibles de convertir listas <code>&lt;ul&gt;</code> a menús de navegación si hace una pequeña búsqueda en la web, puede elegir un estilo de menú que le guste. El archivo <code>toc.css</code> que se mencionó anteriormente es un estilo de menú con textos blancos sobre un fondo negro, y es compatible con los submenús (por ejemplo, los títulos de las secciones se muestran como menús desplegables bajo los títulos de los capítulos).</p>
+<p>De hecho, usted puede deshacerse del estilo Bootstrap en <code>html_document()</code> si se establece la opción <code>theme</code> como <code>null</code>, y queda libre de aplicar estilos arbitrarios en la salida HTML utilizando la opción <code>css</code> (y posiblemente la opción <code>includes</code> si desea incluir contenido arbitrario en el encabezado/pie del HTML).</p>
+</div>
+<div id="el-estilo-tufte" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> El estilo Tufte</h3>
+<p>Al igual que el estilo Bootstrap, el estilo Tufte es proporcionado por un formato de salida <code>tufte_html_book()</code>, que es también un caso especial de <code>html_chapters()</code> usando <code>tufte::tufte_html()</code> como el formato de base. Por favor, vea el paquete <strong>Tufte</strong> <span class="citation">(Xie and Allaire <a href="#ref-R-tufte">2016</a>)</span> si no está familiarizado con el estilo Tufte. Básicamente, es un diseño con una columna principal a la izquierda y una columna al margen, dispuesta a la derecha. El cuerpo principal está en la columna principal, y la columna al margen se utiliza para poner notas al pie, notas al margen, referencias y figuras al margen, etc.</p>
+<p>Todos los argumentos de <code>tufte_html_book()</code> tienen exactamente el mismo significado que en <code>html_book()</code>, por ejemplo, también se puede personalizar el CSS a través de la opción <code>css</code>. Hay algunos elementos que son específicos del estilo Tufte, tales como notas al margen, figuras de margen, y figuras de ancho completo. Estos elementos requieren una sintaxis especial para su generación, por lo que se recomienda consultar la documentación del paquete <strong>Tufte</strong>. Note que no es necesario hacer nada especial para las notas al pie y las referencias (sólo tiene que utilizar la sintaxis Markdown normal <code>^[nota]</code> y <code>[@citas]</code>), ya que éstas se ponen automáticamente al margen. Un breve ejemplo YAML del formato <code>tufte_html_book</code>:</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
+<span class="fu">output:</span>
+  <span class="fu">bookdown:</span>:tufte_html_book:
+    <span class="fu">toc:</span> yes
+    <span class="fu">css:</span> toc.css
+<span class="ot">---</span></code></pre></div>
+</div>
+</div>
+<h3>Referencias</h3>
+<div id="refs" class="references">
+<div id="ref-R-tufte">
+<p>Xie, Yihui, and JJ Allaire. 2016. <em>Tufte: Tufte’s Styles for R Markdown Documents</em>. <a href="https://CRAN.R-project.org/package=tufte" class="uri">https://CRAN.R-project.org/package=tufte</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="9">
+<li id="fn9"><p>Para ver más detalles sobre cómo se genera automáticamente un identificador, ver la extensión <code>auto_identifiers</code> en la documentación del Pandoc <a href="http://pandoc.org/README.html#header-identifiers" class="uri">http://pandoc.org/README.html#header-identifiers</a><a href="3-1-html.html#fnref9">↩</a></p></li>
+<li id="fn10"><p>El backslash antes de <code>:</code> se debe a errores técnicos: se quiere prevenir que Pandoc traduzca el vínculo a código HTML <code>&lt;a href=&quot;...&quot;&gt;&lt;/a&gt;</code>.<a href="3-1-html.html#fnref10">↩</a></p></li>
+</ol>
+</div>
+<p style="text-align: center;">
+<a href="3-formatos-de-salida.html"><button class="btn btn-default">Previous</button></a>
+<a href="3-2-latexpdf.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

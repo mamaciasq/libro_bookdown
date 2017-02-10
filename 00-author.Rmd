@@ -1,0 +1,9 @@
+# Acerca del Autor {-}
+
+Yihui Xie (<http://yihui.name>) es ingeniero de software en RStudio (<http://www.rstudio.com>). Obtuvo su PhD del Departmento de Estadística de la Iowa State University. Se interesa por los gráficos estadísticos interactivos y la computación estadística. Como un usuario activo de R, es autor de varios paquetes, tales como **knitr**, **bookdown**, **animation**, **DT**, **tufte**, **formatR**, **fun**, **mime**, **highr**, **servr**, y **Rd2roxygen**, entre los cuales el paquete **animation** ganó el premio de Software Estadístico John M. Chambers (ASA) en 2009. También es coautor de otros pocos paquetes de R, incluyendo **shiny**, **rmarkdown**, y **leaflet**.
+
+En 2006, fundó el "Capital of Statistics" (<http://cos.name>), que ha crecido hasta convertirse en una gran comunidad de estadísticos en China. Inició la conferencia china de R en 2008, y ha estado involucrado en la organización de conferencias sobre R en China desde entonces. Durante su estadía en el PhD en la Iowa State University, ganó el premio de Computación Estadística Vince Sposito (2011) y el premio Snedecor (2012) en el Departmento de Estadística.
+
+Ocasionalmente despotrica en Twitter (https://twitter.com/xieyihui), y la mayor parte del tiempo se encuentra en GitHub (https://github.com/yihui).
+
+Adora la comida picante tanto como la literatura china clásica.

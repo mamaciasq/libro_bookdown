@@ -1,0 +1,193 @@
+\mainmatter
+
+# Introducción
+
+Este libro es una guía para la escritura de libros con R Markdown [@R-rmarkdown] y con el paquete **bookdown** de R [@R-bookdown]. Se enfoca en las características específicas de la escritura de libros, artículos o reportes de gran extensión . Algunas de estas características son:
+
++ Cómo se componen figuras y tablas y se hacen referencias cruzadas hacia ellas;
+
++ Cómo generar múltiples formatos de salida tales como HTML, PDF y e-books para un sólo libro;
+
++ Como personalizar las plantillas de los libros y elementos de diferentes estilos en un libro;
+
++ El soporte de editor (en particular, el IDE RStudio);
+
++ Cómo publicar un libro;
+
+No es una completa introducción a R Markdown o al paquete **knitr** [@R-knitr], sobre el cual se construyó **bookdown**. Para obtener más información sobre R Markdown, consulte la documentación en línea <http://rmarkdown.rstudio.com>. Para **knitr**, consulte @xie2015. No hay que ser un experto en el lenguaje R [@R-base] para leer este libro, pero se espera que se tengan conocimientos básicos sobre  R Markdown y **knitr**. Para los principiantes, puede empezar a trabajar con los Cheatsheets en <https://www.rstudio.com/resources/cheatsheets/>. El apéndice de este libro contiene breves introducciones a esos paquetes de software. Para poder personalizar las plantillas de libros y temas, debe estar familiarizado con LaTeX, HTML y CSS.
+
+## Motivación
+
+Markdown es un maravilloso lenguaje para escribir documentos relativamente simples que contengan elementos como secciones, párrafos, listas, vínculos e imágenes, etc. Pandoc <http://pandoc.org> ha extendido enormemente la [sintaxis original de Markdown](http://daringfireball.net/projects/markdown/) y ha añadido unas pequeñas nuevas características tales como notas al pie de página, citas y tablas. Lo más importante que hace Pandoc es hacer posible la generación de documentos en una amplia variedad de formatos desde Markdown, incluyendo HTML, LaTeX/PDF, MSWord y Slides.
+
+Existen unas pocas características que Pandoc aún no permite hacer si lo que se desea es escribir un documento como un libro relativamente complicado, tales como numerar automáticamente las figuras y tablas en la salida de documentos HTML, referencias cruzadas de figuras y tablas y un control óptimo de la apariencia de figuras (e.g. actualmente es imposible especificar la alineación de imágenes usando la sintaxis de Markdown). Estos son algunos de los problemas que se han intentado resolver con la librería **bookdown**.
+
+Bajo la restricción de que queremos producir el libro en varios formatos de salida, es casi imposible cubrir todas las posibles características específicas de estos formatos. Por ejemplo, puede ser difícil recrear un determinado ambiente complicado en LaTeX en la salida HTML utilizando la sintaxis de R Markdown. El objetivo principal no es reemplazar _todo_ con Markdown, sino cubrir las funcionalidades más comunes que se requieren para escribir un documento relativamente complicado, y hacer la sintaxis de dichas funcionalidades consistentes a través de todos los formatos de salida, por lo que sólo necesita aprenderse una cosa y ésta funciona bien para todos los formatos de salida.\index{Markdown}\index{LaTeX}
+
+Otro de los objetivos de este proyecto es hacer que sea fácil producir libros que parezcan visualmente agradables. Algunos buenos ejemplos existentes incluyen Gitbook <https://www.gitbook.com>, Tufte CSS <http://edwardtufte.github.io/tufte-css/>, y Tufte-LaTeX <https://tufte-latex.github.io/tufte-latex/>. Se espera integrar estos temas y estilos en **bookdown**, por lo que los autores no tienen que sumergirse en los detalles sobre cómo utilizar una cierta clase de plantilla LaTeX o cómo configurar CSS para la salida HTML.
+
+## Comenzando
+
+El camino más fácil para que los principiantes comiencen con la escritura de un libro con R Markdown y **bookdown** es a través de la demostración `bookdown-demo` en GitHub:
+
+1. Descargue el repositorio de GitHub <https://github.com/rstudio/bookdown-demo> como un [archivo Zip] y luego descomprímalo localmente;
+2. Instale el IDE RStudio. Observe que necesita una versión superior a la 1.0.0. Por favor [descargue la última versión](https://www.rstudio.com/products/rstudio/download/preview/) si su versión de RStudio es menor a la 1.0.0);
+3. Instale el paquete de R **bookdown**:
+
+    ```{r eval=FALSE}
+    # version estable en el CRAN
+    install.packages('bookdown')
+    # o la versión de desarrollo en GitHub
+    # devtools::install_github('rstudio/bookdown')
+    ```
+
+
+4. Abra el repositorio `bookdown-demo` que descargó en RStudio haciendo click en `bookdown-demo.Rproj`.
+
+5. Abra el archivo de R Markdown `index.Rmd` y haga clic en el botón `Build Book` en la pestaña `Build` de RStudio;
+
+Ahora debería ver la página de índice de ese libro de demostración en el visor de RStudio. Puede agregar o cambiar los archivos de R Markdown, volver a `index.Rmd`, y pulsar el botón `Knit` de nuevo para obtener una vista previa del libro. Si prefiere no utilizar RStudio, también puede compilar el libro a través de línea de comandos. Consulte la siguiente sección para más detalles.
+
+Aunque se ve un buen número de archivos en el ejemplo `bookdown-demo`, la mayoría de ellos no son esenciales para un libro. Si se siente abrumado por el número de archivos, puede utilizar este mínimo ejemplo, en lugar del otro, que es esencialmente un archivo `index.Rmd`: https://github.com/yihui/bookdown-minimal El ejemplo `bookdown-demo` contiene algunas configuraciones avanzadas que es posible que desee aprender más adelante, como la forma de personalizar el preámbulo de LaTeX, modificar el CSS, y construir el libro en GitHub, etc.
+
+## Uso
+
+Normalmente, un libro contiene varios capítulos, y un capítulo está contenido dentro de un archivo de R Markdown, con la extensión de archivo `.Rmd`. Cada archivo de R Markdown debe comenzar inmediatamente con el título del capítulo usando el encabezado de primer nivel, por ejemplo, `# Título del Capítulo`. Todos los archivos R Markdown deben ser codificados en UTF-8. Aquí hay un ejemplo (las viñetas son los nombres de archivo, seguidos por el contenido del archivo):
+
+
+- index.Rmd
+
+    ```markdown
+    # Prefacio {-}
+    
+    En este libro presentamos un método interesante.
+    ```
+
+- 01-intro.Rmd
+
+    ```markdown
+    # Introducción
+    
+    Este capítulo es un panorama de los métodos con que proponemos resolver un  **problema importante**.
+    ```
+
+- 02-literatura.Rmd
+
+    ```markdown
+    # Literatura
+    
+    Aquí hay una revisión de los métodos existentes.
+    ```
+
+- 03-metodos.Rmd
+
+    ```markdown
+    # Métodos
+    
+    Describimos nuestros métodos en este capítulo.
+    ```
+
+- 04-aplicacion.Rmd
+
+    ```markdown
+    # Aplicaciones
+    
+    Algunos aplicaciones _significativas_ se demuestran
+    en este capítulo.
+    
+    ## Ejemplo uno
+    
+    ## Ejemplo dos
+    ```
+
+- 05-resumen.Rmd
+
+    ```markdown
+    # Palabras finales
+    
+    Hemos finalizado un bello libro.
+    ```
+
+De forma predeterminada, **bookdown** fusiona todos los archivos Rmd por el orden de los nombres de archivo, por ejemplo, `01-intro.Rmd` aparecerá antes de `02-literatura.Rmd`. Los nombres de archivo que comiencen con un guión bajo `_` se omiten. Si existe un archivo Rmd llamado `index.Rmd`, siempre va a ser tratado como el primer archivo cuando se fusionen todos los archivos Rmd. La razón de este tratamiento especial es que el archivo HTML `index.html` se genera a partir de` index.Rmd`. Este `index.html` suele ser el archivo de índice por defecto cuando se ve una página web, por ejemplo, usted está viendo <http://yihui.name/index.html> cuando se abre <http://yihui.name/>.
+
+Puede anular el comportamiento anterior mediante la inclusión de un archivo de configuración llamado `_bookdown.yml` en el directorio del libro. Este es un archivo YAML (<https://en.wikipedia.org/wiki/YAML>), y los usuarios de R Markdown deben estar familiarizados con este formato, ya que también se utiliza para escribir los metadatos al comienzo de los documentos R Markdown (puede aprender más acerca de YAML en la Sección \@ref(r-markdown)). Puede utilizar un campo llamado `rmd_files` para definir su propia lista y el orden de los archivos Rmd para el libro. Por ejemplo,
+
+```yaml
+rmd_files: ["index.Rmd", "abstract.Rmd", "intro.Rmd"]
+```
+
+En este caso, **bookdown** sólo tiene que utilizar lo que se ha definido en este campo YAML sin tratamientos especiales de `index.Rmd` o guiones bajos. Si desea salidas HTML y LaTeX/PDF del libro, y usar diferentes archivos Rmd para la salida HTML y LaTeX, puede especificar estos archivos para los dos formatos de salida por separado, por ejemplo,
+
+```yaml
+rmd_files:
+  html: ["index.Rmd", "abstract.Rmd", "intro.Rmd"]
+  latex: ["abstract.Rmd", "intro.Rmd"]
+```
+
+A pesar de que hemos estado hablando acerca de los archivos de R Markdown, los archivos de capítulos en realidad no tienen que ser R Markdown. Pueden ser archivos sin formato Markdown ( `.md`), y no tienen que contener trozos de código R (en adelante *chunks*) en absoluto. ¡Por supuesto que puede utilizar **bookdown**  para componer novelas o poemas!
+
+Por el momento, los principales formatos de salida que se pueden utilizar incluyen `bookdown::pdf_book`,` bookdown::gitbook`, `bookdown::html_book`, y `bookdown::epub_book`. Hay una función `bookdown::render_book()` \index{bookdown::render\_book()} similar  a `rmarkdown::render()`, pero fue diseñada para hacer _múltiples_ documentos Rmd en un libro utilizando las funciones de formato de salida. Es posible que se quiera llamar a esta función desde la línea de comandos directamente, o hacer clic en los botones correspondientes en el IDE RStudio. Estos son algunos ejemplos de línea de comandos:
+
+```{r eval=FALSE}
+bookdown::render_book('foo.Rmd', 'bookdown::gitbook')
+bookdown::render_book('foo.Rmd', 'bookdown::pdf_book')
+bookdown::render_book('foo.Rmd', bookdown::gitbook(lib_dir = 'libs'))
+bookdown::render_book('foo.Rmd', bookdown::pdf_book(keep_tex = TRUE))
+```
+
+Para utilizar las funciones `render_book` y el formato de salida en el IDE RStudio, se puede definir un campo YAML llamado `site` que toma el valor `bookdown::bookdown_site` ^[Esta función llama a `bookdown::render_book()`.], y las funciones de formato de salida se pueden utilizar en el campo `output`, por ejemplo,
+
+```yaml
+---
+site: "bookdown::bookdown_site"
+output:
+  bookdown::gitbook:
+    lib_dir: "book_assets"
+  bookdown::pdf_book:
+    keep_tex: yes
+---
+```
+
+A continuación, puede hacer clic en el botón `Build Book` en el panel `Build` en RStudio para compilar los archivos Rmd en un libro, o haga clic en el botón `Knit` en la barra de herramientas para obtener una vista previa del capítulo actual.
+
+Más opciones de configuración **bookdown** en `_bookdown.yml` se explican en la sección \@ref(configuracion). Además de estas configuraciones, también puede especificar otras relacionadas con Pandoc en los metadatos YAML del primer archivo Rmd del libro, como el título, autor y fecha del libro, etc. Por ejemplo:
+
+```yaml
+--- 
+title: "Creando un libro con R Markdown"
+author: "Yihui Xie"
+date: "`r '\x60r Sys.Date()'``"
+site: "bookdown::bookdown_site"
+output:
+  bookdown::gitbook: default
+documentclass: book
+bibliography: ["book.bib", "packages.bib"]
+biblio-style: apalike
+link-citations: yes
+---
+```
+
+## Dos enfoques de representación {#new-session}
+
+Fusionar todos los capítulos en un archivo Rmd y compilarlo es una manera de hacer el libro en **bookdown**.  Actualmente, existe otra forma: es posible compilar cada capítulo en una sesión de R _separada_, y **bookdown**  combinará los Markdown de todos los capítulos para hacer el libro. A estos dos enfoques se les llama "Merge and knit" (MK) y "knit and Merge" (KM), respectivamente. Las diferencias entre ellos parecen sutiles, pero pueden ser bastante importantes dependiendo de sus casos de uso.
+
+- La diferencia más significativa es que el MK corre _todos_ los trozos de código de todos los capítulos en la misma sesión de R, mientras que K-M utiliza sesiones de R separadas para los distintos capítulos. Para M-K, el estado de la sesión de R de los capítulos anteriores se lleva a capítulos posteriores (por ejemplo, los objetos creados en los capítulos anteriores están disponibles para los capítulos siguientes, a menos que se les elimine deliberadamente); para K-M, todos los capítulos están aislados unos de otros^[Obviamente, nadie puede dejar de escribir algunos archivos en un capítulo, y leerlos en otro capítulo. Es difícil aislar este tipo de efectos colaterales]. Si desea que cada capítulo se compile desde un estado limpio, utilice el enfoque K-M. Puede ser muy complicado y difícil restaurar una sesión de R corriendo a un estado completamente limpio si se utiliza el enfoque de M-K. Por ejemplo, incluso si desea desvincular/descargar paquetes previamente cargados en un capítulo previo, R no va a limpiar los métodos S3 registrados por los paquetes.
+- Debido a que **knitr** no permite etiquetas de chunk duplicadas en un documento de origen, debe asegurarse que no haya etiquetas duplicadas en sus capítulos del libro cuando se utilice el enfoque M-K, de lo contrario **knitr**  señalará un error cuando compile el archivo Rmd fusionado. Tenga en cuenta que esto significa que no debe haber etiquetas duplicadas a lo largo de todo el libro. El enfoque K-M requiere no tener etiquetas duplicadas dentro de cualquier archivo sencillo Rmd.
+- El método K-M no permite que los archivos Rmd estén en subdirectorios, mientras M-K sí.
+
+El método por defecto en **bookdown** es M-K. Para cambiar a K-M, use o bien el argumento `new_session = TRUE` al llamar `render_book()`, o establezca `new_session: yes` en el archivo de configuración `_bookdown.yml`.
+
+Se puede configurar `book_filename` en `_bookdown.yml` para el enfoque K-M, pero debe ser un nombre de archivo Markdown, por ejemplo, `_main.md`, aunque la extensión del archivo no importa realmente, e incluso se puede dejar de lado la extensión, por ejemplo, establezca `book_filename: _main`. Todas las demás configuraciones funcionan tanto para M-K como para K-M.
+
+## Algunos tips
+
+Componer textos bajo la restricción de paginación (por ejemplo, para salidas LaTeX/PDF) puede ser un trabajo muy tedioso y que consume mucho tiempo. Se recomienda no ver la salida de PDF frecuentemente, ya que la mayoría de las veces es muy poco probable que quede satisfecho: el texto puede desbordar el margen de la página, las figuras pueden ubicarse demasiado lejos de donde se pensó inicialmente, etc. No trate de hacer que las cosas se vean perfectas _immediatamente_, porque puede decepcionarse una y otra vez al estar revisando el libro, y las cosas pueden desorganizarse, incluso si sólo hizo algunos cambios menores (véase <http://bit.ly/tbrLtx> para una mejor ilustración).
+
+Si desea obtener una previsualización del libro, visualice la salida HTML. Trabaje en el libro en PDF después de haber terminado el contenido del libro, y seguramente no serán necesarias revisiones importantes.
+
+Si ciertos chunks en los documentos de R Markdown requieren mucho tiempo para funcionar, es posible almacenarlo en caché mediante la adición de la opción `cache = TRUE` en el encabezado del chunk, y se recomienda etiquetar dichos chunks, así,
+
+    `r ''````{r important-computing, cache=TRUE}
+
+Se hablará acerca de cómo previsualizar rápidamente los libros que se mantengan en edición en el capítulo \@ref(edicion). En resumen, se puede utilizar la función `preview_chapter()`  para compilar un solo capítulo en lugar de todo el libro. La función `serve_book ()` hace que sea fácil previsualizar en tiempo real páginas del libro en HTML: cada vez que se modifica un archivo Rmd, el libro puede volver a compilarse y, en consecuencia, el navegador se puede actualizar automáticamente.
+

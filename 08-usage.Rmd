@@ -1,0 +1,104 @@
+# Uso de Software
+
+Como se ha mencionado en el capítulo \@ref(introduccion), este libro no es una guía completa **knitr** o **rmarkdown **. En este capítulo, se explican brevemente algunos conceptos básicos y la sintaxis en **knitr** y **rmarkdown**. Si tiene alguna duda, puede preguntar en StackOverflow (https://stackoverflow.com) y etiquetar las preguntas con `R`,` knitr`, `rmarkdown`, y/o `bookdown`, según sea el caso.
+
+## knitr
+
+El paquete **knitr**\index{knitr} fue diseñado basado en la idea de "programación literaria" [@knuth1984], que le permite combinar código de programa con el texto en un documento de origen. Cuando **knitr** compila un documento, el código del programa (en chunks) se extrae y se ejecuta, y la salida del programa se muestra junto con el texto original en el documento de salida. Se ha introducido la sintaxis básica de la sección \@ref(codigo-en-r).
+
+R Markdown no es el único formato de origen que **knitr** soporta. La idea básica se puede aplicar a otros idiomas de computación y de creación. Por ejemplo, **knitr** también es compatible con la combinación de R y látex (documentos `*.Rnw`), y R + HTML (`*.Rhtml`), etc. Se pueden utilizar otros lenguajes de computación con  **knitr**, como C++, Python, SQL, etc. A continuación se muestra un ejemplo sencillo y se puede ver más en http://rmarkdown.rstudio.com/authoring_knitr_engines.html.
+
+    `r ''````{python}
+    x = 'Hello, Python World!'
+    print(x.split(' '))
+    ```
+Los usuarios de Python pueden estar familiarizados con los portátiles IPython \index{IPython} o Jupyter \index{Jupyter Notebook}(https://jupyter.org). De hecho, R Markdown también se puede utilizar como notebooks, y tiene algunos beneficios adicionales; Vea esta entrada del blog para más información: https://blog.rstudio.org/2016/10/05/r-notebooks/.
+
+Si desea mostrar un fragmento literal de chunk en su documento, se puede añadir una expresión en línea que genera una cadena vacía (`` `r "\x60r ''\x60"` ``) antes de la cabecera del chunk, y sangrar el trozo de código cuatro espacios ^[Sigue la regla de cuatro espacios si el chunk literal se muestra en otros entornos como una lista:
+http://pandoc.org/MANUAL.html#the-four-space-rule], e.g.,
+
+        `r "\x60r ''\x60"````{r}
+        # a literal code chunk
+        ```
+
+Después de que se compila el documento, la expresión en línea desaparecerá y se verá:
+
+    `r ""````{r}
+    # a literal code chunk
+    ```
+
+Normalmente no es necesario llamar directamente funciones **knitr**  al compilar un documento, ya que **rmarkdown**  llamará **knitr**. Si desea compilar un documento de origen sin la conversión a otros formatos, es posible utilizar la función `knitr::knit)`.
+
+## R Markdown
+
+Gracias a la potencia de R y Pandoc, usted puede fácilmente hacer el cómputo de documentos en R Markdown, y convertirlos en una variedad de formatos de salida, incluyendo documentos de Word/HTML/PDF/, diapositivas HTML5/Beamer, dashboards, y sitios web, etc. Un documento en R  Markdown, por lo general, consiste en metadatos YAML\index{YAML}  (opcional) y el cuerpo del documento. Se ha introducido la sintaxis para escribir diversos componentes del cuerpo del documento en el capítulo \@ref(componentes), y se explica más sobre los metadatos YAML en esa sección.
+
+Los metadatos para R Markdown se puede escribir al principio de un documento, empezando y terminando con tres guiones `---`, respectivamente. Los metadatos YAML consisten, generalmente, en pares de etiquetas de valor separados por dos puntos, por ejemplo,
+
+```yaml
+---
+title: "Un documento en R Markdown"
+author: "Yihui Xie"
+---
+```
+
+Para los valores de caracteres, es posible que omita las comillas cuando los valores no contienen caracteres especiales, pero es más seguro para citarlos si se espera que sean los valores de caracteres.
+
+Además de los caracteres, otro tipo común de valores son valores lógicos. Tanto `yes` como `true` significan verdad, y `no` / `false` significan falso, por ejemplo,
+
+```yaml
+link-citations: yes
+```
+
+Los valores pueden ser vectores, y hay dos formas de escribir vectores. Las dos formas siguientes son equivalentes:
+
+```yaml
+output: ["html_document", "word_document"]
+```
+
+```yaml
+output:
+  - "html_document"
+  - "word_document"
+```
+
+Los valores también pueden ser listas de valores. Sólo tiene que aplicar sangría de dos espacios más a los valores, por ejemplo,
+
+```yaml
+output:
+  bookdown::gitbook:
+    split_by: "section"
+    split_bib: no
+```
+
+Es un error común olvidar sangrar los valores. Por ejemplo, los siguientes datos
+
+```yaml
+output:
+html_document:
+toc: yes
+```
+
+significaría
+
+```yaml
+output: null
+html_document: null
+toc: yes
+```
+
+en lugar de lo que probablemente habría esperado:
+
+```yaml
+output:
+  html_document:
+    toc: yes
+```
+
+El formato de salida R Markdown se especifica en el campo `output` de los metadatos YAML, y hay que consultar las páginas de ayuda de R para las opciones posibles, por ejemplo,`?rmarkdown::html_document`, o `?bookdown::gitbook`. Los significados de la mayoría de los otros campos en YAML se pueden encontrar en la documentación de Pandoc.
+
+El paquete **rmarkdown** ha porporcionado estos formatos de salida R Markdown:
+
+`r knitr::combine_words(grep('^[^_]+_(document|presentation)$', ls(asNamespace('rmarkdown')), value = TRUE), sep = '\n', and = '', before = '- \x60', after = '\x60')`
+
+Hay muchos posibles formatos de salida en otros paquetes de R, incluyendo **bookdown**, **tufte**, **rticles**, **flexdashboard**, **revealjs**, y **rmdformats**, etc.

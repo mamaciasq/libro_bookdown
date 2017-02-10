@@ -1,0 +1,388 @@
+# Formatos de salida
+
+El paquete **bookdown** [tablita](#tablas) es compatible principalmente con tres tipos de formatos de salida: HTML, LaTeX/PDF y e-books. En este capítulo presentamos las opciones posibles para estos formatos. Los formatos de salida pueden especificarse en los metadatos YAML del primer archivo Rmd del libro o en un archivo YAML por separado llamado `_output.yml` que se encuentra en el directorio raíz del libro. Un breve ejemplo de los primeros (los formatos de salida que se especifican en el campo `output` de los metadatos YAML) es:
+
+```yaml
+---
+title: "Un libro impresionante"
+author: "Martín Macías y Prof. Daniel Rodríguez"
+output:
+  bookdown::gitbook:
+    lib_dir: assets
+    split_by: section
+    config:
+      toolbar:
+        position: static
+  bookdown::pdf_book:
+    keep_tex: yes
+  bookdown::html_book:
+    css: toc.css
+documentclass: book
+---
+```
+
+Un ejemplo del archivo `_output.yml` es:
+
+```yaml
+bookdown::gitbook:
+  lib_dir: assets
+  split_by: section
+  config:
+    toolbar:
+      position: static
+bookdown::pdf_book:
+  keep_tex: yes
+bookdown::html_book:
+  css: toc.css
+```
+
+En este caso, todos los formatos deben estar en el nivel superior, en vez de estar bajo un campo `output`. En el archivo `_output.yml` no necesita usar tres guiones `---` .
+
+## HTML
+
+La principal diferencia entre compilar un libro (usando **bookdown**) y compilar un simple documento R Markdown (utilizando **rmarkdown**) a HTML es que un libro generará múltiples páginas HTML de forma predeterminada --- normalmente un archivo HTML por capítulo. Esto hace que sea más fácil de señalar un determinado capítulo o compartir su URL con otras personas a medida que se lee el libro, además de ser más rápido a la hora de cargar el libro en el navegador web. Actualmente se ha proporcionado un número de estilos diferentes para la salida HTML: el estilo GitBook, el estilo Bootstrap, y el estilo Tufte.
+
+### El estilo GitBook {#estilo-gitbook}
+
+El estilo GitBook fue tomado de GitBook, un proyecto puesto en marcha por Friendcode, Inc (https://www.gitbook.com) y se dedica a ayudar a los autores a escribir libros con Markdown. Proporciona un estilo bonito, con un diseño que consiste en una barra lateral que muestra la tabla de contenido en la parte izquierda de la pantalla, y el cuerpo principal del libro a la derecha. El diseño es sensible al tamaño de la ventana, por ejemplo, los botones de navegación se muestran a la izquierda/derecha del cuerpo del libro cuando la ventana es lo suficientemente ancha, y colapsa en la parte inferior cuando la ventana es estrecha para dar a los lectores más espacio horizontal para leer el cuerpo del libro.
+
+Se han hecho varias mejoras con respecto al proyecto original GitBook. El más significativo es que se ha sustituido el motor de Markdown con R Markdown v2 basado en Pandoc, por lo que hay muchas más características para utilizar cuando se escribe un libro. Por ejemplo,
+
+- Puede incorporar chunks en R y expresiones en línea de R en Markdown, y esto hace que sea fácil crear documentos reproducibles y lo libera de sincronizar su cómputo con la salida actual (**knitr**  se encargará de eso automáticamente);
+- La sintaxis de Markdown es mucho más rica: se puede escribir cualquier cosa que Markdown de Pandoc soporte, como las expresiones matemáticas de LaTeX y citas;
+- Puede incrustar contenido interactivo en el libro (para la salida HTML únicamente), tales como HTML widgets y aplicaciones Shiny;
+
+También se han añadido algunas características útiles en la interfaz de usuario que se introducirán en detalle a continuación. La función de formato de salida para el estilo GitBook en **bookdown**  es `gitbook()`. A continuación se presentan sus argumentos:
+
+```{r gitbook-args, code=formatR::usage(bookdown::gitbook, output=FALSE), eval=FALSE}
+```
+
+La mayoría de los argumentos se pasan a `rmarkdown::html_document()`, incluyendo `fig_caption`, ` lib_dir`, y `...` . Puede comprobarse en la página de ayuda de `rmarkdown::html_document()`, la lista completa de opciones posibles. Se recomienda encarecidamente utilizar `fig_caption = TRUE` por dos razones: 1) Es importante explicar las figuras con etiquetas; 2) permitir que los pies de figura representen figuras que se colocarán en entornos flotantes cuando la salida sea LaTeX, de lo contrario puede terminar con una gran cantidad de espacio en blanco en ciertas páginas. El formato de los números de figura/tabla depende de si las secciones están numeradas o no: si `number_sections = TRUE`, estos números serán del formato` X.i`, donde `X` es el número del capítulo, e `i` es un incremento numérico; si las secciones no están numeradas, todas las figuras/tablas serán numeradas secuencialmente a través del libro de 1, 2, ..., N. Note que en cualquiera de los casos, las figuras y tablas se numerarán de forma independiente.
+
+Entre todos los argumentos posibles en `...` , es muy probable que utilice el argumento `css` para proporcionar uno o más archivos CSS personalizados para modificar el estilo CSS por defecto. Hay algunos argumentos de `html_document()` que se han codificado en `gitbook()` y no se pueden cambiar: `toc = TRUE` (debe haber una tabla de contenidos),`theme = null` (no usar ningún tema Bootstrap), y `template` (habrá una plantilla interna GitBook).
+
+Tenga en cuenta que si se cambia `self_contained = TRUE` para hacer páginas HTML independientes, el tamaño total de todos los archivos HTML puede aumentar de manera significativa, ya que hay muchos archivos JS y CSS que se incorporarán en cada archivo HTML.
+
+Además de estas opciones `html_document()`, `gitbook()` tiene otros dos argumentos: `split_by` y `config`. El argumento `split_by` especifica la forma en que desea dividir la salida HTML en varias páginas, y sus posibles valores son:
+
+- `rmd`: utiliza los nombres de archivo base de los archivos de entrada Rmd para crear los archivos HTML, por ejemplo `chapter3.html` para `chapter3.Rmd`;
+- `none`: no divide el archivo HTML (el libro será de un sólo archivo HTML);
+- `chapter`: divide el archivo por los encabezados de primer nivel;
+- `section`: divide el archivo por los encabezados de segundo nivel;
+- `chapter+number` y `section+number`: similar a `chapter` y `section`, pero los archivos se numerarán;
+
+Para `chapter` y `section`, los nombres de archivo HTML serán determinados por los identificadores de encabezado, por ejemplo, el nombre de archivo para el primer capítulo con un título del capítulo `# Introducción` será `introducción.html` por defecto. Para `chapter+number` y `section+number`, los números de capítulo/sección se antepondrá a los nombres de archivo HTML, por ejemplo, `1-introduction.html` y` 2-1-literature.html`. El identificador del encabezado se genera automáticamente a partir del texto del encabezado por defecto^[Para ver más detalles sobre cómo se genera automáticamente un identificador, ver la extensión `auto_identifiers` en la documentación del Pandoc http://pandoc.org/README.html#header-identifiers], y puede especificar manualmente un identificador utilizando la sintaxis `{#su-propio-id}` después del texto del encabezado, por ejemplo,
+
+```markdown
+# Una introducción {#introduccion}
+
+El identificador por defecto es `una-introduccion` pero se cambió a `introduccion`.
+```
+
+Por defecto, la bibliografía se divide y los artículos de citas relevantes se ponen en la parte inferior de cada página, para que los lectores no tengan que desplazarse a una página de bibliografía diferente para ver los detalles de las citas. Esta característica se puede desactivar usando `split_bib = FALSE`, en cuyo caso todas las citas se colocan en una página separada.
+
+Hay varias sub-opciones en la opción `config` para poder ajustar algunos detalles en la interfaz de usuario. Vale recordar que todas las opciones de formatos de salida (no sólo para `bookdown::gitbook`) pueden transmitirse a la función de formato si se utiliza la interfaz de línea de comandos `bookdown::render_book()`, o escritos en los metadatos YAML. A continuación se muestran las sub-opciones predeterminadas  de `config` en el formato `gitbook` como metadatos YAML (tenga en cuenta que se inserta debajo de la opción `config`):
+
+```yaml
+bookdown::gitbook:
+  config:
+    toc:
+      collapse: subsection
+      scroll_highlight: true
+      before: null
+      after: null
+    toolbar:
+      position: fixed
+    edit:
+      link: null
+      text: null
+    download: null
+    search: true
+    fontsettings:
+      theme: white
+      family: sans
+      size: 2
+    sharing:
+      facebook: yes
+      twitter: yes
+      google: no
+      weibo: no
+      instapper: no
+      vk: no
+      all: ['facebook', 'google', 'twitter', 'weibo', 'instapaper']
+```
+
+La opción `toc` controla el comportamiento de la tabla de contenido (TOC, por sus siglas en inglés). Puede contraer algunos items inicialmente cuando una página se carga a través de la opción `collapse`. Sus valores posibles son `subsection`,` section`, `none` (o `null`). Esta opción puede ser útil si la TOC es muy larga y tiene más de tres niveles de títulos: `subsection` para colapsar de todos los items del índice para las subsecciones (X.X.X), `section` entenderá que colapse los items para las secciones (X.X) por lo que sólo los encabezados de nivel superior se muestran inicialmente, y `none` significa que no colapse ningún ítem en la tabla de contenido. Para aquellos ítems de la TOC colapsados, puede alternar su visibilidad haciendo clic en los ítems de jerarquía superior. Por ejemplo, puede hacer clic en un título de capítulo en la tabla de contenido para mostrar/ocultar sus secciones.
+
+La opción `scroll_highlight` en `toc` se utiliza para activar el resaltado de elementos de la TOC a medida que se desplaza el cuerpo del libro (por defecto, esta función está activada). Cada vez que un nuevo encabezado entra en la ventana gráfica actual a medida que se desplaza hacia abajo/arriba, se resaltará el elemento correspondiente en la tabla de contenido de la izquierda.
+
+Como la barra lateral tiene una anchura fija, cuando un elemento en la tabla de contenido se trunca porque el texto del encabezado es demasiado amplio, puede pasar el cursor sobre él para ver una información sobre herramientas que muestran el texto completo.
+
+Es posible añadir más ítems antes y después del TOC utilizando la etiqueta HTML `<li>`. Estos ítems se separarán de la tabla de contenido utilizando un divisor horizontal. Se puede utilizar el carácter de barra vertical `|` por lo que no es necesario omitir ningún carácter en estos ítems siguientes de la sintaxis YAML, por ejemplo,
+
+```
+    toc:
+      before: |
+        <li><a href="...">My Awesome Book</a></li>
+        <li><a href="...">John Smith</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown">
+        Proudly published with bookdown</a></li>
+```
+
+A medida que navega a través de diferentes páginas HTML, se preservará la posición de desplazamiento de la TOC. Normalmente verá la barra de desplazamiento en la tabla de contenido en una posición fija, incluso si se desplaza a la siguiente página. Sin embargo, si el ítem de la TOC para el capítulo/sección actual no es visible cuando se carga la página, se desplazará automáticamente la tabla de contenido para que sea visible.
+
+```{r gitbook-toolbar, echo=FALSE, fig.cap='La barra de herramientas de GitBook.', out.width='100%'}
+knitr::include_graphics('images/gitbook.png', dpi = NA)
+```
+
+El estilo GitBook tiene una barra de herramientas en la parte superior de cada página que le permite cambiar dinámicamente la configuración de los libros. La opción `toolbar` tiene una sub-opción `position`, que puede tomar valores `fixed` o `static`. El valor por defecto es que la barra de herramientas se mantenga fija en la parte superior de la página, por lo que incluso si se desplaza hacia abajo de la página, la barra de herramientas es aún visible allí. Si se trata de `static`, la barra de herramientas no se desplazará con la página, es decir, una vez que se desplaza lejos, ya no podrá verla.
+
+El primer botón de la barra de herramientas puede cambiar la visibilidad de la barra lateral. También puede pulsar la tecla `s` en el teclado para hacer lo mismo. El estilo GitBook puede recordar el estado de visibilidad de la barra lateral, por ejemplo, si se ha cerrado la barra lateral, permanecerá cerrada la próxima vez que abra el libro. De hecho, el estilo GitBook recuerda muchas otras configuraciones, así como la palabra clave de búsqueda y la configuración de la tipografía.
+
+El segundo botón en la barra de herramientas es el botón de búsqueda. Su combinación de teclas es `F` (Buscar). Cuando se hace clic en el botón, verá un cuadro de búsqueda en la parte superior de la barra lateral. A medida que escribe en el cuadro, la TOC se filtra para mostrar las secciones que coincidan con la palabra clave de búsqueda. Ahora bien, puede utilizar las teclas de flecha `Up`/`Down` para resaltar la siguiente palabra clave en la página actual. Al hacer clic en el botón de búsqueda de nuevo (o digitar la tecla `F` fuera del cuadro de búsqueda), la palabra clave de búsqueda se vacía y la caja de búsqueda se oculta. Para deshabilitar la búsqueda, establezca la opción `search: no` en `config`.
+
+El tercer botón es para la configuración de fuente/tema. Se puede cambiar el tamaño de la fuente (aumentar o reducir), la familia de fuentes (serif o sans serif), y el tema (`White`, `Sepia`, o `Night`). Estos ajustes se pueden modificar a través de la opción `fontsettings`.
+
+La opción `edit` es la misma que la opción que se mencióno en la sección \@ref(configuracion). Si no está vacío, un botón de edición se añadirá a la barra de herramientas. Esto fue diseñado para posibles contribuyentes del libro para su edición en GitHub después de hacer clic en el botón y enviar solicitudes de extracción.
+
+Si el libro tiene otros formatos de salida para que los lectores puedan descargarlo, es posible proporcionar la opción `download` para que un botón de descarga se pueda agregar a la barra de herramientas. Esta opción tiene ya sea un vector de caracteres, o una lista de vectores de caracteres con la longitud de cada vector. Cuando se trata de un vector de caracteres, debe ser o bien un vector de nombres de archivo, o las extensiones nombre de archivo, por ejemplo, los dos siguientes ajustes están bien:
+
+```yaml
+    download: ["book.pdf", "book.epub"]
+    download: ["pdf", "epub", "mobi"]
+```
+
+Cuando sólo proporciona las extensiones del nombre de archivo, el nombre del archivo se deriva del nombre del archivo libro del archivo de configuración `_bookdown.yml` (Sección \@ref(configuracion)). Cuando `download` es `null`, `gitbook()` buscará PDF, EPUB y MOBI en el directorio de salida del libro, y añadirá automáticamente la opción `download`. Si lo que desea es suprimir el botón de descarga, usar `download: no`. Todos los archivos que los lectores descarguen se muestran en un menú desplegable, y las extensiones de nombre de archivo se utilizan como en el texto del menú. Cuando el único formato disponible para los lectores para descargar es PDF, el botón de descarga será un solo botón PDF en lugar de un menú desplegable.
+
+Una forma alternativa para el valor de la opción `download` es una lista de vectores de longitud 2, por ejemplo,
+
+```yaml
+    download: [["book.pdf", "PDF"], ["book.epub", "EPUB"]]
+```
+
+También puede escribirse como:
+
+```yaml
+    download:
+      - ["book.pdf", "PDF"]
+      - ["book.epub", "EPUB"]
+```
+
+Cada vector en la lista consiste en el nombre del archivo y el texto que se mostrará en el menú. En comparación con la primera forma, esta le permite personalizar el texto del menú, por ejemplo, puede tener dos copias diferentes de PDF para los lectores para descargar y tendrá que hacer los elementos de menú diferente.
+
+A la derecha de la barra de herramientas, hay algunos botones para compartir el enlace en sitios web de redes sociales como Twitter, Facebook y Google+. Puede utilizar la opción `sharing` para decidir qué botones activar. Si desea deshacerse de estos botones en su totalidad, sólo tiene que utilizar `sharing: null` (o `no`).
+
+Por último, hay algunas opciones de más alto nivel en los metadatos YAML que se puede utilizar en la plantilla GitBook HTML a través de Pandoc. Puede que no tengan efectos visibles claros sobre la salida HTML, pero pueden ser útiles cuando se implementa la salida HTML como una página web. Estas opciones incluyen:
+
+- `description`: Una cadena de caracteres que se escribe en el atributo `content` del tag `<meta name="description" content="">` en el encabezado del HTML (si falta, se usará el título del libro). Esto puede ser útil para efectos de optimización de motores de búsqueda (SEO). Debe ser texto plano sin ningún formato Markdown talcomo _itálica_ o **negrita**; 
+- `url`: La URL de la página web del libro, por ejemplo, `https\://bookdown.org/yihui/bookdown/`^[El backslash antes de `:` se debe a errores técnicos: se quiere prevenir que Pandoc traduzca el vínculo a código HTML `<a href="..."></a>`.];
+- `github-repo`: El repositorio GitHub del libro de la forma: `user/repo`;
+- `cover-image`: la ruta de la imagen de la carátula del libro;
+- `apple-touch-icon`: Una ruta a un ícono (e.g., una imagen PNG). Esto funciona sólo para iOS: cuando la página web se añade a la pantalla de inicio, el vínculo se representa por este ícono.
+- `apple-touch-icon-size`: El tamaño del ícono (por defecto, 152 x 152 pixels).
+- `favicon`: Una ruta al "ícono favorito". Típicamente este ícono se muestra en la barra de dirección del buscador, o al frente de la página del título, si el buscador lo soporta.
+
+Abajo se muestra un ejemplo de metadatos YAML (de nuevo note que existen opciones _top-level_ ):
+
+```yaml
+---
+title: "Un libro impresionante"
+author: "Daniel Rodríguez"
+description: "Este libro introduce la teoría ABC, y ..."
+url: "https\://bookdown.org/john/awesome/"
+github-repo: "john/awesome"
+cover-image: "images/cover.png"
+apple-touch-icon: "touch-icon.png"
+apple-touch-icon-size: 120
+favicon: "favicon.ico"
+---
+```
+
+Un buen efecto para establecer `description` y `cover-image` es que cuando se comparte el enlace de su libro sobre algunos sitios web de redes sociales como Twitter, el enlace se puede ampliar de forma automática a una tarjeta de la imagen del libro y la descripción del libro.
+
+### El estilo Bootstrap
+
+Si ha utilizado R Markdown antes, debe estar familiarizado con el estilo Bootstrap (http://getbootstrap.com), que es el estilo por defecto de la salida HTML de R Markdown. La función del formato de salida en **rmarkdown** es `html_document()`, y se tiene un formato correspondiente `html_book()` en **bookdown**  usando `html_document()` como formato de base. De hecho, hay un formato más general `html_chapters()` en **bookdown**  y `html_book()` es sólo su caso especial:
+
+```{r html-chapters-usage, eval=FALSE, code=formatR::usage(bookdown::html_chapters, output=FALSE)}
+```
+
+Tenga en cuenta que tiene un argumento `base_format` que tiene una función base de formato de salida, y `html_book()` es, básicamente, `html_chapters(base_format = rmarkdown::html_document)`. Todos los argumentos de `html_book()` se pueden utilizar en `html_chapters()`:
+
+```{r html-book-usage, eval=FALSE, code=formatR::usage(bookdown::html_book, output=FALSE)}
+```
+
+
+Esto significa que puede utilizar la mayoría de los argumentos de `rmarkdown::html_document`, como `toc` (si desea mostrar la tabla de contenidos), `number_sections` (si quiere numerar encabezados de sección), y así sucesivamente. Una vez más, vale la pena visitar la página de ayuda de `rmarkdown::html_document` para ver la lista completa de posibles opciones. Tenga en cuenta que el argumento `self_contained` no es modificable a `FALSE` internamente, por lo que no puede cambiar el valor de este argumento. Ya hemos explicado el argumento `split_by` en la sección anterior.
+
+La argumentos `template` y `page_builder` son para usuarios avanzados, y no es necesario entenderlos a menos que tenga una imperiosa necesidad de personalizar la salida HTML, y la gran variedad de opciones de que dispone `rmarkdown::html_document()` no le muestren el resultado deseado.
+
+Si desea pasar una plantilla HTML diferente al argumento `template`, la plantilla debe contener tres pares de comentarios HTML, y cada comentario tiene que estar en una línea separada:
+
+- `<!--bookdown:title:start-->` y `<!--bookdown:title:end-->` para marcar la sección de título del libro. Esta sección se pondrá en la primera página del libro compilado.
+- `<!--bookdown:toc:start-->` y `<!--bookdown:toc:end-->` para marcar la sección de tabla de contenidos. Esta sección se pondrá en todas las páginas HTML.
+- `<!--bookdown:body:start-->` y `<!--bookdown:body:end-->` para marcar el cuerpo HTML del libro, y el cuerpo HTML se dividirá en múltiples páginas separadas. Recuerde que se combinan todos los archivos Mrkdown y R Markdown, se compilan en un solo archivo HTML y se dividen.
+
+Puede abrir la plantilla HTML por defecto para ver donde se insertaron estos comentarios:
+
+```{r results='hide'}
+bookdown:::bookdown_file('templates/default.html')
+# puede usar file.edit() para abrir este archivo
+```
+
+Una vez que sepa cómo **bookdown**  trabaja internamente para generar varias páginas HTML de salida, será más fácil entender el argumento `page_builder`, que es una función para componer cada página HTML individual utilizando los fragmentos HTML extraídos de la ficha de comentario anterior. El valor por defecto de `page_builder` es una función `build_chapter` en **bookdown** , y su código fuente es relativamente simple (ignore esas funciones internas como `button_link()`):
+
+```{r include=FALSE}
+extract_fun = function(name, script) {
+  x = readLines(script)
+  def = paste(name, '= ')
+  i = which(substr(x, 1, nchar(def)) == def)
+  if (length(i) == 0) stop('Cannot find ', def, ' from ', script)
+  i = i[1]
+  j = which(x == '}')
+  j = min(j[j > i])
+  x[i:j]
+}
+```
+```{r eval=FALSE, tidy=FALSE, code=extract_fun('build_chapter', '/Users/Martin/Dropbox/Manejo de datos DNPE/Reportes/Libro Bookdown/R/html.R')}
+```
+
+
+Básicamente, esta función toma un número de componentes como el encabezado de HTML, la tabla de contenido, el cuerpo del capítulo, etc., y se espera que devuelva una cadena de caracteres que es el código fuente HTML de una página HTML completa. Es posible manipular todos los componentes de esta función utilizando las funciones de procesamiento de textos como `gsub()` y `paste()`.
+
+
+Lo que el constructor de página por defecto hace es poner la tabla de contenido en la primera fila, el cuerpo en la segunda fila, los botones de navegación en la parte inferior del cuerpo, y concatenarlos con el encabezado y el final del HTML. Aquí hay un boceto del código fuente HTML que pueden ayudarle a entender la salida de `build_chapter ()`:
+
+```html
+<html>
+  <head>
+    <title>A Nice Book</title>
+  </head>
+  <body>
+  
+    <div class="row">TOC</div>
+    
+    <div class="row">
+      CHAPTER BODY
+      <p>
+        <button>PREVIOUS</button>
+        <button>NEXT</button>
+      </p>
+    </div>
+  
+  </body>
+</html>
+```
+
+Para todas las páginas HTML, la principal diferencia es el cuerpo del capítulo, y la mayoría del resto de elementos son los mismos. La salida por defecto de `html_book()` incluirá la Bootstrap CSS y los archivos JavaScript en la etiqueta `<head>`. 
+
+La tabla de contenidos se utiliza a menudo para fines de navegación. En el estilo GitBook, el índice se mostrará en la barra lateral. Para el estilo Bootstrap, no se aplica un estilo especial a ella, por lo que se muestra como una lista desordenada normal (en la etiqueta HTML `<ul>`). Es fácil dar vuelta a esta lista en una barra de navegación con algunas técnicas de CSS. Se ha proporcionado un archivo CSS `toc.css` en este paquete que se puede utilizar, y se puede encontrar aquí: https://github.com/rstudio/bookdown/blob/master/inst/examples/css/toc.css
+
+Puede copiar este archivo en el directorio raíz de su libro, y aplicarla a la salida HTML a través de la opción `css`, por ejemplo,
+
+```yaml
+---
+output:
+  bookdown::html_book:
+    toc: yes
+    css: toc.css
+---
+```
+
+Hay muchas maneras posibles de convertir listas `<ul>`  a menús de navegación si hace una pequeña búsqueda en la web, puede elegir un estilo de menú que le guste. El archivo `toc.css` que se mencionó anteriormente es un estilo de menú con textos blancos sobre un fondo negro, y es compatible con los submenús (por ejemplo, los títulos de las secciones se muestran como menús desplegables bajo los títulos de los capítulos).
+
+De hecho, usted puede deshacerse del estilo Bootstrap en `html_document()` si se establece la opción `theme` como `null`, y queda libre de aplicar estilos arbitrarios en la salida HTML utilizando la opción `css` (y posiblemente la opción `includes` si desea incluir contenido arbitrario en el encabezado/pie del HTML).
+
+### El estilo Tufte
+
+Al igual que el estilo Bootstrap, el estilo Tufte es proporcionado por un formato de salida `tufte_html_book()`, que es también un caso especial de `html_chapters()` usando `tufte::tufte_html()` como el formato de base. Por favor, vea el paquete **Tufte** [@R-tufte] si no está familiarizado con el estilo Tufte. Básicamente, es un diseño con una columna principal a la izquierda y una columna al margen, dispuesta a la derecha. El cuerpo principal está en la columna principal, y la columna al margen se utiliza para poner notas al pie, notas al margen, referencias y figuras al margen, etc.
+
+Todos los argumentos de `tufte_html_book()` tienen exactamente el mismo significado que en `html_book()`, por ejemplo, también se puede personalizar el CSS a través de la opción `css`. Hay algunos elementos que son específicos del estilo Tufte, tales como notas al margen, figuras de margen, y figuras de ancho completo. Estos elementos requieren una sintaxis especial para su generación, por lo que se recomienda consultar la documentación del paquete **Tufte**. Note que no es necesario hacer nada especial para las notas al pie y las referencias (sólo tiene que utilizar la sintaxis Markdown normal `^[nota]` y `[@citas]`), ya que éstas se ponen automáticamente al margen. Un breve ejemplo YAML del formato `tufte_html_book`:
+
+```yaml
+---
+output:
+  bookdown::tufte_html_book:
+    toc: yes
+    css: toc.css
+---
+```
+
+## LaTeX/PDF
+
+Se recomienda encarecidamente el uso de un formato de salida HTML en lugar de LaTeX cuando se hace un libro, ya que no tendrá que estar distrayéndose por los detalles de composición tipográfica que pueden molestar mucho si se revisa constantemente la salida PDF de un libro. Deje el trabajo de cuidar la composición tipográfica sólo para el final (idealmente después de que realmente haya terminado el contenido del libro).
+
+El formato de salida de LaTeX/PDF es proporcionado por `pdf_book()` en **bookdown**.  No hay una diferencia significativa entre `pdf_book()` y el `pdf_document()` del formato **rmarkdown**. El objetivo principal de `pdf_book()` es aclarar las etiquetas y referencias cruzadas escritas usando la sintaxis descrita en las secciones \@ref(figuras), \@ref(tablas), y \@ref(referencias-cruzadas). Si el único formato de salida que desea para un libro es el LaTeX/PDF, puede utilizar la sintaxis específica de LaTeX, por ejemplo `\label{}` para etiquetar las figuras/tablas/secciones, y `\ref{}` para sus referencias cruzadas, puesto que Pandoc admite comandos de LaTeX en Markdown. Sin embargo, la sintaxis LaTeX no es portátil a otros formatos de salida, tales como HTML y libros electrónicos. Es por eso que se ha introducido la sintaxis `(\#label)` para etiquetas y `\@ref(label)` para referencias cruzadas.
+
+Hay algunas opciones YAML de alto nivel que se aplicarán a la salida LaTeX. Para un libro, puede cambiar la clase de documento predeterminado a `book` (el valor predeterminado es` article`), y especificar un estilo de bibliografía requerida por su editor. Un breve ejemplo YAML:
+
+
+```yaml
+---
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+---
+```
+
+El formato `pdf_book()` es un formato general como `html_chapters`, que también tiene un argumento `base_format`:
+
+```{r pdf-book-usage, eval=FALSE, code=formatR::usage(bookdown::pdf_book, output=FALSE)}
+```
+
+Puede cambiar la función `base_format` a otras funciones de formato de salida, y **bookdown** ha proporcionado una sencilla función de contenedor `tufte_book2()`, que es básicamente `pdf_book(base_format = Tufte::tufte_book)`, para producir un libro PDF utilizando el estilo PDF Tufte (de nuevo, ver el **tufte**  paquete).
+
+## E-Books
+
+Actualmente **bookdown**  proporciona dos formatos de libros electrónicos, EPUB y MOBI. Los libros en estos formatos se pueden leer en dispositivos como teléfonos inteligentes, tabletas o lectores electrónicos especiales como el Kindle.
+
+### EPUB
+
+Para crear un libro EPUB, puede utilizar el formato `epub_book()`. Este formato tiene algunas opciones en común con `rmarkdown::html_document()`:
+
+```{r epub-book, eval=FALSE, code=formatR::usage(bookdown::epub_book, output=FALSE)}
+```
+
+La opción `toc` se deshabilita debido a que el lector de libros electrónicos puede determinar a menudo una tabla de contenido de forma automática desde el libro, por lo que no es necesario añadir unas pocas páginas para la tabla de contenido. Hay algunas opciones específicas para EPUB:
+
+- `stylesheet`: Es similar a la opción `css` en formatos de salida HTML, y se puede personalizar la apariencia de los elementos usando CSS;
+- `cover_image`: La ruta de la imagen de la portada del libro;
+- `metadata`: La ruta de acceso a un archivo XML para los metadatos del libro (ver documentación Pandoc para más detalles);
+- `chapter_level`: Internamente un libro EPUB es una serie de archivos "capítulo", y esta opción determina el nivel por el cual el libro se divide en estos archivos. Esto es similar al argumento `split_by` de formatos de salida HTML que hemos mencionado en la sección \@ref(html), con la diferencia de que un libro EPUB es un solo archivo, y no se verán estos archivos "capítulo" directamente. El nivel predeterminado es el primer nivel, y si lo ajusta a 2, significa que el libro será organizado por la sección de archivos internos, lo que puede hacer al lector más rápido para cargar el libro;
+- `epub_version`: Versión 3 o 2 de EPUB;
+
+Un libro EPUB es esencialmente una colección de páginas HTML, por ejemplo, se pueden aplicar reglas CSS a sus elementos, incrustar imágenes, insertar expresiones matemáticas (debido a MathML está soportado parcialmente), etc. Las leyendas de las figuras/tablas, referencias cruzadas, bloques personalizados, y las citas mencionadas en el capítulo \@ref(componentes) también deben trabajar en EPUB. Es posible comparar la salida EPUB de este libro a la salida HTML, con la única diferencia importante del aspecto visual.
+
+Hay varios lectores EPUB disponibles, incluyendo Calibre (https://www.calibre-ebook.com), iBooks de Apple y Google Play Books.
+
+### MOBI
+
+Los libros electrónicos MOBI pueden leerse en dispositivos Kindle de Amazon. Pandoc no es compatible con la salida MOBI de forma nativa, pero Amazon ha proporcionado una herramienta llamada KindleGen (https://www.amazon.com/gp/feature.html?docId=1000765211) para crear libros MOBI de otros formatos, incluyendo EPUB y HTML. Hemos proporcionado una simple función de contenedor `KindleGen()` en **bookdown** para llamar KindleGen con el fin de convertir un libro EPUB a MOBI. Esto requiere que se descargue primero KindleGen, y asegurarse de que el ejecutable KindleGen se pueda encontrar a través de la variable de entorno de sistema `path`.
+
+Otra herramienta para convertir EPUB a  MOBI es proporcionada por Calibre. A diferencia de KindleGen, Calibre es de código abierto y libre, y soporta la conversión entre muchos más formatos. Por ejemplo, se puede convertir HTML a EPUB, documentos de Word a MOBI, etc. La función `calibre()` en **bookdown**  es una función de contenedor de la utilidad de línea de comandos `ebook-convert` en Calibre. Del mismo modo, es necesario asegurarse de que el ejecutable `ebook-convert` se pueda encontrar a través de la variable de entorno `path`. Si utiliza OS X, puede instalar tanto KindleGen como Calibre a través de Homebrew-Cask (https://caskroom.github.io), por lo que no necesita preocuparse por el problema `path`.
+
+## Un documento sencillo
+
+A veces, puede que no desee escribir un libro, sino un simple artículo de formato largo o un reporte. Por lo general, lo que se hace es llamar a `rmarkdown::render()` con un determinado formato de salida. Las principales características que faltan son la numeración automática de títulos de figuras/tablas y referenciación cruzada de figuras/tablas/secciones. Se han descartado estas características en **bookdown** para que puedan utilizarse sin tener que preparar un libro de varios archivos Rmd.
+
+Las funciones `html_document2()`, `tufte_html2()`, `pdf_document2()`, `word_document2()`, `tufte_handout2()` y `tufte_book2()` están diseñadas para estos propósitos. Si se procesa un documento R Markdown con el formato de salida, por ejemplo, `bookdown::html_document2`, se obtendrán números de figuras/tablas y podrán referenciarse cruzadamente en una simple página HTML usando la sintaxis descrita en el capítulo \@ref(componentes).
+
+Las funciones de formato de salida HTML y PDF anteriores son básicamente envolturas de formatos de salida `bookdown::html_book` y `bookdown::pdf_book`, en el sentido de que cambiaron el argumento `base_format`. Por ejemplo, puede echar un vistazo al código fuente de `pdf_document2`:
+
+```{r}
+bookdown::pdf_document2
+```
+
+Después de conocer este hecho, puede aplicar la misma idea a otros formatos de salida mediante el `base_format` apropiado. Por ejemplo, puede portar las características **bookdown** al formato `jss_article` en el paquete **rticles** [@R-rticles] usando los metadatos YAML:
+
+```yaml
+output:
+  bookdown::pdf_book:
+    base_format: rticles::jss_article
+```
+
+A continuación, podrá utilizar todas las funciones que hemos introducido en el capítulo \@ref(componentes).
+
+
+Aunque el formato `gitbook()` fue diseñado principalmente para libros, en realidad se puede también aplicar a un simple documento R Markdown. La única diferencia es que no habrá ningún botón de búsqueda en la salida de una página, ya que simplemente puede utilizar la herramienta de búsqueda de su navegador web para buscar texto (por ejemplo, pulse `Ctrl + F`  o `Command + F`). También puede configurar la opción `split_by` con `none` para generar una página de salida única, en cuyo caso no habrá ningún botón de navegación, ya que no hay otras páginas para navegar. Aun es posible generar archivos HTML de varias páginas si se desea. Otra opción posible es utilizar `self_contained = TRUE cuando sólo es una página de salida.

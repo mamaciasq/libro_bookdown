@@ -1,0 +1,118 @@
+--- 
+title: "bookdown: Escritura de libros y documentos técnicos con R Markdown"
+always_allow_html: yes
+author: "Yihui Xie"
+date: "`r Sys.Date()`"
+knit: "bookdown::render_book"
+documentclass: krantz
+lot: yes
+lof: yes
+fontsize: 12pt
+monofont: "Source Code Pro"
+monofontoptions: "Scale=0.7"
+bibliography: ["book.bib", "packages.bib"]
+biblio-style: apalike
+link-citations: yes
+site: bookdown::bookdown_site
+description: "Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook."
+github-repo: mamaciasq/libro_bookdown
+cover-image: images/cover.png
+---
+
+```{r setup, include=FALSE}
+options(
+  htmltools.dir.version = FALSE, formatR.indent = 2,
+  width = 55, digits = 4, warnPartialMatchAttr = FALSE, warnPartialMatchDollar = FALSE
+)
+
+lapply(c('DT', 'citr'), function(pkg) {
+  if (!requireNamespace(pkg)) install.packages(pkg)
+})
+```
+
+# Prefacio {-}
+
+```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), fig.link='https://www.crcpress.com/product/isbn/9781138700109'}
+knitr::include_graphics('images/cover.jpg', dpi = NA)
+```
+
+Este breve libro presenta el paquete de R, **bookdown**, que cambia la forma de escribir libros. Escribir un libro debe ser técnicamente fácil, visualmente agradable a la hora de leerlo, divertido para interactuar con él, cómodo para navegar a través de sus páginas y sencillo si los lectores desean contribuir o dejar comentarios para su(s) autor(es), y lo más importante, para que los autores no se distraigan con los detalles de composición tipográfica.
+
+El paquete **bookdown** fue construido con base en R Markdown (http://rmarkdown.rstudio.com), y heredó la simplicidad en la sintaxis de R Markdown (puede aprenderse lo básico en cinco minutos; véase la sección \@ref(sintaxis-de-markdown)), así como la posibilidad de múltiples tipos de formatos de salida (PDF/HTML/Word/...). Asimismo, ha añadido diferentes características como la salida  de múltiples páginas HTML, numeración y referenciación cruzada a figuras/tablas/secciones/ecuaciones, inserción de partes/apéndices, e importación del estilo GitBook \index{GitBook} (https://www.gitbook.com) para crear páginas de libros en un formato elegante y atractivo en HTML. Este libro en sí es un ejemplo de cómo se puede producir un libro de una serie de documentos R Markdown, y tanto la versión impresa como la versión en línea puede parecer profesional. Puede encontrar más ejemplos en https://bookdown.org. 
+
+A pesar de que el nombre del paquete contiene la palabra "libro", **bookdown**  no es sólo para libros. El "libro" puede ser cualquier cosa que se componga de varios documentos R Markdown, como documentación de un curso, notas de estudio, un manual de software, una tesis de maestría/doctorado, o incluso un diario. De hecho, muchas características de **bookdown**  se aplican a documentos sencillos de R Markdown (Sección \@ref(un-documento-sencillo)).
+
+```{asis, echo='cc-license' %in% commandArgs(TRUE)}
+![Creative Commons License](images/by-nc-sa.png)  
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+```
+
+## ¿Por qué leer este libro? {-}
+
+¿Puede escribirse un libro en un formato de origen, y generar la salida a múltiples formatos? Tradicionalmente los libros se escriben con LaTeX o Microsoft Word. Cualquiera de estas herramientas hará que escribir libros sea un viaje de ida donde no se puede dar marcha atrás: si elige LaTeX, normalmente termina sólo con un documento PDF; si se trabaja con Word, es probable que tenga que permanecer en Word para siempre, y también se pueden desperdiciar muchas de las características útiles y hermosas de la salida PDF que sí genera LaTeX.
+
+¿Puede enfocarse en escribir el contenido del libro sin tener que preocuparse demasiado por la composición tipográfica? Parece haber una contradicción natural entre el contenido y la apariencia, y siempre tiene que equilibrarse el tiempo que se dedica a estos dos aspectos. Se quiere que el libro luzca razonablemente bonito, a la vez que quiere centrarse en su contenido. Una posibilidad es renunciar a PDF temporalmente, y a cambio obtener una vista previa bastante bella de su libro en páginas web HTML \index{HTML}. LaTeX \index{LaTeX} es una excelente herramienta de composición, pero puede ahogarse fácilmente en las numerosas órdenes de su programación y en los detalles de composición tipográfica mientras se está trabajando en el libro. Es difícil obtener una previsualización del libro en PDF, y, por desgracia, algunas veces aparecen ciertas palabras que exceden el margen de la página, algunas figuras flotan en páginas al azar, cinco o seis palabras sueltas en el final de un capítulo llevan a una página nueva, y así sucesivamente. Si el libro se va a imprimir, tendrá que hacer frente a estos problemas eventualmente, y realmente no vale la pena distraerse una y otra vez sobre estos asuntos mientras está escribiendose el libro. El hecho de que la sintaxis de Markdown es más simple y tiene menos funciones que LaTeX también ayuda a centrarse en el contenido del libro. ¿Realmente tiene que definirse un nuevo comando como `\myprecious{}` que aplica `\textbf{\textit{\textsf{}}}` a su texto? ¿La letra "R" tiene que estar encerrada en `\proglang{}` cuando los lectores pueden fácilmente intuir que representa el lenguaje R? No hay mucha diferencia si todo o nada, necesita la atención del lector.
+
+¿Pueden interactuar los lectores con ejemplos del libro cuando lo leen? La respuesta es no, sin duda alguna, siempre y cuando el libro esté impreso en papel, pero es posible hacerlo si su libro tiene una versión HTML que contenga ejemplos interactivos, como las aplicaciones Shiny (https://shiny.rstudio.com) o los HTML widgets (https://htmlwidgets.org). Por ejemplo, los lectores pueden saber de inmediato qué pasa si cambian algunos parámetros en un modelo estadístico.
+
+¿Puede obtener retroalimentación e incluso contribuciones de los lectores a medida que se escribe el libro? Tradicionalmente, el editor puede encontrar un pequeño número de revisores anónimos para corregir su libro. Los revisores suelen ser útiles, pero es posible que aún así se pierda el aporte de los lectores más representativos. Es demasiado tarde después de que se imprimió la primera edición, y el lector tiene que esperar unos años antes que la segunda edición esté lista. Hay algunas plataformas web que hacen que sea fácil para las personas proporcionar retroalimentación y contribución a sus proyectos, y GitHub (https://github.com) es un ejemplo prominente. Si alguien encuentra un error tipográfico en su libro, puede simplemente corregirlo en línea y enviarle el cambio para su aprobación. Es una cuestión de hacer clic en un botón para fusionar el cambio, sin hacer preguntas o correos electrónicos de ida y vuelta. Para poder utilizar estas plataformas, es necesario aprender los conceptos básicos de herramientas de control de versiones como GIT, y los archivos de origen del libro deben estar en texto plano.
+
+La combinación de R (https://www.r-project.org), Markdown, y Pandoc (http://pandoc.org) hace que sea posible pasar de un formato de fuente simple (R Markdown) a múltiples formatos de salida posibles (PDF, HTML, EPUB y Word, etc). El paquete **bookdown** está basado en R Markdown, y proporciona formatos de salida para libros y artículos de formato largo, incluyendo el formato GitBook, que es un formato de salida HTML de varias páginas con una interfaz de usuario útil y bonita. Es mucho más fácil componer en HTML que en LaTeX, por lo que siempre se puede obtener una previsualización de su libro en HTML, y el trabajo sobre el PDF del contenido está casi hecho. Los ejemplos interactivos se pueden incorporar fácilmente en HTML, lo que puede hacer al libro más atractivo y útil. R Markdown es un formato de texto plano, lo que también puede brindar beneficios al control de versiones, como colaborar en GitHub. También se ha tratado de poner algunas de las características importantes de LaTeX a HTML y otros formatos de salida, como enumeración de figuras/tablas y referenciación cruzada.
+
+En resumen, únicamente prepare un par de capítulos de un libro en R Markdown, y **bookdown** puede ayudarle a convertirlos en un hermoso libro.
+
+## Estructura del libro {-}
+
+Los capítulos \@ref(introduccion) y \@ref(componentes) introducen el uso básico y la sintaxis, lo cual debería ser suficiente para que la mayoría de los lectores empiecen a escribir un libro. Los capítulos \@ref(formatos-de-salida) y \@ref(personalizacion) son para aquellos que quieren afinar la apariencia de sus libros. Pueden parecer muy técnicos si no se está familiarizados con HTML/CSS y LaTeX. No es necesario leer estos dos capítulos con mucho cuidado la primera vez. Puede aprender lo que posiblemente puede cambiarse, y volver después para saber cómo hacerlo. Para el capítulo \@ref(edicion), los detalles técnicos no son importantes a menos que no utilice el RStudio IDE (Sección \@ref(ide-rstudio)). Del mismo modo, puede sentirse abrumado por los comandos presentados en el capítulo \@ref(publicacion) para publicar su libro, pero nuevamente, hemos tratado de facilitar la publicación de su libro en línea a través de la IDE de RStudio. Los comandos y funciones personalizadas son sólo para aquellos que deciden no usar el servicio de RStudio o quieren entender los detalles técnicos.
+
+Para resumir, este libro es una referencia completa del paquete **bookdown**. Puede seguir la regla 80/20 al leerla. Algunas secciones están allí para el bien de la integridad, y no todas las secciones son igualmente útiles al libro particular que usted piensa escribir.
+
+## Información acerca del software y convenciones {-}
+
+Este libro es principalmente sobre el paquete **bookdown** de R, por lo que necesita instalar al menos R y el paquete **bookdown**. Sin embargo, su libro no tiene que estar relacionado en absoluto con el lenguaje R. Se pueden usar otros lenguajes de computación (C++, SQL, Python, etc.; véase el Apéndice \@ref(uso-de-software)), e incluso puede ser totalmente irrelevante para la computación (por ejemplo, puede escribir una novela, o una colección de poemas). Las herramientas de software necesarias para construir un libro se introducen en el Apéndice \@ref(herramientas-de-software).
+
+La información de la sesión de R al compilar este libro es la siguiente:
+
+```{r include=FALSE}
+# only show versions of very relevant packages
+sessionInfo = function() {
+  lapply(c('shiny', 'miniUI'), loadNamespace)
+  res = utils::sessionInfo()
+  loaded = res$loadedOnly
+  res$loadedOnly = loaded[intersect(names(loaded), c(
+    'bookdown', 'knitr', 'rmarkdown', 'shiny', 'htmltools', 'tools', 'miniUI'
+  ))]
+  res
+}
+```
+
+```{r}
+sessionInfo()
+```
+
+No se añaden instrucciones (`>` y `+`) al código fuente en R en este libro, y, por defecto, se comenta la salida de texto mediante dos numerales `##`, como se pudo advertir anteriormente en la información de sesión de R . Esto es para comodidad del lector a la hora que desee copiar y ejecutar el código (el texto resultante se ignorará ya que se encuentra comentado). Los nombres de paquetes están en negrita (por ejemplo, **rmarkdown**), y el código en línea y los nombres de archivos se formatean en una fuente de máquina de escribir (por ejemplo, `knitr::knit('foo.Rmd')`). Los nombres de funciones son seguidas por paréntesis (por ejemplo, `bookdown::render_book()`). El operador doble dos puntos (`::`) significa acceder a un objeto desde un paquete.
+
+## Agradecimientos {-}
+
+En primer lugar me gustaría dar las gracias a mi empleador, RStudio, por darme la oportunidad de trabajar en este emocionante proyecto. Tenía la esperanza de trabajar en él cuando vi por primera vez el proyecto GitBook en 2013, ya que de inmediato me di cuenta que era un estilo hermoso de libro y había mucha más potencia que podríamos agregarle, a juzgar por mi experiencia de escribir el libro sobre **knitr** [@xie2015] y la lectura de otros libros. R Markdown se convirtió en un proyecto maduro dos años después, y por suerte, **bookdown** se convirtió en mi trabajo oficial a finales de 2015. No hay muchas cosas en el mundo mejores que el hecho de que su trabajo pase a ser su afición (o viceversa). Estoy totalmente complacido de jugar un poco con bibliotecas de JavaScript, paquetes de LaTeX, y un sinfín de expresiones regulares en R. Honestamente también debo agradecer a StackOverflow (http://stackoverflow.com), y creo que todos ustedes saben [lo que quiero decir] (http://bit.ly/2cWbiAp), si alguna vez han escrito algún código de programa.
+
+Este proyecto es, sin duda, no solo el esfuerzo de una sola persona. Varios colegas en RStudio me han ayudado a lo largo del camino. Hadley Wickham proporcionó una enorme cantidad de información durante el desarrollo de **bookdown**, mientras trabajaba en su libro "R for Data Science" con Garrett Grolemund. JJ Allaire y Jonathan McPherson proporcionaron una gran cantidad de ayuda técnica directamente al paquete, así como apoyo en el IDE RStudio. Jeff Allen, Chaita Chaudhari, y el equipo de RStudio Connect han mantenido el sitio web https://bookdown.org. Robby Shaver diseñó una imagen de portada bonita para este libro. Tareef Kawaf hizo todo lo posible para ayudarme a crecer como un ingeniero de software profesional. Es una bendición trabajar en esta empresa con personas entusiastas e inteligentes. Recuerdo que una vez le dije a Jonathan "Hey, me encontré con un problema en el almacenamiento en caché de HTML widgets y finalmente me di cuenta de una posible solución", y Jonathan agarró su cerveza, "yo ya lo resolví" "Oh, bien, muy bien."
+
+También he recibido un montón de comentarios de los autores de libros fuera de RStudio, incluyendo Jan de Leeuw, Jenny Bryan, Dean Attali, Rafael Irizarry, Michael Love, Roger Peng, Andrew Clark, etc. Algunos usuarios también contribuyeron con código para el proyecto y ayudaron a revisar el libro. Aquí está una lista de todos los contribuyentes: https://github.com/rstudio/bookdown/graphs/contributors. Se siente bien cuando uno inventa una herramienta y se da cuenta que también es el beneficiario de su propia herramienta. Como alguien que ama el modelo de solicitud de extracción de GitHub, deseaba que los lectores no tuvieran que enviarme un correo electrónico para mencionar que había un error tipográfico o un error evidente en mi libro, sino que sólo pudiera arreglarse a través de una solicitud de extracción. Esto fue posible en **bookdown**. Se puede ver el número de solicitudes de extracción de los errores tipográficos que he fusionado: https://github.com/rstudio/bookdown/pulls Es bueno tener tantos correctores ortográficos humanos. No es que no sepa cómo usar un verdadero corrector ortográfico, pero no quiero hacer esto antes de que el libro esté terminado, y el malévolo Yihui también quiere dejar algunas tareas sencillas para los lectores e involucrarlos en la mejora del libro.
+
+El paquete **bookdown** no sería posible sin un par de paquetes de software de código abierto. En particular, Pandoc, GitBook, jQuery, y los paquetes de R dependientes, por no hablar de R en sí. Doy las gracias a los desarrolladores de estos paquetes.
+
+Me mudé a Omaha, Nebraska en 2015, y disfruté de un año en apartamentos Steeplechase, donde viví con comodidad para desarrollar el paquete **bookdown**, gracias al personal del condominio que fue muy amable y servicial. Luego me encontré con un agente inmobiliario profesional y muy listo, Kevin Schaben, que encontró una casa fabulosa para nosotros en un período de tiempo sorprendentemente corto, y terminé este libro en nuestra nueva casa.
+
+John Kimmel, el editor de Chapman & Hall/CRC, me ayudó a publicar mi primer libro. Es un placer trabajar con él de nuevo. Él generosamente accedió a que me quedara con la versión en línea de este libro de forma gratuita, por lo que puede seguirlo para actualizar después de que se imprima y publique (es decir, usted no tiene que esperar años para la segunda edición para corregir errores e introducir nuevas caracteristicas). Me gustaría poder ser lo más abierto de mente posible como él cuando tenga su edad. Shashi Kumar resolvió algunos de mis problemas técnicos con la clase del editor de LaTeX (`krantz.cls`) cuando yo estaba tratando de integrarlo con **bookdown**. También aprecio los comentarios muy útiles de los revisores Jan de Leeuw, Karl Broma  n, Brooke Anderson, Michael Grayling, Daniel Kaplan y Max Kuhn. 
+
+Por último quiero agradecer a mi familia, en especial, a mi esposa e hijo, por su apoyo. Él, de un año de edad, ha descubierto que el monitor se enciende cuando toca el teclado, así que en ocasiones simplemente gatea en mi oficina y presiona al azar el teclado. No estoy seguro de si esto cuenta como su contribución al libro ... \@)!%)Y\@\*
+
+```{block2, type='flushright', html.tag='p'}
+Yihui Xie  
+Elkhorn, Nebraska
+```
+
+
+
+

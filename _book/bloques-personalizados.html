@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook." />
+  <meta name="github-repo" content="mamaciasq/libro_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
+  
+  <meta name="twitter:description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook." />
+  <meta name="twitter:image" content="images/cover.png" />
+
+<meta name="author" content="Yihui Xie">
+
+
+<meta name="date" content="2017-02-10">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="referencias-cruzadas.html">
+<link rel="next" href="citas.html">
+
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/datatables-binding/datatables.js"></script>
+<link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">bookdown: Escritura de libros con R Markdown</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a><ul>
+<li class="chapter" data-level="" data-path="por-que-leer-este-libro.html"><a href="por-que-leer-este-libro.html"><i class="fa fa-check"></i>¿Por qué leer este libro?</a></li>
+<li class="chapter" data-level="" data-path="estructura-del-libro.html"><a href="estructura-del-libro.html"><i class="fa fa-check"></i>Estructura del libro</a></li>
+<li class="chapter" data-level="" data-path="informacion-acerca-del-software-y-convenciones.html"><a href="informacion-acerca-del-software-y-convenciones.html"><i class="fa fa-check"></i>Información acerca del software y convenciones</a></li>
+<li class="chapter" data-level="" data-path="agradecimientos.html"><a href="agradecimientos.html"><i class="fa fa-check"></i>Agradecimientos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="acerca-del-autor.html"><a href="acerca-del-autor.html"><i class="fa fa-check"></i>Acerca del Autor</a></li>
+<li class="chapter" data-level="1" data-path="introduccion.html"><a href="introduccion.html"><i class="fa fa-check"></i><b>1</b> Introducción</a><ul>
+<li class="chapter" data-level="1.1" data-path="motivacion.html"><a href="motivacion.html"><i class="fa fa-check"></i><b>1.1</b> Motivación</a></li>
+<li class="chapter" data-level="1.2" data-path="comenzando.html"><a href="comenzando.html"><i class="fa fa-check"></i><b>1.2</b> Comenzando</a></li>
+<li class="chapter" data-level="1.3" data-path="uso.html"><a href="uso.html"><i class="fa fa-check"></i><b>1.3</b> Uso</a></li>
+<li class="chapter" data-level="1.4" data-path="new-session.html"><a href="new-session.html"><i class="fa fa-check"></i><b>1.4</b> Dos enfoques de representación</a></li>
+<li class="chapter" data-level="1.5" data-path="algunos-tips.html"><a href="algunos-tips.html"><i class="fa fa-check"></i><b>1.5</b> Algunos tips</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="componentes.html"><a href="componentes.html"><i class="fa fa-check"></i><b>2</b> Componentes</a><ul>
+<li class="chapter" data-level="2.1" data-path="sintaxis-de-markdown.html"><a href="sintaxis-de-markdown.html"><i class="fa fa-check"></i><b>2.1</b> Sintaxis de Markdown</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="sintaxis-de-markdown.html"><a href="sintaxis-de-markdown.html#formateo-en-linea"><i class="fa fa-check"></i><b>2.1.1</b> Formateo en línea</a></li>
+<li class="chapter" data-level="2.1.2" data-path="sintaxis-de-markdown.html"><a href="sintaxis-de-markdown.html#elementos-de-nivel-bloque"><i class="fa fa-check"></i><b>2.1.2</b> Elementos de nivel bloque</a></li>
+<li class="chapter" data-level="2.1.3" data-path="sintaxis-de-markdown.html"><a href="sintaxis-de-markdown.html#expresiones-matematicas-en-latex"><i class="fa fa-check"></i><b>2.1.3</b> Expresiones matemáticas en LaTeX</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="extensiones-de-markdown-en-bookdown.html"><a href="extensiones-de-markdown-en-bookdown.html"><i class="fa fa-check"></i><b>2.2</b> Extensiones de Markdown en bookdown</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="extensiones-de-markdown-en-bookdown.html"><a href="extensiones-de-markdown-en-bookdown.html#ecuaciones"><i class="fa fa-check"></i><b>2.2.1</b> Numerar y referenciar ecuaciones</a></li>
+<li class="chapter" data-level="2.2.2" data-path="extensiones-de-markdown-en-bookdown.html"><a href="extensiones-de-markdown-en-bookdown.html#teoremas"><i class="fa fa-check"></i><b>2.2.2</b> Teoremas y demostraciones</a></li>
+<li class="chapter" data-level="2.2.3" data-path="extensiones-de-markdown-en-bookdown.html"><a href="extensiones-de-markdown-en-bookdown.html#encabezados-especiales"><i class="fa fa-check"></i><b>2.2.3</b> Encabezados especiales</a></li>
+<li class="chapter" data-level="2.2.4" data-path="extensiones-de-markdown-en-bookdown.html"><a href="extensiones-de-markdown-en-bookdown.html#referencias-de-textos"><i class="fa fa-check"></i><b>2.2.4</b> Referencias de textos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="codigo-en-r.html"><a href="codigo-en-r.html"><i class="fa fa-check"></i><b>2.3</b> Código en R</a></li>
+<li class="chapter" data-level="2.4" data-path="figuras.html"><a href="figuras.html"><i class="fa fa-check"></i><b>2.4</b> Figuras</a></li>
+<li class="chapter" data-level="2.5" data-path="tablas.html"><a href="tablas.html"><i class="fa fa-check"></i><b>2.5</b> Tablas</a></li>
+<li class="chapter" data-level="2.6" data-path="referencias-cruzadas.html"><a href="referencias-cruzadas.html"><i class="fa fa-check"></i><b>2.6</b> Referencias cruzadas</a></li>
+<li class="chapter" data-level="2.7" data-path="bloques-personalizados.html"><a href="bloques-personalizados.html"><i class="fa fa-check"></i><b>2.7</b> Bloques personalizados</a></li>
+<li class="chapter" data-level="2.8" data-path="citas.html"><a href="citas.html"><i class="fa fa-check"></i><b>2.8</b> Citas</a></li>
+<li class="chapter" data-level="2.9" data-path="latex-index.html"><a href="latex-index.html"><i class="fa fa-check"></i><b>2.9</b> Índices</a></li>
+<li class="chapter" data-level="2.10" data-path="html-widgets.html"><a href="html-widgets.html"><i class="fa fa-check"></i><b>2.10</b> HTML Widgets</a></li>
+<li class="chapter" data-level="2.11" data-path="paginas-web-y-aplicaciones-shiny.html"><a href="paginas-web-y-aplicaciones-shiny.html"><i class="fa fa-check"></i><b>2.11</b> Páginas web y aplicaciones Shiny</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="formatos-de-salida.html"><a href="formatos-de-salida.html"><i class="fa fa-check"></i><b>3</b> Formatos de salida</a><ul>
+<li class="chapter" data-level="3.1" data-path="html.html"><a href="html.html"><i class="fa fa-check"></i><b>3.1</b> HTML</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="html.html"><a href="html.html#estilo-gitbook"><i class="fa fa-check"></i><b>3.1.1</b> El estilo GitBook</a></li>
+<li class="chapter" data-level="3.1.2" data-path="html.html"><a href="html.html#el-estilo-bootstrap"><i class="fa fa-check"></i><b>3.1.2</b> El estilo Bootstrap</a></li>
+<li class="chapter" data-level="3.1.3" data-path="html.html"><a href="html.html#el-estilo-tufte"><i class="fa fa-check"></i><b>3.1.3</b> El estilo Tufte</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="latexpdf.html"><a href="latexpdf.html"><i class="fa fa-check"></i><b>3.2</b> LaTeX/PDF</a></li>
+<li class="chapter" data-level="3.3" data-path="e-books.html"><a href="e-books.html"><i class="fa fa-check"></i><b>3.3</b> E-Books</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="e-books.html"><a href="e-books.html#epub"><i class="fa fa-check"></i><b>3.3.1</b> EPUB</a></li>
+<li class="chapter" data-level="3.3.2" data-path="e-books.html"><a href="e-books.html#mobi"><i class="fa fa-check"></i><b>3.3.2</b> MOBI</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="un-documento-sencillo.html"><a href="un-documento-sencillo.html"><i class="fa fa-check"></i><b>3.4</b> Un documento sencillo</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="personalizacion.html"><a href="personalizacion.html"><i class="fa fa-check"></i><b>4</b> Personalización</a><ul>
+<li class="chapter" data-level="4.1" data-path="opciones-yaml.html"><a href="opciones-yaml.html"><i class="fa fa-check"></i><b>4.1</b> Opciones YAML</a></li>
+<li class="chapter" data-level="4.2" data-path="temas.html"><a href="temas.html"><i class="fa fa-check"></i><b>4.2</b> Temas</a></li>
+<li class="chapter" data-level="4.3" data-path="plantillas.html"><a href="plantillas.html"><i class="fa fa-check"></i><b>4.3</b> Plantillas</a></li>
+<li class="chapter" data-level="4.4" data-path="configuracion.html"><a href="configuracion.html"><i class="fa fa-check"></i><b>4.4</b> Configuración</a></li>
+<li class="chapter" data-level="4.5" data-path="internacionalizacion.html"><a href="internacionalizacion.html"><i class="fa fa-check"></i><b>4.5</b> Internacionalización</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="edicion.html"><a href="edicion.html"><i class="fa fa-check"></i><b>5</b> Edición</a><ul>
+<li class="chapter" data-level="5.1" data-path="construyendo-el-libro.html"><a href="construyendo-el-libro.html"><i class="fa fa-check"></i><b>5.1</b> Construyendo el libro</a></li>
+<li class="chapter" data-level="5.2" data-path="previsualizar-un-capitulo.html"><a href="previsualizar-un-capitulo.html"><i class="fa fa-check"></i><b>5.2</b> Previsualizar un capítulo</a></li>
+<li class="chapter" data-level="5.3" data-path="presentar-el-libro.html"><a href="presentar-el-libro.html"><i class="fa fa-check"></i><b>5.3</b> Presentar el libro</a></li>
+<li class="chapter" data-level="5.4" data-path="ide-rstudio.html"><a href="ide-rstudio.html"><i class="fa fa-check"></i><b>5.4</b> IDE RStudio</a></li>
+<li class="chapter" data-level="5.5" data-path="colaboracion.html"><a href="colaboracion.html"><i class="fa fa-check"></i><b>5.5</b> Colaboración</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="publicacion.html"><a href="publicacion.html"><i class="fa fa-check"></i><b>6</b> Publicación</a><ul>
+<li class="chapter" data-level="6.1" data-path="rstudio-connect.html"><a href="rstudio-connect.html"><i class="fa fa-check"></i><b>6.1</b> RStudio Connect</a></li>
+<li class="chapter" data-level="6.2" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>6.2</b> GitHub</a></li>
+<li class="chapter" data-level="6.3" data-path="editores.html"><a href="editores.html"><i class="fa fa-check"></i><b>6.3</b> Editores</a></li>
+</ul></li>
+<li class="appendix"><span><b>Apéndice</b></span></li>
+<li class="chapter" data-level="A" data-path="herramientas-de-software.html"><a href="herramientas-de-software.html"><i class="fa fa-check"></i><b>A</b> Herramientas de Software</a><ul>
+<li class="chapter" data-level="A.1" data-path="r-y-sus-paquetes.html"><a href="r-y-sus-paquetes.html"><i class="fa fa-check"></i><b>A.1</b> R y sus paquetes</a></li>
+<li class="chapter" data-level="A.2" data-path="pandoc.html"><a href="pandoc.html"><i class="fa fa-check"></i><b>A.2</b> Pandoc</a></li>
+<li class="chapter" data-level="A.3" data-path="latex.html"><a href="latex.html"><i class="fa fa-check"></i><b>A.3</b> LaTeX</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="uso-de-software.html"><a href="uso-de-software.html"><i class="fa fa-check"></i><b>B</b> Uso de Software</a><ul>
+<li class="chapter" data-level="B.1" data-path="knitr.html"><a href="knitr.html"><i class="fa fa-check"></i><b>B.1</b> knitr</a></li>
+<li class="chapter" data-level="B.2" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>B.2</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="faq.html"><a href="faq.html"><i class="fa fa-check"></i><b>C</b> FAQ</a></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">bookdown: Escritura de libros y documentos técnicos con R Markdown</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bloques-personalizados" class="section level2">
+<h2><span class="header-section-number">2.7</span> Bloques personalizados</h2>
+<p>Puede generar bloques personalizados  utilizando el motor de <code>block</code> en <strong>knitr</strong> , es decir, la opción del chunk <code>engine = 'block'</code>, o la sintaxis más compacta <code>```{block}</code>. Este motor se debe utilizar en combinación con la opción del chunk <code>type</code>, que tiene una cadena de caracteres. Cuando se utiliza el motor de <code>block</code>, genera un <code>&lt;div&gt;</code> para envolver el contenido del chunk si el formato de salida es HTML, y un entorno de LaTeX si la salida es ésta. La opción <code>type</code> especifica la clase del <code>&lt;div&gt;</code> y el nombre del entorno de LaTeX. Por ejemplo, la salida HTML de este chunk</p>
+<pre><code>```{block, type=&#39;FOO&#39;}
+Some text for this block.
+```</code></pre>
+<p>sería:</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;FOO&quot;</span><span class="kw">&gt;</span>
+Some text for this block.
+<span class="kw">&lt;/div&gt;</span></code></pre></div>
+<p>y la salida en LaTeX sería:</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\begin{FOO}
+Some text for this block.
+\end{FOO}</code></pre></div>
+<p>Depende del autor del libro establecer cómo definir el estilo del bloque. Puede definir el estilo de <code>&lt;div&gt;</code> en CSS e incluirlo en la salida a través de la opción <code>includes</code> en los metadatos YAML. Del mismo modo, puede definir el entorno de LaTeX a través de <code>\newenvironment</code> e incluir la definición en la salida de LaTeX a través de la opción <code>includes</code>. Por ejemplo, podemos guardar el siguiente estilo en un archivo CSS, digamos, <code>style.css</code>:</p>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css">div<span class="fl">.FOO</span> <span class="kw">{</span>
+  <span class="kw">font-weight:</span> <span class="dt">bold</span><span class="kw">;</span>
+  <span class="kw">color:</span> <span class="dt">red</span><span class="kw">;</span>
+<span class="kw">}</span></code></pre></div>
+<p>Y los metadatos YAML del documento R Markdown pueden ser:</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
+<span class="fu">output:</span>
+  <span class="fu">bookdown:</span>:html_book:
+    <span class="fu">includes:</span>
+      <span class="fu">in_header:</span> style.css
+<span class="ot">---</span></code></pre></div>
+<p>Hemos definido algunos tipos de bloques para que este libro muestre notas, consejos y advertencias, etc. A continuación se presentan algunos ejemplos:</p>
+
+<div class="rmdnote">
+R es software libre y viene con ABSOLUTAMENTE NINGUNA GARANTÍA. Le invitamos a redistribuirlo bajo los términos de la GNU General Public License versiones 2 o 3. Para más información sobre estos asuntos, <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.
+</div>
+<p></p>
+
+<div class="rmdcaution">
+R es software libre y viene con ABSOLUTAMENTE NINGUNA GARANTÍA. Le invitamos a redistribuirlo bajo los términos de la GNU General Public License versiones 2 o 3. Para más información sobre estos asuntos, <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.
+</div>
+<p></p>
+
+<div class="rmdimportant">
+R es software libre y viene con ABSOLUTAMENTE NINGUNA GARANTÍA. Le invitamos a redistribuirlo bajo los términos de la GNU General Public License versiones 2 o 3. Para más información sobre estos asuntos, <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.
+</div>
+<p></p>
+
+<div class="rmdtip">
+R es software libre y viene con ABSOLUTAMENTE NINGUNA GARANTÍA. Le invitamos a redistribuirlo bajo los términos de la GNU General Public License versiones 2 o 3. Para más información sobre estos asuntos, <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.
+</div>
+<p></p>
+
+<div class="rmdwarning">
+R es software libre y viene con ABSOLUTAMENTE NINGUNA GARANTÍA. Le invitamos a redistribuirlo bajo los términos de la GNU General Public License versiones 2 o 3. Para más información sobre estos asuntos, <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.
+</div>
+<p></p>
+<p>El motor <strong>knitr</strong> <code>block</code> fue diseñado para mostrar contenido simple (normalmente un párrafo de texto sin formato). Puede utilizar una sintaxis de formato simple, como hacer que ciertas palabras sean negritas o cursivas, pero la sintaxis más avanzada, como las citas y las referencias cruzadas, no funcionarán. Sin embargo, hay un motor alternativo denominado <code>block2</code> que soporta la sintaxis arbitraria de Markdown, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```{block2, type=&#39;FOO&#39;}
+Some text for this block [@citation-key].
+
+- <span class="fl">a list item</span>
+<span class="fl">- another item</span>
+
+<span class="fl">More text.</span>
+<span class="fl">```</span></code></pre></div>
+<p>El motor <code>block2</code> también debería ser más rápido que el motor <code>block</code> si tiene muchos bloques personalizados en el documento, pero su implementación se basó en <a href="https://github.com/jgm/pandoc/issues/2453">un hack,</a> por lo que no estamos 100% seguros de si siempre va a funcionar en el futuro. No hemos visto problemas con Pandoc v1.17.2 todavía.</p>
+<p>Una advertencia más para el motor <code>block2</code>: si el último elemento del bloque no es un párrafo ordinario, debe dejar una línea en blanco al final, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```{block2, type=&#39;FOO&#39;}
+Some text for this block [@citation-key].
+
+- <span class="fl">a list item</span>
+<span class="fl">- another item</span>
+<span class="fl">- end the list with a blank line</span>
+
+<span class="fl">```</span></code></pre></div>
+<p>El teorema y los entornos de prueba en la sección <a href="extensiones-de-markdown-en-bookdown.html#teoremas">2.2.2</a> se implementan en realidad a través del motor <code>block2</code>.</p>
+<p>Para todos los bloques personalizados basados en el motor <code>block</code> o <code>block2</code>, hay una opción de bloqueo <code>echo</code> que puede usar para mostrar (<code>echo = TRUE</code>) u ocultar (<code>echo = FALSE</code>) los bloques.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="referencias-cruzadas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="citas.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mamaciasq/libro_bookdown02-components.Rmd",
+"text": "Edit"
+},
+"download": ["bookdown.pdf", "bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

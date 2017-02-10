@@ -1,0 +1,226 @@
+# Publicación
+
+A medida que desarrolla el libro, puede incluir un borrador del libro públicamente para obtener retroalimentación temprana de los lectores, por ejemplo, publicarla en un sitio web. Después de terminar de escribir el libro, es necesario pensar acerca de las opciones para publicar formalmente como copias impresas o libros electrónicos.
+
+## RStudio Connect
+
+En teoría, se puede compilar el libro por sí mismo y publicar la salida de cualquier lugar que desee. Por ejemplo, puede alojar los archivos HTML en su propio servidor web. Se ha proporcionado una función `publish_book()` en **bookdown**  para que sea muy simple cargar su libro en https://bookdown.org, que es un sitio web proporcionado por RStudio para alojar sus libros de forma gratuita. \index{bookdown.org} Este sitio web está construido con base en ["RStudio Connect"](https://www.rstudio.com/products/connect/) \index{RStudio Connect}, un producto de RStudio que le permite implementar una variedad de aplicaciones relacionadas con R hacia un servidor, incluyendo documentos R Markdown, aplicaciones Shiny, gráficos de R, etc.
+
+No tiene que saber mucho sobre RStudio Connect para publicar su libro en bookdown.org. Básicamente, sólo tiene que registrarse en https://bookdown.org/connect/, y la primera vez que intente ejecutar `bookdown::publish_book()`\index{bookdown::publish\_book()}, se le pedirá autorizar **bookdown**  publicar en su cuenta bookdown.org. En el futuro, sólo tiene que llamar `publish_book()` de nuevo y **bookdown**  ya no pedirá nada.
+
+```{r publish-book-usage, eval=FALSE, code=formatR::usage(bookdown::publish_book, output=FALSE)}
+```
+
+El único argumento de `publish_book()` que es posible que desee tocar es `render`. Este determina si desea procesar el libro antes de publicar. Si ha ejecutado `render_book()` antes, no es necesario cambiar este argumento, de lo contrario puede configurarlo para que quede `'local'`:
+
+```{r eval=FALSE}
+bookdown::publish_book(render = 'local')
+````
+
+Si ha establecido su propio servidor RStudio Connect, sin duda puede publicar el libro a ese servidor en lugar de en bookdown.org.
+
+
+## GitHub
+
+Puede alojar su libro en GitHub \index{GitHub}  de forma gratuita a través de GitHub Pages (https://pages.github.com). GitHub sopporta Jekyll (http://jekyllrb.com), un constructor de sitios web estático, para construir un sitio web a partir de archivos Markdown. Ese puede ser el caso de uso más común de GitHub pages, pero GitHub también es compatible con archivos HTML estáticos arbitrarios, por ende puede albergar los archivos de salida HTML de su libro en GitHub.
+
+Un enfoque para publicar su libro como un sitio de GitHub Pages de una carpeta `/docs` en su rama `master` como se describe en [GitHub Ayuda] (http://bit.ly/2cvloKV). En primer lugar establecer el directorio de salida de su libro para que sea `/docs` añadiendo la línea `output_dir: "docs"` al archivo de configuración `_bookdown.yml`. A continuación, después de empujar los cambios en GitHub ir a la configuración de su repositorio y en "GitHub Pages" cambiar la "Fuente" por "rama maestra / carpeta de documentos".
+
+Un enfoque alternativo es crear una rama `gh-pages` en su repositorio, construir el libro, poner la salida HTML (incluyendo todos los recursos externos, como imágenes, CSS y archivos JavaScript) en esta rama, y empujar la rama al repositorio remoto. Si el repositorio de libro no tiene la rama `gh-pages`, puede utilizar los siguientes comandos para crear una:
+
+
+```bash
+# assume you have initialized the git repository,
+# and are under the directory of the book repository now
+
+# create a branch named gh-pages and clean up everything
+git checkout --orphan gh-pages
+git rm -rf .
+
+# create a hidden file .nojekyll
+touch .nojekyll
+git add .nojekyll
+
+git commit -m"Initial commit"
+git push origin gh-pages
+```
+
+El archivo oculto `.nojekyll` le dice a GitHub que su sitio web no debe ser construido a través de Jekyll, ya que la salida **bookdown** HTML ya es un sitio web independiente. Si está en Windows, puede que no tenga el comando `touch`, y sólo se pueda crear el archivo en R usando `file.create('.nojekyll') `.
+
+Después de haber configurado GIT, el resto del trabajo puede ser automatizado a través de una secuencia de comandos (Shell, R o Makefile, dependiendo de su preferencia). Básicamente, se compila el libro a HTML, a continuación, ejecuta los comandos git para empujar los archivos en GitHub, pero es probable que no quiera hacer esto una y otra vez de forma manual y localmente. Puede ser muy útil para automatizar el proceso de publicación por completo en la nube, por lo que una vez que se haya configurado correctamente, todo lo que tiene que hacer ahora es escribir el libro y empujar los archivos de origen Rmd a GitHub, y su libro siempre será construido de forma automática y publicado hacia el servidor.
+
+Un servicio que se puede utilizar es Travis CI (https://travis-ci.org). \index{Travis CI}.  Es libre para repositorios públicos en GitHub, y fue diseñado para la integración continua (CI) de los paquetes de software. Travis CI se puede conectar a GitHub en el sentido de que cada vez que se empuja a GitHub, Travis puede ser activado para ejecutar ciertos comandos/scripts en la versión más reciente de su repositorio ^[Debe autorizar el servicio Travis CI para su repositorio en GitHub primero . Ver https://docs.travis-ci.com/user/getting-started/ de cómo empezar con Travis CI.]. Estos comandos se especifican en un archivo YAML llamado `.travis.yml` en el directorio raíz de su repositorio, y están por lo general con el propósito de pruebas de software, pero en realidad son bastante abiertos, lo que significa que puede ejecutar arbitrariamente programas en una máquina Travis (virtual). Esto significa que sin duda puede ejecutar sus propios scripts para construir su libro sobre Travis. _Nota_: Travis sólo es compatible con Ubuntu y Mac OS X en este momento, por lo que debe tener algunos conocimientos básicos acerca de los comandos de Linux/Unix.
+
+La siguiente pregunta es, cómo publicar el libro construido sobre Travis a GitHub? Básicamente tiene que conceder acceso de escritura a Travis a su repositorio GitHub. Esta autorización se puede hacer a través de varias maneras, y la más fácil a los principiantes puede ser una señal de acceso personal. A continuación se presentan algunos pasos que puede seguir:
+
+1. Crear un [token de acceso personal](http://bit.ly/2cEBYWB) para su cuenta en GitHub (asegúrese de que sea posible el funcionamiento "repo", por lo que el uso de esta muestra permitirá escrito a sus repositorios de GitHub);
+1. Cifrarlo en la variable de entorno `GITHUB_PAT` a través de la línea de comandos `travis encrypt` y almacenarlo en `.travis.yml`,
+por ejemplo `travis encrypt GITHUB_PAT=TOKEN`. Si usted no sabe cómo instalar o utilizar la herramienta de línea de comandos Travis, simplemente guarde esta variable de entorno a través de https://travis-ci.org/user/repo/settings donde `user` es su ID de GitHub, y `repo` es el nombre del repositorio;
+1. Puede clonar esta rama `gh-pages` en Travis utilizando el token de GitHub, añadir los archivos HTML de salida de R Markdown (no se olvide de añadir figuras y archivos de estilo CSS, también), y empujar al repositorio remoto.
+
+Suponga que usted está en la rama `master` en este momento (donde pone los archivos de origen Rmd), y ha compilado el libro en el directorio `_book`. Lo que puede hacer al lado de Travis es:
+
+```bash
+# configure your name and email if you have not done so
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+# clone the repository to the book-output directory
+git clone -b gh-pages \
+  https://${GITHUB_PAT}@github.com/${TRAVIS_REPO_SLUG}.git \
+  book-output
+cd book-output
+cp -r ../_book/* ./
+git add --all *
+git commit -m"Update the book"
+git push origin gh-pages
+```
+
+El nombre de la variable `GITHUB_PAT` y el nombre del directorio `book-output` son arbitrarios, y se puede usar cualquier nombre que desee, siempre y cuando los nombres no entren en conflicto con los nombres de variables de entorno existentes o nombres de directorio. Esta secuencia de comandos, junto con la escritura de la estructura mencionamos en la sección \@ref(construir-el-libro), se puede poner en la rama `master` como scripts de shell, por ejemplo, puede nombrarlos a ellos como `_build.sh` y `_deploy.sh`. Luego, su `.travis.yml` puede tener este aspecto:
+
+```yaml
+language: r
+
+env:
+  global:
+    - secure: A_LONG_ENCRYPTED_STRING
+
+before_script:
+  - chmod +x ./_build.sh
+  - chmod +x ./_deploy.sh
+
+script:
+  - ./_build.sh
+  - ./_deploy.sh
+```
+
+La clave `language` le dice a Travis que utilice una máquina virtual que ha instalado R. La clave `secure` es el token de acceso personal encriptada. Si ya ha guardado la variable `GITHUB_PAT` utilizando la interfaz Web Travis en lugar de la herramienta de línea de comandos `travis encrypt`, puede dejar de lado esta clave.
+
+Como este servicio Travis es principalmente para el control de paquetes en R, también se necesita un (falso) archivo de `DESCRIPTION` como si el repositorio de libro fuera un paquete R. La única cosa en este archivo que realmente importa es la especificación de las dependencias. Todas las dependencias se instalarán a través deL paquete **devtools**. Si una dependencia está en CRAN o BioConductor, sólo tiene que incluirla en el campo `Imports` del archivo `DESCRIPTION`. Si está en GitHub, puede utilizar el campo `Remotes` para listar el nombre de su repositorio. A continuación se muestra un ejemplo:
+
+
+```dcf
+Package: placeholder
+Title: Does not matter.
+Version: 0.0.1
+Imports: bookdown, ggplot2
+Remotes: rstudio/bookdown
+```
+
+Si se utiliza la [infraestructura basada en contenedores](https://docs.travis-ci.com/user/workers/container-based-infrastructure/) de Travis, puede habilitar el almacenamiento en caché mediante el uso de `sudo:false` en `.travis.yml`. Normalmente debería almacenar en caché al menos dos tipos de directorios: el directorio de la figura (por ejemplo, `_main_files`) y el directorio de caché (por ejemplo,` _main_cache`). Estos nombres de los directorios también pueden ser diferentes si se ha especificado las opciones del chunk **knitr**  `` `fig.path` y `cache.path`, pero se recomienda encarecidamente que no cambie estas opciones. Los directorios de las figuras y de caché se almacenan en el directorio `_bookdown_files` del directorio raíz del libro. Un archivo `.travis.yml` que ha permitido el almacenamiento en caché de la figura **knitr** los y directorios de caché pueden tener configuraciones adicionales` `sudo` y `cache` como este:
+
+```yaml
+sudo: false
+
+cache:
+  packages: yes
+  directories:
+    - $TRAVIS_BUILD_DIR/_bookdown_files
+```
+
+Si el libro consume mucho tiempo para construir, puede utilizar las configuraciones anteriores de Travis para ahorrar tiempo. Note que `paquetes: yes` significa que los paquetes instalados en R Travis también están almacenados en caché.
+
+Todas las secuencias de comandos y configuraciones anteriores se pueden encontrar en el repositorio `bookdown-demo`: https://github.com/rstudio/bookdown-demo/. Si los copia a su propio repositorio, por favor recuerde que debe cambiar la tecla `secure` en `.travis.yml` usando su propia variable de cifrado `GITHUB_PAT`.
+
+GitHub y Travis CI ciertamente no son las únicas opciones para construir y publicar su libro. Usted es libre para almacenar y publicar el libro en su propio servidor.
+
+
+## Editores
+
+Además de publicar su libro en línea, sin duda puede considerar la publicación con un editor index\{publisher}. Por ejemplo, este libro fue publicado con Chapman & Hall/CRC, y también hay una versión en línea gratis en https://bookdown.org/yihui/bookdown/ (con un acuerdo con la editorial). Otra opción que puede considerar es la auto-publicación (https://en.wikipedia.org/wiki/Self-publishing) si no desea trabajar con una editorial establecida.
+
+Será mucho más fácil publicar un libro escrito con **bookdown**  si el editor que elija es compatible con LaTeX. \index{LaTeX} Por ejemplo, Chapman & Hall proporciona una clase de LaTeX llamado `krantz.cls`, y Springer ofrece` svmono.cls`. Para aplicar estas clases de látex para sus libros en PDF, sólo establezca `documentclass` en los metadatos de YAML en el `index.Rmd` al nombre del archivo de clase (sin la extensión `.cls`).
+
+La clase LaTeX es el escenario más importante de los metadatos YAML. Controla el estilo general del libro PDF. A menudo hay otros ajustes que desea modificar, y se mostrarán algunos detalles sobre este libro a continuación.
+
+Los metadatos YAML de este libro contiene los siguientes ajustes:
+
+```yaml
+documentclass: krantz
+lot: yes
+lof: yes
+fontsize: 12pt
+monofont: "Source Code Pro"
+monofontoptions: "Scale=0.7"
+```
+
+El campo `lote: yes` significa que queremos la "Lista de tablas", y de manera similar, `lof` significa "Lista de figuras". El tamaño de la fuente base es `12pt`, y usamos" [Source Code Pro](https://www.fontsquirrel.com/fonts/source-code-pro) "como el tipo de letra monoespaciada (ancho fijo), la cual es aplicada a todo el código del programa en este libro.
+
+En el preámbulo LaTeX (Sección \@ref(opciones-yaml)), se tienen unos cuantos ajustes. En primer lugar, se propuso la principal fuente \index{font} como "[Alegreya](https://www.fontsquirrel.com/fonts/alegreya)", y dado que esta fuente no tiene la función  <span style="font-variant:small-caps;">Small Capitals</span>, se utilizó la fuente "Alegreya SC".
+
+
+```latex
+\setmainfont[
+  UprightFeatures={SmallCapsFont=AlegreyaSC-Regular}
+]{Alegreya}
+```
+
+Los siguientes comandos hacen entornos flotantes \index{entorno flotante} con menos probabilidades de flotar al permitirles ocupar grandes fracciones de páginas sin flotar.
+
+```latex
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+```
+
+Como `krantz.cls` proporcionar un entorno` VF` para las citas, hay que redefinir el entorno `quote` estándar a `VF`. Se puede ver su estilo en la sección \@ref(sintaxis-de-markdown).
+
+```latex
+\renewenvironment{quote}{\begin{VF}}{\end{VF}}
+```
+
+Entonces volvemos a definir hipervínculos como notas al pie, porque cuando el libro está impreso en papel, los lectores no son capaces de hacer clic en algunos enlaces de texto. Las notas al pie les dirán que los enlaces son reales.
+
+```latex
+\let\oldhref\href
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+```
+
+También tenemos algunos ajustes para el formato `bookdown:: pdf_book` en `_output.yml`\index{output.yml}:
+
+
+```yaml
+bookdown::pdf_book:
+  includes:
+    in_header: latex/preamble.tex
+    before_body: latex/before_body.tex
+    after_body: latex/after_body.tex
+  keep_tex: yes
+  dev: "cairo_pdf"
+  latex_engine: xelatex
+  citation_package: natbib
+  template: null
+  pandoc_args: "--chapters"
+  toc_unnumbered: no
+  toc_appendix: yes
+  quote_footer: ["\\VA{", "}{}"]
+```
+
+Todos los ajustes de preámbulo que hemos mencionado anteriormente están en el archivo `latex/preamble.tex`. En `latex/before_body.tex`, insertamos algunas páginas en blanco que requeridas por el editor, escribimos la página dedicación, y especificamos que el asunto delante comienza:
+
+```latex
+\frontmatter
+```
+
+Antes del primer capítulo del libro, insertamos
+
+```latex
+\mainmatter
+```
+
+por lo que el látex sabe cambiar el estilo de numeración de las páginas de los números romanos (por el asunto frontal) para números arábigos (para el cuerpo del libro).
+
+Imprimimos el índice en `latex/after_body.tex` (Sección \@ref(latex-index)).
+
+El dispositivo gráfico (`dev`) para guardar gráficos se establece en `cairo_pdf` de manera que las fuentes están incrustadas en los gráficos, ya que el dispositivo predeterminado `PDF` no incrusta fuentes. Su corrector de estilo es probable que requiera incrustar todas las fuentes utilizadas en el PDF, por lo que el libro se puede imprimir exactamente como lo que se ve, de lo contrario algunas fuentes pueden ser sustituidos y el tipo de letra puede ser impredecible.
+
+El campo `quote_footer` aseguraba que los pies de página de la cita estaban alineados a la derecha: el comando LaTeX `\{VA}` fuera proporcionado por `krantz.cls` para incluir el pie de cita.
+
+La opción `highlight_bw` se estableció en true para que los colores en los bloques de código resaltados por sintaxis se convirtieran en escala de grises, ya que este libro se imprimirá en blanco y negro.
+
+El libro fue compilado a PDF a través de `xelatex` para que sea más fácil para nosotros usar fuentes personalizadas.
+
+Todos los ajustes anteriores, excepto el entorno `VF` y el comando `\{VA}` se pueden aplicar a cualquier otra clase de documentos LaTeX.
+
+En caso de que quiera trabajar con Chapman & Hall, es posible comenzar con la copia de `krantz.cls` en nuestro repositorio (https://github.com/rstudio/bookdown/tree/master/inst/examples) en lugar de la copia que recibe de su editor. Hemos trabajado con la recepción de LaTeX ayudan a fijar un buen número de problemas con esta clase de LaTeX, así que espero que funcione bien para su libro si utiliza **bookdown** 

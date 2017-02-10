@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="bookdown: Escritura de libros con R Markdown" />
+<meta property="og:type" content="book" />
+
+<meta property="og:image" content="images/cover.png" />
+<meta property="og:description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook." />
+<meta name="github-repo" content="rstudio/bookdown" />
+
+<meta name="author" content="Yihui Xie" />
+
+<meta name="date" content="2017-02-03" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
+
+<title>bookdown: Escritura de libros con R Markdown</title>
+
+<script src="libs/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap/shim/respond.min.js"></script>
+<script src="libs/navigation/tabsets.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/datatables-binding/datatables.js"></script>
+<link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="has-sub"><a href="index.html#prefacio">Prefacio</a><ul>
+<li><a href="por-que-leer-este-libro.html#por-que-leer-este-libro">¿Por qué leer este libro?</a></li>
+<li><a href="informacion-acerca-del-software-y-convenciones.html#informacion-acerca-del-software-y-convenciones">Información acerca del software y convenciones</a></li>
+<li><a href="agradecimientos.html#agradecimientos">Agradecimientos</a></li>
+</ul></li>
+<li><a href="acerca-del-autor.html#acerca-del-autor">Acerca del Autor</a></li>
+<li class="has-sub"><a href="1-introduccion.html#introduccion"><span class="toc-section-number">1</span> Introducción</a><ul>
+<li><a href="1-1-motivacion.html#motivacion"><span class="toc-section-number">1.1</span> Motivación</a></li>
+<li><a href="1-2-comenzando.html#comenzando"><span class="toc-section-number">1.2</span> Comenzando</a></li>
+<li><a href="1-3-uso.html#uso"><span class="toc-section-number">1.3</span> Uso</a></li>
+<li><a href="1-4-new-session.html#new-session"><span class="toc-section-number">1.4</span> Dos enfoques de representación</a></li>
+<li><a href="1-5-algunos-tips.html#algunos-tips"><span class="toc-section-number">1.5</span> Algunos tips</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-componentes.html#componentes"><span class="toc-section-number">2</span> Componentes</a><ul>
+<li class="has-sub"><a href="2-1-sintaxis-de-markdown.html#sintaxis-de-markdown"><span class="toc-section-number">2.1</span> Sintaxis de Markdown</a><ul>
+<li><a href="2-1-sintaxis-de-markdown.html#formateo-en-linea"><span class="toc-section-number">2.1.1</span> Formateo en línea</a></li>
+<li><a href="2-1-sintaxis-de-markdown.html#elementos-de-nivel-bloque"><span class="toc-section-number">2.1.2</span> Elementos de nivel bloque</a></li>
+<li><a href="2-1-sintaxis-de-markdown.html#expresiones-matematicas-en-latex"><span class="toc-section-number">2.1.3</span> Expresiones matemáticas en LaTeX</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-2-extensiones-de-markdown-en-bookdown.html#extensiones-de-markdown-en-bookdown"><span class="toc-section-number">2.2</span> Extensiones de Markdown en bookdown</a><ul>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#ecuaciones"><span class="toc-section-number">2.2.1</span> Numerar y referenciar ecuaciones</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#teoremas"><span class="toc-section-number">2.2.2</span> Teoremas y demostraciones</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#encabezados-especiales"><span class="toc-section-number">2.2.3</span> Encabezados especiales</a></li>
+<li><a href="2-2-extensiones-de-markdown-en-bookdown.html#referencias-de-textos"><span class="toc-section-number">2.2.4</span> Referencias de textos</a></li>
+</ul></li>
+<li><a href="2-3-codigo-en-r.html#codigo-en-r"><span class="toc-section-number">2.3</span> Código en R</a></li>
+<li><a href="2-4-figuras.html#figuras"><span class="toc-section-number">2.4</span> Figuras</a></li>
+<li><a href="2-5-tablas.html#tablas"><span class="toc-section-number">2.5</span> Tablas</a></li>
+<li><a href="2-6-referencias-cruzadas.html#referencias-cruzadas"><span class="toc-section-number">2.6</span> Referencias cruzadas</a></li>
+<li><a href="2-7-bloques-personalizados.html#bloques-personalizados"><span class="toc-section-number">2.7</span> Bloques personalizados</a></li>
+<li><a href="2-8-citas.html#citas"><span class="toc-section-number">2.8</span> Citas</a></li>
+<li><a href="2-9-latex-index.html#latex-index"><span class="toc-section-number">2.9</span> Index</a></li>
+<li><a href="2-10-html-widgets.html#html-widgets"><span class="toc-section-number">2.10</span> HTML Widgets</a></li>
+<li><a href="2-11-paginas-web-y-aplicaciones-shiny.html#paginas-web-y-aplicaciones-shiny"><span class="toc-section-number">2.11</span> Páginas web y aplicaciones Shiny</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-formatos-de-salida.html#formatos-de-salida"><span class="toc-section-number">3</span> Formatos de salida</a><ul>
+<li class="has-sub"><a href="3-1-html.html#html"><span class="toc-section-number">3.1</span> HTML</a><ul>
+<li><a href="3-1-html.html#estilo-gitbook"><span class="toc-section-number">3.1.1</span> El estilo GitBook</a></li>
+<li><a href="3-1-html.html#el-estilo-bootstrap"><span class="toc-section-number">3.1.2</span> El estilo Bootstrap</a></li>
+<li><a href="3-1-html.html#el-estilo-tufte"><span class="toc-section-number">3.1.3</span> El estilo Tufte</a></li>
+</ul></li>
+<li><a href="3-2-latexpdf.html#latexpdf"><span class="toc-section-number">3.2</span> LaTeX/PDF</a></li>
+<li class="has-sub"><a href="3-3-e-books.html#e-books"><span class="toc-section-number">3.3</span> E-Books</a><ul>
+<li><a href="3-3-e-books.html#epub"><span class="toc-section-number">3.3.1</span> EPUB</a></li>
+<li><a href="3-3-e-books.html#mobi"><span class="toc-section-number">3.3.2</span> MOBI</a></li>
+</ul></li>
+<li><a href="3-4-un-documento-sencillo.html#un-documento-sencillo"><span class="toc-section-number">3.4</span> Un documento sencillo</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-personalizacion.html#personalizacion"><span class="toc-section-number">4</span> Personalización</a><ul>
+<li><a href="4-1-opciones-yaml.html#opciones-yaml"><span class="toc-section-number">4.1</span> Opciones YAML</a></li>
+<li><a href="4-2-temas.html#temas"><span class="toc-section-number">4.2</span> Temas</a></li>
+<li><a href="4-3-plantillas.html#plantillas"><span class="toc-section-number">4.3</span> Plantillas</a></li>
+<li><a href="4-4-configuracion.html#configuracion"><span class="toc-section-number">4.4</span> Configuración</a></li>
+<li><a href="4-5-internacionalizacion.html#internacionalizacion"><span class="toc-section-number">4.5</span> Internacionalización</a></li>
+</ul></li>
+<li class="has-sub"><a href="5-edicion.html#edicion"><span class="toc-section-number">5</span> Edición</a><ul>
+<li><a href="5-1-construyendo-el-libro.html#construyendo-el-libro"><span class="toc-section-number">5.1</span> Construyendo el libro</a></li>
+<li><a href="5-2-previsualizar-un-capitulo.html#previsualizar-un-capitulo"><span class="toc-section-number">5.2</span> Previsualizar un capítulo</a></li>
+<li><a href="5-3-presentar-el-libro.html#presentar-el-libro"><span class="toc-section-number">5.3</span> Presentar el libro</a></li>
+<li><a href="5-4-ide-rstudio.html#ide-rstudio"><span class="toc-section-number">5.4</span> IDE RStudio</a></li>
+</ul></li>
+<li class="has-sub"><a href="6-publicacion.html#publicacion"><span class="toc-section-number">6</span> Publicación</a><ul>
+<li><a href="6-1-rstudio-connect.html#rstudio-connect"><span class="toc-section-number">6.1</span> RStudio Connect</a></li>
+<li><a href="6-2-github.html#github"><span class="toc-section-number">6.2</span> GitHub</a></li>
+<li><a href="6-3-editores.html#editores"><span class="toc-section-number">6.3</span> Editores</a></li>
+</ul></li>
+<li class="appendix"><span><b>Apéndice</b></span></li>
+<li class="has-sub"><a href="A-herramientas-de-software.html#herramientas-de-software"><span class="toc-section-number">A</span> Herramientas de Software</a><ul>
+<li><a href="A-1-r-y-sus-paquetes.html#r-y-sus-paquetes"><span class="toc-section-number">A.1</span> R y sus paquetes</a></li>
+<li><a href="A-2-pandoc.html#pandoc"><span class="toc-section-number">A.2</span> Pandoc</a></li>
+<li><a href="A-3-latex.html#latex"><span class="toc-section-number">A.3</span> LaTeX</a></li>
+</ul></li>
+<li class="has-sub"><a href="B-uso-de-software.html#uso-de-software"><span class="toc-section-number">B</span> Uso de Software</a><ul>
+<li><a href="B-1-knitr.html#knitr"><span class="toc-section-number">B.1</span> knitr</a></li>
+<li><a href="B-2-r-markdown.html#r-markdown"><span class="toc-section-number">B.2</span> R Markdown</a></li>
+</ul></li>
+<li><a href="C-faq.html#faq"><span class="toc-section-number">C</span> FAQ</a></li>
+<li><a href="referencias.html#referencias">Referencias</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="sintaxis-de-markdown" class="section level2">
+<h2><span class="header-section-number">2.1</span> Sintaxis de Markdown</h2>
+<p>En esta sección se da una breve introducción a Markdown de Pandoc. Los lectores que estén familiarizados con Markdown pueden omitir esta sección. La sintaxis completa de Markdown de Pandoc se puede encontrar en el sitio web de Pandoc <a href="http://pandoc.org" class="uri">http://pandoc.org</a>.</p>
+<div id="formateo-en-linea" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Formateo en línea</h3>
+<p>Puede producir texto en <em>cursiva</em> rodeándolo con guiones o asteriscos, por ejemplo, <code>_texto_</code> o <code>*texto*</code>. Para texto en <strong>negrita</strong>, utilice dos guiones bajos ( <code>__texto__</code>) o asteriscos (<code>**texto**</code>). El texto rodeado por <code>~</code> se convertirá en un subíndice (por ejemplo, <code>H~2~SO~4~</code> muestra H<sub>2</sub>SO<sub>4</sub>), y de manera similar, dos signos de intercalación <code>^</code> producen un superíndice (por ejemplo, <code>ClO^-^</code> muestra ClO<sup>-</sup>). Para marcar el texto como <code>código en línea</code>, utilice un par de acentos abiertos, por ejemplo, <code>`code`</code><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. Las versalitas se pueden producir con la etiqueta HTML <code>span</code>, por ejemplo, <code>&lt;span style=&quot;font-variant:small-caps;&quot;&gt;Versalitas&lt;/span&gt;</code> muestra <span style="font-variant: small-caps;">Versalitas</span>. Los enlaces se crean usando <code>[texto](link)</code>, por ejemplo, <code>[RStudio](http://www.rstudio.com)</code>, y la sintaxis de las imágenes es similar: sólo tiene que añadir un signo de exclamación, por ejemplo, <code>![título de la imagen](ruta)</code>. Las notas al pie se colocan dentro de corchetes cuadrados después de un acento circunflejo <code>^[]</code>, por ejemplo,<code>^[Esta es una nota al pie.]</code>. Se hablará de las citas en la sección <a href="2-8-citas.html#citas">2.8</a>.</p>
+</div>
+<div id="elementos-de-nivel-bloque" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Elementos de nivel bloque</h3>
+<p>Los encabezados de sección se pueden escribir después de una serie de símbolos de numeral, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu"># Encabezado de primer nivel</span>
+
+<span class="fu">## Encabezado de segundo nivel</span>
+
+<span class="fu">### Encabezado de tercer nivel</span></code></pre></div>
+<p>Si no desea que un determinado encabezado sea numerado, puede agregar <code>{-}</code> después del encabezado, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu"># Prefacio {-}</span></code></pre></div>
+<p>Los elementos de la lista no ordenada comienzan con <code>*</code> <code>-</code>, o <code>+</code>, y se puede anidar una lista dentro de otra lista sangrando la sub-lista con cuatro espacios, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">- <span class="fl">un item</span>
+<span class="fl">- un item</span>
+<span class="fl">- un item</span>
+<span class="fl">    - un item</span>
+<span class="fl">    - un item</span></code></pre></div>
+<p>La salida es:</p>
+<ul>
+<li>un item</li>
+<li>un item</li>
+<li>un item
+<ul>
+<li>un item</li>
+<li>un item</li>
+</ul></li>
+</ul>
+<p>Los elementos de la lista ordenada comienzan con números (la regla para las listas anidadas es el mismo que en el anterior), por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">1. <span class="fl">primer item</span>
+<span class="fl">2. segundo item</span>
+<span class="fl">3. tercer item</span></code></pre></div>
+<p>La salida no se ve demasiado diferente que en Markdown:</p>
+<ol style="list-style-type: decimal">
+<li>primer item</li>
+<li>segundo item</li>
+<li>tercero item</li>
+</ol>
+<p>Un párrafo citado se escribe después de <code>&gt;</code>, por ejemplo:</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">&gt;<span class="dt"> &quot;I thoroughly disapprove of duels. If a man should challenge me,</span>
+<span class="dt">  I would take him kindly and forgivingly by the hand and lead him</span>
+<span class="dt">  to a quiet place and kill him.&quot;</span>
+<span class="dt">&gt;</span>
+<span class="dt">&gt; --- Mark Twain</span></code></pre></div>
+<p>Y la salida es:</p>
+<blockquote>
+<p>“I thoroughly disapprove of duels. If a man should challenge me, I would take him kindly and forgivingly by the hand and lead him to a quiet place and kill him.”</p>
+<p>— Mark Twain</p>
+</blockquote>
+<p>Los bloques de código sin formato se pueden escribir después de tres o más acentos abiertos, y también se puede aplicar sangría a los bloques de cuatro espacios, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```
+Este texto se muestra verbatim
+```
+
+O sangrándolo con cuatro espacios:
+
+<span class="bn">    Este texto se muestra verbatim</span></code></pre></div>
+</div>
+<div id="expresiones-matematicas-en-latex" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Expresiones matemáticas en LaTeX</h3>
+<p>Las ecuaciones en LaTeX se pueden escribir dentro de un par de signos peso usando la sintaxis de LaTeX, por ejemplo <code>$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$</code> (cuya salida es: <span class="math inline">\(f(k)={n \choose k}p^{k}(1-p)^{n-k}\)</span>); las expresiones matemáticas también pueden centrarse en la página si se ponen entre dobles signos peso, por ejemplo: <code>$$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$$</code>, cuya salida se vería como:</p>
+<p><span class="math display">\[f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k}\]</span></p>
+<p>También puede utilizar entornos matemáticos dentro de <code>$ $</code> o <code>$$ $$</code>, por ejemplo,</p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">$$\begin{array}{ccc}
+x_{11} &amp; x_{12} &amp; x_{13}\\
+x_{21} &amp; x_{22} &amp; x_{23}
+\end{array}$$</code></pre></div>
+<p><span class="math display">\[\begin{array}{ccc}
+x_{11} &amp; x_{12} &amp; x_{13}\\
+x_{21} &amp; x_{22} &amp; x_{23}
+\end{array}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">$$X = \begin{bmatrix}1 &amp; x_{1}\\
+1 &amp; x_{2}\\
+1 &amp; x_{3}
+\end{bmatrix}$$</code></pre></div>
+<p><span class="math display">\[X = \begin{bmatrix}1 &amp; x_{1}\\
+1 &amp; x_{2}\\
+1 &amp; x_{3}
+\end{bmatrix}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">$$\begin{vmatrix}a &amp; b\\
+c &amp; d
+\end{vmatrix}=ad-bc$$</code></pre></div>
+<p><span class="math display">\[\begin{vmatrix}a &amp; b\\
+c &amp; d
+\end{vmatrix}=ad-bc\]</span></p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>Para incluir acentos abiertos literales, sólo tiene que utilizar más acentos abiertos en el exterior, por ejemplo, se pueden utilizar dos comillas sencillas para preservar un acento grave en el interior: <code>`` ` code ` ``</code>.<a href="2-1-sintaxis-de-markdown.html#fnref3">↩</a></p></li>
+</ol>
+</div>
+<p style="text-align: center;">
+<a href="2-componentes.html"><button class="btn btn-default">Previous</button></a>
+<a href="2-2-extensiones-de-markdown-en-bookdown.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

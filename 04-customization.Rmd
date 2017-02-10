@@ -1,0 +1,252 @@
+# Personalización
+
+Como se mencionó al comienzo de este libro, se asume que el usuario tiene algunos conocimientos básicos sobre R Markdown, para centrarse en la introducción de las características de **bookdown** en lugar de las de **rmarkdown**. De hecho, R Markdown es altamente personalizable, y hay muchas opciones que se pueden utilizar para personalizar el documento de salida. Dependiendo de qué tanto quiera personalizar la salida, es posible utilizar algunas opciones simples en los metadatos YAML, o simplemente reemplazar toda la plantilla Pandoc.
+
+## Opciones YAML {#opciones-yaml}
+
+\index{YAML}Para la mayoría de los tipos de formatos de salida, puede personalizar los estilos de resaltado de sintaxis utilizando la opción `highlight` del formato específico. En la actualidad, los estilos posibles son `r knitr::combine_words(rmarkdown:::highlighters(), before = '\x60')`. Por ejemplo, se puede elegir el estilo `tango` para el formato de `gitbook`:
+
+```yaml
+---
+output:
+  bookdown::gitbook:
+    highlight: tango
+---
+```
+
+Para formatos de salida HTML, es preferible usar la opción `css` con el fin de proporcionar sus propias hojas de estilo CSS para personalizar la apariencia de los elementos HTML. Hay una opción `includes` que se aplica a más formatos, incluyendo HTML y LaTeX. La opción `includes` permite insertar contenido personalizado antes y/o después del cuerpo de salida. Tiene tres sub-opciones: `in_header`, ` before_body`, y `after_body`. Es necesario conocer la estructura básica de un documento HTML o LaTeX para entender estas opciones. El código fuente de un documento HTML luce de la siguiente forma:
+
+```html
+<html>
+  
+  <head>
+  <!-- head content here, e.g. CSS and JS -->
+  </head>
+  
+  <body>
+  <!-- body content here -->
+  </body>
+
+</html>
+```
+
+La opción `in_header` toma una ruta de archivo y lo inserta en la etiqueta `<head>`. Se insertará el archivo `before_body` justo debajo de la apertura `<body>`, y `after_body` se inserta antes de la etiqueta de cierre `</body>`.
+
+Un documento de origen LaTeX tiene una estructura similar:
+
+```latex
+\documentclass{book}
+
+% LaTeX preamble
+% insert in_header here
+
+\begin{document}
+% insert before_body here
+
+% body content here
+
+% insert after_body here
+\end{document}
+```
+
+La opción `includes` es muy útil y flexible. Para la salida HTML, quiere decir que se puede insertar código HTML arbitrario a la salida. Por ejemplo, cuando se tienen expresiones matemáticas de LaTeX compiladas a través de la biblioteca MathJax en la salida HTML, y desea enumerar las ecuaciones en el entorno `equation`, puede crear un archivo de texto que contenga el siguiente código:
+
+```html
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+```
+
+Asumiendo que el archivo se denomina `mathjax-number.html`, y que está en el directorio raíz de su libro (el directorio que contiene todos los archivos Rmd). Puede insertar este archivo en el encabezado del HTML a través de la opción `in_header`, por ejemplo,
+
+```yaml
+---
+output:
+  bookdown::gitbook:
+    includes:
+      in_header: mathjax-number.html
+---
+```
+
+Si se utiliza el formato de salida HTML `html_book` o `gitbook` en **bookdown**, esto ya se ha establecido en las plantillas HTML, por lo que no es realmente necesario insertar un archivo de este tipo en el encabezado HTML. Sólo es necesario que lo haga para otros formatos de salida HTML.
+
+Del mismo modo, si usted está familiarizado con LaTeX, puede agregar código LaTeX arbitrariamente al preámbulo. Esto significa que puede utilizar cualquier paquete de LaTeX y configurar las opciones de cualquier paquete para su libro. Por ejemplo, este libro utiliza la opción `in_header` para utilizar unos pocas paquetes de LaTeX adicionales, tales como **booktabs** (para mejorar el aspecto de las tablas) y **longtable**  (para las tablas que se extienden a través de múltiples páginas), y arreglar un problema XeLaTeX en el que el vínculo de los gráficos no funcionen:
+
+```latex
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\ifxetex
+  \usepackage{letltxmacro}
+  \setlength{\XeTeXLinkMargin}{1pt}
+  \LetLtxMacro\SavedIncludeGraphics\includegraphics
+  \def\includegraphics#1#{% #1 catches optional stuff (star/opt. arg.)
+    \IncludeGraphicsAux{#1}%
+  }%
+  \newcommand*{\IncludeGraphicsAux}[2]{%
+    \XeTeXLinkBox{%
+      \SavedIncludeGraphics#1{#2}%
+    }%
+  }%
+\fi
+```
+
+El código LaTeX anterior se guarda en un archivo `preamble.tex`, y los metadatos YAML se ven así:
+
+```yaml
+---
+output:
+  bookdown::pdf_book:
+    includes:
+      in_header: preamble.tex
+---
+```
+
+## Temas
+
+A veces es posible que desee cambiar el tema general de la salida, y por lo general esto se puede hacer a través de la opción `in_header` descrita en el apartado anterior, o mediante la opción `css` si la salida es HTML. Algunos formatos de salida tienen sus temas únicos, tales como `gitbook`, `tufte_html_book`, y `tufte_book2`, y es preferible no modificar estos temas demasiado. En comparación, los formatos de salida `html_book()` y `pdf_book()` no están vinculados a temas particulares y son más personalizables.
+
+Como se mencionó en la sección \@ref(el-estilo-bootstrap), el estilo predeterminado de `html_book()` es el estilo Bootstrap. El estilo Bootstrap en realidad tiene varios temas incorporados que se pueden utilizar, incluyendo `r knitr::combine_words(rmarkdown:::themes(), before='\x60')`. Puede establecer el tema a través de la opción `theme`, por ejemplo,
+
+```yaml
+---
+output:
+  bookdown::html_book:
+    theme: united
+---
+```
+
+Si no le gusta ninguno de estos estilos de Bootstrap, se puede establecer `theme` como `null`, y aplicar su propio CSS a través de la opción `css` o `includes`. 
+
+Para `pdf_book()`, además de la opción `in_header` mencionada en el apartado anterior, otra posibilidad es cambiar la clase de documento. Hay muchos posibles clases de LaTeX para libros, tales como **memoir** (https://www.ctan.org/pkg/memoir), **amsbook** (https://www.ctan.org/pkg/ amsbook), KOMA-script (https://www.ctan.org/pkg/koma-script), etc. Una breve muestra de los metadatos YAML especificando la clase `scrbook` del paquete KOMA-Script es:
+
+```yaml
+---
+documentclass: scrbook
+output:
+  bookdown::pdf_book:
+    template: null
+---
+```
+
+Algunos editores (por ejemplo, Springer y Chapman & Hall/CRC) tienen sus propios archivos de estilo de LaTeX o de class. Puede intentar cambiar la opción `documentclass` para utilizar sus clases de documento, aunque generalmente no es tan simple como eso. Puede terminar usando `in_header`, o incluso diseñar una plantilla personalizada Pandoc LaTeX para dar cabida a estas clases de documentos.
+
+Tenga en cuenta que cuando se cambia `documentclass`, es posible especificar un argumento adicional Pandoc` --chapters` de modo que Pandoc reconozca que los encabezados de primer nivel deben ser tratados como capítulos en lugar de secciones (este es el valor predeterminado cuando `documentclass` es `book`), por ejemplo,
+
+```yaml
+documentclass: krantz
+output:
+  bookdown::pdf_book:
+    pandoc_args: --chapters
+```
+
+## Plantillas
+
+Cuando Pandoc convierte Markdown a otro formato de salida, utiliza una plantilla bajo la manga. La plantilla es un archivo de texto plano que contiene algunas variables de la forma `$variable$`. Estas variables se reemplazarán por sus valores generados mediante Pandoc. A continuación se muestra una breve plantilla para la salida HTML:
+
+
+```html
+<html>
+  <head>
+    <title>$title$</title>
+  </head>
+  
+  <body>
+  $body$
+  </body>
+</html>
+```
+
+Tiene dos variables `title` y `body`. El valor de `title` viene del campo `title` de los metadatos YAML, y `body` es el código HTML generado por el cuerpo del documento Markdown. Por ejemplo, supongamos que tenemos un documento Markdown:
+
+```markdown
+---
+title: Un libro chévere
+---
+
+# Introducción
+
+Este es una **berraquera** de libro!
+```
+
+Si usamos la plantilla anterior para generar un documento HTML, su código fuente sería así:
+
+```html
+<html>
+  <head>
+    <title>Una berraquera de libro</title>
+  </head>
+  
+  <body>
+  
+  <h1>Introducción</h1>
+  
+  <p>Este es una <strong>berraquera</strong> de libro!</p>
+  
+  </body>
+</html>
+```
+
+Las plantillas actuales HTML, LaTeX, y EPUB son más complicadas pero la idea es la misma. Usted sólo necesita saber qué variables están disponibles: algunas variables están incorporados en las variables Pandoc, y algunas se puede definir por los usuarios en los metadatos YAML, o se pasan de la opción de línea de comandos `-V` o `--variable`. Algunas variables sólo tienen sentido para determinados formatos de salida, por ejemplo, la variable `documentclass` sólo se utiliza en la producción de documentos en LaTeX. Consulte la documentación de Pandoc para aprender más sobre estas variables, y puede encontrar todas las plantillas Pandoc por defecto  en el repositorio GitHub https://github.com/jgm/pandoc-templates.
+
+Tenga en cuenta que para la salida HTML, **bookdown**  requiere algunas fichas adicionales de comentarios en la plantilla que se explicó en la sección \@ref(el-estilo-bootstrap).
+
+## Configuración
+
+Se han mencionado los `rmd_files` en la Sección \@ref(uso), pero hay más cosas que se pueden configurar para un libro en `_bookdown.yml`:
+
+- `book_filename`: el nombre del archivo principal Rmd, es decir, el archivo Rmd a partir del cual se fusionan todos los capítulos; por defecto, se llama `_main.Rmd`.
+- `before_chapter_script`: una o varias secuencias de comandos en R para ser ejecutadas antes de cada capítulo, por ejemplo, es posible que desee limpiar el área de trabajo antes de compilar cada capítulo, en cuyo caso se puede usar `rm(list = ls(all = TRUE))` en el script de R.
+- `after_chapter_script`: similar a `before_chapter_script`, y el script de R se ejecuta después de cada capítulo.
+- `edit`: un enlace que los colaboradores pueden utilizar para editar el documento original Rmd de la página actual; esto fue diseñado principalmente para los repositorios de Github, ya que es fácil editar archivos arbitrarios de texto sin formato en Github incluso en los repositorios de otras personas (si usted no tiene acceso a escritura en el repositorio, Github se trinchará automáticamente y le permitirá enviar una solicitud de extracción después de haber terminado de editar el archivo). Este enlace debe tener `s%` dentro de él, que será sustituido por el nombre de archivo actual Rmd para cada página.
+
+  - Opcionalmente, puede tener un campo `text` bajo el campo `edit` para especificar el texto al que está unido el enlace.
+- `rmd_subdir`: si desea buscar archivos de origen del libro de Rmd en subdirectorios (por defecto, sólo el directorio raíz se busca).  
+- `output_dir`: el directorio de salida del libro; esta configuración es leída y utilizada por `render_book()`.
+- `clean`: un vector de archivos y directorios a ser limpiados por la función `clean_book()`.
+
+Aquí hay un ejemplo de `_bookdown.yml`:
+
+```yaml
+book_filename: "mi-libro.Rmd"
+chapter_name: "CAPÍTULO "
+before_chapter_script: ["script1.R", "script2.R"]
+after_chapter_script: "script3.R"
+edit:
+  link: https://github.com/rstudio/bookdown/edit/master/inst/examples/%s
+  text: "Edit"
+output_dir: "book-output"
+clean: ["my-book.bbl", "R-packages.bib"]
+```
+
+
+## Internacionalización
+
+Si el idioma de su libro no es Inglés, se necesita traducir ciertas palabras y frases de inglés a su lengua materna, tales como "Figure" y "Table" cuando las figuras/tablas se enumeren automáticamente en la salida HTML. La internacionalización puede no ser un problema para la salida de LaTeX, ya que algunos paquetes de LaTeX pueden traducir automáticamente estos términos al idioma local, tal como el paquete **ctexcap**  al chino.
+
+Para la salida que no sea de látex, se puede establecer el campo `language` en el archivo de configuración` _bookdown.yml`. Actualmente los ajustes por defecto son:
+
+```{r echo=FALSE, comment='', results='asis'}
+cat('```yaml\n')
+cat(yaml::as.yaml(list(language = list(
+    label = c(bookdown:::label_names, bookdown:::label_names_math2),
+    ui = bookdown:::ui_names
+  ))
+))
+cat('```')
+```
+
+Por ejemplo, si desea `FIGURE x.x` en lugar de` Figure x.x`, puede cambiar `fig` a `"Figure"`:
+
+
+```yaml
+language:
+  label:
+    fig: "FIGURE "
+```
+
+Los campos bajo `ui` se utilizan para especificar algunos términos en la interfaz de usuario. El campo `edit` especifica el texto asociado con el enlace `edit` en `_bookdown.yml` (Sección \@ref(configuracion)). El campo `chapter_name` puede ser una cadena de caracteres que se antepone a los números de capítulos en títulos de los capítulos (por ejemplo, "Capítulo "), o una función de R que toma el número de capítulo como entrada y devuelve una cadena como el nuevo número de capítulo (por ejemplo, `!expr function(i) paste('Capítulo', i)`). Si se trata de un vector de caracteres de longitud 2, el prefijo del título de capítulo será `paste0(chapter_name[1], i, chapter_name[2])`, donde `i` es el número de capítulo.
+
+Hay una advertencia cuando se escribe en un idioma que utiliza caracteres de varios bytes, como el chino, japonés y coreano (CJK): Pandoc no puede generar identificadores de los encabezados de las secciones que son caracteres CJK puros, por lo que no será capaz de hacer referencias cruzadas a las secciones (no tienen etiquetas), a menos que asigne manualmente identificadores, añadiendo `{#identifier}`  a la cabecera de sección, donde `identifier` es un identificador arbitrario que elija.
