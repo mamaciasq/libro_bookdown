@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="figuras.html">
 <link rel="next" href="referencias-cruzadas.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -213,7 +212,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.5</span> Tablas</h2>
 <p>Por ahora, la forma más conveniente para generar una tabla es la función <code>knitr::kable()</code>, porque hay algunos trucos internos en <strong>knitr</strong> para que funcione con <strong>bookdown</strong> y los usuarios no tienen necesidad de preocuparse por estos detalles de implementación. Adelante se explicará cómo utilizar otros paquetes y funciones más detalladamente en esta sección.</p>
 <p>Al igual que las figuras, las tablas con títulos también estarán numeradas y podrán ser referenciadas. La función <code>kable()</code> generará automáticamente una etiqueta para un entorno de la tabla, que es el prefijo <code>tab:</code> más la etiqueta del chunk. Por ejemplo, la etiqueta de la tabla para un chunk con la etiqueta <code>foo</code> será: <code>tab:foo</code>, y usar la sintaxis <code>\@ref(etiqueta)</code> para hacer referencia a la tabla. La tabla <a href="tablas.html#tab:table-single">2.2</a> es un ejemplo sencillo.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(
   <span class="kw">head</span>(mtcars, <span class="dv">10</span>), <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,
   <span class="dt">caption =</span> <span class="st">&#39;Una tabla de las primeras 10 filas de la base de datos mtcars.&#39;</span>
 )</code></pre></div>
@@ -378,11 +377,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </tbody>
 </table>
-<p>Si desea poner varias tablas en un único entorno de tablas, simplemente empaquete los objetos de datos (usualmente en data frames en R) dentro de una lista. Véase la tabla <a href="tablas.html#tab:table-multi">2.3</a> para un ejemplo.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(
+<p>Si desea poner varias tablas en un único entorno de tablas, simplemente empaquete los objetos de datos (usualmente en data frames en R) dentro de una lista. Véase la tabla <a href="tablas.html#tab:table-multi">2.3</a> para un ejemplo. Por favor note que esta característica está disponible únicamente para salida HTML y PDF.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(
   <span class="kw">list</span>(
-    <span class="kw">head</span>(iris[,<span class="dv">1</span>:<span class="dv">2</span>],<span class="dv">3</span>),
-    <span class="kw">head</span>(mtcars[,<span class="dv">1</span>:<span class="dv">3</span>],<span class="dv">5</span>)
+    <span class="kw">head</span>(iris[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="dv">3</span>),
+    <span class="kw">head</span>(mtcars[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>],<span class="dv">5</span>)
   ),
   <span class="dt">caption =</span> <span class="st">&#39;Una trama de dos tablas.&#39;</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>
 )</code></pre></div>
@@ -464,8 +463,8 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </tbody>
 </table>
 <p>Cuando no se quiera una tabla flotante en PDF, es posible utilizar el paquete de LaTeX <a href="https://www.ctan.org/pkg/longtable"><strong>longtable</strong></a>, que puede dividir una tabla a través de múltiples páginas. Para utilizar <strong>longtable</strong>, sólo tiene que poner <code>longtable = TRUE</code> en <code>kable()</code>, y asegurarse de incluir <code>\usepackage{longtable}</code> en el preámbulo de LaTeX (véase la sección <a href="opciones-yaml.html#opciones-yaml">4.1</a> para saber cómo personalizar el preámbulo LaTeX). Por supuesto, esto es irrelevante para la salida HTML, ya que las tablas de HTML no necesitan flotar.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(
-  iris[<span class="dv">1</span>:<span class="dv">100</span>, ], <span class="dt">longtable =</span> <span class="ot">TRUE</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(
+  iris[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, ], <span class="dt">longtable =</span> <span class="ot">TRUE</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,
   <span class="dt">caption =</span> <span class="st">&#39;Una tabla generada mediante el paquete `longtable`.&#39;</span>
 )</code></pre></div>
 <table>
@@ -1182,6 +1181,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </tbody>
 </table>
+<p>Puede usar cualquier tipo de tablas de Markdown en su documento. Para poder hacer una referencia cruzada de una tabla de Markdown, debe tener un título etiquetado de la forma <code>Table: (\#label) Leyenda aquí</code>, donde la etiqueta debe tener el prefijo: <code>tab</code>, por ejemplo, <code>tab: simple-table</code>.</p>
 <p>Si decide utilizar otros paquetes para generar tablas, tiene que asegurarse de que la etiqueta para el ambiente de la tabla aparezca al comienzo de la leyenda de la tabla de la forma <code>(\#label)</code>, donde <code>label</code> debe tener el prefijo <code>tab:</code>. Tiene que tenerse mucho cuidado con la <em>portabilidad</em> de la función que genera la tabla: deberá trabajar tanto para la salida HTML como para LaTeX de forma automática, por lo que debe tener en cuenta el formato de salida internamente (revise <code>knitr::opts_knit$get('pandoc.to')</code>). Al escribir una tabla HTML, el título debe ser escrito en la etiqueta <code>&lt;caption&gt;&lt;/caption&gt;</code>. Para las tablas simples, <code>kable()</code> debería ser suficiente. Si usted tiene que crear tablas complicadas (por ejemplo, con ciertas celdas que atraviesen múltiples columnas/filas), tendrá que tomar las cuestiones mencionadas en consideración.</p>
 </div>
             </section>
@@ -1190,8 +1190,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="figuras.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="referencias-cruzadas.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="referencias-cruzadas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -1200,11 +1201,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -1221,7 +1222,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown02-components.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -1234,7 +1235,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

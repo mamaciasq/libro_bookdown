@@ -22,30 +22,40 @@ Si ha establecido su propio servidor RStudio Connect, sin duda puede publicar el
 
 ## GitHub
 
-Puede alojar su libro en GitHub \index{GitHub}  de forma gratuita a través de GitHub Pages (https://pages.github.com). GitHub sopporta Jekyll (http://jekyllrb.com), un constructor de sitios web estático, para construir un sitio web a partir de archivos Markdown. Ese puede ser el caso de uso más común de GitHub pages, pero GitHub también es compatible con archivos HTML estáticos arbitrarios, por ende puede albergar los archivos de salida HTML de su libro en GitHub.
+Puede alojar su libro en GitHub \index{GitHub}  de forma gratuita a través de GitHub Pages (https://pages.github.com). GitHub sopporta Jekyll (http://jekyllrb.com), un constructor de sitios web estático, para construir un sitio web a partir de archivos Markdown. Ese puede ser el caso de uso más común de GitHub pages, pero GitHub también es compatible con archivos HTML estáticos arbitrarios, por ende puede albergar los archivos de salida HTML de su libro en GitHub. La clave es crear un archivo oculto `.nojekyll` que le indique a GitHub que su sitio web no se construirá a través de Jekyll, ya que el resultado HTML de bookdown ya es un sitio web independiente.
 
-Un enfoque para publicar su libro como un sitio de GitHub Pages de una carpeta `/docs` en su rama `master` como se describe en [GitHub Ayuda] (http://bit.ly/2cvloKV). En primer lugar establecer el directorio de salida de su libro para que sea `/docs` añadiendo la línea `output_dir: "docs"` al archivo de configuración `_bookdown.yml`. A continuación, después de empujar los cambios en GitHub ir a la configuración de su repositorio y en "GitHub Pages" cambiar la "Fuente" por "rama maestra / carpeta de documentos".
+```bash
+# se asume que ha inicializado el repositorio de git,
+# y en este momento se encuentra en el directorio del repositorio del libro
+
+# crear un archivo oculto .nojekyll
+touch .nojekyll
+# agregar a git aquí porque no se mostrará en RStudio
+git add .nojekyll
+```
+
+Si está en Windows, es posible que no tenga el comando `touch`, puede crear el archivo en R usando `file.create('.nojekyll').
+
+Un enfoque es publicar su libro como un sitio en GitHub Pages desde una carpeta `/docs` en su rama principal `master` como se describe en [GitHub Help.](http://bit.ly/2cvloKV). Primero, configure el directorio de salida de su libro para que sea `/docs` agregando la línea `output_dir: "docs"` al archivo de configuración `_bookdown.yml`. Luego, después de enviar sus cambios a GitHub, vaya a la configuración de su repositorio y en "GitHub Pages" cambie el "Source" para que sea "master branch /docs folder”. En este caso, el archivo `.nojekyll` tiene que estar en la carpeta `/docs`.
 
 Un enfoque alternativo es crear una rama `gh-pages` en su repositorio, construir el libro, poner la salida HTML (incluyendo todos los recursos externos, como imágenes, CSS y archivos JavaScript) en esta rama, y empujar la rama al repositorio remoto. Si el repositorio de libro no tiene la rama `gh-pages`, puede utilizar los siguientes comandos para crear una:
 
 
 ```bash
-# assume you have initialized the git repository,
-# and are under the directory of the book repository now
+# se asume que ha inicializado el repositorio git,
+# y en este momento se encuentra en el directorio del repositorio del libro
 
-# create a branch named gh-pages and clean up everything
+# crear una rama llamada gh-pages y limpiar todo
 git checkout --orphan gh-pages
 git rm -rf .
 
-# create a hidden file .nojekyll
+# crear un archivo aoculto .nojekyll
 touch .nojekyll
 git add .nojekyll
 
 git commit -m"Initial commit"
 git push origin gh-pages
 ```
-
-El archivo oculto `.nojekyll` le dice a GitHub que su sitio web no debe ser construido a través de Jekyll, ya que la salida **bookdown** HTML ya es un sitio web independiente. Si está en Windows, puede que no tenga el comando `touch`, y sólo se pueda crear el archivo en R usando `file.create('.nojekyll') `.
 
 Después de haber configurado GIT, el resto del trabajo puede ser automatizado a través de una secuencia de comandos (Shell, R o Makefile, dependiendo de su preferencia). Básicamente, se compila el libro a HTML, a continuación, ejecuta los comandos git para empujar los archivos en GitHub, pero es probable que no quiera hacer esto una y otra vez de forma manual y localmente. Puede ser muy útil para automatizar el proceso de publicación por completo en la nube, por lo que una vez que se haya configurado correctamente, todo lo que tiene que hacer ahora es escribir el libro y empujar los archivos de origen Rmd a GitHub, y su libro siempre será construido de forma automática y publicado hacia el servidor.
 
@@ -61,15 +71,16 @@ por ejemplo `travis encrypt GITHUB_PAT=TOKEN`. Si usted no sabe cómo instalar o
 Suponga que usted está en la rama `master` en este momento (donde pone los archivos de origen Rmd), y ha compilado el libro en el directorio `_book`. Lo que puede hacer al lado de Travis es:
 
 ```bash
-# configure your name and email if you have not done so
+# configure su nombre y email si no lo ha hecho anteriormente
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
-# clone the repository to the book-output directory
+# clone el repository al directorio de salida del libro
 git clone -b gh-pages \
   https://${GITHUB_PAT}@github.com/${TRAVIS_REPO_SLUG}.git \
   book-output
 cd book-output
+git rm -rf *
 cp -r ../_book/* ./
 git add --all *
 git commit -m"Update the book"
@@ -118,7 +129,7 @@ cache:
     - $TRAVIS_BUILD_DIR/_bookdown_files
 ```
 
-Si el libro consume mucho tiempo para construir, puede utilizar las configuraciones anteriores de Travis para ahorrar tiempo. Note que `paquetes: yes` significa que los paquetes instalados en R Travis también están almacenados en caché.
+Si el libro consume mucho tiempo para construir, puede utilizar las configuraciones anteriores de Travis para ahorrar tiempo. Note que `packages: yes` significa que los paquetes instalados en R Travis también están almacenados en caché.
 
 Todas las secuencias de comandos y configuraciones anteriores se pueden encontrar en el repositorio `bookdown-demo`: https://github.com/rstudio/bookdown-demo/. Si los copia a su propio repositorio, por favor recuerde que debe cambiar la tecla `secure` en `.travis.yml` usando su propia variable de cifrado `GITHUB_PAT`.
 
@@ -144,7 +155,7 @@ monofont: "Source Code Pro"
 monofontoptions: "Scale=0.7"
 ```
 
-El campo `lote: yes` significa que queremos la "Lista de tablas", y de manera similar, `lof` significa "Lista de figuras". El tamaño de la fuente base es `12pt`, y usamos" [Source Code Pro](https://www.fontsquirrel.com/fonts/source-code-pro) "como el tipo de letra monoespaciada (ancho fijo), la cual es aplicada a todo el código del programa en este libro.
+El campo `lot: yes` significa que queremos la "Lista de tablas", y de manera similar, `lof` significa "Lista de figuras". El tamaño de la fuente base es `12pt`, y usamos" [Source Code Pro](https://www.fontsquirrel.com/fonts/source-code-pro) "como el tipo de letra monoespaciada (ancho fijo), la cual es aplicada a todo el código del programa en este libro.
 
 En el preámbulo LaTeX (Sección \@ref(opciones-yaml)), se tienen unos cuantos ajustes. En primer lugar, se propuso la principal fuente \index{font} como "[Alegreya](https://www.fontsquirrel.com/fonts/alegreya)", y dado que esta fuente no tiene la función  <span style="font-variant:small-caps;">Small Capitals</span>, se utilizó la fuente "Alegreya SC".
 
@@ -219,7 +230,7 @@ El campo `quote_footer` aseguraba que los pies de página de la cita estaban ali
 
 La opción `highlight_bw` se estableció en true para que los colores en los bloques de código resaltados por sintaxis se convirtieran en escala de grises, ya que este libro se imprimirá en blanco y negro.
 
-El libro fue compilado a PDF a través de `xelatex` para que sea más fácil para nosotros usar fuentes personalizadas.
+Este libro fue compilado a PDF a través de `xelatex` para que sea más fácil para nosotros usar fuentes personalizadas.
 
 Todos los ajustes anteriores, excepto el entorno `VF` y el comando `\{VA}` se pueden aplicar a cualquier otra clase de documentos LaTeX.
 

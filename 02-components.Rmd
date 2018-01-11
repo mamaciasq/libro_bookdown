@@ -371,6 +371,16 @@ La función característica de la suma de dos variables aleatorias independiente
 $$\varphi _{X_1+X_2}(t)=\varphi _{X_1}(t) \varphi _{X_2}(t)$$
 ```
 
+```{exercise, name="Función característica de la media muestral"}
+Sea $\bar{X}=\sum_{i=1}^n \frac{1}{n} X_i$ la media muestral de $n$ variables aleatorias independientes e idénticamente distribuidas, cada una con función característica $\varphi _{X}$. Compute la función característica de $\bar{X}$. 
+```
+
+```{solution}
+Aplicando el teorema \@ref(thm:chf-sum), tenemos
+
+$$\varphi _{\bar{X}}(t)=\prod_{i=1}^n \varphi _{X_i}\left(\frac{t}{n}\right)=\left[\varphi _{X}\left(\frac{t}{n}\right)\right]^n.$$
+```
+
 ### Encabezados especiales
 
 Hay unos cuantos tipos especiales de encabezados de primer nivel que serán procesados de forma diferente en  **bookdown**. El primer tipo es un enzacebzado sin numerar que se inicia con el token `(PART)`. Este tipo de encabezados se traducen en títulos de parte\index{parte}. Si está familiarizado con LaTeX, esto significa básicamente `\part{}`. Cuando su libro tenga un gran número de capítulos, es posible que desee organizarlos en partes, por ejemplo,
@@ -424,6 +434,8 @@ plot(cars)  # a scatterplot
 ```
 ````
 
+Las referencias de texto se pueden usar en cualquier parte del documento (no están limitadas a las leyendas de las figuras). También puede ser útil si desea reutilizar un fragmento de texto en múltiples lugares.
+
 ## Código en R
 
 Hay dos tipos de código en R en documentos R Markdown/**knitr**: chunks de R y  código en línea R. La sintaxis de este último es `` ``r ''`r R_CODE` ``, y puede ser integrado en línea con otros elementos del documento. Los chunks de R parecen bloques de código plano, pero tienen `{r}`  después de los tres acentos abiertos y (opcionalmente) parámetros dentro del `{}`, por ejemplo,
@@ -449,7 +461,7 @@ La desventaja de realizar figuras de esta manera es que cuando no hay suficiente
 
 Si se asigna un pie de figura a un chunk a través de la opción `fig.cap`, los gráficos en R se pondrán dentro de entornos figura, que serán etiquetados y numerados de forma automática, y también pueden usarse como una referencia cruzada. La etiqueta de un entorno figura se genera a partir de la etiqueta del chunk, por ejemplo, si la etiqueta es `foo`, la etiqueta de la figura será` fig: foo` (el prefijo `fig` se añade antes de `foo`). Para hacer referencia a una figura, utilice la sintaxis `\@ref(etiqueta)` ^[No olvide de la barra invertida inicial! y también note el paréntesis ` () ` después de ` ref `; no hay corchetes ` {} ` .], donde `label` es la etiqueta de la figura, por ejemplo,`fig: foo`.
 
-Para aprovechar el formato Markdown en el subtítulo de la figura, necesitará usar referencias de texto (consulte la sección \@ref (referencias-de-texto)). Por ejemplo, una leyenda de la figura que contiene `_texto en bastardilla_` no funcionará cuando el formato de salida sea LaTeX/PDF, ya que el carácter de subrayado es un carácter especial en LaTeX, pero si utiliza referencias de texto,` _texto en bastardilla_` será traducido a código LaTeX cuando la salida sea LaTeX.
+Para aprovechar el formato Markdown en el subtítulo de la figura, necesitará usar referencias de texto (consulte la sección \@ref(referencias-de-texto)). Por ejemplo, una leyenda de la figura que contiene `_texto en bastardilla_` no funcionará cuando el formato de salida sea LaTeX/PDF, ya que el carácter de subrayado es un carácter especial en LaTeX, pero si utiliza referencias de texto,` _texto en bastardilla_` será traducido a código LaTeX cuando la salida sea LaTeX.
 
 ```{block2, type='rmdimportant'}
 Si desea referencias cruzadas hacia figuras o tablas generadas a partir de  un chunk, por favor asegúrese de que la etiqueta del chunk sólo contenga  caracteres alfanuméricos (a-z, A-Z, 0-9), barras (/) o guiones (-). 
@@ -504,7 +516,7 @@ knitr::kable(
 )
 ```
 
-Si desea poner varias tablas en un único entorno de tablas, simplemente empaquete los objetos de datos (usualmente en data frames en R) dentro de una lista. Véase la tabla \@ref(tab:table-multi) para un ejemplo.
+Si desea poner varias tablas en un único entorno de tablas, simplemente empaquete los objetos de datos (usualmente en data frames en R) dentro de una lista. Véase la tabla \@ref(tab:table-multi) para un ejemplo. Por favor note que esta característica está disponible únicamente para salida HTML y PDF.
 
 ```{r table-multi, tidy=FALSE}
 knitr::kable(
@@ -524,6 +536,8 @@ knitr::kable(
   caption = 'Una tabla generada mediante el paquete `longtable`.'
 )
 ```
+
+Puede usar cualquier tipo de tablas de Markdown en su documento. Para poder hacer una referencia cruzada de una tabla de Markdown, debe tener un título etiquetado de la forma `Table: (\#label) Leyenda aquí`, donde la etiqueta debe tener el prefijo: `tab`, por ejemplo, `tab: simple-table`.
 
 Si decide utilizar otros paquetes para generar tablas, tiene que asegurarse de que la etiqueta para el ambiente de la tabla aparezca al comienzo de la leyenda de la tabla de la forma `(\#label)`, donde `label` debe tener el prefijo `tab: `. Tiene que tenerse mucho cuidado con la _portabilidad_ de la función que genera la tabla: deberá trabajar tanto para la salida HTML como para LaTeX de forma automática, por lo que debe tener en cuenta el formato de salida internamente (revise `knitr::opts_knit$get('pandoc.to')`). Al escribir una tabla HTML, el título debe ser escrito en la etiqueta `<caption></caption>`. Para las tablas simples, `kable()` debería ser suficiente. Si usted tiene que crear tablas complicadas (por ejemplo, con ciertas celdas que atraviesen múltiples columnas/filas), tendrá que tomar las cuestiones mencionadas en consideración.
 

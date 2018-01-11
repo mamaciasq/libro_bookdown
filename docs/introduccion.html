@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="acerca-del-autor.html">
 <link rel="next" href="motivacion.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -211,7 +210,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="introduccion" class="section level1">
 <h1><span class="header-section-number">Capítulo 1</span> Introducción</h1>
-<p>Este libro es una guía para la escritura de libros con R Markdown <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown">2016</a>)</span> y con el paquete <strong>bookdown</strong> de R <span class="citation">(Xie <a href="#ref-R-bookdown">2016</a><a href="#ref-R-bookdown">a</a>)</span>. Se enfoca en las características específicas de la escritura de libros, artículos o reportes de gran extensión . Algunas de estas características son:</p>
+<p>Este libro es una guía para la escritura de libros con R Markdown <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown">2017</a>)</span> y con el paquete <strong>bookdown</strong> de R <span class="citation">(Xie <a href="#ref-R-bookdown">2017</a><a href="#ref-R-bookdown">a</a>)</span>. Se enfoca en las características específicas de la escritura de libros, artículos o reportes de gran extensión . Algunas de estas características son:</p>
 <ul>
 <li><p>Cómo se componen figuras y tablas y se hacen referencias cruzadas hacia ellas;</p></li>
 <li><p>Cómo generar múltiples formatos de salida tales como HTML, PDF y e-books para un sólo libro;</p></li>
@@ -219,24 +218,24 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <li><p>El soporte de editor (en particular, el IDE RStudio);</p></li>
 <li><p>Cómo publicar un libro;</p></li>
 </ul>
-<p>No es una completa introducción a R Markdown o al paquete <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-R-knitr">2016</a><a href="#ref-R-knitr">c</a>)</span>, sobre el cual se construyó <strong>bookdown</strong>. Para obtener más información sobre R Markdown, consulte la documentación en línea <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>. Para <strong>knitr</strong>, consulte <span class="citation">Xie (<a href="#ref-xie2015">2015</a>)</span>. No hay que ser un experto en el lenguaje R <span class="citation">(R Core Team <a href="#ref-R-base">2016</a>)</span> para leer este libro, pero se espera que se tengan conocimientos básicos sobre R Markdown y <strong>knitr</strong>. Para los principiantes, puede empezar a trabajar con los Cheatsheets en <a href="https://www.rstudio.com/resources/cheatsheets/" class="uri">https://www.rstudio.com/resources/cheatsheets/</a>. El apéndice de este libro contiene breves introducciones a esos paquetes de software. Para poder personalizar las plantillas de libros y temas, debe estar familiarizado con LaTeX, HTML y CSS.</p> 
+<p>No es una completa introducción a R Markdown o al paquete <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-R-knitr">2017</a><a href="#ref-R-knitr">b</a>)</span>, sobre el cual se construyó <strong>bookdown</strong>. Para obtener más información sobre R Markdown, consulte la documentación en línea <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>. Para <strong>knitr</strong>, consulte <span class="citation">Xie (<a href="#ref-xie2015">2015</a>)</span>. No hay que ser un experto en el lenguaje R <span class="citation">(R Core Team <a href="#ref-R-base">2017</a>)</span> para leer este libro, pero se espera que se tengan conocimientos básicos sobre R Markdown y <strong>knitr</strong>. Para los principiantes, puede empezar a trabajar con los Cheatsheets en <a href="https://www.rstudio.com/resources/cheatsheets/" class="uri">https://www.rstudio.com/resources/cheatsheets/</a>. El apéndice de este libro contiene breves introducciones a esos paquetes de software. Para poder personalizar las plantillas de libros y temas, debe estar familiarizado con LaTeX, HTML y CSS.</p> 
 </div>
 <h3>Referencias</h3>
 <div id="refs" class="references">
 <div id="ref-R-rmarkdown">
-<p>Allaire, JJ, Joe Cheng, Yihui Xie, Jonathan McPherson, Winston Chang, Jeff Allen, Hadley Wickham, Aron Atkins, and Rob Hyndman. 2016. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://CRAN.R-project.org/package=rmarkdown" class="uri">https://CRAN.R-project.org/package=rmarkdown</a>.</p>
+<p>Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, and Winston Chang. 2017. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://CRAN.R-project.org/package=rmarkdown" class="uri">https://CRAN.R-project.org/package=rmarkdown</a>.</p>
 </div>
 <div id="ref-R-bookdown">
-<p>Xie, Yihui. 2016a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown" class="uri">https://CRAN.R-project.org/package=bookdown</a>.</p>
+<p>Xie, Yihui. 2017a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown" class="uri">https://CRAN.R-project.org/package=bookdown</a>.</p>
 </div>
 <div id="ref-R-knitr">
-<p>Xie, Yihui. 2016c. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://CRAN.R-project.org/package=knitr" class="uri">https://CRAN.R-project.org/package=knitr</a>.</p>
+<p>Xie, Yihui. 2017b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://CRAN.R-project.org/package=knitr" class="uri">https://CRAN.R-project.org/package=knitr</a>.</p>
 </div>
 <div id="ref-xie2015">
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
 </div>
 <div id="ref-R-base">
-<p>R Core Team. 2016. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+<p>R Core Team. 2017. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
 </div>
 </div>
             </section>
@@ -245,8 +244,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="acerca-del-autor.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="motivacion.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="motivacion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -255,11 +255,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -276,7 +276,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown01-intro.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -289,7 +289,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="sintaxis-de-markdown.html">
 <link rel="next" href="codigo-en-r.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -215,10 +214,10 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <div id="ecuaciones" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> Numerar y referenciar ecuaciones</h3>
 <p>Para numerar y referenciar ecuaciones, póngalas dentro de entornos de ecuaciones y asígneles etiquetas mediante la sintaxis <code>(\#eq:label)</code>, por ejemplo,</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\begin{equation} 
-  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  \label{eq:binom}
-\end{equation} </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="kw">\begin</span>{<span class="ex">equation</span>}<span class="ss"> </span>
+<span class="ss">  f</span><span class="sc">\left</span><span class="ss">(k</span><span class="sc">\right</span><span class="ss">) = </span><span class="sc">\binom</span><span class="ss">{n}{k} p^k</span><span class="sc">\left</span><span class="ss">(1-p</span><span class="sc">\right</span><span class="ss">)^{n-k}</span>
+<span class="ss">  </span><span class="sc">\label</span><span class="ss">{eq:binom}</span>
+<span class="kw">\end</span>{<span class="ex">equation</span>} </code></pre></div>
 <p>Esto muestra la siguiente ecuación:</p>
 <span class="math display" id="eq:binom">\[\begin{equation}
 f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k} \tag{2.1}
@@ -228,35 +227,35 @@ f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k} \tag{2.1}
 <div class="rmdcaution">
 Las etiquetas de una ecuación deben comenzar con el prefijo <code>eq:</code> en <strong>bookdown</strong>. Las referencias a una ecuación funcionan mejor para la producción de LaTeX/PDF, y no están bien soportadas en la producción de Word o libros electrónicos. Para la salida HTML, <strong>bookdown</strong> sólo puede numerar las ecuaciones con etiquetas. Por favor asegúrese de que las ecuaciones sin etiquetas no estén numeradas ya sea usando el entorno <code>equation*</code> o adicionando <code>\nonumber</code> o <code>\notag</code> a sus ecuaciones. Las mismas reglas se aplican a otros entornos de matemáticas, tales como <code>eqnarray</code>,<code>gather</code>, <code>align</code>, etc. (por ejemplo, se puede utilizar el entorno <code>align*</code>).
 </div>
-<p></p>
+
 <p>Demostramos unos entornos más de ecuaciones matemáticas abajo. Aquí está una ecuación sin numerar utilizando el entorno <code>equation*</code>:</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\begin{equation*} 
-\frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x)
-\end{equation*} </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="kw">\begin</span>{<span class="ex">equation*</span>}<span class="ss"> </span>
+<span class="sc">\frac</span><span class="ss">{d}{dx}</span><span class="sc">\left</span><span class="ss">( </span><span class="sc">\int</span><span class="ss">_{a}^{x} f(u)</span><span class="sc">\,</span><span class="ss">du</span><span class="sc">\right</span><span class="ss">)=f(x)</span>
+<span class="kw">\end</span>{<span class="ex">equation*</span>} </code></pre></div>
 <span class="math display">\[\begin{equation*}
 \frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x)
 \end{equation*}\]</span>
 <p>Abajo hay un entorno <code>align</code> <a href="extensiones-de-markdown-en-bookdown.html#eq:align">(2.2)</a>:</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\begin{align} 
-g(X_{n}) &amp;= g(\theta)+g&#39;({\tilde{\theta}})(X_{n}-\theta) \notag \\
-\sqrt{n}[g(X_{n})-g(\theta)] &amp;= g&#39;\left({\tilde{\theta}}\right)
-  \sqrt{n}[X_{n}-\theta ] (\#eq:align)
-\end{align} </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="kw">\begin</span>{<span class="ex">align</span>}<span class="ss"> </span>
+<span class="ss">g(X_{n}) &amp;= g(</span><span class="sc">\theta</span><span class="ss">)+g&#39;({</span><span class="sc">\tilde</span><span class="ss">{</span><span class="sc">\theta</span><span class="ss">}})(X_{n}-</span><span class="sc">\theta</span><span class="ss">) </span><span class="sc">\notag</span><span class="ss"> </span><span class="sc">\\</span>
+<span class="sc">\sqrt</span><span class="ss">{n}[g(X_{n})-g(</span><span class="sc">\theta</span><span class="ss">)] &amp;= g&#39;</span><span class="sc">\left</span><span class="ss">({</span><span class="sc">\tilde</span><span class="ss">{</span><span class="sc">\theta</span><span class="ss">}}</span><span class="sc">\right</span><span class="ss">)</span>
+<span class="ss">  </span><span class="sc">\sqrt</span><span class="ss">{n}[X_{n}-</span><span class="sc">\theta</span><span class="ss"> ] (</span><span class="sc">\#</span><span class="ss">eq:align)</span>
+<span class="kw">\end</span>{<span class="ex">align</span>} </code></pre></div>
 <span class="math display" id="eq:align">\[\begin{align}
 g(X_{n}) &amp;= g(\theta)+g&#39;({\tilde{\theta}})(X_{n}-\theta) \notag \\
 \sqrt{n}[g(X_{n})-g(\theta)] &amp;= g&#39;\left({\tilde{\theta}}\right)
   \sqrt{n}[X_{n}-\theta ] \tag{2.2}
 \end{align}\]</span>
 <p>El entorno <code>split</code> dentro de <code>equation</code> de manera que todas las líneas comparten el mismo número <a href="extensiones-de-markdown-en-bookdown.html#eq:var-beta">(2.3)</a>. Por defecto, cada línea en el entorno <code>align</code> se le asignará un número de ecuación. Suprimimos el número de la primera línea en el ejemplo anterior usando <code>\notag</code>. En este ejemplo, a todo el entorno <code>split</code> se le asignó un único número.</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\begin{equation} 
-\begin{split}
-\mathrm{Var}(\hat{\beta}) &amp; =\mathrm{Var}((X&#39;X)^{-1}X&#39;y)\\
- &amp; =(X&#39;X)^{-1}X&#39;\mathrm{Var}(y)((X&#39;X)^{-1}X&#39;)&#39;\\
- &amp; =(X&#39;X)^{-1}X&#39;\mathrm{Var}(y)X(X&#39;X)^{-1}\\
- &amp; =(X&#39;X)^{-1}\sigma^{2}
-\end{split}
-(\#eq:var-beta)
-\end{equation} </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="kw">\begin</span>{<span class="ex">equation</span>}<span class="ss"> </span>
+<span class="kw">\begin</span>{<span class="ex">split</span>}
+<span class="sc">\mathrm</span><span class="ss">{Var}(</span><span class="sc">\hat</span><span class="ss">{</span><span class="sc">\beta</span><span class="ss">}) &amp; =</span><span class="sc">\mathrm</span><span class="ss">{Var}((X&#39;X)^{-1}X&#39;y)</span><span class="sc">\\</span>
+<span class="ss"> &amp; =(X&#39;X)^{-1}X&#39;</span><span class="sc">\mathrm</span><span class="ss">{Var}(y)((X&#39;X)^{-1}X&#39;)&#39;</span><span class="sc">\\</span>
+<span class="ss"> &amp; =(X&#39;X)^{-1}X&#39;</span><span class="sc">\mathrm</span><span class="ss">{Var}(y)X(X&#39;X)^{-1}</span><span class="sc">\\</span>
+<span class="ss"> &amp; =(X&#39;X)^{-1}</span><span class="sc">\sigma</span><span class="ss">^{2}</span>
+<span class="kw">\end</span>{<span class="ss">split}</span>
+<span class="ss">(</span><span class="sc">\#</span><span class="ss">eq:var-beta)</span>
+<span class="kw">\end</span>{<span class="ex">equation</span>} </code></pre></div>
 <span class="math display" id="eq:var-beta">\[\begin{equation}
 \begin{split}
 \mathrm{Var}(\hat{\beta}) &amp; =\mathrm{Var}((X&#39;X)^{-1}X&#39;y)\\
@@ -313,7 +312,12 @@ Aquí está mi teorema.
 <tr class="even">
 <td align="left">example</td>
 <td align="left">Example</td>
-<td align="left">ex</td>
+<td align="left">exm</td>
+</tr>
+<tr class="odd">
+<td align="left">exercise</td>
+<td align="left">Exercise</td>
+<td align="left">exr</td>
 </tr>
 </tbody>
 </table>
@@ -341,15 +345,15 @@ $$a^2 + b^2 = c^2$$
 ```</code></pre></div>
 
 <div class="theorem">
-<p><span id="thm:pyth" class="theorem"><strong>Teorema 2.1  (Teorema de Pitágoras) </strong></span>Para un triángulo rectángulo, si <span class="math inline">\(c\)</span> denota la longitud de la hipotenusa y <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span> denotan las longitudes de los otros dos lados, se tiene que</p>
+<p><span id="thm:pyth" class="theorem"><strong>Teorema 2.1  (Teorema de Pitágoras)  </strong></span>Para un triángulo rectángulo, si <span class="math inline">\(c\)</span> denota la longitud de la hipotenusa y <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span> denotan las longitudes de los otros dos lados, se tiene que</p>
 <span class="math display">\[a^2 + b^2 = c^2\]</span>
 </div>
-<p></p>
-<p>Los entornos de demostración que actualmente se soportan <code>proof</code> and <code>remark</code>. La sintaxis es similar a los entornos de teoremas, y los entornos de demostración también pueden ser nombrados. La única diferencia es que, puesto que no tienen número, no se puede hacer referencia a ellos.</p>
-<p>Hemos tratado de hacer que todos estos entornos de teorema y demostración funcionen fuera de lo normal, no importa si su salida es PDF, HTML o EPUB. Si es un experto en LaTeX o HTML, quizá desee personalizar el estilo de estos entornos de todos modos (consulte el capítulo <a href="personalizacion.html#personalizacion">4</a>). La personalización en HTML es fácil con CSS, y cada entorno está encerrado en <code>&lt;div&gt;&lt;/div&gt;</code> con la clase CSS siendo el nombre del entorno, por ejemplo, <code>&lt;div class=&quot;lemma&quot;&gt;&lt;/div&gt;</code>. Para la salida de LaTeX, hemos predefinido el estilo para que sea <code>definición</code> para entornos <code>definition</code> and <code>example</code> y <code>remark</code> para entornos <code>proof</code> and <code>remark</code>. Todos los demás entornos usan el estilo <code>plain</code>. La definición de estilo se realiza a través del comando <code>\theoremstyle{}</code> del paquete <strong>amsthm</strong>.</p>
+
+<p>Los entornos de demostración que actualmente se soportan <code>proof</code>, <code>remark</code>, and <code>solution</code>. La sintaxis es similar a los entornos de teoremas, y los entornos de demostración también pueden ser nombrados. La única diferencia es que, puesto que no tienen número, no se puede hacer referencia a ellos.</p>
+<p>Hemos tratado de hacer que todos estos entornos de teorema y demostración funcionen fuera de lo normal, no importa si su salida es PDF, HTML o EPUB. Si es un experto en LaTeX o HTML, quizá desee personalizar el estilo de estos entornos de todos modos (consulte el capítulo <a href="personalizacion.html#personalizacion">4</a>). La personalización en HTML es fácil con CSS, y cada entorno está encerrado en <code>&lt;div&gt;&lt;/div&gt;</code> con la clase CSS siendo el nombre del entorno, por ejemplo, <code>&lt;div class=&quot;lemma&quot;&gt;&lt;/div&gt;</code>. Para la salida de LaTeX, hemos predefinido el estilo para que sea <code>definición</code> para entornos <code>definition</code>, <code>example</code>, and <code>exercise</code> y <code>remark</code> para entornos <code>proof</code> and <code>remark</code>. Todos los demás entornos usan el estilo <code>plain</code>. La definición de estilo se realiza a través del comando <code>\theoremstyle{}</code> del paquete <strong>amsthm</strong>.</p>
 <p>Por defecto, los teoremas están numerados por capítulos. Si no hay capítulos en su documento, en su lugar se numeran por secciones. Si todo el documento no tiene número (la opción de formato de salida <code>number_sections = FALSE</code>), todos los teoremas están numerados secuencialmente de 1, 2, …, N. LaTeX soporta numeración de un entorno de teorema después de otro, por ejemplo, teoremas y lemas comparten el mismo contador. Esto no es compatible con la salida HTML/EPUB en <strong>bookdown</strong>. Puede cambiar el esquema de numeración en el preámbulo de LaTeX definiendo sus propios entornos de teorema, por ejemplo,</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="fu">\newtheorem</span>{theorem}{Theorem}
+<span class="fu">\newtheorem</span>{lemma}[theorem]{Lemma}</code></pre></div>
 <p>Cuando <strong>bookdown</strong> detecta <code>\newtheorem{theorem}</code> en su preámbulo de LaTeX, no escribirá sus definiciones de teorema por defecto, lo que significa que usted tiene que definir todos los entornos de teorema por su propia cuenta. Por razones de simplicidad y consistencia, no recomendamos que lo haga. Puede ser confuso cuando el Teorema 18 en PDF se convierte en el Teorema 2.4 en HTML.</p>
 <p>Los entornos de teorema y demostración quedarán ocultos si la opción de bloqueo <code>echo</code> se establece en <code>FALSE</code>. Para asegurarse de que siempre se muestren, puede agregar la opción de bloqueo <code>echo = TRUE</code>, por ejemplo,</p>
 <div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```{theorem, echo=TRUE}
@@ -358,13 +362,13 @@ Aquí está mi teorema.
 <p>A continuación, mostramos más ejemplos<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> de los entornos teorema y demostración, para que pueda ver los estilos por defecto en <strong>bookdown</strong>.</p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-9" class="definition"><strong>Definición 2.1 </strong></span>La función característica de una variable aleatoria <span class="math inline">\(X\)</span> está definida por</p>
+<p><span id="def:unnamed-chunk-9" class="definition"><strong>Definición 2.1  </strong></span>La función característica de una variable aleatoria <span class="math inline">\(X\)</span> está definida por</p>
 <span class="math display">\[\varphi _{X}(t)=\operatorname {E} \left[e^{itX}\right], \; t\in\mathcal{R}\]</span>
 </div>
-<p></p>
+
 
 <div class="example">
-<p><span id="ex:unnamed-chunk-10" class="example"><strong>Ejemplo 2.1 </strong></span>Derivamos la función característica de <span class="math inline">\(X\sim U(0,1)\)</span> con la función de densidad de probabilidad <span class="math inline">\(f(x)=\mathbf{1}_{x \in [0,1]}\)</span>.</p>
+<p><span id="exm:unnamed-chunk-10" class="example"><strong>Ejemplo 2.1  </strong></span>Derivamos la función característica de <span class="math inline">\(X\sim U(0,1)\)</span> con la función de densidad de probabilidad <span class="math inline">\(f(x)=\mathbf{1}_{x \in [0,1]}\)</span>.</p>
 <span class="math display">\[\begin{equation*}
 \begin{split}
 \varphi _{X}(t) &amp;= \operatorname {E} \left[e^{itX}\right]\\
@@ -379,27 +383,27 @@ Aquí está mi teorema.
 \end{equation*}\]</span>
 Note que usamos el hecho <span class="math inline">\(e^{ix}=\cos(x)+i\sin(x)\)</span> dos veces.
 </div>
-<p></p>
+
 
 <div class="lemma">
-<p><span id="lem:chf-pdf" class="lemma"><strong>Lema 2.1 </strong></span>Para dos variables aleatorias cualquiera <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, ambas tienen la misma distribución de probabilidad si y solo si</p>
+<p><span id="lem:chf-pdf" class="lemma"><strong>Lema 2.1  </strong></span>Para dos variables aleatorias cualquiera <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, ambas tienen la misma distribución de probabilidad si y solo si</p>
 <span class="math display">\[\varphi _{X_1}(t)=\varphi _{X_2}(t)\]</span>
 </div>
-<p></p>
+
 
 <div class="theorem">
-<p><span id="thm:chf-sum" class="theorem"><strong>Teorema 2.2 </strong></span>Si <span class="math inline">\(X_1\)</span>, …, <span class="math inline">\(X_n\)</span> son variables aleatorias independientes, y <span class="math inline">\(a_1\)</span>, …, <span class="math inline">\(a_n\)</span> son constantes, entonces la función característica de la combinación lineal <span class="math inline">\(S_n=\sum_{i=1}^na_iX_i\)</span> es</p>
+<p><span id="thm:chf-sum" class="theorem"><strong>Teorema 2.2  </strong></span>Si <span class="math inline">\(X_1\)</span>, …, <span class="math inline">\(X_n\)</span> son variables aleatorias independientes, y <span class="math inline">\(a_1\)</span>, …, <span class="math inline">\(a_n\)</span> son constantes, entonces la función característica de la combinación lineal <span class="math inline">\(S_n=\sum_{i=1}^na_iX_i\)</span> es</p>
 <span class="math display">\[\varphi _{S_{n}}(t)=\prod_{i=1}^n\varphi _{X_i}(a_{i}t)=\varphi _{X_{1}}(a_{1}t)\cdots \varphi _{X_{n}}(a_{n}t)\]</span>
 </div>
-<p></p>
+
 
 <div class="proposition">
-<span id="prp:unnamed-chunk-11" class="proposition"><strong>Proposición 2.1 </strong></span>La distribución de la suma de variables aleatorias independientes Poisson <span class="math inline">\(X_i \sim \mathrm{Pois}(\lambda_i),\: i=1,2,\cdots,n\)</span> es <span class="math inline">\(\mathrm{Pois}(\sum_{i=1}^n\lambda_i)\)</span>.
+<span id="prp:unnamed-chunk-11" class="proposition"><strong>Proposición 2.1  </strong></span>La distribución de la suma de variables aleatorias independientes Poisson <span class="math inline">\(X_i \sim \mathrm{Pois}(\lambda_i),\: i=1,2,\cdots,n\)</span> es <span class="math inline">\(\mathrm{Pois}(\sum_{i=1}^n\lambda_i)\)</span>.
 </div>
-<p></p>
+
 
 <div class="proof">
-<p><span class="proof"><em>Demostración. </em></span> La función característica de <span class="math inline">\(X\sim\mathrm{Pois}(\lambda)\)</span> es <span class="math inline">\(\varphi _{X}(t)=e^{\lambda (e^{it}-1)}\)</span>. Sea <span class="math inline">\(P_n=\sum_{i=1}^nX_i\)</span>. Se sabe del teorema <a href="extensiones-de-markdown-en-bookdown.html#thm:chf-sum">2.2</a> que</p>
+<p> <span class="proof"><em>Demostración. </em></span> La función característica de <span class="math inline">\(X\sim\mathrm{Pois}(\lambda)\)</span> es <span class="math inline">\(\varphi _{X}(t)=e^{\lambda (e^{it}-1)}\)</span>. Sea <span class="math inline">\(P_n=\sum_{i=1}^nX_i\)</span>. Se sabe del teorema <a href="extensiones-de-markdown-en-bookdown.html#thm:chf-sum">2.2</a> que</p>
 <span class="math display">\[\begin{equation*}
 \begin{split}
 \varphi _{P_{n}}(t) &amp; =\prod_{i=1}^n\varphi _{X_i}(t) \\
@@ -409,18 +413,29 @@ Note que usamos el hecho <span class="math inline">\(e^{ix}=\cos(x)+i\sin(x)\)</
 \end{equation*}\]</span>
 Esta es la función característica de una variable aleatoria Poisson con parámetro <span class="math inline">\(\lambda=\sum_{i=1}^n \lambda_i\)</span>. Del Lemma <a href="extensiones-de-markdown-en-bookdown.html#lem:chf-pdf">2.1</a>, se sabe que la distribución de <span class="math inline">\(P_n\)</span> es <span class="math inline">\(\mathrm{Pois}(\sum_{i=1}^n\lambda_i)\)</span>.
 </div>
-<p></p>
+
 
 <div class="remark">
-<span class="remark"><em>Observación. </em></span> En algunos casos, es muy conveniente y fácil calcular la distribución de la suma de variables aleatorias independientes usando funciones características.
+ <span class="remark"><em>Observación. </em></span> En algunos casos, es muy conveniente y fácil calcular la distribución de la suma de variables aleatorias independientes usando funciones características.
 </div>
-<p></p>
+
 
 <div class="corollary">
-<p><span id="cor:unnamed-chunk-14" class="corollary"><strong>Corolario 2.1 </strong></span>La función característica de la suma de dos variables aleatorias independientes <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span> es el producto de las funciones características de <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>, por ejemplo,</p>
+<p><span id="cor:unnamed-chunk-14" class="corollary"><strong>Corolario 2.1  </strong></span>La función característica de la suma de dos variables aleatorias independientes <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span> es el producto de las funciones características de <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>, por ejemplo,</p>
 <span class="math display">\[\varphi _{X_1+X_2}(t)=\varphi _{X_1}(t) \varphi _{X_2}(t)\]</span>
 </div>
-<p></p>
+
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-15" class="exercise"><strong>Ejercicio. 2.1  (Función característica de la media muestral)  </strong></span>Sea <span class="math inline">\(\bar{X}=\sum_{i=1}^n \frac{1}{n} X_i\)</span> la media muestral de <span class="math inline">\(n\)</span> variables aleatorias independientes e idénticamente distribuidas, cada una con función característica <span class="math inline">\(\varphi _{X}\)</span>. Compute la función característica de <span class="math inline">\(\bar{X}\)</span>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solución. </em></span> Aplicando el teorema <a href="extensiones-de-markdown-en-bookdown.html#thm:chf-sum">2.2</a>, tenemos</p>
+<span class="math display">\[\varphi _{\bar{X}}(t)=\prod_{i=1}^n \varphi _{X_i}\left(\frac{t}{n}\right)=\left[\varphi _{X}\left(\frac{t}{n}\right)\right]^n.\]</span>
+</div>
+
 </div>
 <div id="encabezados-especiales" class="section level3">
 <h3><span class="header-section-number">2.2.3</span> Encabezados especiales</h3>
@@ -459,6 +474,7 @@ Esta es la función característica de una variable aleatoria Poisson con parám
 ```{r foo, fig.cap=&#39;(ref:foo)&#39;}
 plot(cars)  # a scatterplot
 ```</code></pre></div>
+<p>Las referencias de texto se pueden usar en cualquier parte del documento (no están limitadas a las leyendas de las figuras). También puede ser útil si desea reutilizar un fragmento de texto en múltiples lugares.</p>
 </div>
 </div>
 <div class="footnotes">
@@ -474,8 +490,9 @@ plot(cars)  # a scatterplot
         </div>
       </div>
 <a href="sintaxis-de-markdown.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="codigo-en-r.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="codigo-en-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -484,11 +501,11 @@ plot(cars)  # a scatterplot
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -505,7 +522,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown02-components.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -518,7 +535,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

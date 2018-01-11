@@ -5,12 +5,13 @@ author: "Yihui Xie"
 date: "`r Sys.Date()`"
 knit: "bookdown::render_book"
 documentclass: krantz
+colorlinks: yes
 lot: yes
 lof: yes
 fontsize: 12pt
 monofont: "Source Code Pro"
 monofontoptions: "Scale=0.7"
-bibliography: ["book.bib", "packages.bib"]
+bibliography: ["book.bib", "R-packages.bib"]
 biblio-style: apalike
 link-citations: yes
 site: bookdown::bookdown_site
@@ -40,12 +41,14 @@ Este breve libro presenta el paquete de R, **bookdown**, que cambia la forma de 
 
 El paquete **bookdown** fue construido con base en R Markdown (http://rmarkdown.rstudio.com), y heredó la simplicidad en la sintaxis de R Markdown (puede aprenderse lo básico en cinco minutos; véase la sección \@ref(sintaxis-de-markdown)), así como la posibilidad de múltiples tipos de formatos de salida (PDF/HTML/Word/...). Asimismo, ha añadido diferentes características como la salida  de múltiples páginas HTML, numeración y referenciación cruzada a figuras/tablas/secciones/ecuaciones, inserción de partes/apéndices, e importación del estilo GitBook \index{GitBook} (https://www.gitbook.com) para crear páginas de libros en un formato elegante y atractivo en HTML. Este libro en sí es un ejemplo de cómo se puede producir un libro de una serie de documentos R Markdown, y tanto la versión impresa como la versión en línea puede parecer profesional. Puede encontrar más ejemplos en https://bookdown.org. 
 
+```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), fig.link='https://github.com/rstudio/bookdown'}
+knitr::include_graphics('images/logo.png', dpi = NA)
+```
+
 A pesar de que el nombre del paquete contiene la palabra "libro", **bookdown**  no es sólo para libros. El "libro" puede ser cualquier cosa que se componga de varios documentos R Markdown, como documentación de un curso, notas de estudio, un manual de software, una tesis de maestría/doctorado, o incluso un diario. De hecho, muchas características de **bookdown**  se aplican a documentos sencillos de R Markdown (Sección \@ref(un-documento-sencillo)).
 
-```{asis, echo='cc-license' %in% commandArgs(TRUE)}
 ![Creative Commons License](images/by-nc-sa.png)  
-This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
-```
+La versión online de este documento está licenciada bajo la [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/). You can purchase a hardcopy from [Chapman & Hall](https://www.crcpress.com/product/isbn/9781138700109) or Amazon.
 
 ## ¿Por qué leer este libro? {-}
 
@@ -94,11 +97,13 @@ No se añaden instrucciones (`>` y `+`) al código fuente en R en este libro, y,
 
 ## Agradecimientos {-}
 
-En primer lugar me gustaría dar las gracias a mi empleador, RStudio, por darme la oportunidad de trabajar en este emocionante proyecto. Tenía la esperanza de trabajar en él cuando vi por primera vez el proyecto GitBook en 2013, ya que de inmediato me di cuenta que era un estilo hermoso de libro y había mucha más potencia que podríamos agregarle, a juzgar por mi experiencia de escribir el libro sobre **knitr** [@xie2015] y la lectura de otros libros. R Markdown se convirtió en un proyecto maduro dos años después, y por suerte, **bookdown** se convirtió en mi trabajo oficial a finales de 2015. No hay muchas cosas en el mundo mejores que el hecho de que su trabajo pase a ser su afición (o viceversa). Estoy totalmente complacido de jugar un poco con bibliotecas de JavaScript, paquetes de LaTeX, y un sinfín de expresiones regulares en R. Honestamente también debo agradecer a StackOverflow (http://stackoverflow.com), y creo que todos ustedes saben [lo que quiero decir] (http://bit.ly/2cWbiAp), si alguna vez han escrito algún código de programa.
+En primer lugar me gustaría dar las gracias a mi empleador, RStudio, por darme la oportunidad de trabajar en este emocionante proyecto. Tenía la esperanza de trabajar en él cuando vi por primera vez el proyecto GitBook en 2013, ya que de inmediato me di cuenta que era un estilo hermoso de libro y había mucha más potencia que podríamos agregarle, a juzgar por mi experiencia de escribir el libro sobre **knitr** [@xie2015] y la lectura de otros libros. R Markdown se convirtió en un proyecto maduro dos años después, y por suerte, **bookdown** se convirtió en mi trabajo oficial a finales de 2015. No hay muchas cosas en el mundo mejores que el hecho de que su trabajo pase a ser su afición (o viceversa). Estoy totalmente complacido de jugar un poco con bibliotecas de JavaScript, paquetes de LaTeX, y un sinfín de expresiones regulares en R. Honestamente también debo agradecer a StackOverflow (http://stackoverflow.com), y creo que todos ustedes saben [lo que quiero decir](http://bit.ly/2cWbiAp), si alguna vez han escrito algún código de programa.
 
-Este proyecto es, sin duda, no solo el esfuerzo de una sola persona. Varios colegas en RStudio me han ayudado a lo largo del camino. Hadley Wickham proporcionó una enorme cantidad de información durante el desarrollo de **bookdown**, mientras trabajaba en su libro "R for Data Science" con Garrett Grolemund. JJ Allaire y Jonathan McPherson proporcionaron una gran cantidad de ayuda técnica directamente al paquete, así como apoyo en el IDE RStudio. Jeff Allen, Chaita Chaudhari, y el equipo de RStudio Connect han mantenido el sitio web https://bookdown.org. Robby Shaver diseñó una imagen de portada bonita para este libro. Tareef Kawaf hizo todo lo posible para ayudarme a crecer como un ingeniero de software profesional. Es una bendición trabajar en esta empresa con personas entusiastas e inteligentes. Recuerdo que una vez le dije a Jonathan "Hey, me encontré con un problema en el almacenamiento en caché de HTML widgets y finalmente me di cuenta de una posible solución", y Jonathan agarró su cerveza, "yo ya lo resolví" "Oh, bien, muy bien."
+Este proyecto es, sin duda, no solo el esfuerzo de una sola persona. Varios colegas en RStudio me han ayudado a lo largo del camino. Hadley Wickham proporcionó una enorme cantidad de información durante el desarrollo de **bookdown**, mientras trabajaba en su libro _R for Data Science_ con Garrett Grolemund. JJ Allaire y Jonathan McPherson proporcionaron una gran cantidad de ayuda técnica directamente al paquete, así como apoyo en el IDE RStudio. Jeff Allen, Chaita Chaudhari, y el equipo de RStudio Connect han mantenido el sitio web https://bookdown.org. Robby Shaver diseñó una imagen de portada bonita para este libro. Tareef Kawaf hizo todo lo posible para ayudarme a crecer como un ingeniero de software profesional. Es una bendición trabajar en esta empresa con personas entusiastas e inteligentes. Recuerdo que una vez le dije a Jonathan "Hey, me encontré con un problema en el almacenamiento en caché de HTML widgets y finalmente me di cuenta de una posible solución", y Jonathan agarró su cerveza, "yo ya lo resolví" "Oh, bien, muy bien."
 
 También he recibido un montón de comentarios de los autores de libros fuera de RStudio, incluyendo Jan de Leeuw, Jenny Bryan, Dean Attali, Rafael Irizarry, Michael Love, Roger Peng, Andrew Clark, etc. Algunos usuarios también contribuyeron con código para el proyecto y ayudaron a revisar el libro. Aquí está una lista de todos los contribuyentes: https://github.com/rstudio/bookdown/graphs/contributors. Se siente bien cuando uno inventa una herramienta y se da cuenta que también es el beneficiario de su propia herramienta. Como alguien que ama el modelo de solicitud de extracción de GitHub, deseaba que los lectores no tuvieran que enviarme un correo electrónico para mencionar que había un error tipográfico o un error evidente en mi libro, sino que sólo pudiera arreglarse a través de una solicitud de extracción. Esto fue posible en **bookdown**. Se puede ver el número de solicitudes de extracción de los errores tipográficos que he fusionado: https://github.com/rstudio/bookdown/pulls Es bueno tener tantos correctores ortográficos humanos. No es que no sepa cómo usar un verdadero corrector ortográfico, pero no quiero hacer esto antes de que el libro esté terminado, y el malévolo Yihui también quiere dejar algunas tareas sencillas para los lectores e involucrarlos en la mejora del libro.
+
+Callum Webb amablemente diseñó un lindo sticker hexagonal para **bookdown**.
 
 El paquete **bookdown** no sería posible sin un par de paquetes de software de código abierto. En particular, Pandoc, GitBook, jQuery, y los paquetes de R dependientes, por no hablar de R en sí. Doy las gracias a los desarrolladores de estos paquetes.
 

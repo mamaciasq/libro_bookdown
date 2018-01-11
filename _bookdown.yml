@@ -5,7 +5,7 @@ output_dir: "docs"
 #clean: [packages.bib, bookdown.bbl]
 language:
   label:
-    fig: "Figura "
+    fig: "Figura: "
     tab: "Tabla "
     eq: "Ecuación "
     thm: "Teorema "
@@ -13,8 +13,10 @@ language:
     def: "Definición "
     cor: "Corolario "
     prp: "Proposición "
-    ex: "Ejemplo "
+    exm: "Ejemplo "
     proof: "Demostración. "
     remark: "Observación. "
+    exr: "Ejercicio. "
+    solution: "Solución. "
   ui:
     edit: "Edit"

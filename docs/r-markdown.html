@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="knitr.html">
 <link rel="next" href="faq.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -214,34 +213,34 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>Gracias a la potencia de R y Pandoc, usted puede fácilmente hacer el cómputo de documentos en R Markdown, y convertirlos en una variedad de formatos de salida, incluyendo documentos de Word/HTML/PDF/, diapositivas HTML5/Beamer, dashboards, y sitios web, etc. Un documento en R Markdown, por lo general, consiste en metadatos YAML (opcional) y el cuerpo del documento. Se ha introducido la sintaxis para escribir diversos componentes del cuerpo del documento en el capítulo <a href="componentes.html#componentes">2</a>, y se explica más sobre los metadatos YAML en esa sección.</p>
 <p>Los metadatos para R Markdown se puede escribir al principio de un documento, empezando y terminando con tres guiones <code>---</code>, respectivamente. Los metadatos YAML consisten, generalmente, en pares de etiquetas de valor separados por dos puntos, por ejemplo,</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
-<span class="fu">title:</span> <span class="st">&quot;Un documento en R Markdown&quot;</span>
-<span class="fu">author:</span> <span class="st">&quot;Yihui Xie&quot;</span>
+<span class="fu">title:</span><span class="at"> </span><span class="st">&quot;Un documento en R Markdown&quot;</span>
+<span class="fu">author:</span><span class="at"> </span><span class="st">&quot;Yihui Xie&quot;</span>
 <span class="ot">---</span></code></pre></div>
 <p>Para los valores de caracteres, es posible que omita las comillas cuando los valores no contienen caracteres especiales, pero es más seguro para citarlos si se espera que sean los valores de caracteres.</p>
 <p>Además de los caracteres, otro tipo común de valores son valores lógicos. Tanto <code>yes</code> como <code>true</code> significan verdad, y <code>no</code> / <code>false</code> significan falso, por ejemplo,</p>
-<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">link-citations:</span> yes</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">link-citations:</span><span class="at"> yes</span></code></pre></div>
 <p>Los valores pueden ser vectores, y hay dos formas de escribir vectores. Las dos formas siguientes son equivalentes:</p>
-<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">output:</span> <span class="kw">[</span><span class="st">&quot;html_document&quot;</span><span class="kw">,</span> <span class="st">&quot;word_document&quot;</span><span class="kw">]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">output:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;html_document&quot;</span><span class="kw">,</span> <span class="st">&quot;word_document&quot;</span><span class="kw">]</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">output:</span>
   <span class="kw">-</span> <span class="st">&quot;html_document&quot;</span>
   <span class="kw">-</span> <span class="st">&quot;word_document&quot;</span></code></pre></div>
 <p>Los valores también pueden ser listas de valores. Sólo tiene que aplicar sangría de dos espacios más a los valores, por ejemplo,</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:gitbook:
-    <span class="fu">split_by:</span> <span class="st">&quot;section&quot;</span>
-    <span class="fu">split_bib:</span> no</code></pre></div>
+  <span class="fu">bookdown:</span><span class="at">:gitbook:</span>
+    <span class="fu">split_by:</span><span class="at"> </span><span class="st">&quot;section&quot;</span>
+    <span class="fu">split_bib:</span><span class="at"> no</span></code></pre></div>
 <p>Es un error común olvidar sangrar los valores. Por ejemplo, los siguientes datos</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">output:</span>
 <span class="fu">html_document:</span>
-<span class="fu">toc:</span> yes</code></pre></div>
+<span class="fu">toc:</span><span class="at"> yes</span></code></pre></div>
 <p>significaría</p>
-<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">output:</span> <span class="dt">null</span>
-<span class="fu">html_document:</span> <span class="dt">null</span>
-<span class="fu">toc:</span> yes</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">output:</span><span class="at"> </span><span class="dt">null</span>
+<span class="fu">html_document:</span><span class="at"> </span><span class="dt">null</span>
+<span class="fu">toc:</span><span class="at"> yes</span></code></pre></div>
 <p>en lugar de lo que probablemente habría esperado:</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">output:</span>
   <span class="fu">html_document:</span>
-    <span class="fu">toc:</span> yes</code></pre></div>
+    <span class="fu">toc:</span><span class="at"> yes</span></code></pre></div>
 <p>El formato de salida R Markdown se especifica en el campo <code>output</code> de los metadatos YAML, y hay que consultar las páginas de ayuda de R para las opciones posibles, por ejemplo,<code>?rmarkdown::html_document</code>, o <code>?bookdown::gitbook</code>. Los significados de la mayoría de los otros campos en YAML se pueden encontrar en la documentación de Pandoc.</p>
 <p>El paquete <strong>rmarkdown</strong> ha porporcionado estos formatos de salida R Markdown:</p>
 <ul>
@@ -249,6 +248,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <li><code>github_document</code></li>
 <li><code>html_document</code></li>
 <li><code>ioslides_presentation</code></li>
+<li><code>latex_document</code></li>
 <li><code>md_document</code></li>
 <li><code>odt_document</code></li>
 <li><code>pdf_document</code></li>
@@ -266,8 +266,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="knitr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="faq.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="faq.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -276,11 +277,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -297,7 +298,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown08-usage.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -310,7 +311,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

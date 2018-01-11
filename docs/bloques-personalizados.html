@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="referencias-cruzadas.html">
 <link rel="next" href="citas.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -220,9 +219,9 @@ Some text for this block.
 Some text for this block.
 <span class="kw">&lt;/div&gt;</span></code></pre></div>
 <p>y la salida en LaTeX sería:</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\begin{FOO}
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="kw">\begin</span>{<span class="ex">FOO</span>}
 Some text for this block.
-\end{FOO}</code></pre></div>
+<span class="kw">\end</span>{<span class="ex">FOO</span>}</code></pre></div>
 <p>Depende del autor del libro establecer cómo definir el estilo del bloque. Puede definir el estilo de <code>&lt;div&gt;</code> en CSS e incluirlo en la salida a través de la opción <code>includes</code> en los metadatos YAML. Del mismo modo, puede definir el entorno de LaTeX a través de <code>\newenvironment</code> e incluir la definición en la salida de LaTeX a través de la opción <code>includes</code>. Por ejemplo, podemos guardar el siguiente estilo en un archivo CSS, digamos, <code>style.css</code>:</p>
 <div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css">div<span class="fl">.FOO</span> <span class="kw">{</span>
   <span class="kw">font-weight:</span> <span class="dt">bold</span><span class="kw">;</span>
@@ -231,36 +230,36 @@ Some text for this block.
 <p>Y los metadatos YAML del documento R Markdown pueden ser:</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
 <span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:html_book:
+  <span class="fu">bookdown:</span><span class="at">:html_book:</span>
     <span class="fu">includes:</span>
-      <span class="fu">in_header:</span> style.css
+      <span class="fu">in_header:</span><span class="at"> style.css</span>
 <span class="ot">---</span></code></pre></div>
 <p>Hemos definido algunos tipos de bloques para que este libro muestre notas, consejos y advertencias, etc. A continuación se presentan algunos ejemplos:</p>
 
 <div class="rmdnote">
 R es software libre y viene con ABSOLUTAMENTE NINGUNA GARANTÍA. Le invitamos a redistribuirlo bajo los términos de la GNU General Public License versiones 2 o 3. Para más información sobre estos asuntos, <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.
 </div>
-<p></p>
+
 
 <div class="rmdcaution">
 R es software libre y viene con ABSOLUTAMENTE NINGUNA GARANTÍA. Le invitamos a redistribuirlo bajo los términos de la GNU General Public License versiones 2 o 3. Para más información sobre estos asuntos, <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.
 </div>
-<p></p>
+
 
 <div class="rmdimportant">
 R es software libre y viene con ABSOLUTAMENTE NINGUNA GARANTÍA. Le invitamos a redistribuirlo bajo los términos de la GNU General Public License versiones 2 o 3. Para más información sobre estos asuntos, <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.
 </div>
-<p></p>
+
 
 <div class="rmdtip">
 R es software libre y viene con ABSOLUTAMENTE NINGUNA GARANTÍA. Le invitamos a redistribuirlo bajo los términos de la GNU General Public License versiones 2 o 3. Para más información sobre estos asuntos, <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.
 </div>
-<p></p>
+
 
 <div class="rmdwarning">
 R es software libre y viene con ABSOLUTAMENTE NINGUNA GARANTÍA. Le invitamos a redistribuirlo bajo los términos de la GNU General Public License versiones 2 o 3. Para más información sobre estos asuntos, <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.
 </div>
-<p></p>
+
 <p>El motor <strong>knitr</strong> <code>block</code> fue diseñado para mostrar contenido simple (normalmente un párrafo de texto sin formato). Puede utilizar una sintaxis de formato simple, como hacer que ciertas palabras sean negritas o cursivas, pero la sintaxis más avanzada, como las citas y las referencias cruzadas, no funcionarán. Sin embargo, hay un motor alternativo denominado <code>block2</code> que soporta la sintaxis arbitraria de Markdown, por ejemplo,</p>
 <div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```{block2, type=&#39;FOO&#39;}
 Some text for this block [@citation-key].
@@ -268,8 +267,8 @@ Some text for this block [@citation-key].
 - <span class="fl">a list item</span>
 <span class="fl">- another item</span>
 
-<span class="fl">More text.</span>
-<span class="fl">```</span></code></pre></div>
+More text.
+```</code></pre></div>
 <p>El motor <code>block2</code> también debería ser más rápido que el motor <code>block</code> si tiene muchos bloques personalizados en el documento, pero su implementación se basó en <a href="https://github.com/jgm/pandoc/issues/2453">un hack,</a> por lo que no estamos 100% seguros de si siempre va a funcionar en el futuro. No hemos visto problemas con Pandoc v1.17.2 todavía.</p>
 <p>Una advertencia más para el motor <code>block2</code>: si el último elemento del bloque no es un párrafo ordinario, debe dejar una línea en blanco al final, por ejemplo,</p>
 <div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```{block2, type=&#39;FOO&#39;}
@@ -279,7 +278,7 @@ Some text for this block [@citation-key].
 <span class="fl">- another item</span>
 <span class="fl">- end the list with a blank line</span>
 
-<span class="fl">```</span></code></pre></div>
+```</code></pre></div>
 <p>El teorema y los entornos de prueba en la sección <a href="extensiones-de-markdown-en-bookdown.html#teoremas">2.2.2</a> se implementan en realidad a través del motor <code>block2</code>.</p>
 <p>Para todos los bloques personalizados basados en el motor <code>block</code> o <code>block2</code>, hay una opción de bloqueo <code>echo</code> que puede usar para mostrar (<code>echo = TRUE</code>) u ocultar (<code>echo = FALSE</code>) los bloques.</p>
 </div>
@@ -289,8 +288,9 @@ Some text for this block [@citation-key].
         </div>
       </div>
 <a href="referencias-cruzadas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="citas.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="citas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -299,11 +299,11 @@ Some text for this block [@citation-key].
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -320,7 +320,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown02-components.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -333,7 +333,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

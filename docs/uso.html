@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="comenzando.html">
 <link rel="next" href="new-session.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -245,39 +244,39 @@ Hemos finalizado un bello libro.</code></pre></div></li>
 </ul>
 <p>De forma predeterminada, <strong>bookdown</strong> fusiona todos los archivos Rmd por el orden de los nombres de archivo, por ejemplo, <code>01-intro.Rmd</code> aparecerá antes de <code>02-literatura.Rmd</code>. Los nombres de archivo que comiencen con un guión bajo <code>_</code> se omiten. Si existe un archivo Rmd llamado <code>index.Rmd</code>, siempre va a ser tratado como el primer archivo cuando se fusionen todos los archivos Rmd. La razón de este tratamiento especial es que el archivo HTML <code>index.html</code> se genera a partir de<code>index.Rmd</code>. Este <code>index.html</code> suele ser el archivo de índice por defecto cuando se ve una página web, por ejemplo, usted está viendo <a href="http://yihui.name/index.html" class="uri">http://yihui.name/index.html</a> cuando se abre <a href="http://yihui.name/" class="uri">http://yihui.name/</a>.</p>
 <p>Puede anular el comportamiento anterior mediante la inclusión de un archivo de configuración llamado <code>_bookdown.yml</code> en el directorio del libro. Este es un archivo YAML (<a href="https://en.wikipedia.org/wiki/YAML" class="uri">https://en.wikipedia.org/wiki/YAML</a>), y los usuarios de R Markdown deben estar familiarizados con este formato, ya que también se utiliza para escribir los metadatos al comienzo de los documentos R Markdown (puede aprender más acerca de YAML en la Sección <a href="r-markdown.html#r-markdown">B.2</a>). Puede utilizar un campo llamado <code>rmd_files</code> para definir su propia lista y el orden de los archivos Rmd para el libro. Por ejemplo,</p>
-<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">rmd_files:</span> <span class="kw">[</span><span class="st">&quot;index.Rmd&quot;</span><span class="kw">,</span> <span class="st">&quot;abstract.Rmd&quot;</span><span class="kw">,</span> <span class="st">&quot;intro.Rmd&quot;</span><span class="kw">]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">rmd_files:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;index.Rmd&quot;</span><span class="kw">,</span> <span class="st">&quot;abstract.Rmd&quot;</span><span class="kw">,</span> <span class="st">&quot;intro.Rmd&quot;</span><span class="kw">]</span></code></pre></div>
 <p>En este caso, <strong>bookdown</strong> sólo tiene que utilizar lo que se ha definido en este campo YAML sin tratamientos especiales de <code>index.Rmd</code> o guiones bajos. Si desea salidas HTML y LaTeX/PDF del libro, y usar diferentes archivos Rmd para la salida HTML y LaTeX, puede especificar estos archivos para los dos formatos de salida por separado, por ejemplo,</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">rmd_files:</span>
-  <span class="fu">html:</span> <span class="kw">[</span><span class="st">&quot;index.Rmd&quot;</span><span class="kw">,</span> <span class="st">&quot;abstract.Rmd&quot;</span><span class="kw">,</span> <span class="st">&quot;intro.Rmd&quot;</span><span class="kw">]</span>
-  <span class="fu">latex:</span> <span class="kw">[</span><span class="st">&quot;abstract.Rmd&quot;</span><span class="kw">,</span> <span class="st">&quot;intro.Rmd&quot;</span><span class="kw">]</span></code></pre></div>
+  <span class="fu">html:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;index.Rmd&quot;</span><span class="kw">,</span> <span class="st">&quot;abstract.Rmd&quot;</span><span class="kw">,</span> <span class="st">&quot;intro.Rmd&quot;</span><span class="kw">]</span>
+  <span class="fu">latex:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;abstract.Rmd&quot;</span><span class="kw">,</span> <span class="st">&quot;intro.Rmd&quot;</span><span class="kw">]</span></code></pre></div>
 <p>A pesar de que hemos estado hablando acerca de los archivos de R Markdown, los archivos de capítulos en realidad no tienen que ser R Markdown. Pueden ser archivos sin formato Markdown ( <code>.md</code>), y no tienen que contener trozos de código R (en adelante <em>chunks</em>) en absoluto. ¡Por supuesto que puede utilizar <strong>bookdown</strong> para componer novelas o poemas!</p>
 <p>Por el momento, los principales formatos de salida que se pueden utilizar incluyen <code>bookdown::pdf_book</code>,<code>bookdown::gitbook</code>, <code>bookdown::html_book</code>, y <code>bookdown::epub_book</code>. Hay una función <code>bookdown::render_book()</code>  similar a <code>rmarkdown::render()</code>, pero fue diseñada para hacer <em>múltiples</em> documentos Rmd en un libro utilizando las funciones de formato de salida. Es posible que se quiera llamar a esta función desde la línea de comandos directamente, o hacer clic en los botones correspondientes en el IDE RStudio. Estos son algunos ejemplos de línea de comandos:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bookdown::<span class="kw">render_book</span>(<span class="st">&#39;foo.Rmd&#39;</span>, <span class="st">&#39;bookdown::gitbook&#39;</span>)
-bookdown::<span class="kw">render_book</span>(<span class="st">&#39;foo.Rmd&#39;</span>, <span class="st">&#39;bookdown::pdf_book&#39;</span>)
-bookdown::<span class="kw">render_book</span>(<span class="st">&#39;foo.Rmd&#39;</span>, bookdown::<span class="kw">gitbook</span>(<span class="dt">lib_dir =</span> <span class="st">&#39;libs&#39;</span>))
-bookdown::<span class="kw">render_book</span>(<span class="st">&#39;foo.Rmd&#39;</span>, bookdown::<span class="kw">pdf_book</span>(<span class="dt">keep_tex =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&#39;foo.Rmd&#39;</span>, <span class="st">&#39;bookdown::gitbook&#39;</span>)
+bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&#39;foo.Rmd&#39;</span>, <span class="st">&#39;bookdown::pdf_book&#39;</span>)
+bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&#39;foo.Rmd&#39;</span>, bookdown<span class="op">::</span><span class="kw">gitbook</span>(<span class="dt">lib_dir =</span> <span class="st">&#39;libs&#39;</span>))
+bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&#39;foo.Rmd&#39;</span>, bookdown<span class="op">::</span><span class="kw">pdf_book</span>(<span class="dt">keep_tex =</span> <span class="ot">TRUE</span>))</code></pre></div>
 <p>Para utilizar las funciones <code>render_book</code> y el formato de salida en el IDE RStudio, se puede definir un campo YAML llamado <code>site</code> que toma el valor <code>bookdown::bookdown_site</code>,<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> y las funciones de formato de salida se pueden utilizar en el campo <code>output</code>, por ejemplo,</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
-<span class="fu">site:</span> <span class="st">&quot;bookdown::bookdown_site&quot;</span>
+<span class="fu">site:</span><span class="at"> </span><span class="st">&quot;bookdown::bookdown_site&quot;</span>
 <span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:gitbook:
-    <span class="fu">lib_dir:</span> <span class="st">&quot;book_assets&quot;</span>
-  <span class="fu">bookdown:</span>:pdf_book:
-    <span class="fu">keep_tex:</span> yes
+  <span class="fu">bookdown:</span><span class="at">:gitbook:</span>
+    <span class="fu">lib_dir:</span><span class="at"> </span><span class="st">&quot;book_assets&quot;</span>
+  <span class="fu">bookdown:</span><span class="at">:pdf_book:</span>
+    <span class="fu">keep_tex:</span><span class="at"> yes</span>
 <span class="ot">---</span></code></pre></div>
 <p>A continuación, puede hacer clic en el botón <code>Build Book</code> en el panel <code>Build</code> en RStudio para compilar los archivos Rmd en un libro, o haga clic en el botón <code>Knit</code> en la barra de herramientas para obtener una vista previa del capítulo actual.</p>
 <p>Más opciones de configuración <strong>bookdown</strong> en <code>_bookdown.yml</code> se explican en la sección <a href="configuracion.html#configuracion">4.4</a>. Además de estas configuraciones, también puede especificar otras relacionadas con Pandoc en los metadatos YAML del primer archivo Rmd del libro, como el título, autor y fecha del libro, etc. Por ejemplo:</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">--- </span>
-<span class="fu">title:</span> <span class="st">&quot;Creando un libro con R Markdown&quot;</span>
-<span class="fu">author:</span> <span class="st">&quot;Yihui Xie&quot;</span>
-<span class="fu">date:</span> <span class="st">&quot;`r Sys.Date()`&quot;</span>
-<span class="fu">site:</span> <span class="st">&quot;bookdown::bookdown_site&quot;</span>
+<span class="fu">title:</span><span class="at"> </span><span class="st">&quot;Creando un libro con R Markdown&quot;</span>
+<span class="fu">author:</span><span class="at"> </span><span class="st">&quot;Yihui Xie&quot;</span>
+<span class="fu">date:</span><span class="at"> </span><span class="st">&quot;`r Sys.Date()`&quot;</span>
+<span class="fu">site:</span><span class="at"> </span><span class="st">&quot;bookdown::bookdown_site&quot;</span>
 <span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:gitbook: default
-<span class="fu">documentclass:</span> book
-<span class="fu">bibliography:</span> <span class="kw">[</span><span class="st">&quot;book.bib&quot;</span><span class="kw">,</span> <span class="st">&quot;packages.bib&quot;</span><span class="kw">]</span>
-<span class="fu">biblio-style:</span> apalike
-<span class="fu">link-citations:</span> yes
+  <span class="fu">bookdown:</span><span class="at">:gitbook: default</span>
+<span class="fu">documentclass:</span><span class="at"> book</span>
+<span class="fu">bibliography:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;book.bib&quot;</span><span class="kw">,</span> <span class="st">&quot;packages.bib&quot;</span><span class="kw">]</span>
+<span class="fu">biblio-style:</span><span class="at"> apalike</span>
+<span class="fu">link-citations:</span><span class="at"> yes</span>
 <span class="ot">---</span></code></pre></div>
 </div>
 <div class="footnotes">
@@ -292,8 +291,9 @@ bookdown::<span class="kw">render_book</span>(<span class="st">&#39;foo.Rmd&#39;
         </div>
       </div>
 <a href="comenzando.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="new-session.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="new-session.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -302,11 +302,11 @@ bookdown::<span class="kw">render_book</span>(<span class="st">&#39;foo.Rmd&#39;
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -323,7 +323,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown01-intro.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -336,7 +336,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="informacion-acerca-del-software-y-convenciones.html">
 <link rel="next" href="acerca-del-autor.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -211,9 +210,10 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="agradecimientos" class="section level2 unnumbered">
 <h2>Agradecimientos</h2>
-<p>En primer lugar me gustaría dar las gracias a mi empleador, RStudio, por darme la oportunidad de trabajar en este emocionante proyecto. Tenía la esperanza de trabajar en él cuando vi por primera vez el proyecto GitBook en 2013, ya que de inmediato me di cuenta que era un estilo hermoso de libro y había mucha más potencia que podríamos agregarle, a juzgar por mi experiencia de escribir el libro sobre <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span> y la lectura de otros libros. R Markdown se convirtió en un proyecto maduro dos años después, y por suerte, <strong>bookdown</strong> se convirtió en mi trabajo oficial a finales de 2015. No hay muchas cosas en el mundo mejores que el hecho de que su trabajo pase a ser su afición (o viceversa). Estoy totalmente complacido de jugar un poco con bibliotecas de JavaScript, paquetes de LaTeX, y un sinfín de expresiones regulares en R. Honestamente también debo agradecer a StackOverflow (<a href="http://stackoverflow.com" class="uri">http://stackoverflow.com</a>), y creo que todos ustedes saben [lo que quiero decir] (<a href="http://bit.ly/2cWbiAp" class="uri">http://bit.ly/2cWbiAp</a>), si alguna vez han escrito algún código de programa.</p>
-<p>Este proyecto es, sin duda, no solo el esfuerzo de una sola persona. Varios colegas en RStudio me han ayudado a lo largo del camino. Hadley Wickham proporcionó una enorme cantidad de información durante el desarrollo de <strong>bookdown</strong>, mientras trabajaba en su libro “R for Data Science” con Garrett Grolemund. JJ Allaire y Jonathan McPherson proporcionaron una gran cantidad de ayuda técnica directamente al paquete, así como apoyo en el IDE RStudio. Jeff Allen, Chaita Chaudhari, y el equipo de RStudio Connect han mantenido el sitio web <a href="https://bookdown.org" class="uri">https://bookdown.org</a>. Robby Shaver diseñó una imagen de portada bonita para este libro. Tareef Kawaf hizo todo lo posible para ayudarme a crecer como un ingeniero de software profesional. Es una bendición trabajar en esta empresa con personas entusiastas e inteligentes. Recuerdo que una vez le dije a Jonathan “Hey, me encontré con un problema en el almacenamiento en caché de HTML widgets y finalmente me di cuenta de una posible solución”, y Jonathan agarró su cerveza, “yo ya lo resolví” “Oh, bien, muy bien.”</p>
+<p>En primer lugar me gustaría dar las gracias a mi empleador, RStudio, por darme la oportunidad de trabajar en este emocionante proyecto. Tenía la esperanza de trabajar en él cuando vi por primera vez el proyecto GitBook en 2013, ya que de inmediato me di cuenta que era un estilo hermoso de libro y había mucha más potencia que podríamos agregarle, a juzgar por mi experiencia de escribir el libro sobre <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span> y la lectura de otros libros. R Markdown se convirtió en un proyecto maduro dos años después, y por suerte, <strong>bookdown</strong> se convirtió en mi trabajo oficial a finales de 2015. No hay muchas cosas en el mundo mejores que el hecho de que su trabajo pase a ser su afición (o viceversa). Estoy totalmente complacido de jugar un poco con bibliotecas de JavaScript, paquetes de LaTeX, y un sinfín de expresiones regulares en R. Honestamente también debo agradecer a StackOverflow (<a href="http://stackoverflow.com" class="uri">http://stackoverflow.com</a>), y creo que todos ustedes saben <a href="http://bit.ly/2cWbiAp">lo que quiero decir</a>, si alguna vez han escrito algún código de programa.</p>
+<p>Este proyecto es, sin duda, no solo el esfuerzo de una sola persona. Varios colegas en RStudio me han ayudado a lo largo del camino. Hadley Wickham proporcionó una enorme cantidad de información durante el desarrollo de <strong>bookdown</strong>, mientras trabajaba en su libro <em>R for Data Science</em> con Garrett Grolemund. JJ Allaire y Jonathan McPherson proporcionaron una gran cantidad de ayuda técnica directamente al paquete, así como apoyo en el IDE RStudio. Jeff Allen, Chaita Chaudhari, y el equipo de RStudio Connect han mantenido el sitio web <a href="https://bookdown.org" class="uri">https://bookdown.org</a>. Robby Shaver diseñó una imagen de portada bonita para este libro. Tareef Kawaf hizo todo lo posible para ayudarme a crecer como un ingeniero de software profesional. Es una bendición trabajar en esta empresa con personas entusiastas e inteligentes. Recuerdo que una vez le dije a Jonathan “Hey, me encontré con un problema en el almacenamiento en caché de HTML widgets y finalmente me di cuenta de una posible solución”, y Jonathan agarró su cerveza, “yo ya lo resolví” “Oh, bien, muy bien.”</p>
 <p>También he recibido un montón de comentarios de los autores de libros fuera de RStudio, incluyendo Jan de Leeuw, Jenny Bryan, Dean Attali, Rafael Irizarry, Michael Love, Roger Peng, Andrew Clark, etc. Algunos usuarios también contribuyeron con código para el proyecto y ayudaron a revisar el libro. Aquí está una lista de todos los contribuyentes: <a href="https://github.com/rstudio/bookdown/graphs/contributors" class="uri">https://github.com/rstudio/bookdown/graphs/contributors</a>. Se siente bien cuando uno inventa una herramienta y se da cuenta que también es el beneficiario de su propia herramienta. Como alguien que ama el modelo de solicitud de extracción de GitHub, deseaba que los lectores no tuvieran que enviarme un correo electrónico para mencionar que había un error tipográfico o un error evidente en mi libro, sino que sólo pudiera arreglarse a través de una solicitud de extracción. Esto fue posible en <strong>bookdown</strong>. Se puede ver el número de solicitudes de extracción de los errores tipográficos que he fusionado: <a href="https://github.com/rstudio/bookdown/pulls" class="uri">https://github.com/rstudio/bookdown/pulls</a> Es bueno tener tantos correctores ortográficos humanos. No es que no sepa cómo usar un verdadero corrector ortográfico, pero no quiero hacer esto antes de que el libro esté terminado, y el malévolo Yihui también quiere dejar algunas tareas sencillas para los lectores e involucrarlos en la mejora del libro.</p>
+<p>Callum Webb amablemente diseñó un lindo sticker hexagonal para <strong>bookdown</strong>.</p>
 <p>El paquete <strong>bookdown</strong> no sería posible sin un par de paquetes de software de código abierto. En particular, Pandoc, GitBook, jQuery, y los paquetes de R dependientes, por no hablar de R en sí. Doy las gracias a los desarrolladores de estos paquetes.</p>
 <p>Me mudé a Omaha, Nebraska en 2015, y disfruté de un año en apartamentos Steeplechase, donde viví con comodidad para desarrollar el paquete <strong>bookdown</strong>, gracias al personal del condominio que fue muy amable y servicial. Luego me encontré con un agente inmobiliario profesional y muy listo, Kevin Schaben, que encontró una casa fabulosa para nosotros en un período de tiempo sorprendentemente corto, y terminé este libro en nuestra nueva casa.</p>
 <p>John Kimmel, el editor de Chapman &amp; Hall/CRC, me ayudó a publicar mi primer libro. Es un placer trabajar con él de nuevo. Él generosamente accedió a que me quedara con la versión en línea de este libro de forma gratuita, por lo que puede seguirlo para actualizar después de que se imprima y publique (es decir, usted no tiene que esperar años para la segunda edición para corregir errores e introducir nuevas caracteristicas). Me gustaría poder ser lo más abierto de mente posible como él cuando tenga su edad. Shashi Kumar resolvió algunos de mis problemas técnicos con la clase del editor de LaTeX (<code>krantz.cls</code>) cuando yo estaba tratando de integrarlo con <strong>bookdown</strong>. También aprecio los comentarios muy útiles de los revisores Jan de Leeuw, Karl Broma n, Brooke Anderson, Michael Grayling, Daniel Kaplan y Max Kuhn.</p>
@@ -223,7 +223,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 Yihui Xie<br />
 Elkhorn, Nebraska
 </p>
-<p></p>
+
 
 </div>
 <!-- </div> -->
@@ -239,8 +239,9 @@ Elkhorn, Nebraska
         </div>
       </div>
 <a href="informacion-acerca-del-software-y-convenciones.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="acerca-del-autor.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="acerca-del-autor.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -249,11 +250,11 @@ Elkhorn, Nebraska
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -270,7 +271,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdownindex.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -283,7 +284,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

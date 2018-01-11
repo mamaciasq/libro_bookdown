@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="configuracion.html">
 <link rel="next" href="edicion.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -215,24 +214,26 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>Para la salida que no sea de látex, se puede establecer el campo <code>language</code> en el archivo de configuración<code>_bookdown.yml</code>. Actualmente los ajustes por defecto son:</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">language:</span>
   <span class="fu">label:</span>
-    <span class="fu">fig:</span> <span class="st">&#39;Figure &#39;</span>
-    <span class="fu">tab:</span> <span class="st">&#39;Table &#39;</span>
-    <span class="fu">eq:</span> <span class="st">&#39;Equation &#39;</span>
-    <span class="fu">thm:</span> <span class="st">&#39;Theorem &#39;</span>
-    <span class="fu">lem:</span> <span class="st">&#39;Lemma &#39;</span>
-    <span class="fu">def:</span> <span class="st">&#39;Definition &#39;</span>
-    <span class="fu">cor:</span> <span class="st">&#39;Corollary &#39;</span>
-    <span class="fu">prp:</span> <span class="st">&#39;Proposition &#39;</span>
-    <span class="fu">ex:</span> <span class="st">&#39;Example &#39;</span>
-    <span class="fu">proof:</span> <span class="st">&#39;Proof. &#39;</span>
-    <span class="fu">remark:</span> <span class="st">&#39;Remark. &#39;</span>
+    <span class="fu">fig:</span><span class="at"> </span><span class="st">&#39;Figure &#39;</span>
+    <span class="fu">tab:</span><span class="at"> </span><span class="st">&#39;Table &#39;</span>
+    <span class="fu">eq:</span><span class="at"> </span><span class="st">&#39;Equation &#39;</span>
+    <span class="fu">thm:</span><span class="at"> </span><span class="st">&#39;Theorem &#39;</span>
+    <span class="fu">lem:</span><span class="at"> </span><span class="st">&#39;Lemma &#39;</span>
+    <span class="fu">def:</span><span class="at"> </span><span class="st">&#39;Definition &#39;</span>
+    <span class="fu">cor:</span><span class="at"> </span><span class="st">&#39;Corollary &#39;</span>
+    <span class="fu">prp:</span><span class="at"> </span><span class="st">&#39;Proposition &#39;</span>
+    <span class="fu">exm:</span><span class="at"> </span><span class="st">&#39;Example &#39;</span>
+    <span class="fu">exr:</span><span class="at"> </span><span class="st">&#39;Exercise &#39;</span>
+    <span class="fu">proof:</span><span class="at"> </span><span class="st">&#39;Proof. &#39;</span>
+    <span class="fu">remark:</span><span class="at"> </span><span class="st">&#39;Remark. &#39;</span>
+    <span class="fu">solution:</span><span class="at"> </span><span class="st">&#39;Solution. &#39;</span>
   <span class="fu">ui:</span>
-    <span class="fu">edit:</span> Edit
-    <span class="fu">chapter_name:</span> <span class="st">&#39;&#39;</span></code></pre></div>
+    <span class="fu">edit:</span><span class="at"> Edit</span>
+    <span class="fu">chapter_name:</span><span class="at"> </span><span class="st">&#39;&#39;</span></code></pre></div>
 <p>Por ejemplo, si desea <code>FIGURE x.x</code> en lugar de<code>Figure x.x</code>, puede cambiar <code>fig</code> a <code>&quot;Figure&quot;</code>:</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">language:</span>
   <span class="fu">label:</span>
-    <span class="fu">fig:</span> <span class="st">&quot;FIGURE &quot;</span></code></pre></div>
+    <span class="fu">fig:</span><span class="at"> </span><span class="st">&quot;FIGURE &quot;</span></code></pre></div>
 <p>Los campos bajo <code>ui</code> se utilizan para especificar algunos términos en la interfaz de usuario. El campo <code>edit</code> especifica el texto asociado con el enlace <code>edit</code> en <code>_bookdown.yml</code> (Sección <a href="configuracion.html#configuracion">4.4</a>). El campo <code>chapter_name</code> puede ser una cadena de caracteres que se antepone a los números de capítulos en títulos de los capítulos (por ejemplo, “Capítulo”), o una función de R que toma el número de capítulo como entrada y devuelve una cadena como el nuevo número de capítulo (por ejemplo, <code>!expr function(i) paste('Capítulo', i)</code>). Si se trata de un vector de caracteres de longitud 2, el prefijo del título de capítulo será <code>paste0(chapter_name[1], i, chapter_name[2])</code>, donde <code>i</code> es el número de capítulo.</p>
 <p>Hay una advertencia cuando se escribe en un idioma que utiliza caracteres de varios bytes, como el chino, japonés y coreano (CJK): Pandoc no puede generar identificadores de los encabezados de las secciones que son caracteres CJK puros, por lo que no será capaz de hacer referencias cruzadas a las secciones (no tienen etiquetas), a menos que asigne manualmente identificadores, añadiendo <code>{#identifier}</code> a la cabecera de sección, donde <code>identifier</code> es un identificador arbitrario que elija.</p>
 
@@ -244,8 +245,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="configuracion.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="edicion.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="edicion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -254,11 +256,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -275,7 +277,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown04-customization.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -288,7 +290,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="plantillas.html">
 <link rel="next" href="internacionalizacion.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -216,23 +215,20 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <li><code>book_filename</code>: el nombre del archivo principal Rmd, es decir, el archivo Rmd a partir del cual se fusionan todos los capítulos; por defecto, se llama <code>_main.Rmd</code>.</li>
 <li><code>before_chapter_script</code>: una o varias secuencias de comandos en R para ser ejecutadas antes de cada capítulo, por ejemplo, es posible que desee limpiar el área de trabajo antes de compilar cada capítulo, en cuyo caso se puede usar <code>rm(list = ls(all = TRUE))</code> en el script de R.</li>
 <li><code>after_chapter_script</code>: similar a <code>before_chapter_script</code>, y el script de R se ejecuta después de cada capítulo.</li>
-<li><p><code>edit</code>: un enlace que los colaboradores pueden utilizar para editar el documento original Rmd de la página actual; esto fue diseñado principalmente para los repositorios de Github, ya que es fácil editar archivos arbitrarios de texto sin formato en Github incluso en los repositorios de otras personas (si usted no tiene acceso a escritura en el repositorio, Github se trinchará automáticamente y le permitirá enviar una solicitud de extracción después de haber terminado de editar el archivo). Este enlace debe tener <code>s%</code> dentro de él, que será sustituido por el nombre de archivo actual Rmd para cada página.</p></li>
-<li>Opcionalmente, puede tener un campo <code>text</code> bajo el campo <code>edit</code> para especificar el texto al que está unido el enlace.</li>
+<li><code>edit</code>: un enlace que los colaboradores pueden utilizar para editar el documento original Rmd de la página actual; esto fue diseñado principalmente para los repositorios de Github, ya que es fácil editar archivos arbitrarios de texto sin formato en Github incluso en los repositorios de otras personas (si usted no tiene acceso a escritura en el repositorio, Github se trinchará automáticamente y le permitirá enviar una solicitud de extracción después de haber terminado de editar el archivo). Este enlace debe tener <code>s%</code> dentro de él, que será sustituido por el nombre de archivo actual Rmd para cada página.</li>
 <li><code>rmd_subdir</code>: si desea buscar archivos de origen del libro de Rmd en subdirectorios (por defecto, sólo el directorio raíz se busca).<br />
 </li>
 <li><code>output_dir</code>: el directorio de salida del libro; esta configuración es leída y utilizada por <code>render_book()</code>.</li>
-<li><p><code>clean</code>: un vector de archivos y directorios a ser limpiados por la función <code>clean_book()</code>.</p></li>
+<li><code>clean</code>: un vector de archivos y directorios a ser limpiados por la función <code>clean_book()</code>.</li>
 </ul>
 <p>Aquí hay un ejemplo de <code>_bookdown.yml</code>:</p>
-<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">book_filename:</span> <span class="st">&quot;mi-libro.Rmd&quot;</span>
-<span class="fu">chapter_name:</span> <span class="st">&quot;CAPÍTULO &quot;</span>
-<span class="fu">before_chapter_script:</span> <span class="kw">[</span><span class="st">&quot;script1.R&quot;</span><span class="kw">,</span> <span class="st">&quot;script2.R&quot;</span><span class="kw">]</span>
-<span class="fu">after_chapter_script:</span> <span class="st">&quot;script3.R&quot;</span>
-<span class="fu">edit:</span>
-  <span class="fu">link:</span> https://github.com/rstudio/bookdown/edit/master/inst/examples/%s
-  <span class="fu">text:</span> <span class="st">&quot;Edit&quot;</span>
-<span class="fu">output_dir:</span> <span class="st">&quot;book-output&quot;</span>
-<span class="fu">clean:</span> <span class="kw">[</span><span class="st">&quot;my-book.bbl&quot;</span><span class="kw">,</span> <span class="st">&quot;R-packages.bib&quot;</span><span class="kw">]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">book_filename:</span><span class="at"> </span><span class="st">&quot;mi-libro.Rmd&quot;</span>
+<span class="fu">chapter_name:</span><span class="at"> </span><span class="st">&quot;CAPÍTULO &quot;</span>
+<span class="fu">before_chapter_script:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;script1.R&quot;</span><span class="kw">,</span> <span class="st">&quot;script2.R&quot;</span><span class="kw">]</span>
+<span class="fu">after_chapter_script:</span><span class="at"> </span><span class="st">&quot;script3.R&quot;</span>
+<span class="fu">edit:</span><span class="at"> https://github.com/rstudio/bookdown/edit/master/inst/examples/%s</span>
+<span class="fu">output_dir:</span><span class="at"> </span><span class="st">&quot;book-output&quot;</span>
+<span class="fu">clean:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;my-book.bbl&quot;</span><span class="kw">,</span> <span class="st">&quot;R-packages.bib&quot;</span><span class="kw">]</span></code></pre></div>
 </div>
             </section>
 
@@ -240,8 +236,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="plantillas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="internacionalizacion.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="internacionalizacion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -250,11 +247,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -271,7 +268,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown04-customization.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -284,7 +281,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

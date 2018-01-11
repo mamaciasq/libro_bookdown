@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="html.html">
 <link rel="next" href="e-books.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -215,16 +214,19 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>El formato de salida de LaTeX/PDF es proporcionado por <code>pdf_book()</code> en <strong>bookdown</strong>. No hay una diferencia significativa entre <code>pdf_book()</code> y el <code>pdf_document()</code> del formato <strong>rmarkdown</strong>. El objetivo principal de <code>pdf_book()</code> es aclarar las etiquetas y referencias cruzadas escritas usando la sintaxis descrita en las secciones <a href="figuras.html#figuras">2.4</a>, <a href="tablas.html#tablas">2.5</a>, y <a href="referencias-cruzadas.html#referencias-cruzadas">2.6</a>. Si el único formato de salida que desea para un libro es el LaTeX/PDF, puede utilizar la sintaxis específica de LaTeX, por ejemplo <code>\label{}</code> para etiquetar las figuras/tablas/secciones, y <code>\ref{}</code> para sus referencias cruzadas, puesto que Pandoc admite comandos de LaTeX en Markdown. Sin embargo, la sintaxis LaTeX no es portátil a otros formatos de salida, tales como HTML y libros electrónicos. Es por eso que se ha introducido la sintaxis <code>(\#label)</code> para etiquetas y <code>\@ref(label)</code> para referencias cruzadas.</p>
 <p>Hay algunas opciones YAML de alto nivel que se aplicarán a la salida LaTeX. Para un libro, puede cambiar la clase de documento predeterminado a <code>book</code> (el valor predeterminado es<code>article</code>), y especificar un estilo de bibliografía requerida por su editor. Un breve ejemplo YAML:</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
-<span class="fu">documentclass:</span> book
-<span class="fu">bibliography:</span> <span class="kw">[</span>book.bib<span class="kw">,</span> packages.bib<span class="kw">]</span>
-<span class="fu">biblio-style:</span> apalike
+<span class="fu">documentclass:</span><span class="at"> book</span>
+<span class="fu">bibliography:</span><span class="at"> </span><span class="kw">[</span>book.bib<span class="kw">,</span> packages.bib<span class="kw">]</span>
+<span class="fu">biblio-style:</span><span class="at"> apalike</span>
 <span class="ot">---</span></code></pre></div>
+<p>Hay una gran cantidad de opciones de YAML que puede especificar para la salida de LaTeX, como el tamaño del papel, el tamaño de la fuente, el margen de página, el espaciado entre líneas, las familias de fuentes, etc. Consulte <a href="http://pandoc.org/MANUAL.html#variables-for-latex" class="uri">http://pandoc.org/MANUAL.html#variables-for-latex</a> para obtener una lista completa de opciones.</p>
 <p>El formato <code>pdf_book()</code> es un formato general como <code>html_chapters</code>, que también tiene un argumento <code>base_format</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pdf_book</span>(<span class="dt">toc =</span> <span class="ot">TRUE</span>, <span class="dt">number_sections =</span> <span class="ot">TRUE</span>, <span class="dt">fig_caption =</span> <span class="ot">TRUE</span>, 
-  ..., <span class="dt">base_format =</span> rmarkdown::pdf_document, <span class="dt">toc_unnumbered =</span> <span class="ot">TRUE</span>, 
-  <span class="dt">toc_appendix =</span> <span class="ot">FALSE</span>, <span class="dt">toc_bib =</span> <span class="ot">FALSE</span>, <span class="dt">quote_footer =</span> <span class="ot">NULL</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pdf_book</span>(<span class="dt">toc =</span> <span class="ot">TRUE</span>, <span class="dt">number_sections =</span> <span class="ot">TRUE</span>,
+  <span class="dt">fig_caption =</span> <span class="ot">TRUE</span>, ...,
+  <span class="dt">base_format =</span> rmarkdown<span class="op">::</span>pdf_document,
+  <span class="dt">toc_unnumbered =</span> <span class="ot">TRUE</span>, <span class="dt">toc_appendix =</span> <span class="ot">FALSE</span>,
+  <span class="dt">toc_bib =</span> <span class="ot">FALSE</span>, <span class="dt">quote_footer =</span> <span class="ot">NULL</span>,
   <span class="dt">highlight_bw =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p>Puede cambiar la función <code>base_format</code> a otras funciones de formato de salida, y <strong>bookdown</strong> ha proporcionado una sencilla función de contenedor <code>tufte_book2()</code>, que es básicamente <code>pdf_book(base_format = Tufte::tufte_book)</code>, para producir un libro PDF utilizando el estilo PDF Tufte (de nuevo, ver el <strong>tufte</strong> paquete).</p>
+<p>Puede cambiar la función <code>base_format</code> a otras funciones de formato de salida, y <strong>bookdown</strong> ha proporcionado una sencilla función de contenedor <code>tufte_book2()</code>, que es básicamente <code>pdf_book(base_format = Tufte::tufte_book)</code>, para producir un libro PDF utilizando el estilo PDF Tufte (de nuevo, ver el paquete <strong>tufte</strong>).</p>
 </div>
             </section>
 
@@ -232,8 +234,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="html.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="e-books.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="e-books.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -242,11 +245,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -263,7 +266,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown03-formats.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -276,7 +279,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

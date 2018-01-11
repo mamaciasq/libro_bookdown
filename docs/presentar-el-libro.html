@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="previsualizar-un-capitulo.html">
 <link rel="next" href="ide-rstudio.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -211,9 +210,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="presentar-el-libro" class="section level2">
 <h2><span class="header-section-number">5.3</span> Presentar el libro</h2>
-<p>En lugar de ejecutar <code>render_book()</code> o <code>preview_chapter()</code> una y otra vez, se puede previsualizar el libro “en vivo” en el navegador web, y lo único que hay que hacer es guardar el archivo Rmd. La función <code>serve_book()</code> en <strong>bookdown</strong> puede iniciar un servidor web local para presentar la salida HTML basada en el paquete <strong>servr</strong> <span class="citation">(Xie <a href="#ref-R-servr">2016</a><a href="#ref-R-servr">d</a>)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">serve_book</span>(<span class="dt">dir =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">output_dir =</span> <span class="st">&quot;_book&quot;</span>, <span class="dt">preview =</span> <span class="ot">TRUE</span>, 
-  <span class="dt">in_session =</span> <span class="ot">TRUE</span>, <span class="dt">daemon =</span> <span class="ot">FALSE</span>, ...)</code></pre></div>
+<p>En lugar de ejecutar <code>render_book()</code> o <code>preview_chapter()</code> una y otra vez, se puede previsualizar el libro “en vivo” en el navegador web, y lo único que hay que hacer es guardar el archivo Rmd. La función <code>serve_book()</code> en <strong>bookdown</strong> puede iniciar un servidor web local para presentar la salida HTML basada en el paquete <strong>servr</strong> <span class="citation">(Xie <a href="#ref-R-servr">2017</a><a href="#ref-R-servr">c</a>)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">serve_book</span>(<span class="dt">dir =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">output_dir =</span> <span class="st">&quot;_book&quot;</span>,
+  <span class="dt">preview =</span> <span class="ot">TRUE</span>, <span class="dt">in_session =</span> <span class="ot">TRUE</span>, ...)</code></pre></div>
 <p>Sólo tiene que pasar el directorio raíz del libro al argumento <code>dir</code>, y esta función iniciará un servidor web local para que pueda ver la salida del libro usando el servidor. La dirección URL predeterminada para acceder a la salida del libro es <code>http://127.0.0.1:4321</code>. Si ejecuta esta función en una sesión interactiva de R, este URL se abrirá automáticamente en su navegador web. Si se encuentra en la IDE RStudio, el visor de RStudio se utilizará como el navegador web por defecto, por lo que se podrá escribir en los archivos de origen Rmd y ver la salida en el mismo entorno (por ejemplo, la fuente en la izquierda y la salida en el derecha).</p>
 <p>El servidor atenderá a los cambios en el directorio raíz del libro: siempre que modifique los archivos en el directorio de libro, <code>serve_book()</code> puede detectar los cambios, volver a compilar los archivos Rmd, y refrescar el navegador web de forma automática. Si los archivos modificados no incluyen archivos Rmd, sólo se actualiza el navegador (por ejemplo, si sólo actualizó un determinado archivo CSS). Esto significa que una vez que se inicie el servidor, todo lo que tiene que hacer es simplemente escribir el libro y guardar los archivos. La compilación y previsualización se llevarán a cabo automáticamente al guardar archivos.</p>
 <p>Si en realidad no se toma demasiado tiempo para volver a compilar todo el libro, es posible establecer el argumento <code>preview = FALSE</code>, de modo que cada vez que se actualice el libro, todo el libro se vuelve a compilar, de lo contrario sólo los capítulos modificados se vuelven a compilar a través de <code>preview_chapter()</code>.</p>
@@ -227,7 +226,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <h3>Referencias</h3>
 <div id="refs" class="references">
 <div id="ref-R-servr">
-<p>Xie, Yihui. 2016d. <em>Servr: A Simple Http Server to Serve Static Files or Dynamic Documents</em>. <a href="https://CRAN.R-project.org/package=servr" class="uri">https://CRAN.R-project.org/package=servr</a>.</p>
+<p>Xie, Yihui. 2017c. <em>Servr: A Simple Http Server to Serve Static Files or Dynamic Documents</em>. <a href="https://CRAN.R-project.org/package=servr" class="uri">https://CRAN.R-project.org/package=servr</a>.</p>
 </div>
 </div>
             </section>
@@ -236,8 +235,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="previsualizar-un-capitulo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ide-rstudio.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="ide-rstudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -246,11 +246,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -267,7 +267,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown05-editing.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -280,7 +280,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

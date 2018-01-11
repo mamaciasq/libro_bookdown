@@ -5,6 +5,7 @@ A continuación se muestra la lista _completa_ de preguntas frecuentes (FAQ). S�
 1. P: **bookdown** tendrá características X, Y, y Z?
 
     R: La respuesta corta es no, pero si usted se ha hecho esta pregunta tres veces: "¿Realmente lo necesito", y la respuesta sigue siendo "sí", no dude en presentar una solicitud de función en https://github.com/rstudio/bookdown/issues.
+    
     Los usuarios que solicitan más funciones a menudo provienen del mundo LaTeX. Si ese es el caso suyo, la respuesta a esta pregunta es sí, porque Markdown Pandoc apoya código LaTeX sin procesar. Siempre que sienta que Markdown no puede hacer el trabajo por usted, siempre tiene la opción de aplicar un código LaTeX sin procesar en su documento de Markdown. Por ejemplo, puede crear glosarios utilizando el paquete **glossaries** o incrustar una tabla LaTeX complicada, siempre y cuando conozca la sintaxis de LaTeX. Sin embargo, tenga en cuenta que el contenido de LaTeX no es portátil. Sólo funcionará para la salida LaTeX/PDF, y se ignorará en otros tipos de salida. Dependiendo de la solicitud, podemos introducir algunas características más de LaTeX en **bookdown** en el futuro, pero nuestra filosofía general es que Markdown debe mantenerse tan simple como sea posible.
 
 Lo más difícil en el mundo no es aprender tecnologías fantásticas, sino controlar su propio corazón salvaje.

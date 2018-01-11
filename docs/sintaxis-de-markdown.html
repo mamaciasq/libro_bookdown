@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="componentes.html">
 <link rel="next" href="extensiones-de-markdown-en-bookdown.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -277,25 +276,25 @@ O sangrándolo con cuatro espacios:
 <p>Las ecuaciones en LaTeX se pueden escribir dentro de un par de signos peso usando la sintaxis de LaTeX, por ejemplo <code>$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$</code> (cuya salida es: <span class="math inline">\(f(k)={n \choose k}p^{k}(1-p)^{n-k}\)</span>); las expresiones matemáticas también pueden centrarse en la página si se ponen entre dobles signos peso, por ejemplo: <code>$$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$$</code>, cuya salida se vería como:</p>
 <p><span class="math display">\[f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k}\]</span></p>
 <p>También puede utilizar entornos matemáticos dentro de <code>$ $</code> o <code>$$ $$</code>, por ejemplo,</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">$$\begin{array}{ccc}
-x_{11} &amp; x_{12} &amp; x_{13}\\
-x_{21} &amp; x_{22} &amp; x_{23}
-\end{array}$$</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="ss">$$</span><span class="sc">\begin</span><span class="ss">{array}{ccc}</span>
+<span class="ss">x_{11} &amp; x_{12} &amp; x_{13}</span><span class="sc">\\</span>
+<span class="ss">x_{21} &amp; x_{22} &amp; x_{23}</span>
+<span class="sc">\end</span><span class="ss">{array}$$</span></code></pre></div>
 <p><span class="math display">\[\begin{array}{ccc}
 x_{11} &amp; x_{12} &amp; x_{13}\\
 x_{21} &amp; x_{22} &amp; x_{23}
 \end{array}\]</span></p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">$$X = \begin{bmatrix}1 &amp; x_{1}\\
-1 &amp; x_{2}\\
-1 &amp; x_{3}
-\end{bmatrix}$$</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="ss">$$X = </span><span class="sc">\begin</span><span class="ss">{bmatrix}1 &amp; x_{1}</span><span class="sc">\\</span>
+<span class="ss">1 &amp; x_{2}</span><span class="sc">\\</span>
+<span class="ss">1 &amp; x_{3}</span>
+<span class="sc">\end</span><span class="ss">{bmatrix}$$</span></code></pre></div>
 <p><span class="math display">\[X = \begin{bmatrix}1 &amp; x_{1}\\
 1 &amp; x_{2}\\
 1 &amp; x_{3}
 \end{bmatrix}\]</span></p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">$$\begin{vmatrix}a &amp; b\\
-c &amp; d
-\end{vmatrix}=ad-bc$$</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="ss">$$</span><span class="sc">\begin</span><span class="ss">{vmatrix}a &amp; b</span><span class="sc">\\</span>
+<span class="ss">c &amp; d</span>
+<span class="sc">\end</span><span class="ss">{vmatrix}=ad-bc$$</span></code></pre></div>
 <p><span class="math display">\[\begin{vmatrix}a &amp; b\\
 c &amp; d
 \end{vmatrix}=ad-bc\]</span></p>
@@ -313,8 +312,9 @@ c &amp; d
         </div>
       </div>
 <a href="componentes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="extensiones-de-markdown-en-bookdown.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="extensiones-de-markdown-en-bookdown.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -323,11 +323,11 @@ c &amp; d
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -344,7 +344,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown02-components.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -357,7 +357,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

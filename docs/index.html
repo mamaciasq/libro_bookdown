@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 
 <link rel="next" href="por-que-leer-este-libro.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -212,14 +211,17 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">bookdown: Escritura de libros y documentos técnicos con R Markdown</h1>
 <h4 class="author"><em>Yihui Xie</em></h4>
-<h4 class="date"><em>2017-02-10</em></h4>
+<h4 class="date"><em>2018-01-10</em></h4>
 </div>
 <div id="prefacio" class="section level1 unnumbered">
 <h1>Prefacio</h1>
 <p><a href="https://www.crcpress.com/product/isbn/9781138700109" target="_blank"><img src="images/cover.jpg" style="display: block; margin: auto;" /></a></p>
 <p>Este breve libro presenta el paquete de R, <strong>bookdown</strong>, que cambia la forma de escribir libros. Escribir un libro debe ser técnicamente fácil, visualmente agradable a la hora de leerlo, divertido para interactuar con él, cómodo para navegar a través de sus páginas y sencillo si los lectores desean contribuir o dejar comentarios para su(s) autor(es), y lo más importante, para que los autores no se distraigan con los detalles de composición tipográfica.</p>
 <p>El paquete <strong>bookdown</strong> fue construido con base en R Markdown (<a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>), y heredó la simplicidad en la sintaxis de R Markdown (puede aprenderse lo básico en cinco minutos; véase la sección <a href="sintaxis-de-markdown.html#sintaxis-de-markdown">2.1</a>), así como la posibilidad de múltiples tipos de formatos de salida (PDF/HTML/Word/…). Asimismo, ha añadido diferentes características como la salida de múltiples páginas HTML, numeración y referenciación cruzada a figuras/tablas/secciones/ecuaciones, inserción de partes/apéndices, e importación del estilo GitBook  (<a href="https://www.gitbook.com" class="uri">https://www.gitbook.com</a>) para crear páginas de libros en un formato elegante y atractivo en HTML. Este libro en sí es un ejemplo de cómo se puede producir un libro de una serie de documentos R Markdown, y tanto la versión impresa como la versión en línea puede parecer profesional. Puede encontrar más ejemplos en <a href="https://bookdown.org" class="uri">https://bookdown.org</a>.</p>
-<p>A pesar de que el nombre del paquete contiene la palabra “libro”, <strong>bookdown</strong> no es sólo para libros. El “libro” puede ser cualquier cosa que se componga de varios documentos R Markdown, como documentación de un curso, notas de estudio, un manual de software, una tesis de maestría/doctorado, o incluso un diario. De hecho, muchas características de <strong>bookdown</strong> se aplican a documentos sencillos de R Markdown (Sección <a href="un-documento-sencillo.html#un-documento-sencillo">3.4</a>).</p> 
+<p><a href="https://github.com/rstudio/bookdown" target="_blank"><img src="images/logo.png" style="display: block; margin: auto;" /></a></p>
+<p>A pesar de que el nombre del paquete contiene la palabra “libro”, <strong>bookdown</strong> no es sólo para libros. El “libro” puede ser cualquier cosa que se componga de varios documentos R Markdown, como documentación de un curso, notas de estudio, un manual de software, una tesis de maestría/doctorado, o incluso un diario. De hecho, muchas características de <strong>bookdown</strong> se aplican a documentos sencillos de R Markdown (Sección <a href="un-documento-sencillo.html#un-documento-sencillo">3.4</a>).</p>
+<p><img src="images/by-nc-sa.png" alt="Creative Commons License" /><br />
+La versión online de este documento está licenciada bajo la <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. You can purchase a hardcopy from <a href="https://www.crcpress.com/product/isbn/9781138700109">Chapman &amp; Hall</a> or Amazon.</p> 
 </div>
             </section>
 
@@ -227,8 +229,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 
-<a href="por-que-leer-este-libro.html" class="navigation navigation-next navigation-unique" aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="por-que-leer-este-libro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -237,11 +240,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -258,7 +261,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdownindex.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -271,7 +274,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

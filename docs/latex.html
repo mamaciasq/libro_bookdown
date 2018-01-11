@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="pandoc.html">
 <link rel="next" href="uso-de-software.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -229,11 +228,11 @@ pandoc: Error producing PDF
 Error: pandoc document conversion failed with error 43
 Execution halted</code></pre></div>
 <p>Esto quiere decir que utilizó un paquete que contiene <code>titling.sty</code>, pero no se ha instalado. Los nombres de los paquetes de LaTeX son a menudo los mismos que los nombres de fichero <code>*.sty</code>, por lo que en este caso, se puede tratar de instalar el paquete <code>titling</code>. Tanto MiKTeX como MacTeX proporcionan una interfaz gráfica de usuario para administrar paquetes. Puede encontrar el gestor de paquetes MiKTeX desde el menú de inicio, y el gestor de paquetes de MacTeX de la aplicación “Utilidad de TeX Live”. Escriba el nombre del paquete, o el nombre del archivo para buscar el paquete e instalarlo. TeXLive puede ser un poco más complicado: si utiliza los paquetes pre-construidos TexLive de la distribución de Linux, es necesario buscar en el repositorio de paquetes y sus palabras clave pueden coincidir con otros paquetes que no contengan LaTeX. En lo personal resulta frustrante usar las colecciones pre-construidos de paquetes en Linux, y mucho más fácil de instalar sólo TeXLive de la fuente, en cuyo caso se pueden gestionar los paquetes utilizando el comando <code>tlmgr</code>. Por ejemplo, puede buscar <code>titling.sty</code> desde el repositorio de paquetes TeXLive:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">tlmgr</span> search --global --file titling.sty
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">tlmgr</span> search --global --file titling.sty
 <span class="co"># titling:</span>
 <span class="co">#    texmf-dist/tex/latex/titling/titling.sty</span></code></pre></div>
 <p>Una vez que haya averiguado el nombre del paquete, se puede instalar mediante:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">tlmgr</span> install titling  <span class="co"># quizás requiera sudo</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">tlmgr</span> install titling  # quizás requiera sudo</code></pre></div>
 <p>Las distribuciones de látex y los paquetes también se actualizan de vez en cuando, y es posible considerar este proceso, especialmente cuando se encuentra con problemas en LaTeX. Puede averiguar la versión de su distribución LaTeX mediante:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system</span>(<span class="st">&#39;pdflatex --version&#39;</span>)
 ## pdfTeX 3.14159265-2.6-1.40.17 (TeX Live 2016)
@@ -257,8 +256,9 @@ Execution halted</code></pre></div>
         </div>
       </div>
 <a href="pandoc.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="uso-de-software.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="uso-de-software.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -267,11 +267,11 @@ Execution halted</code></pre></div>
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -288,7 +288,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown07-tools.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -301,7 +301,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

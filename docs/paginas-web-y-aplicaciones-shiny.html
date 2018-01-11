@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="html-widgets.html">
 <link rel="next" href="formatos-de-salida.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -214,12 +213,12 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>Al igual que en los HTML widgets, los sitios web se pueden incrustar en el libro. Puede utilizar la función <code>knitr::include_url()</code> para incluir una página web a través de su URL. Cuando el formato de salida es HTML, se usa un <code>iframe</code><a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>; en otros casos, <strong>knitr</strong> trata de tomar una captura de pantalla de la página web (o utilizar una captura de pantalla personalizada en la medida en que se haya pensado). Todas las opciones del chunk son las mismas que para los HTML widgets. Una opción que puede requerir atención especial es la opción <code>delay</code>: los HTML widgets se compilan a nivel local, por lo que por lo general son rápidos para cargar por PhantomJS para tomar capturas de pantalla, pero una URL arbitraria pueden tardar más tiempo en cargarse, por lo que es posible que desee utilizar un valor mayor de <code>delay</code>, por ejemplo, utilizar la opción del chunk <code>screenshot.opts = list(delay = 5)</code>.</p>
 <p>Una función relacionada es <code>knitr::include_app()</code>, que es muy similar a <code>include_url()</code>, y fue diseñada para incrustar aplicaciones shiny a través de sus direcciones URL en la salida. Su única diferencia con <code>include_url()</code> es que añade automáticamente un parámetro de consulta <code>?showcase=0</code> a la URL, si no hay otros parámetros de consulta que estén presentes en la URL, desactiva el modo showcase de Shiny, lo que es poco probable que sea útil para las capturas de pantalla o iframes. Si se desea solo el modo showcase, únicamente use <code>include_url()</code> en lugar de <code>include_app()</code>. A continuación se muestra un ejemplo de aplicación Shiny (Figura <a href="paginas-web-y-aplicaciones-shiny.html#fig:miniUI">2.6</a>):</p>
 <p></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">include_app</span>(<span class="st">&#39;https://yihui.shinyapps.io/miniUI/&#39;</span>, <span class="dt">height =</span> <span class="st">&#39;600px&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_app</span>(<span class="st">&#39;https://yihui.shinyapps.io/miniUI/&#39;</span>, <span class="dt">height =</span> <span class="st">&#39;600px&#39;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:miniUI"></span>
 <iframe src="https://yihui.shinyapps.io/miniUI/?showcase=0" width="768" height="600px">
 </iframe>
 <p class="caption">
-Figura 2.6: Una aplicación en Shiny creada mediante el paquete miniUI; puede ver una versiòn en vivo en: <a href="https://yihui.shinyapps.io/miniUI/" class="uri">https://yihui.shinyapps.io/miniUI/</a>.
+Figura: 2.6: Una aplicación en Shiny creada mediante el paquete miniUI; puede ver una versiòn en vivo en: <a href="https://yihui.shinyapps.io/miniUI/" class="uri">https://yihui.shinyapps.io/miniUI/</a>.
 </p>
 </div>
 <p></p>
@@ -246,8 +245,9 @@ Figura 2.6: Una aplicación en Shiny creada mediante el paquete miniUI; puede ve
         </div>
       </div>
 <a href="html-widgets.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="formatos-de-salida.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="formatos-de-salida.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -256,11 +256,11 @@ Figura 2.6: Una aplicación en Shiny creada mediante el paquete miniUI; puede ve
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -277,7 +277,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown02-components.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -290,7 +290,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

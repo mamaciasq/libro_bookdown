@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="codigo-en-r.html">
 <link rel="next" href="tablas.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -214,31 +213,31 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>Por defecto, las figuras no tienen títulos en la salida generada por <strong>knitr</strong>, lo que significa que solo pueden colocarse en el lugar en el que se generaron en el código en R. A continuación se muestra un ejemplo de ello.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))
 <span class="kw">plot</span>(pressure, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>)</code></pre></div>
-<p><img src="bookdown_files/figure-html/no-caption-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="bookdown_files/figure-html/no-caption-1.svg" width="80%" style="display: block; margin: auto;" /></p>
 <p>La desventaja de realizar figuras de esta manera es que cuando no hay suficiente espacio en la página actual para colocar una figura, puede o bien llegar a la parte inferior de la página (por lo tanto excede el margen de la página), o ser empujada a la página siguiente, dejando un gran margen blanco en la parte inferior de la página actual. Esto es, básicamente, porque hay “ambientes flotantes” en LaTeX: los elementos que no se pueden dividir en varias páginas (como las figuras) se ponen en entornos flotantes, para que puedan deambular a una página que tenga espacio suficiente para sostenerlos. Sin embargo, claramente es una desventaja el hecho de que floten las cosas hacia adelante o hacia atrás. Es decir, los lectores pueden tener que saltar a una página diferente para encontrar la figura mencionada en la página actual. Esto es simplemente una consecuencia natural de tener que componer las cosas en varias páginas de tamaños fijos. Este problema no existe en HTML ya que todo se puede colocar de forma continua en una sola página (presumiblemente de altura infinita), y no hay necesidad de dividir nada a través de múltiples páginas del mismo tamaño de página.</p>
 <p>Si se asigna un pie de figura a un chunk a través de la opción <code>fig.cap</code>, los gráficos en R se pondrán dentro de entornos figura, que serán etiquetados y numerados de forma automática, y también pueden usarse como una referencia cruzada. La etiqueta de un entorno figura se genera a partir de la etiqueta del chunk, por ejemplo, si la etiqueta es <code>foo</code>, la etiqueta de la figura será<code>fig: foo</code> (el prefijo <code>fig</code> se añade antes de <code>foo</code>). Para hacer referencia a una figura, utilice la sintaxis <code>\@ref(etiqueta)</code>,<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a> donde <code>label</code> es la etiqueta de la figura, por ejemplo,<code>fig: foo</code>.</p>
-<p>Para aprovechar el formato Markdown en el subtítulo de la figura, necesitará usar referencias de texto (consulte la sección @ref (referencias-de-texto)). Por ejemplo, una leyenda de la figura que contiene <code>_texto en bastardilla_</code> no funcionará cuando el formato de salida sea LaTeX/PDF, ya que el carácter de subrayado es un carácter especial en LaTeX, pero si utiliza referencias de texto,<code>_texto en bastardilla_</code> será traducido a código LaTeX cuando la salida sea LaTeX.</p>
+<p>Para aprovechar el formato Markdown en el subtítulo de la figura, necesitará usar referencias de texto (consulte la sección <a href="#referencias-de-texto"><strong>??</strong></a>). Por ejemplo, una leyenda de la figura que contiene <code>_texto en bastardilla_</code> no funcionará cuando el formato de salida sea LaTeX/PDF, ya que el carácter de subrayado es un carácter especial en LaTeX, pero si utiliza referencias de texto,<code>_texto en bastardilla_</code> será traducido a código LaTeX cuando la salida sea LaTeX.</p>
 
 <div class="rmdimportant">
 Si desea referencias cruzadas hacia figuras o tablas generadas a partir de un chunk, por favor asegúrese de que la etiqueta del chunk sólo contenga caracteres alfanuméricos (a-z, A-Z, 0-9), barras (/) o guiones (-).
 </div>
-<p></p>
+
 <p>La opción del chunk <code>fig.asp</code> se puede utilizar para establecer la relación de aspecto de los gráficos, es decir, la relación entre la altura/anchura. Si el ancho de la figura es de 6 pulgadas (<code>fig.width = 6</code>) y<code>fig.asp = 0.7</code>, la altura de la figura se calcula automáticamente con <code>fig.width * fig.asp = 6 * 0,7 = 4.2</code>. La figura <a href="figuras.html#fig:pressure2-plot">2.1</a> es un ejemplo utilizando las opciones del chunk <code>fig.asp = 0.7</code>, <code>fig.width = 6</code>, y <code>fig.align = 'center'</code>, generado a partir del código de abajo:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))
 <span class="kw">plot</span>(pressure, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pressure2-plot"></span>
-<img src="bookdown_files/figure-html/pressure2-plot-1.png" alt="Un ejemplo de figura con el aspecto especificado, ancho, y alineación." width="80%" />
+<img src="bookdown_files/figure-html/pressure2-plot-1.svg" alt="Un ejemplo de figura con el aspecto especificado, ancho, y alineación." width="80%" />
 <p class="caption">
-Figura 2.1: Un ejemplo de figura con el aspecto especificado, ancho, y alineación.
+Figura: 2.1: Un ejemplo de figura con el aspecto especificado, ancho, y alineación.
 </p>
 </div>
 <p>El tamaño real de un gráfico se determina por las opciones del chunk <code>fig.width</code> y <code>fig.height</code> (el tamaño del gráfico generado desde un dispositivo gráfico), y se puede especificar el tamaño de salida de los gráficos a través de las opciones del chunk <code>out.width</code> y <code>out.height</code>. El valor posible de estas dos opciones depende del formato de salida del documento. Por ejemplo, <code>out.width = '30%'</code> es un valor válido para la salida HTML, pero no para la producción de documentos LaTeX/PDF. Sin embargo, <strong>knitr</strong> convertirá automáticamente a un valor de porcentaje para <code>out.width</code> de la forma<code>`x%</code> a <code>(x / 100) \linewidth</code>, por ejemplo, <code>out.width = '70%'</code> se intrpretará como <code>.7 \linewidth</code> cuando el formato de salida es LaTeX. Esto hace que sea posible especificar una anchura relativa de un gráfico de una manera consistente. La figura <a href="figuras.html#fig:cars-plot2">2.2</a> es un ejemplo de <code>out.width = 70%</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))
 <span class="kw">plot</span>(cars, <span class="dt">pch =</span> <span class="dv">19</span>)</code></pre></div>
 <div class="figure"><span id="fig:cars-plot2"></span>
-<img src="bookdown_files/figure-html/cars-plot2-1.png" alt="Una figura de ejemplo con un ancho relativo de 70\%." width="70%" />
+<img src="bookdown_files/figure-html/cars-plot2-1.svg" alt="Una figura de ejemplo con un ancho relativo de 70\%." width="70%" />
 <p class="caption">
-Figura 2.2: Una figura de ejemplo con un ancho relativo de 70%.
+Figura: 2.2: Una figura de ejemplo con un ancho relativo de 70%.
 </p>
 </div>
 <p>Si desea poner varios gráficos en un entorno de figuras, debe utilizar la opción del chunk <code>fig.show = 'hold'</code> para disponer de múltiples gráficos en un chunk e incluirlas en un único entorno. También puede poner gráficos uno al lado del otro si la suma de la anchura de todas los gráficos es menor o igual a la anchura de la línea actual. Por ejemplo, si dos gráficos tienen la misma anchura <code>50%</code>, serán ubicados uno al lado del otro. Del mismo modo, puede especificar <code>out.width = '33% '</code> para organizar tres gráficos en una sola línea. La figura <a href="figuras.html#fig:multi-plots2">2.3</a> es un ejemplo de dos gráficos, cada una con una anchura de <code>50%</code>.</p>
@@ -246,17 +245,17 @@ Figura 2.2: Una figura de ejemplo con un ancho relativo de 70%.
 <span class="kw">plot</span>(pressure, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>)
 <span class="kw">plot</span>(cars, <span class="dt">pch =</span> <span class="dv">19</span>)</code></pre></div>
 <div class="figure"><span id="fig:multi-plots2"></span>
-<img src="bookdown_files/figure-html/multi-plots2-1.png" alt="Dos gráficos dispuestos uno al lado del otro." width="50%" /><img src="bookdown_files/figure-html/multi-plots2-2.png" alt="Dos gráficos dispuestos uno al lado del otro." width="50%" />
+<img src="bookdown_files/figure-html/multi-plots2-1.svg" alt="Dos gráficos dispuestos uno al lado del otro." width="50%" /><img src="bookdown_files/figure-html/multi-plots2-2.svg" alt="Dos gráficos dispuestos uno al lado del otro." width="50%" />
 <p class="caption">
-Figura 2.3: Dos gráficos dispuestos uno al lado del otro.
+Figura: 2.3: Dos gráficos dispuestos uno al lado del otro.
 </p>
 </div>
 <p>A veces es posible que tenga imágenes que no se generaron a partir de código en R. A pesar de esto, puede incluirlas en R Markdown a través de la función <code>knitr::include_graphics()</code>. La figura <a href="figuras.html#fig:knitr-logo2">2.4</a> es un ejemplo de tres logotipos de <strong>knitr</strong> incluidos en un entorno gráfico. Se pueden incluir una o varias imágenes con la función <code>include_graphics()</code>, y todas las opciones del chunk que se aplican a los gráficos en R también se aplican a estas imágenes, por ejemplo, se puede usar <code>out.width = '33% '</code> para establecer las anchuras de estas imágenes en el documento de salida.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">include_graphics</span>(<span class="kw">rep</span>(<span class="st">&#39;images/knit-logo.png&#39;</span>, <span class="dv">3</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="kw">rep</span>(<span class="st">&#39;images/knit-logo.png&#39;</span>, <span class="dv">3</span>))</code></pre></div>
 <div class="figure"><span id="fig:knitr-logo2"></span>
 <img src="images/knit-logo.png" alt="Tres logos de knitr incluidos en el documento desde una imagen PNG externa." width="33%" /><img src="images/knit-logo.png" alt="Tres logos de knitr incluidos en el documento desde una imagen PNG externa." width="33%" /><img src="images/knit-logo.png" alt="Tres logos de knitr incluidos en el documento desde una imagen PNG externa." width="33%" />
 <p class="caption">
-Figura 2.4: Tres logos de knitr incluidos en el documento desde una imagen PNG externa.
+Figura: 2.4: Tres logos de knitr incluidos en el documento desde una imagen PNG externa.
 </p>
 </div>
 <p>Las ventajas de usar <code>include_graphics()</code> son:</p>
@@ -279,8 +278,9 @@ Figura 2.4: Tres logos de knitr incluidos en el documento desde una imagen PNG e
         </div>
       </div>
 <a href="codigo-en-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tablas.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="tablas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -289,11 +289,11 @@ Figura 2.4: Tres logos de knitr incluidos en el documento desde una imagen PNG e
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -310,7 +310,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown02-components.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -323,7 +323,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

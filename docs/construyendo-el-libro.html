@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="edicion.html">
 <link rel="next" href="previsualizar-un-capitulo.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -212,22 +211,23 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <div id="construyendo-el-libro" class="section level2">
 <h2><span class="header-section-number">5.1</span> Construyendo el libro</h2>
 <p>Para conformar todos los archivos Rmd en un libro, puede llamar a la función <code>render_book()</code> en <strong>bookdown</strong>. A continuación se presentan los argumentos de <code>render_book()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">render_book</span>(input, <span class="dt">output_format =</span> <span class="ot">NULL</span>, ..., <span class="dt">clean =</span> <span class="ot">TRUE</span>, 
-  <span class="dt">envir =</span> <span class="kw">parent.frame</span>(), <span class="dt">clean_envir =</span> !<span class="kw">interactive</span>(), 
-  <span class="dt">output_dir =</span> <span class="ot">NULL</span>, <span class="dt">new_session =</span> <span class="ot">NA</span>, <span class="dt">preview =</span> <span class="ot">FALSE</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">render_book</span>(input, <span class="dt">output_format =</span> <span class="ot">NULL</span>, ...,
+  <span class="dt">clean =</span> <span class="ot">TRUE</span>, <span class="dt">envir =</span> <span class="kw">parent.frame</span>(),
+  <span class="dt">clean_envir =</span> <span class="op">!</span><span class="kw">interactive</span>(), <span class="dt">output_dir =</span> <span class="ot">NULL</span>,
+  <span class="dt">new_session =</span> <span class="ot">NA</span>, <span class="dt">preview =</span> <span class="ot">FALSE</span>,
   <span class="dt">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>)</code></pre></div>
 <p>El argumento más importante es <code>output_format</code>, que puede tomar una cadena de caracteres del formato de salida (por ejemplo,<code>'bookdown::gitbook'</code>). Puede dejar este argumento vacío, y el formato de salida por defecto será el primer formato de salida especificado en los metadatos YAML del primer archivo Rmd o un archivo YAML por separado <code>_output.yml</code>, como se mencionó en la sección <a href="configuracion.html#configuracion">4.4</a>. Si va a generar múltiples formatos de salida para un libro, se recomienda especificar todos los formatos en <code>_output.yml</code>.</p>
 <p>Una vez que todos los formatos se especifican en el <code>_output.yml</code>, es fácil escribir un script en R o en Shell o Makefile para compilar el libro. A continuación se muestra un ejemplo sencillo del uso de un script de Shell para compilar un libro a HTML (con el estilo GitBook) y PDF:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env Rscript</span>
 
-<span class="kw">bookdown</span>::render_book(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::gitbook&quot;</span>)
-<span class="kw">bookdown</span>::render_book(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::pdf_book&quot;</span>)</code></pre></div>
+<span class="ex">bookdown</span>::render_book(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::gitbook&quot;</span>)
+<span class="ex">bookdown</span>::render_book(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::pdf_book&quot;</span>)</code></pre></div>
 <p>El script de Shell no funciona en Windows (no es estrictamente cierto), pero espero que se entienda la idea.</p>
 <p>El argumento <code>...</code> se pasa a la función de formato de salida. Los argumentos <code>clean</code> y <code>envir</code> se pasan a <code>rmarkdown::render()</code>, para decidir si se deben limpiar los archivos intermedios, y especificar el entorno para evaluar el código en R, respectivamente.</p>
-<p>El directorio de salida del libro se puede especificar a través del argumento <code>output_dir</code>. Por defecto, el libro se genera en el directorio <code>_book</code>. Esto también se puede ajustar por medio del campo <code>output_dir</code> en el archivo de configuración <code>_bookdown.yml</code>, de modo que no se tiene que especificar varias veces para la presentación de un libro a múltiples formatos de salida. El argumento <code>new_session</code> se explicó en la sección @ref(#new-session). Al configurar <code>preview = TRUE</code>, sólo los archivos Rmd especificados en el argumento <code>input</code> se compilan, lo que puede ser conveniente al previsualizar un determinado capítulo, ya que no se vuelve a compilar el libro entero, sino cuando se publica un libro, este argumento sin duda se debe establecer a FALSE.</p>
+<p>El directorio de salida del libro se puede especificar a través del argumento <code>output_dir</code>. Por defecto, el libro se genera en el directorio <code>_book</code>. Esto también se puede ajustar por medio del campo <code>output_dir</code> en el archivo de configuración <code>_bookdown.yml</code>, de modo que no se tiene que especificar varias veces para la presentación de un libro a múltiples formatos de salida. El argumento <code>new_session</code> se explicó en la sección @ref(#new-session). Al configurar <code>preview = TRUE</code>, sólo los archivos Rmd especificados en el argumento <code>input</code> se compilan, lo que puede ser conveniente al previsualizar un determinado capítulo, ya que no se vuelve a compilar el libro entero, sino cuando se publica un libro, este argumento sin duda se debe establecer a `FALSE.</p>
 <p>Al reproducir el libro en múltiples formatos en la misma sesión de R, hay que tener cuidado porque el siguiente formato podrá tener acceso a los objetos R creados a partir del formato anterior. Se recomienda reproducir el libro con un ambiente limpio para cada formato de salida. El argumento <code>clean_envir</code> se puede utilizar para limpiar todos los objetos en el entorno especificado por <code>envir</code>. De forma predeterminada, es <code>TRUE</code> para las sesiones de R no interactivos (por ejemplo, en modo batch). Note que incluso <code>clean_envir = TRUE</code> en realidad no garantiza que la sesión R esté limpia. Por ejemplo, los paquetes cargados cuando se reproduce el formato anterior permanecerán en la sesión para el siguiente formato de salida. Para asegurarse de que cada formato se reproduce en una sesión de R completamente limpia, debe iniciar una nueva sesión de R para generar cada formato, por ejemplo, utilizar la línea de comandos</p>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="kw">Rscript</span> -e <span class="st">&quot;bookdown::render_book(&#39;index.Rmd&#39;, &#39;bookdown::gitbook&#39;)&quot;</span>
-<span class="kw">Rscript</span> -e <span class="st">&quot;bookdown::render_book(&#39;index.Rmd&#39;, &#39;bookdown::pdf_book&#39;)&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">Rscript</span> -e <span class="st">&quot;bookdown::render_book(&#39;index.Rmd&#39;, &#39;bookdown::gitbook&#39;)&quot;</span>
+<span class="ex">Rscript</span> -e <span class="st">&quot;bookdown::render_book(&#39;index.Rmd&#39;, &#39;bookdown::pdf_book&#39;)&quot;</span></code></pre></div>
 <p>Una serie de archivos de salida se generarán mediante <code>render_book()</code>. A veces es posible que desee limpiar el directorio del libro y empezar todo de nuevo, por ejemplo, eliminar los archivos de caché que se generaron de forma automática desde <strong>knitr</strong>. La función <code>clean_book()</code> fue diseñada para este propósito. Por defecto, esta le indica qué archivos posiblemente son los de salida y que pueden borrarse. Si usted ha revisado esta lista de archivos, y está seguro de que ningún archivo se identificó erróneamente como archivo de salida (claramente no desea borrar un archivo de entrada que haya creado manualmente), puede eliminar todos ellos usando <code>bookdown::clean_book(TRUE)</code>. Como la eliminación de archivos es una operación relativamente peligrosa, le recomendamos que conserve su libro a través de herramientas de control de versiones como GIT, o un servicio que soporte copias de seguridad y restauración, con el fin de no perder algunos archivos para siempre una vez los elimine por error.</p>
 </div>
             </section>
@@ -236,8 +236,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="edicion.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="previsualizar-un-capitulo.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="previsualizar-un-capitulo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -246,11 +247,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -267,7 +268,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown05-editing.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -280,7 +281,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

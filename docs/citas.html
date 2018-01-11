@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="bloques-personalizados.html">
 <link rel="next" href="latex-index.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -213,7 +212,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.8</span> Citas</h2>
 <p>Aunque Pandoc soporta múltiples formas de escribir las citas, se recomienda que utilice las bases de datos BibTeX porque trabajan mejor con la salida de LaTeX/PDF. Pandoc puede procesar otros tipos de bases de datos bibliográficas con la utilidad <code>pandoc-citeproc</code> (<a href="https://github.com/jgm/pandoc-citeproc" class="uri">https://github.com/jgm/pandoc-citeproc</a>), pero no pone ciertos elementos de bibliografía correctamente (especialmente en el caso de múltiples autores). Con las bases de datos BibTeX, podrá definirse el estilo bibliográfico si se requiere por un determinado editor o revista.</p>
 <p>Una base de datos BibTeX es un archivo de texto (con la extensión de nombre de archivo convencional <code>.bib</code>) que consta de entradas bibliográficas como:</p>
-<div class="sourceCode"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span class="kw">@Manual</span>{<span class="ot">R</span>-<span class="ot">base</span>,
+<div class="sourceCode"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span class="va">@Manual</span>{<span class="ot">R</span>-<span class="ot">base</span>,
   <span class="dt">title</span> = {R: A Language and Environment for Statistical Computing},
   <span class="dt">author</span> = {{R Core Team}},
   <span class="dt">organization</span> = {R Foundation for Statistical Computing},
@@ -221,30 +220,30 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
   <span class="dt">year</span> = {2015},
   <span class="dt">url</span> = {https://www.R-project.org/},
 }</code></pre></div>
-<p>Una entrada bibliográfica comienza con <code>{@type</code>, donde <code>type</code> puede ser <code>article</code>, <code>book</code>,<code>manual</code>, etc.<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a>. A continuación hay una clave de citación, como <code>R-base</code> en el ejemplo anterior. Para citar una entrada, use <code>@ key</code> o <code>[@key]</code> (este último pone la cita entre paréntesis), por ejemplo, <code>@R-base</code> se compila como <span class="citation">R Core Team (<a href="#ref-R-base">2016</a>)</span>, y <code>[@ R-base]</code> genera “<span class="citation">(R Core Team <a href="#ref-R-base">2016</a>)</span>”. Si no está familiarizado con el paquete <strong>natbib</strong> de LaTeX, <code>@key</code> es básicamente <code>\citet{key}</code> y <code>[@key]</code> es equivalente a <code>\citep{key}</code>.</p>
+<p>Una entrada bibliográfica comienza con <code>{@type</code>, donde <code>type</code> puede ser <code>article</code>, <code>book</code>,<code>manual</code>, etc.<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a>. A continuación hay una clave de citación, como <code>R-base</code> en el ejemplo anterior. Para citar una entrada, use <code>@ key</code> o <code>[@key]</code> (este último pone la cita entre paréntesis), por ejemplo, <code>@R-base</code> se compila como <span class="citation">R Core Team (<a href="#ref-R-base">2017</a>)</span>, y <code>[@ R-base]</code> genera “<span class="citation">(R Core Team <a href="#ref-R-base">2017</a>)</span>”. Si no está familiarizado con el paquete <strong>natbib</strong> de LaTeX, <code>@key</code> es básicamente <code>\citet{key}</code> y <code>[@key]</code> es equivalente a <code>\citep{key}</code>.</p>
 <p>Hay una serie de campos en una entrada de bibliografía, tales como <code>title</code>, <code>author</code>, y <code>year</code>, etc. Puede visitar <a href="https://en.wikipedia.org/wiki/BibTeX" class="uri">https://en.wikipedia.org/wiki/BibTeX</a> para saber más sobre posibles tipos de entradas y campos en BibTeX.</p>
 <p>Hay una función auxiliar <code>write_bib()</code> en <strong>knitr</strong> para generar entradas BibTeX automáticamente para paquetes en R. Tenga en cuenta que sólo genera una entrada de BibTeX para el propio paquete en el momento, mientras que un paquete puede contener múltiples entradas en el archivo <code>CITATION</code>, y algunas entradas versan sobre las publicaciones relacionadas con el paquete. Estas entradas son ignoradas por <code>write_bib()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># el segundo argumento puede ser un archivo .bib</span>
-knitr::<span class="kw">write_bib</span>(<span class="kw">c</span>(<span class="st">&#39;knitr&#39;</span>, <span class="st">&#39;stringr&#39;</span>), <span class="st">&#39;&#39;</span>)</code></pre></div>
+knitr<span class="op">::</span><span class="kw">write_bib</span>(<span class="kw">c</span>(<span class="st">&#39;knitr&#39;</span>, <span class="st">&#39;stringr&#39;</span>), <span class="st">&#39;&#39;</span>)</code></pre></div>
 <pre><code>@Manual{R-knitr,
   title = {knitr: A General-Purpose Package for Dynamic Report Generation in R},
   author = {Yihui Xie},
-  year = {2016},
-  note = {R package version 1.15.1},
+  year = {2017},
+  note = {R package version 1.18},
   url = {https://CRAN.R-project.org/package=knitr},
 }
 @Manual{R-stringr,
   title = {stringr: Simple, Consistent Wrappers for Common String Operations},
   author = {Hadley Wickham},
-  year = {2016},
-  note = {R package version 1.1.0},
+  year = {2017},
+  note = {R package version 1.2.0},
   url = {https://CRAN.R-project.org/package=stringr},
 }</code></pre>
 <p>Una vez que tenga uno o varios archivos <code>.bib</code>, puede utilizar el campo <code>bibliography</code> en los metadatos del documento YAML del documento R Markdown, y también se puede especificar el estilo de bibliografía a través de <code>biblio-style</code> (esto sólo se aplica a las salidas en PDF), por ejemplo,</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
-<span class="fu">bibliography:</span> <span class="kw">[</span><span class="st">&quot;one.bib&quot;</span><span class="kw">,</span> <span class="st">&quot;another.bib&quot;</span><span class="kw">,</span> <span class="st">&quot;yet-another.bib&quot;</span><span class="kw">]</span>
-<span class="fu">biblio-style:</span> <span class="st">&quot;apalike&quot;</span>
-<span class="fu">link-citations:</span> true
+<span class="fu">bibliography:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;one.bib&quot;</span><span class="kw">,</span> <span class="st">&quot;another.bib&quot;</span><span class="kw">,</span> <span class="st">&quot;yet-another.bib&quot;</span><span class="kw">]</span>
+<span class="fu">biblio-style:</span><span class="at"> </span><span class="st">&quot;apalike&quot;</span>
+<span class="fu">link-citations:</span><span class="at"> true</span>
 <span class="ot">---</span></code></pre></div>
 <p>El campo <code>link-citations</code> se puede utilizar para añadir enlaces internos a partir del texto de la cita del estilo autor-año de la entrada bibliográfica en la salida HTML.</p>
 <p>Cuando el formato de salida es LaTeX, las citas se colocarán automáticamente en un capítulo o sección. Para la salida no LaTeX, puede agregar un capítulo vacío como el último capítulo de su libro. Por ejemplo, si su último capítulo es el archivo Rmd <code>06-references.Rmd</code>, su contenido puede ser una expresión R en línea:</p>
@@ -253,7 +252,7 @@ knitr::<span class="kw">write_bib</span>(<span class="kw">c</span>(<span class="
 <h3>Referencias</h3>
 <div id="refs" class="references">
 <div id="ref-R-base">
-<p>R Core Team. 2016. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+<p>R Core Team. 2017. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
 </div>
 </div>
 <div class="footnotes">
@@ -268,8 +267,9 @@ knitr::<span class="kw">write_bib</span>(<span class="kw">c</span>(<span class="
         </div>
       </div>
 <a href="bloques-personalizados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="latex-index.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="latex-index.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -278,11 +278,11 @@ knitr::<span class="kw">write_bib</span>(<span class="kw">c</span>(<span class="
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -299,7 +299,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown02-components.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -312,7 +312,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

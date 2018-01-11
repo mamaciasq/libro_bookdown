@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="presentar-el-libro.html">
 <link rel="next" href="colaboracion.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -211,13 +210,13 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="ide-rstudio" class="section level2">
 <h2><span class="header-section-number">5.4</span> IDE RStudio</h2>
-<p>Se recomienda utilizar <a href="https://www.rstudio.com/products/rstudio/download/preview/">la versión preliminar de RStudio</a> si su versión RStudio es inferior a 1.0.0. Como se mencionó en la sección <a href="uso.html#uso">1.3</a>, todos los archivos R Markdown deben ser codificados en UTF-8. Esto es importante sobre todo cuando sus archivos contienen caracteres de varios bytes. Para guardar un archivo con la codificación UTF-8, puede utilizar el menú <code>Archivo -&gt; Guardar con Encoding</code>, y elija <code>UTF-8</code>.</p>
+<p>Se recomienda <a href="https://www.rstudio.com/products/rstudio/download/">actualizar</a> su RStudio IDE si su versión es inferior a 1.0.0. Como se mencionó en la sección <a href="uso.html#uso">1.3</a>, todos los archivos R Markdown deben ser codificados en UTF-8. Esto es importante sobre todo cuando sus archivos contienen caracteres de varios bytes. Para guardar un archivo con la codificación UTF-8, puede utilizar el menú <code>Archivo -&gt; Guardar con Encoding</code>, y elija <code>UTF-8</code>.</p>
 <p>Cuando se hace click en el botón <code>knit</code> para compilar un documento R Markdown en el IDE RStudio, la función por defecto llamada por RStudio es <code>rmarkdown::render()</code>, que no es la que se quiere para los libros. Para llamar a la función <code>bookdown::render_book()</code> en lugar de la anterior, se puede establecer el campo <code>site</code> a <code>bookdown::bookdown_site</code> en los metadatos YAML del documento R Markdown llamado `index.Rmd, por ejemplo,</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
-<span class="fu">title:</span> <span class="st">&quot;Un libro chévere&quot;</span>
-<span class="fu">knit:</span> bookdown::render_book
+<span class="fu">title:</span><span class="at"> </span><span class="st">&quot;Un libro chévere&quot;</span>
+<span class="fu">knit:</span><span class="at"> bookdown::render_book</span>
 <span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:gitbook: default
+  <span class="fu">bookdown:</span><span class="at">:gitbook: default</span>
 <span class="ot">---</span></code></pre></div>
 <p>Cuando haya configurado <code>site:bookdown::bookdown_site</code> en<code>index.Rmd</code>, RStudio será capaz de encontrar el directorio como un directorio de origen del libro,<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a> y verá una botón <code>Build Book</code> en el panel<code>Build</code>. Puede hacer clic en el botón para construir todo el libro en diferentes formatos, y si hace clic en el botón <code>Knit</code> en la barra de herramientas, RStudio va a obtener una vista previa de forma automática del capítulo actual, sin tener que usar <code>preview_chapter()</code> explícitamente.</p>
 <p>El paquete <strong>bookdown</strong> viene con unos pocos addins para RStudio. Si no está familiarizado con los addins de RStudio, es posible echarle un vistazo a la documentación en <a href="http://rstudio.github.io/rstudioaddins/" class="uri">http://rstudio.github.io/rstudioaddins/</a>. Después de haber instalado el paquete <strong>bookdown</strong> y utilizar RStudio v0.99.878 o versiones anteriores, verá un menú desplegable en la barra de herramientas denominado “Complementos” y elementos en el menú tales como “Preview Book” y “Input LaTeX Math” después de abrir el menú.</p>
@@ -226,15 +225,21 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <div class="figure" style="text-align: center"><span id="fig:mathquill"></span>
 <img src="images/mathquill.png" alt="The RStudio addin to help input LaTeX math."  />
 <p class="caption">
-Figura 5.1: The RStudio addin to help input LaTeX math.
+Figura: 5.1: The RStudio addin to help input LaTeX math.
 </p>
 </div>
-<p>También existen otros paquetes que proporcionan complementos de R para ayudarle al autor de libros. El paquete <strong>citr</strong> <span class="citation">(<span class="citeproc-not-found" data-reference-id="R-citr"><strong>???</strong></span>)</span> proporciona un complemento llamado “Insertar citas”, lo que resuelve fácilmente la inserción de citas  en documentos de R Markdown. Este complemento analiza las bases de datos bibliográficas, y muestra todos las citas en un menú desplegable, para que se pueda elegir de la lista, recordando qué cita corresponde a qué elemento de la cita (figure <a href="ide-rstudio.html#fig:citr">5.2</a>).</p>
+<p>También existen otros paquetes que proporcionan complementos de R para ayudarle al autor de libros. El paquete <strong>citr</strong> <span class="citation">(Aust <a href="#ref-R-citr">2016</a>)</span> proporciona un complemento llamado “Insertar citas”, lo que resuelve fácilmente la inserción de citas  en documentos de R Markdown. Este complemento analiza las bases de datos bibliográficas, y muestra todos las citas en un menú desplegable, para que se pueda elegir de la lista, recordando qué cita corresponde a qué elemento de la cita (figure <a href="ide-rstudio.html#fig:citr">5.2</a>).</p>
 <div class="figure" style="text-align: center"><span id="fig:citr"></span>
 <img src="images/citr.png" alt="The RStudio addin to help insert citations."  />
 <p class="caption">
-Figura 5.2: The RStudio addin to help insert citations.
+Figura: 5.2: The RStudio addin to help insert citations.
 </p>
+</div>
+</div>
+<h3>Referencias</h3>
+<div id="refs" class="references">
+<div id="ref-R-citr">
+<p>Aust, Frederik. 2016. <em>Citr: RStudio Add-in to Insert Markdown Citations</em>. <a href="https://CRAN.R-project.org/package=citr" class="uri">https://CRAN.R-project.org/package=citr</a>.</p>
 </div>
 </div>
 <div class="footnotes">
@@ -249,8 +254,9 @@ Figura 5.2: The RStudio addin to help insert citations.
         </div>
       </div>
 <a href="presentar-el-libro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="colaboracion.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="colaboracion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -259,11 +265,11 @@ Figura 5.2: The RStudio addin to help insert citations.
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -280,7 +286,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown05-editing.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -293,7 +299,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

@@ -1,6 +1,6 @@
 # Formatos de salida
 
-El paquete **bookdown** [tablita](#tablas) es compatible principalmente con tres tipos de formatos de salida: HTML, LaTeX/PDF y e-books. En este capítulo presentamos las opciones posibles para estos formatos. Los formatos de salida pueden especificarse en los metadatos YAML del primer archivo Rmd del libro o en un archivo YAML por separado llamado `_output.yml` que se encuentra en el directorio raíz del libro. Un breve ejemplo de los primeros (los formatos de salida que se especifican en el campo `output` de los metadatos YAML) es:
+El paquete **bookdown** es compatible principalmente con tres tipos de formatos de salida: HTML, LaTeX/PDF y e-books. En este capítulo presentamos las opciones posibles para estos formatos. Los formatos de salida pueden especificarse en los metadatos YAML del primer archivo Rmd del libro o en un archivo YAML por separado llamado `_output.yml` que se encuentra en el directorio raíz del libro. Un breve ejemplo de los primeros (los formatos de salida que se especifican en el campo `output` de los metadatos YAML) es:
 
 ```yaml
 ---
@@ -245,7 +245,7 @@ extract_fun = function(name, script) {
   x[i:j]
 }
 ```
-```{r eval=FALSE, tidy=FALSE, code=extract_fun('build_chapter', '/Users/Martin/Dropbox/Manejo de datos DNPE/Reportes/Libro Bookdown/R/html.R')}
+```{r eval=FALSE, tidy=FALSE, code=extract_fun('build_chapter','/Users/Martin/GitHub/libro_bookdown/R/html.R')}
 ```
 
 
@@ -326,12 +326,14 @@ biblio-style: apalike
 ---
 ```
 
+Hay una gran cantidad de opciones de YAML que puede especificar para la salida de LaTeX, como el tamaño del papel, el tamaño de la fuente, el margen de página, el espaciado entre líneas, las familias de fuentes, etc. Consulte http://pandoc.org/MANUAL.html#variables-for-latex para obtener una lista completa de opciones.
+
 El formato `pdf_book()` es un formato general como `html_chapters`, que también tiene un argumento `base_format`:
 
 ```{r pdf-book-usage, eval=FALSE, code=formatR::usage(bookdown::pdf_book, output=FALSE)}
 ```
 
-Puede cambiar la función `base_format` a otras funciones de formato de salida, y **bookdown** ha proporcionado una sencilla función de contenedor `tufte_book2()`, que es básicamente `pdf_book(base_format = Tufte::tufte_book)`, para producir un libro PDF utilizando el estilo PDF Tufte (de nuevo, ver el **tufte**  paquete).
+Puede cambiar la función `base_format` a otras funciones de formato de salida, y **bookdown** ha proporcionado una sencilla función de contenedor `tufte_book2()`, que es básicamente `pdf_book(base_format = Tufte::tufte_book)`, para producir un libro PDF utilizando el estilo PDF Tufte (de nuevo, ver el paquete **tufte**).
 
 ## E-Books
 
@@ -358,9 +360,9 @@ Hay varios lectores EPUB disponibles, incluyendo Calibre (https://www.calibre-eb
 
 ### MOBI
 
-Los libros electrónicos MOBI pueden leerse en dispositivos Kindle de Amazon. Pandoc no es compatible con la salida MOBI de forma nativa, pero Amazon ha proporcionado una herramienta llamada KindleGen (https://www.amazon.com/gp/feature.html?docId=1000765211) para crear libros MOBI de otros formatos, incluyendo EPUB y HTML. Hemos proporcionado una simple función de contenedor `KindleGen()` en **bookdown** para llamar KindleGen con el fin de convertir un libro EPUB a MOBI. Esto requiere que se descargue primero KindleGen, y asegurarse de que el ejecutable KindleGen se pueda encontrar a través de la variable de entorno de sistema `path`.
+Los libros electrónicos MOBI pueden leerse en dispositivos Kindle de Amazon. Pandoc no es compatible con la salida MOBI de forma nativa, pero Amazon ha proporcionado una herramienta llamada KindleGen (https://www.amazon.com/gp/feature.html?docId=1000765211) para crear libros MOBI de otros formatos, incluyendo EPUB y HTML. Hemos proporcionado una simple función de contenedor `KindleGen()` en **bookdown** para llamar KindleGen con el fin de convertir un libro EPUB a MOBI. Esto requiere que se descargue primero KindleGen, y asegurarse de que el ejecutable KindleGen se pueda encontrar a través de la variable de entorno de sistema `PATH`.
 
-Otra herramienta para convertir EPUB a  MOBI es proporcionada por Calibre. A diferencia de KindleGen, Calibre es de código abierto y libre, y soporta la conversión entre muchos más formatos. Por ejemplo, se puede convertir HTML a EPUB, documentos de Word a MOBI, etc. La función `calibre()` en **bookdown**  es una función de contenedor de la utilidad de línea de comandos `ebook-convert` en Calibre. Del mismo modo, es necesario asegurarse de que el ejecutable `ebook-convert` se pueda encontrar a través de la variable de entorno `path`. Si utiliza OS X, puede instalar tanto KindleGen como Calibre a través de Homebrew-Cask (https://caskroom.github.io), por lo que no necesita preocuparse por el problema `path`.
+Otra herramienta para convertir EPUB a  MOBI es proporcionada por Calibre. A diferencia de KindleGen, Calibre es de código abierto y libre, y soporta la conversión entre muchos más formatos. Por ejemplo, se puede convertir HTML a EPUB, documentos de Word a MOBI, etc. La función `calibre()` en **bookdown**  es una función de contenedor de la utilidad de línea de comandos `ebook-convert` en Calibre. Del mismo modo, es necesario asegurarse de que el ejecutable `ebook-convert` se pueda encontrar a través de la variable de entorno `PATH`. Si utiliza OS X, puede instalar tanto KindleGen como Calibre a través de Homebrew-Cask (https://caskroom.github.io), por lo que no necesita preocuparse por el problema `PATH`.
 
 ## Un documento sencillo
 

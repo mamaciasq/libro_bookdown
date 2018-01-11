@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="personalizacion.html">
 <link rel="next" href="temas.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -214,8 +213,8 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>Para la mayoría de los tipos de formatos de salida, puede personalizar los estilos de resaltado de sintaxis utilizando la opción <code>highlight</code> del formato específico. En la actualidad, los estilos posibles son <code>default</code>, <code>tango</code>, <code>pygments</code>, <code>kate</code>, <code>monochrome</code>, <code>espresso</code>, <code>zenburn</code>, and <code>haddock</code>. Por ejemplo, se puede elegir el estilo <code>tango</code> para el formato de <code>gitbook</code>:</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
 <span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:gitbook:
-    <span class="fu">highlight:</span> tango
+  <span class="fu">bookdown:</span><span class="at">:gitbook:</span>
+    <span class="fu">highlight:</span><span class="at"> tango</span>
 <span class="ot">---</span></code></pre></div>
 <p>Para formatos de salida HTML, es preferible usar la opción <code>css</code> con el fin de proporcionar sus propias hojas de estilo CSS para personalizar la apariencia de los elementos HTML. Hay una opción <code>includes</code> que se aplica a más formatos, incluyendo HTML y LaTeX. La opción <code>includes</code> permite insertar contenido personalizado antes y/o después del cuerpo de salida. Tiene tres sub-opciones: <code>in_header</code>, <code>before_body</code>, y <code>after_body</code>. Es necesario conocer la estructura básica de un documento HTML o LaTeX para entender estas opciones. El código fuente de un documento HTML luce de la siguiente forma:</p>
 <div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;html&gt;</span>
@@ -231,55 +230,55 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">&lt;/html&gt;</span></code></pre></div>
 <p>La opción <code>in_header</code> toma una ruta de archivo y lo inserta en la etiqueta <code>&lt;head&gt;</code>. Se insertará el archivo <code>before_body</code> justo debajo de la apertura <code>&lt;body&gt;</code>, y <code>after_body</code> se inserta antes de la etiqueta de cierre <code>&lt;/body&gt;</code>.</p>
 <p>Un documento de origen LaTeX tiene una estructura similar:</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\documentclass{book}
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="bu">\documentclass</span>{<span class="ex">book</span>}
 
 <span class="co">% LaTeX preamble</span>
 <span class="co">% insert in_header here</span>
 
-\begin{document}
+<span class="kw">\begin</span>{<span class="ex">document</span>}
 <span class="co">% insert before_body here</span>
 
 <span class="co">% body content here</span>
 
 <span class="co">% insert after_body here</span>
-\end{document}</code></pre></div>
+<span class="kw">\end</span>{<span class="ex">document</span>}</code></pre></div>
 <p>La opción <code>includes</code> es muy útil y flexible. Para la salida HTML, quiere decir que se puede insertar código HTML arbitrario a la salida. Por ejemplo, cuando se tienen expresiones matemáticas de LaTeX compiladas a través de la biblioteca MathJax en la salida HTML, y desea enumerar las ecuaciones en el entorno <code>equation</code>, puede crear un archivo de texto que contenga el siguiente código:</p>
 <div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/x-mathjax-config&quot;</span><span class="kw">&gt;</span>
 <span class="va">MathJax</span>.<span class="va">Hub</span>.<span class="at">Config</span>(<span class="op">{</span>
   <span class="dt">TeX</span><span class="op">:</span> <span class="op">{</span> <span class="dt">equationNumbers</span><span class="op">:</span> <span class="op">{</span> <span class="dt">autoNumber</span><span class="op">:</span> <span class="st">&quot;AMS&quot;</span> <span class="op">}</span> <span class="op">}</span>
 <span class="op">}</span>)<span class="op">;</span>
-<span class="op">&lt;</span><span class="ss">/script&gt;</span></code></pre></div>
+<span class="kw">&lt;/script&gt;</span></code></pre></div>
 <p>Asumiendo que el archivo se denomina <code>mathjax-number.html</code>, y que está en el directorio raíz de su libro (el directorio que contiene todos los archivos Rmd). Puede insertar este archivo en el encabezado del HTML a través de la opción <code>in_header</code>, por ejemplo,</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
 <span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:gitbook:
+  <span class="fu">bookdown:</span><span class="at">:gitbook:</span>
     <span class="fu">includes:</span>
-      <span class="fu">in_header:</span> mathjax-number.html
+      <span class="fu">in_header:</span><span class="at"> mathjax-number.html</span>
 <span class="ot">---</span></code></pre></div>
 <p>Si se utiliza el formato de salida HTML <code>html_book</code> o <code>gitbook</code> en <strong>bookdown</strong>, esto ya se ha establecido en las plantillas HTML, por lo que no es realmente necesario insertar un archivo de este tipo en el encabezado HTML. Sólo es necesario que lo haga para otros formatos de salida HTML.</p>
 <p>Del mismo modo, si usted está familiarizado con LaTeX, puede agregar código LaTeX arbitrariamente al preámbulo. Esto significa que puede utilizar cualquier paquete de LaTeX y configurar las opciones de cualquier paquete para su libro. Por ejemplo, este libro utiliza la opción <code>in_header</code> para utilizar unos pocas paquetes de LaTeX adicionales, tales como <strong>booktabs</strong> (para mejorar el aspecto de las tablas) y <strong>longtable</strong> (para las tablas que se extienden a través de múltiples páginas), y arreglar un problema XeLaTeX en el que el vínculo de los gráficos no funcionen:</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\usepackage{booktabs}
-\usepackage{longtable}
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="bu">\usepackage</span>{<span class="ex">booktabs</span>}
+<span class="bu">\usepackage</span>{<span class="ex">longtable</span>}
 
-\ifxetex
-  \usepackage{letltxmacro}
-  \setlength{\XeTeXLinkMargin}{1pt}
-  \LetLtxMacro\SavedIncludeGraphics\includegraphics
-  \def\includegraphics#1#{<span class="co">% #1 catches optional stuff (star/opt. arg.)</span>
+<span class="fu">\ifxetex</span>
+  <span class="bu">\usepackage</span>{<span class="ex">letltxmacro</span>}
+  <span class="fu">\setlength</span>{<span class="fu">\XeTeXLinkMargin</span>}{1pt}
+  <span class="fu">\LetLtxMacro\SavedIncludeGraphics\includegraphics</span>
+  <span class="fu">\def</span>\includegraphics#1#{<span class="co">% #1 catches optional stuff (star/opt. arg.)</span>
     \IncludeGraphicsAux{#1}<span class="co">%</span>
   }<span class="co">%</span>
-  \newcommand*{\IncludeGraphicsAux}[2]{<span class="co">%</span>
-    \XeTeXLinkBox{<span class="co">%</span>
-      \SavedIncludeGraphics#1{#2}<span class="co">%</span>
+  <span class="fu">\newcommand*</span>{<span class="ex">\IncludeGraphicsAux</span>}[2]{<span class="co">%</span>
+    <span class="fu">\XeTeXLinkBox</span>{<span class="co">%</span>
+      <span class="fu">\SavedIncludeGraphics</span>#1{#2}<span class="co">%</span>
     }<span class="co">%</span>
   }<span class="co">%</span>
-\fi</code></pre></div>
+<span class="fu">\fi</span></code></pre></div>
 <p>El código LaTeX anterior se guarda en un archivo <code>preamble.tex</code>, y los metadatos YAML se ven así:</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
 <span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:pdf_book:
+  <span class="fu">bookdown:</span><span class="at">:pdf_book:</span>
     <span class="fu">includes:</span>
-      <span class="fu">in_header:</span> preamble.tex
+      <span class="fu">in_header:</span><span class="at"> preamble.tex</span>
 <span class="ot">---</span></code></pre></div>
 </div>
             </section>
@@ -288,8 +287,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="personalizacion.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="temas.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="temas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -298,11 +298,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -319,7 +319,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown04-customization.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -332,7 +332,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

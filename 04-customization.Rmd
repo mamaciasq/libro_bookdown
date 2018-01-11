@@ -201,8 +201,6 @@ Se han mencionado los `rmd_files` en la Sección \@ref(uso), pero hay más cosas
 - `before_chapter_script`: una o varias secuencias de comandos en R para ser ejecutadas antes de cada capítulo, por ejemplo, es posible que desee limpiar el área de trabajo antes de compilar cada capítulo, en cuyo caso se puede usar `rm(list = ls(all = TRUE))` en el script de R.
 - `after_chapter_script`: similar a `before_chapter_script`, y el script de R se ejecuta después de cada capítulo.
 - `edit`: un enlace que los colaboradores pueden utilizar para editar el documento original Rmd de la página actual; esto fue diseñado principalmente para los repositorios de Github, ya que es fácil editar archivos arbitrarios de texto sin formato en Github incluso en los repositorios de otras personas (si usted no tiene acceso a escritura en el repositorio, Github se trinchará automáticamente y le permitirá enviar una solicitud de extracción después de haber terminado de editar el archivo). Este enlace debe tener `s%` dentro de él, que será sustituido por el nombre de archivo actual Rmd para cada página.
-
-  - Opcionalmente, puede tener un campo `text` bajo el campo `edit` para especificar el texto al que está unido el enlace.
 - `rmd_subdir`: si desea buscar archivos de origen del libro de Rmd en subdirectorios (por defecto, sólo el directorio raíz se busca).  
 - `output_dir`: el directorio de salida del libro; esta configuración es leída y utilizada por `render_book()`.
 - `clean`: un vector de archivos y directorios a ser limpiados por la función `clean_book()`.
@@ -214,9 +212,7 @@ book_filename: "mi-libro.Rmd"
 chapter_name: "CAPÍTULO "
 before_chapter_script: ["script1.R", "script2.R"]
 after_chapter_script: "script3.R"
-edit:
-  link: https://github.com/rstudio/bookdown/edit/master/inst/examples/%s
-  text: "Edit"
+edit: https://github.com/rstudio/bookdown/edit/master/inst/examples/%s
 output_dir: "book-output"
 clean: ["my-book.bbl", "R-packages.bib"]
 ```

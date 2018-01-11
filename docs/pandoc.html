@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="r-y-sus-paquetes.html">
 <link rel="next" href="latex.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -212,8 +211,8 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <div id="pandoc" class="section level2">
 <h2><span class="header-section-number">A.2</span> Pandoc</h2>
 <p>Un documento de R Markdown (<code>*.Rmd</code>) se compila primero Markdown (<code>*.md</code>) a través del paquete <strong>knitr</strong>, y después Markdown se compila a otros formatos de salida (como el LaTeX o HTML) a través de Pandoc. Este proceso está automatizado por el paquete <strong>rmarkdown</strong>. No es necesario instalar <strong>knitr</strong> o <strong>rmarkdown</strong> por separado, ya que son los paquetes necesarios de <strong>bookdown</strong> y se instalarán automáticamente al instalar <strong>bookdown</strong>. Sin embargo, Pandoc no es un paquete de R, por lo que no se instalará automáticamente al instalar <strong>bookdown</strong>. Puede seguir las instrucciones de instalación en la página Pandoc (<a href="http://pandoc.org" class="uri">http://pandoc.org</a>) para instalar Pandoc, pero si se utiliza el IDE RStudio, realmente no se necesita instalar Pandoc por separado, puesto que RStudio ha incluido una copia de Pandoc en él. El número de versión Pandoc puede obtenerse a través de:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rmarkdown::<span class="kw">pandoc_version</span>()
-## [1] &#39;1.17.2&#39;</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rmarkdown<span class="op">::</span><span class="kw">pandoc_version</span>()
+## [1] &#39;1.19.2.1&#39;</code></pre></div>
 <p>Si cree que esta versión es demasiado baja y hay características de Pandoc que aparecen en una versión posterior, puede instalar una versión posterior de Pandoc, y <strong>rmarkdown</strong> va a llamar a la versión más reciente en lugar de su versión incorporada.</p>
 </div>
             </section>
@@ -222,8 +221,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="r-y-sus-paquetes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="latex.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="latex.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -232,11 +232,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -253,7 +253,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown07-tools.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -266,7 +266,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

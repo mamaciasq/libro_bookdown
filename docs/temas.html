@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="opciones-yaml.html">
 <link rel="next" href="plantillas.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -215,23 +214,23 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>Como se mencionó en la sección <a href="html.html#el-estilo-bootstrap">3.1.2</a>, el estilo predeterminado de <code>html_book()</code> es el estilo Bootstrap. El estilo Bootstrap en realidad tiene varios temas incorporados que se pueden utilizar, incluyendo <code>default</code>, <code>cerulean</code>, <code>journal</code>, <code>flatly</code>, <code>readable</code>, <code>spacelab</code>, <code>united</code>, <code>cosmo</code>, <code>lumen</code>, <code>paper</code>, <code>sandstone</code>, <code>simplex</code>, and <code>yeti</code>. Puede establecer el tema a través de la opción <code>theme</code>, por ejemplo,</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
 <span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:html_book:
-    <span class="fu">theme:</span> united
+  <span class="fu">bookdown:</span><span class="at">:html_book:</span>
+    <span class="fu">theme:</span><span class="at"> united</span>
 <span class="ot">---</span></code></pre></div>
 <p>Si no le gusta ninguno de estos estilos de Bootstrap, se puede establecer <code>theme</code> como <code>null</code>, y aplicar su propio CSS a través de la opción <code>css</code> o <code>includes</code>.</p>
 <p>Para <code>pdf_book()</code>, además de la opción <code>in_header</code> mencionada en el apartado anterior, otra posibilidad es cambiar la clase de documento. Hay muchos posibles clases de LaTeX para libros, tales como <strong>memoir</strong> (<a href="https://www.ctan.org/pkg/memoir" class="uri">https://www.ctan.org/pkg/memoir</a>), <strong>amsbook</strong> (<a href="https://www.ctan.org/pkg/" class="uri">https://www.ctan.org/pkg/</a> amsbook), KOMA-script (<a href="https://www.ctan.org/pkg/koma-script" class="uri">https://www.ctan.org/pkg/koma-script</a>), etc. Una breve muestra de los metadatos YAML especificando la clase <code>scrbook</code> del paquete KOMA-Script es:</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
-<span class="fu">documentclass:</span> scrbook
+<span class="fu">documentclass:</span><span class="at"> scrbook</span>
 <span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:pdf_book:
-    <span class="fu">template:</span> <span class="dt">null</span>
+  <span class="fu">bookdown:</span><span class="at">:pdf_book:</span>
+    <span class="fu">template:</span><span class="at"> </span><span class="dt">null</span>
 <span class="ot">---</span></code></pre></div>
 <p>Algunos editores (por ejemplo, Springer y Chapman &amp; Hall/CRC) tienen sus propios archivos de estilo de LaTeX o de class. Puede intentar cambiar la opción <code>documentclass</code> para utilizar sus clases de documento, aunque generalmente no es tan simple como eso. Puede terminar usando <code>in_header</code>, o incluso diseñar una plantilla personalizada Pandoc LaTeX para dar cabida a estas clases de documentos.</p>
 <p>Tenga en cuenta que cuando se cambia <code>documentclass</code>, es posible especificar un argumento adicional Pandoc<code>--chapters</code> de modo que Pandoc reconozca que los encabezados de primer nivel deben ser tratados como capítulos en lugar de secciones (este es el valor predeterminado cuando <code>documentclass</code> es <code>book</code>), por ejemplo,</p>
-<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">documentclass:</span> krantz
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">documentclass:</span><span class="at"> krantz</span>
 <span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:pdf_book:
-    <span class="fu">pandoc_args:</span> --chapters</code></pre></div>
+  <span class="fu">bookdown:</span><span class="at">:pdf_book:</span>
+    <span class="fu">pandoc_args:</span><span class="at"> --chapters</span></code></pre></div>
 </div>
             </section>
 
@@ -239,8 +238,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="opciones-yaml.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="plantillas.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="plantillas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -249,11 +249,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -270,7 +270,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown04-customization.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -283,7 +283,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

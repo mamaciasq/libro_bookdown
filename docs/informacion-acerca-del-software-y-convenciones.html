@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="estructura-del-libro.html">
 <link rel="next" href="agradecimientos.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -214,21 +213,25 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>Este libro es principalmente sobre el paquete <strong>bookdown</strong> de R, por lo que necesita instalar al menos R y el paquete <strong>bookdown</strong>. Sin embargo, su libro no tiene que estar relacionado en absoluto con el lenguaje R. Se pueden usar otros lenguajes de computación (C++, SQL, Python, etc.; véase el Apéndice <a href="uso-de-software.html#uso-de-software">B</a>), e incluso puede ser totalmente irrelevante para la computación (por ejemplo, puede escribir una novela, o una colección de poemas). Las herramientas de software necesarias para construir un libro se introducen en el Apéndice <a href="herramientas-de-software.html#herramientas-de-software">A</a>.</p>
 <p>La información de la sesión de R al compilar este libro es la siguiente:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sessionInfo</span>()</code></pre></div>
-<pre><code>## R version 3.3.2 (2016-10-31)
-## Platform: x86_64-apple-darwin13.4.0 (64-bit)
-## Running under: OS X El Capitan 10.11.6
+<pre><code>## R version 3.4.3 (2017-11-30)
+## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+## Running under: macOS High Sierra 10.13.2
+## 
+## Matrix products: default
+## BLAS: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRlapack.dylib
 ## 
 ## locale:
 ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets 
-## [6] methods   base     
+## [6] base     
 ## 
 ## loaded via a namespace (and not attached):
-## [1] bookdown_0.3    miniUI_0.1.1    rmarkdown_1.3  
-## [4] tools_3.3.2     shiny_0.14.2    htmltools_0.3.5
-## [7] knitr_1.15.1</code></pre>
+## [1] bookdown_0.5    miniUI_0.1.1    rmarkdown_1.8  
+## [4] tools_3.4.3     shiny_1.0.5     htmltools_0.3.6
+## [7] knitr_1.18</code></pre>
 <p>No se añaden instrucciones (<code>&gt;</code> y <code>+</code>) al código fuente en R en este libro, y, por defecto, se comenta la salida de texto mediante dos numerales <code>##</code>, como se pudo advertir anteriormente en la información de sesión de R . Esto es para comodidad del lector a la hora que desee copiar y ejecutar el código (el texto resultante se ignorará ya que se encuentra comentado). Los nombres de paquetes están en negrita (por ejemplo, <strong>rmarkdown</strong>), y el código en línea y los nombres de archivos se formatean en una fuente de máquina de escribir (por ejemplo, <code>knitr::knit('foo.Rmd')</code>). Los nombres de funciones son seguidas por paréntesis (por ejemplo, <code>bookdown::render_book()</code>). El operador doble dos puntos (<code>::</code>) significa acceder a un objeto desde un paquete.</p>
 </div>
             </section>
@@ -237,8 +240,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="estructura-del-libro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="agradecimientos.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="agradecimientos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -247,11 +251,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -268,7 +272,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdownindex.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -281,7 +285,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

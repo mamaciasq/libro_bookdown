@@ -24,7 +24,7 @@ El script de Shell no funciona en Windows (no es estrictamente cierto), pero esp
 
 El argumento `...`  se pasa a la función de formato de salida. Los argumentos `clean` y `envir` se pasan a `rmarkdown::render()`, para decidir si se deben limpiar los archivos intermedios, y especificar el entorno para evaluar el código en R, respectivamente.
 
-El directorio de salida del libro se puede especificar a través del argumento `output_dir`. Por defecto, el libro se genera en el directorio `_book`. Esto también se puede ajustar por medio del campo `output_dir` en el archivo de configuración `_bookdown.yml`, de modo que no se tiene que especificar varias veces para la presentación de un libro a múltiples formatos de salida. El argumento `new_session` se explicó en la sección \@ref(#new-session). Al configurar `preview = TRUE`, sólo los archivos Rmd especificados en el argumento `input` se compilan, lo que puede ser conveniente al previsualizar un determinado capítulo, ya que no se vuelve a compilar el libro entero, sino cuando se publica un libro, este argumento sin duda se debe establecer a FALSE.
+El directorio de salida del libro se puede especificar a través del argumento `output_dir`. Por defecto, el libro se genera en el directorio `_book`. Esto también se puede ajustar por medio del campo `output_dir` en el archivo de configuración `_bookdown.yml`, de modo que no se tiene que especificar varias veces para la presentación de un libro a múltiples formatos de salida. El argumento `new_session` se explicó en la sección \@ref(#new-session). Al configurar `preview = TRUE`, sólo los archivos Rmd especificados en el argumento `input` se compilan, lo que puede ser conveniente al previsualizar un determinado capítulo, ya que no se vuelve a compilar el libro entero, sino cuando se publica un libro, este argumento sin duda se debe establecer a `FALSE.
 
 Al reproducir el libro en múltiples formatos en la misma sesión de R, hay que tener cuidado porque el siguiente formato podrá tener acceso a los objetos R creados a partir del formato anterior. Se recomienda reproducir el libro con un ambiente limpio para cada formato de salida. El argumento `clean_envir` se puede utilizar para limpiar todos los objetos en el entorno especificado por `envir`. De forma predeterminada, es `TRUE` para las sesiones de R no interactivos (por ejemplo, en modo batch). Note que incluso `clean_envir = TRUE` en realidad no garantiza que la sesión R esté limpia. Por ejemplo, los paquetes cargados cuando se reproduce el formato anterior permanecerán en la sesión para el siguiente formato de salida. Para asegurarse de que cada formato se reproduce en una sesión de R completamente limpia, debe iniciar una nueva sesión de R para generar cada formato, por ejemplo, utilizar la línea de comandos
 
@@ -66,7 +66,7 @@ Usted puede elegir `in_session = TRUE` o `FALSE` dependiendo de sus casos de uso
 
 ## IDE RStudio 
 
-Se recomienda utilizar [la versión preliminar de RStudio](https://www.rstudio.com/products/rstudio/download/preview/)\index{RStudio IDE} si su versión RStudio es inferior a 1.0.0. Como se mencionó en la sección \@ref(uso), todos los archivos R Markdown deben ser codificados en UTF-8. Esto es importante sobre todo cuando sus archivos contienen caracteres de varios bytes. Para guardar un archivo con la codificación UTF-8, puede utilizar el menú `Archivo -> Guardar con Encoding`, y elija `  UTF-8`.
+Se recomienda [actualizar](https://www.rstudio.com/products/rstudio/download/)\index{RStudio IDE} su RStudio IDE si su versión es inferior a 1.0.0. Como se mencionó en la sección \@ref(uso), todos los archivos R Markdown deben ser codificados en UTF-8. Esto es importante sobre todo cuando sus archivos contienen caracteres de varios bytes. Para guardar un archivo con la codificación UTF-8, puede utilizar el menú `Archivo -> Guardar con Encoding`, y elija `  UTF-8`.
 
 Cuando se hace click en el botón `knit` para compilar un documento R Markdown en el IDE RStudio, la función por defecto llamada por RStudio es `rmarkdown::render()`, que no es la que se quiere para los libros. Para llamar a la función `bookdown::render_book()` en lugar de la anterior, se puede establecer el campo `site` a `bookdown::bookdown_site` en los metadatos YAML del documento R Markdown llamado `index.Rmd, por ejemplo,
 
@@ -123,7 +123,7 @@ s.setAttribute('data-timestamp', +new Date());
   comments powered by Disqus.</a></noscript>
 ```
 
-Tenga en cuenta que tendrá que reemplazar el nombre `yihui` con su propio nombre de foro (este nombre debe proporcionarse al crear un nuevo foro de Disqus). Puede guardar el código en un archivo HTML denominado, por ejemplo, `disqus.html`. A continuación, puede incrustarlo al final de cada página a través de la opción `after_body` (Figura \@ref(fig: disqus) muestra cómo se ve el área de discusión):
+Tenga en cuenta que tendrá que reemplazar el nombre `yihui` con su propio nombre de foro (este nombre debe proporcionarse al crear un nuevo foro de Disqus). Puede guardar el código en un archivo HTML denominado, por ejemplo, `disqus.html`. A continuación, puede incrustarlo al final de cada página a través de la opción `after_body` (Figura \@ref(fig:disqus) muestra cómo se ve el área de discusión):
 
 ```yaml
 ---

@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="rstudio-connect.html">
 <link rel="next" href="editores.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -211,23 +210,30 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="github" class="section level2">
 <h2><span class="header-section-number">6.2</span> GitHub</h2>
-<p>Puede alojar su libro en GitHub  de forma gratuita a través de GitHub Pages (<a href="https://pages.github.com" class="uri">https://pages.github.com</a>). GitHub sopporta Jekyll (<a href="http://jekyllrb.com" class="uri">http://jekyllrb.com</a>), un constructor de sitios web estático, para construir un sitio web a partir de archivos Markdown. Ese puede ser el caso de uso más común de GitHub pages, pero GitHub también es compatible con archivos HTML estáticos arbitrarios, por ende puede albergar los archivos de salida HTML de su libro en GitHub.</p>
-<p>Un enfoque para publicar su libro como un sitio de GitHub Pages de una carpeta <code>/docs</code> en su rama <code>master</code> como se describe en [GitHub Ayuda] (<a href="http://bit.ly/2cvloKV" class="uri">http://bit.ly/2cvloKV</a>). En primer lugar establecer el directorio de salida de su libro para que sea <code>/docs</code> añadiendo la línea <code>output_dir: &quot;docs&quot;</code> al archivo de configuración <code>_bookdown.yml</code>. A continuación, después de empujar los cambios en GitHub ir a la configuración de su repositorio y en “GitHub Pages” cambiar la “Fuente” por “rama maestra / carpeta de documentos”.</p>
+<p>Puede alojar su libro en GitHub  de forma gratuita a través de GitHub Pages (<a href="https://pages.github.com" class="uri">https://pages.github.com</a>). GitHub sopporta Jekyll (<a href="http://jekyllrb.com" class="uri">http://jekyllrb.com</a>), un constructor de sitios web estático, para construir un sitio web a partir de archivos Markdown. Ese puede ser el caso de uso más común de GitHub pages, pero GitHub también es compatible con archivos HTML estáticos arbitrarios, por ende puede albergar los archivos de salida HTML de su libro en GitHub. La clave es crear un archivo oculto <code>.nojekyll</code> que le indique a GitHub que su sitio web no se construirá a través de Jekyll, ya que el resultado HTML de bookdown ya es un sitio web independiente.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># se asume que ha inicializado el repositorio de git,</span>
+<span class="co"># y en este momento se encuentra en el directorio del repositorio del libro</span>
+
+<span class="co"># crear un archivo oculto .nojekyll</span>
+<span class="fu">touch</span> .nojekyll
+<span class="co"># agregar a git aquí porque no se mostrará en RStudio</span>
+<span class="fu">git</span> add .nojekyll</code></pre></div>
+<p>Si está en Windows, es posible que no tenga el comando <code>touch</code>, puede crear el archivo en R usando `file.create(‘.nojekyll’).</p>
+<p>Un enfoque es publicar su libro como un sitio en GitHub Pages desde una carpeta <code>/docs</code> en su rama principal <code>master</code> como se describe en <a href="http://bit.ly/2cvloKV">GitHub Help.</a>. Primero, configure el directorio de salida de su libro para que sea <code>/docs</code> agregando la línea <code>output_dir: &quot;docs&quot;</code> al archivo de configuración <code>_bookdown.yml</code>. Luego, después de enviar sus cambios a GitHub, vaya a la configuración de su repositorio y en “GitHub Pages” cambie el “Source” para que sea “master branch /docs folder”. En este caso, el archivo <code>.nojekyll</code> tiene que estar en la carpeta <code>/docs</code>.</p>
 <p>Un enfoque alternativo es crear una rama <code>gh-pages</code> en su repositorio, construir el libro, poner la salida HTML (incluyendo todos los recursos externos, como imágenes, CSS y archivos JavaScript) en esta rama, y empujar la rama al repositorio remoto. Si el repositorio de libro no tiene la rama <code>gh-pages</code>, puede utilizar los siguientes comandos para crear una:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># assume you have initialized the git repository,</span>
-<span class="co"># and are under the directory of the book repository now</span>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># se asume que ha inicializado el repositorio git,</span>
+<span class="co"># y en este momento se encuentra en el directorio del repositorio del libro</span>
 
-<span class="co"># create a branch named gh-pages and clean up everything</span>
-<span class="kw">git</span> checkout --orphan gh-pages
-<span class="kw">git</span> rm -rf .
+<span class="co"># crear una rama llamada gh-pages y limpiar todo</span>
+<span class="fu">git</span> checkout --orphan gh-pages
+<span class="fu">git</span> rm -rf .
 
-<span class="co"># create a hidden file .nojekyll</span>
-<span class="kw">touch</span> .nojekyll
-<span class="kw">git</span> add .nojekyll
+<span class="co"># crear un archivo aoculto .nojekyll</span>
+<span class="fu">touch</span> .nojekyll
+<span class="fu">git</span> add .nojekyll
 
-<span class="kw">git</span> commit -m<span class="st">&quot;Initial commit&quot;</span>
-<span class="kw">git</span> push origin gh-pages</code></pre></div>
-<p>El archivo oculto <code>.nojekyll</code> le dice a GitHub que su sitio web no debe ser construido a través de Jekyll, ya que la salida <strong>bookdown</strong> HTML ya es un sitio web independiente. Si está en Windows, puede que no tenga el comando <code>touch</code>, y sólo se pueda crear el archivo en R usando <code>file.create('.nojekyll')</code>.</p>
+<span class="fu">git</span> commit -m<span class="st">&quot;Initial commit&quot;</span>
+<span class="fu">git</span> push origin gh-pages</code></pre></div>
 <p>Después de haber configurado GIT, el resto del trabajo puede ser automatizado a través de una secuencia de comandos (Shell, R o Makefile, dependiendo de su preferencia). Básicamente, se compila el libro a HTML, a continuación, ejecuta los comandos git para empujar los archivos en GitHub, pero es probable que no quiera hacer esto una y otra vez de forma manual y localmente. Puede ser muy útil para automatizar el proceso de publicación por completo en la nube, por lo que una vez que se haya configurado correctamente, todo lo que tiene que hacer ahora es escribir el libro y empujar los archivos de origen Rmd a GitHub, y su libro siempre será construido de forma automática y publicado hacia el servidor.</p>
 <p>Un servicio que se puede utilizar es Travis CI (<a href="https://travis-ci.org" class="uri">https://travis-ci.org</a>). . Es libre para repositorios públicos en GitHub, y fue diseñado para la integración continua (CI) de los paquetes de software. Travis CI se puede conectar a GitHub en el sentido de que cada vez que se empuja a GitHub, Travis puede ser activado para ejecutar ciertos comandos/scripts en la versión más reciente de su repositorio.<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a> Estos comandos se especifican en un archivo YAML llamado <code>.travis.yml</code> en el directorio raíz de su repositorio, y están por lo general con el propósito de pruebas de software, pero en realidad son bastante abiertos, lo que significa que puede ejecutar arbitrariamente programas en una máquina Travis (virtual). Esto significa que sin duda puede ejecutar sus propios scripts para construir su libro sobre Travis. <em>Nota</em>: Travis sólo es compatible con Ubuntu y Mac OS X en este momento, por lo que debe tener algunos conocimientos básicos acerca de los comandos de Linux/Unix.</p>
 <p>La siguiente pregunta es, cómo publicar el libro construido sobre Travis a GitHub? Básicamente tiene que conceder acceso de escritura a Travis a su repositorio GitHub. Esta autorización se puede hacer a través de varias maneras, y la más fácil a los principiantes puede ser una señal de acceso personal. A continuación se presentan algunos pasos que puede seguir:</p>
@@ -237,25 +243,26 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <li>Puede clonar esta rama <code>gh-pages</code> en Travis utilizando el token de GitHub, añadir los archivos HTML de salida de R Markdown (no se olvide de añadir figuras y archivos de estilo CSS, también), y empujar al repositorio remoto.</li>
 </ol>
 <p>Suponga que usted está en la rama <code>master</code> en este momento (donde pone los archivos de origen Rmd), y ha compilado el libro en el directorio <code>_book</code>. Lo que puede hacer al lado de Travis es:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># configure your name and email if you have not done so</span>
-<span class="kw">git</span> config --global user.email <span class="st">&quot;you@example.com&quot;</span>
-<span class="kw">git</span> config --global user.name <span class="st">&quot;Your Name&quot;</span>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># configure su nombre y email si no lo ha hecho anteriormente</span>
+<span class="fu">git</span> config --global user.email <span class="st">&quot;you@example.com&quot;</span>
+<span class="fu">git</span> config --global user.name <span class="st">&quot;Your Name&quot;</span>
 
-<span class="co"># clone the repository to the book-output directory</span>
-<span class="kw">git</span> clone -b gh-pages \
-  https://<span class="ot">${GITHUB_PAT}</span>@github.com/<span class="ot">${TRAVIS_REPO_SLUG}</span>.git \
+<span class="co"># clone el repository al directorio de salida del libro</span>
+<span class="fu">git</span> clone -b gh-pages \
+  https://<span class="va">${GITHUB_PAT}</span>@github.com/<span class="va">${TRAVIS_REPO_SLUG}</span>.git \
   book-output
-<span class="kw">cd</span> book-output
-<span class="kw">cp</span> -r ../_book/* ./
-<span class="kw">git</span> add --all *
-<span class="kw">git</span> commit -m<span class="st">&quot;Update the book&quot;</span>
-<span class="kw">git</span> push origin gh-pages</code></pre></div>
+<span class="bu">cd</span> book-output
+<span class="fu">git</span> rm -rf *
+<span class="fu">cp</span> -r ../_book/* ./
+<span class="fu">git</span> add --all *
+<span class="fu">git</span> commit -m<span class="st">&quot;Update the book&quot;</span>
+<span class="fu">git</span> push origin gh-pages</code></pre></div>
 <p>El nombre de la variable <code>GITHUB_PAT</code> y el nombre del directorio <code>book-output</code> son arbitrarios, y se puede usar cualquier nombre que desee, siempre y cuando los nombres no entren en conflicto con los nombres de variables de entorno existentes o nombres de directorio. Esta secuencia de comandos, junto con la escritura de la estructura mencionamos en la sección <a href="#construir-el-libro"><strong>??</strong></a>, se puede poner en la rama <code>master</code> como scripts de shell, por ejemplo, puede nombrarlos a ellos como <code>_build.sh</code> y <code>_deploy.sh</code>. Luego, su <code>.travis.yml</code> puede tener este aspecto:</p>
-<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">language:</span> r
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">language:</span><span class="at"> r</span>
 
 <span class="fu">env:</span>
   <span class="fu">global:</span>
-    <span class="kw">-</span> <span class="fu">secure:</span> A_LONG_ENCRYPTED_STRING
+    <span class="kw">-</span> <span class="fu">secure:</span><span class="at"> A_LONG_ENCRYPTED_STRING</span>
 
 <span class="fu">before_script:</span>
   <span class="kw">-</span> chmod +x ./_build.sh
@@ -272,13 +279,13 @@ Version: 0.0.1
 Imports: bookdown, ggplot2
 Remotes: rstudio/bookdown</code></pre>
 <p>Si se utiliza la <a href="https://docs.travis-ci.com/user/workers/container-based-infrastructure/">infraestructura basada en contenedores</a> de Travis, puede habilitar el almacenamiento en caché mediante el uso de <code>sudo:false</code> en <code>.travis.yml</code>. Normalmente debería almacenar en caché al menos dos tipos de directorios: el directorio de la figura (por ejemplo, <code>_main_files</code>) y el directorio de caché (por ejemplo,<code>_main_cache</code>). Estos nombres de los directorios también pueden ser diferentes si se ha especificado las opciones del chunk <strong>knitr</strong> `<code>`fig.path</code> y <code>cache.path</code>, pero se recomienda encarecidamente que no cambie estas opciones. Los directorios de las figuras y de caché se almacenan en el directorio <code>_bookdown_files</code> del directorio raíz del libro. Un archivo <code>.travis.yml</code> que ha permitido el almacenamiento en caché de la figura <strong>knitr</strong> los y directorios de caché pueden tener configuraciones adicionales<code>`sudo</code> y <code>cache</code> como este:</p>
-<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">sudo:</span> false
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">sudo:</span><span class="at"> false</span>
 
 <span class="fu">cache:</span>
-  <span class="fu">packages:</span> yes
+  <span class="fu">packages:</span><span class="at"> yes</span>
   <span class="fu">directories:</span>
     <span class="kw">-</span> $TRAVIS_BUILD_DIR/_bookdown_files</code></pre></div>
-<p>Si el libro consume mucho tiempo para construir, puede utilizar las configuraciones anteriores de Travis para ahorrar tiempo. Note que <code>paquetes: yes</code> significa que los paquetes instalados en R Travis también están almacenados en caché.</p>
+<p>Si el libro consume mucho tiempo para construir, puede utilizar las configuraciones anteriores de Travis para ahorrar tiempo. Note que <code>packages: yes</code> significa que los paquetes instalados en R Travis también están almacenados en caché.</p>
 <p>Todas las secuencias de comandos y configuraciones anteriores se pueden encontrar en el repositorio <code>bookdown-demo</code>: <a href="https://github.com/rstudio/bookdown-demo/" class="uri">https://github.com/rstudio/bookdown-demo/</a>. Si los copia a su propio repositorio, por favor recuerde que debe cambiar la tecla <code>secure</code> en <code>.travis.yml</code> usando su propia variable de cifrado <code>GITHUB_PAT</code>.</p>
 <p>GitHub y Travis CI ciertamente no son las únicas opciones para construir y publicar su libro. Usted es libre para almacenar y publicar el libro en su propio servidor.</p>
 </div>
@@ -294,8 +301,9 @@ Remotes: rstudio/bookdown</code></pre>
         </div>
       </div>
 <a href="rstudio-connect.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="editores.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="editores.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -304,11 +312,11 @@ Remotes: rstudio/bookdown</code></pre>
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -325,7 +333,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown06-publishing.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -338,7 +346,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

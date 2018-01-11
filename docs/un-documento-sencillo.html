@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="e-books.html">
 <link rel="next" href="personalizacion.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -214,7 +213,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>A veces, puede que no desee escribir un libro, sino un simple artículo de formato largo o un reporte. Por lo general, lo que se hace es llamar a <code>rmarkdown::render()</code> con un determinado formato de salida. Las principales características que faltan son la numeración automática de títulos de figuras/tablas y referenciación cruzada de figuras/tablas/secciones. Se han descartado estas características en <strong>bookdown</strong> para que puedan utilizarse sin tener que preparar un libro de varios archivos Rmd.</p>
 <p>Las funciones <code>html_document2()</code>, <code>tufte_html2()</code>, <code>pdf_document2()</code>, <code>word_document2()</code>, <code>tufte_handout2()</code> y <code>tufte_book2()</code> están diseñadas para estos propósitos. Si se procesa un documento R Markdown con el formato de salida, por ejemplo, <code>bookdown::html_document2</code>, se obtendrán números de figuras/tablas y podrán referenciarse cruzadamente en una simple página HTML usando la sintaxis descrita en el capítulo <a href="componentes.html#componentes">2</a>.</p>
 <p>Las funciones de formato de salida HTML y PDF anteriores son básicamente envolturas de formatos de salida <code>bookdown::html_book</code> y <code>bookdown::pdf_book</code>, en el sentido de que cambiaron el argumento <code>base_format</code>. Por ejemplo, puede echar un vistazo al código fuente de <code>pdf_document2</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bookdown::pdf_document2</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bookdown<span class="op">::</span>pdf_document2</code></pre></div>
 <pre><code>## function (...) 
 ## {
 ##     pdf_book(..., base_format = rmarkdown::pdf_document)
@@ -222,8 +221,8 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 ## &lt;environment: namespace:bookdown&gt;</code></pre>
 <p>Después de conocer este hecho, puede aplicar la misma idea a otros formatos de salida mediante el <code>base_format</code> apropiado. Por ejemplo, puede portar las características <strong>bookdown</strong> al formato <code>jss_article</code> en el paquete <strong>rticles</strong> <span class="citation">(<span class="citeproc-not-found" data-reference-id="R-rticles"><strong>???</strong></span>)</span> usando los metadatos YAML:</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:pdf_book:
-    <span class="fu">base_format:</span> rticles::jss_article</code></pre></div>
+  <span class="fu">bookdown:</span><span class="at">:pdf_book:</span>
+    <span class="fu">base_format:</span><span class="at"> rticles::jss_article</span></code></pre></div>
 <p>A continuación, podrá utilizar todas las funciones que hemos introducido en el capítulo <a href="componentes.html#componentes">2</a>.</p>
 <p>Aunque el formato <code>gitbook()</code> fue diseñado principalmente para libros, en realidad se puede también aplicar a un simple documento R Markdown. La única diferencia es que no habrá ningún botón de búsqueda en la salida de una página, ya que simplemente puede utilizar la herramienta de búsqueda de su navegador web para buscar texto (por ejemplo, pulse <code>Ctrl + F</code> o <code>Command + F</code>). También puede configurar la opción <code>split_by</code> con <code>none</code> para generar una página de salida única, en cuyo caso no habrá ningún botón de navegación, ya que no hay otras páginas para navegar. Aun es posible generar archivos HTML de varias páginas si se desea. Otra opción posible es utilizar `self_contained = TRUE cuando sólo es una página de salida.</p>
 
@@ -235,8 +234,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="e-books.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="personalizacion.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="personalizacion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -245,11 +245,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -266,7 +266,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown03-formats.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -279,7 +279,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

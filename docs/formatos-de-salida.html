@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="paginas-web-y-aplicaciones-shiny.html">
 <link rel="next" href="html.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -211,34 +210,34 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="formatos-de-salida" class="section level1">
 <h1><span class="header-section-number">Capítulo 3</span> Formatos de salida</h1>
-<p>El paquete <strong>bookdown</strong> <a href="tablas.html#tablas">tablita</a> es compatible principalmente con tres tipos de formatos de salida: HTML, LaTeX/PDF y e-books. En este capítulo presentamos las opciones posibles para estos formatos. Los formatos de salida pueden especificarse en los metadatos YAML del primer archivo Rmd del libro o en un archivo YAML por separado llamado <code>_output.yml</code> que se encuentra en el directorio raíz del libro. Un breve ejemplo de los primeros (los formatos de salida que se especifican en el campo <code>output</code> de los metadatos YAML) es:</p>
+<p>El paquete <strong>bookdown</strong> es compatible principalmente con tres tipos de formatos de salida: HTML, LaTeX/PDF y e-books. En este capítulo presentamos las opciones posibles para estos formatos. Los formatos de salida pueden especificarse en los metadatos YAML del primer archivo Rmd del libro o en un archivo YAML por separado llamado <code>_output.yml</code> que se encuentra en el directorio raíz del libro. Un breve ejemplo de los primeros (los formatos de salida que se especifican en el campo <code>output</code> de los metadatos YAML) es:</p>
 <div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
-<span class="fu">title:</span> <span class="st">&quot;Un libro impresionante&quot;</span>
-<span class="fu">author:</span> <span class="st">&quot;Martín Macías y Prof. Daniel Rodríguez&quot;</span>
+<span class="fu">title:</span><span class="at"> </span><span class="st">&quot;Un libro impresionante&quot;</span>
+<span class="fu">author:</span><span class="at"> </span><span class="st">&quot;Martín Macías y Prof. Daniel Rodríguez&quot;</span>
 <span class="fu">output:</span>
-  <span class="fu">bookdown:</span>:gitbook:
-    <span class="fu">lib_dir:</span> assets
-    <span class="fu">split_by:</span> section
+  <span class="fu">bookdown:</span><span class="at">:gitbook:</span>
+    <span class="fu">lib_dir:</span><span class="at"> assets</span>
+    <span class="fu">split_by:</span><span class="at"> section</span>
     <span class="fu">config:</span>
       <span class="fu">toolbar:</span>
-        <span class="fu">position:</span> static
-  <span class="fu">bookdown:</span>:pdf_book:
-    <span class="fu">keep_tex:</span> yes
-  <span class="fu">bookdown:</span>:html_book:
-    <span class="fu">css:</span> toc.css
-<span class="fu">documentclass:</span> book
+        <span class="fu">position:</span><span class="at"> static</span>
+  <span class="fu">bookdown:</span><span class="at">:pdf_book:</span>
+    <span class="fu">keep_tex:</span><span class="at"> yes</span>
+  <span class="fu">bookdown:</span><span class="at">:html_book:</span>
+    <span class="fu">css:</span><span class="at"> toc.css</span>
+<span class="fu">documentclass:</span><span class="at"> book</span>
 <span class="ot">---</span></code></pre></div>
 <p>Un ejemplo del archivo <code>_output.yml</code> es:</p>
-<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">bookdown:</span>:gitbook:
-  <span class="fu">lib_dir:</span> assets
-  <span class="fu">split_by:</span> section
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">bookdown:</span><span class="at">:gitbook:</span>
+  <span class="fu">lib_dir:</span><span class="at"> assets</span>
+  <span class="fu">split_by:</span><span class="at"> section</span>
   <span class="fu">config:</span>
     <span class="fu">toolbar:</span>
-      <span class="fu">position:</span> static
-<span class="fu">bookdown:</span>:pdf_book:
-  <span class="fu">keep_tex:</span> yes
-<span class="fu">bookdown:</span>:html_book:
-  <span class="fu">css:</span> toc.css</code></pre></div>
+      <span class="fu">position:</span><span class="at"> static</span>
+<span class="fu">bookdown:</span><span class="at">:pdf_book:</span>
+  <span class="fu">keep_tex:</span><span class="at"> yes</span>
+<span class="fu">bookdown:</span><span class="at">:html_book:</span>
+  <span class="fu">css:</span><span class="at"> toc.css</span></code></pre></div>
 <p>En este caso, todos los formatos deben estar en el nivel superior, en vez de estar bajo un campo <code>output</code>. En el archivo <code>_output.yml</code> no necesita usar tres guiones <code>---</code> .</p> 
 </div>
             </section>
@@ -247,8 +246,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="paginas-web-y-aplicaciones-shiny.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="html.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="html.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -257,11 +257,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -278,7 +278,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown03-formats.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -291,7 +291,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="publicacion.html">
 <link rel="next" href="github.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -213,10 +212,10 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">6.1</span> RStudio Connect</h2>
 <p>En teoría, se puede compilar el libro por sí mismo y publicar la salida de cualquier lugar que desee. Por ejemplo, puede alojar los archivos HTML en su propio servidor web. Se ha proporcionado una función <code>publish_book()</code> en <strong>bookdown</strong> para que sea muy simple cargar su libro en <a href="https://bookdown.org" class="uri">https://bookdown.org</a>, que es un sitio web proporcionado por RStudio para alojar sus libros de forma gratuita.  Este sitio web está construido con base en <a href="https://www.rstudio.com/products/connect/">“RStudio Connect”</a> , un producto de RStudio que le permite implementar una variedad de aplicaciones relacionadas con R hacia un servidor, incluyendo documentos R Markdown, aplicaciones Shiny, gráficos de R, etc.</p>
 <p>No tiene que saber mucho sobre RStudio Connect para publicar su libro en bookdown.org. Básicamente, sólo tiene que registrarse en <a href="https://bookdown.org/connect/" class="uri">https://bookdown.org/connect/</a>, y la primera vez que intente ejecutar <code>bookdown::publish_book()</code>, se le pedirá autorizar <strong>bookdown</strong> publicar en su cuenta bookdown.org. En el futuro, sólo tiene que llamar <code>publish_book()</code> de nuevo y <strong>bookdown</strong> ya no pedirá nada.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">publish_book</span>(<span class="dt">name =</span> <span class="ot">NULL</span>, <span class="dt">account =</span> <span class="ot">NULL</span>, <span class="dt">server =</span> <span class="ot">NULL</span>, 
-  <span class="dt">render =</span> <span class="kw">c</span>(<span class="st">&quot;none&quot;</span>, <span class="st">&quot;local&quot;</span>, <span class="st">&quot;server&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">publish_book</span>(<span class="dt">name =</span> <span class="ot">NULL</span>, <span class="dt">account =</span> <span class="ot">NULL</span>,
+  <span class="dt">server =</span> <span class="ot">NULL</span>, <span class="dt">render =</span> <span class="kw">c</span>(<span class="st">&quot;none&quot;</span>, <span class="st">&quot;local&quot;</span>, <span class="st">&quot;server&quot;</span>))</code></pre></div>
 <p>El único argumento de <code>publish_book()</code> que es posible que desee tocar es <code>render</code>. Este determina si desea procesar el libro antes de publicar. Si ha ejecutado <code>render_book()</code> antes, no es necesario cambiar este argumento, de lo contrario puede configurarlo para que quede <code>'local'</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bookdown::<span class="kw">publish_book</span>(<span class="dt">render =</span> <span class="st">&#39;local&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bookdown<span class="op">::</span><span class="kw">publish_book</span>(<span class="dt">render =</span> <span class="st">&#39;local&#39;</span>)</code></pre></div>
 <p>Si ha establecido su propio servidor RStudio Connect, sin duda puede publicar el libro a ese servidor en lugar de en bookdown.org.</p>
 </div>
             </section>
@@ -225,8 +224,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="publicacion.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="github.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="github.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -235,11 +235,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -256,7 +256,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown06-publishing.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -269,7 +269,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

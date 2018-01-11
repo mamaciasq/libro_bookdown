@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="latexpdf.html">
 <link rel="next" href="un-documento-sencillo.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -215,10 +214,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <div id="epub" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> EPUB</h3>
 <p>Para crear un libro EPUB, puede utilizar el formato <code>epub_book()</code>. Este formato tiene algunas opciones en común con <code>rmarkdown::html_document()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">epub_book</span>(<span class="dt">fig_width =</span> <span class="dv">5</span>, <span class="dt">fig_height =</span> <span class="dv">4</span>, <span class="dt">dev =</span> <span class="st">&quot;png&quot;</span>, <span class="dt">fig_caption =</span> <span class="ot">TRUE</span>, 
-  <span class="dt">number_sections =</span> <span class="ot">TRUE</span>, <span class="dt">toc =</span> <span class="ot">FALSE</span>, <span class="dt">toc_depth =</span> <span class="dv">3</span>, 
-  <span class="dt">stylesheet =</span> <span class="ot">NULL</span>, <span class="dt">cover_image =</span> <span class="ot">NULL</span>, <span class="dt">metadata =</span> <span class="ot">NULL</span>, 
-  <span class="dt">chapter_level =</span> <span class="dv">1</span>, <span class="dt">epub_version =</span> <span class="kw">c</span>(<span class="st">&quot;epub3&quot;</span>, <span class="st">&quot;epub&quot;</span>), 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">epub_book</span>(<span class="dt">fig_width =</span> <span class="dv">5</span>, <span class="dt">fig_height =</span> <span class="dv">4</span>, <span class="dt">dev =</span> <span class="st">&quot;png&quot;</span>,
+  <span class="dt">fig_caption =</span> <span class="ot">TRUE</span>, <span class="dt">number_sections =</span> <span class="ot">TRUE</span>,
+  <span class="dt">toc =</span> <span class="ot">FALSE</span>, <span class="dt">toc_depth =</span> <span class="dv">3</span>, <span class="dt">stylesheet =</span> <span class="ot">NULL</span>,
+  <span class="dt">cover_image =</span> <span class="ot">NULL</span>, <span class="dt">metadata =</span> <span class="ot">NULL</span>,
+  <span class="dt">chapter_level =</span> <span class="dv">1</span>, <span class="dt">epub_version =</span> <span class="kw">c</span>(<span class="st">&quot;epub3&quot;</span>, <span class="st">&quot;epub&quot;</span>),
   <span class="dt">md_extensions =</span> <span class="ot">NULL</span>, <span class="dt">pandoc_args =</span> <span class="ot">NULL</span>)</code></pre></div>
 <p>La opción <code>toc</code> se deshabilita debido a que el lector de libros electrónicos puede determinar a menudo una tabla de contenido de forma automática desde el libro, por lo que no es necesario añadir unas pocas páginas para la tabla de contenido. Hay algunas opciones específicas para EPUB:</p>
 <ul>
@@ -233,8 +233,8 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="mobi" class="section level3">
 <h3><span class="header-section-number">3.3.2</span> MOBI</h3>
-<p>Los libros electrónicos MOBI pueden leerse en dispositivos Kindle de Amazon. Pandoc no es compatible con la salida MOBI de forma nativa, pero Amazon ha proporcionado una herramienta llamada KindleGen (<a href="https://www.amazon.com/gp/feature.html?docId=1000765211" class="uri">https://www.amazon.com/gp/feature.html?docId=1000765211</a>) para crear libros MOBI de otros formatos, incluyendo EPUB y HTML. Hemos proporcionado una simple función de contenedor <code>KindleGen()</code> en <strong>bookdown</strong> para llamar KindleGen con el fin de convertir un libro EPUB a MOBI. Esto requiere que se descargue primero KindleGen, y asegurarse de que el ejecutable KindleGen se pueda encontrar a través de la variable de entorno de sistema <code>path</code>.</p>
-<p>Otra herramienta para convertir EPUB a MOBI es proporcionada por Calibre. A diferencia de KindleGen, Calibre es de código abierto y libre, y soporta la conversión entre muchos más formatos. Por ejemplo, se puede convertir HTML a EPUB, documentos de Word a MOBI, etc. La función <code>calibre()</code> en <strong>bookdown</strong> es una función de contenedor de la utilidad de línea de comandos <code>ebook-convert</code> en Calibre. Del mismo modo, es necesario asegurarse de que el ejecutable <code>ebook-convert</code> se pueda encontrar a través de la variable de entorno <code>path</code>. Si utiliza OS X, puede instalar tanto KindleGen como Calibre a través de Homebrew-Cask (<a href="https://caskroom.github.io" class="uri">https://caskroom.github.io</a>), por lo que no necesita preocuparse por el problema <code>path</code>.</p>
+<p>Los libros electrónicos MOBI pueden leerse en dispositivos Kindle de Amazon. Pandoc no es compatible con la salida MOBI de forma nativa, pero Amazon ha proporcionado una herramienta llamada KindleGen (<a href="https://www.amazon.com/gp/feature.html?docId=1000765211" class="uri">https://www.amazon.com/gp/feature.html?docId=1000765211</a>) para crear libros MOBI de otros formatos, incluyendo EPUB y HTML. Hemos proporcionado una simple función de contenedor <code>KindleGen()</code> en <strong>bookdown</strong> para llamar KindleGen con el fin de convertir un libro EPUB a MOBI. Esto requiere que se descargue primero KindleGen, y asegurarse de que el ejecutable KindleGen se pueda encontrar a través de la variable de entorno de sistema <code>PATH</code>.</p>
+<p>Otra herramienta para convertir EPUB a MOBI es proporcionada por Calibre. A diferencia de KindleGen, Calibre es de código abierto y libre, y soporta la conversión entre muchos más formatos. Por ejemplo, se puede convertir HTML a EPUB, documentos de Word a MOBI, etc. La función <code>calibre()</code> en <strong>bookdown</strong> es una función de contenedor de la utilidad de línea de comandos <code>ebook-convert</code> en Calibre. Del mismo modo, es necesario asegurarse de que el ejecutable <code>ebook-convert</code> se pueda encontrar a través de la variable de entorno <code>PATH</code>. Si utiliza OS X, puede instalar tanto KindleGen como Calibre a través de Homebrew-Cask (<a href="https://caskroom.github.io" class="uri">https://caskroom.github.io</a>), por lo que no necesita preocuparse por el problema <code>PATH</code>.</p>
 </div>
 </div>
             </section>
@@ -243,8 +243,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="latexpdf.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="un-documento-sencillo.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="un-documento-sencillo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -253,11 +254,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -274,7 +275,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown03-formats.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -287,7 +288,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

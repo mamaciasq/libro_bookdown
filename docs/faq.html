@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>bookdown: Escritura de libros y documentos técnicos con R Markdown</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Este es un pequeño ejemplo de usar el paquete bookdown para escribir un libro. El formato de salida para este ejemmplo es bookdown::gitbook.">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="bookdown: Escritura de libros y documentos técnicos con R Markdown" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2017-02-10">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="r-markdown.html">
 <link rel="next" href="referencias.html">
-
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -98,6 +96,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -214,7 +213,8 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>A continuación se muestra la lista <em>completa</em> de preguntas frecuentes (FAQ). Sí, sólo hay una pregunta aquí. Personalmente no me gustan las preguntas frecuentes. A menudo significan sorpresas, y las sorpresas no son buenas para los usuarios de software.</p>
 <ol style="list-style-type: decimal">
 <li><p>P: <strong>bookdown</strong> tendrá características X, Y, y Z?</p>
-<p>R: La respuesta corta es no, pero si usted se ha hecho esta pregunta tres veces: “¿Realmente lo necesito”, y la respuesta sigue siendo “sí”, no dude en presentar una solicitud de función en <a href="https://github.com/rstudio/bookdown/issues" class="uri">https://github.com/rstudio/bookdown/issues</a>. Los usuarios que solicitan más funciones a menudo provienen del mundo LaTeX. Si ese es el caso suyo, la respuesta a esta pregunta es sí, porque Markdown Pandoc apoya código LaTeX sin procesar. Siempre que sienta que Markdown no puede hacer el trabajo por usted, siempre tiene la opción de aplicar un código LaTeX sin procesar en su documento de Markdown. Por ejemplo, puede crear glosarios utilizando el paquete <strong>glossaries</strong> o incrustar una tabla LaTeX complicada, siempre y cuando conozca la sintaxis de LaTeX. Sin embargo, tenga en cuenta que el contenido de LaTeX no es portátil. Sólo funcionará para la salida LaTeX/PDF, y se ignorará en otros tipos de salida. Dependiendo de la solicitud, podemos introducir algunas características más de LaTeX en <strong>bookdown</strong> en el futuro, pero nuestra filosofía general es que Markdown debe mantenerse tan simple como sea posible.</p></li>
+<p>R: La respuesta corta es no, pero si usted se ha hecho esta pregunta tres veces: “¿Realmente lo necesito”, y la respuesta sigue siendo “sí”, no dude en presentar una solicitud de función en <a href="https://github.com/rstudio/bookdown/issues" class="uri">https://github.com/rstudio/bookdown/issues</a>.</p>
+<p>Los usuarios que solicitan más funciones a menudo provienen del mundo LaTeX. Si ese es el caso suyo, la respuesta a esta pregunta es sí, porque Markdown Pandoc apoya código LaTeX sin procesar. Siempre que sienta que Markdown no puede hacer el trabajo por usted, siempre tiene la opción de aplicar un código LaTeX sin procesar en su documento de Markdown. Por ejemplo, puede crear glosarios utilizando el paquete <strong>glossaries</strong> o incrustar una tabla LaTeX complicada, siempre y cuando conozca la sintaxis de LaTeX. Sin embargo, tenga en cuenta que el contenido de LaTeX no es portátil. Sólo funcionará para la salida LaTeX/PDF, y se ignorará en otros tipos de salida. Dependiendo de la solicitud, podemos introducir algunas características más de LaTeX en <strong>bookdown</strong> en el futuro, pero nuestra filosofía general es que Markdown debe mantenerse tan simple como sea posible.</p></li>
 </ol>
 <p>Lo más difícil en el mundo no es aprender tecnologías fantásticas, sino controlar su propio corazón salvaje.</p>
 
@@ -225,8 +225,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="r-markdown.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="referencias.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook/js/app.min.js"></script>
 <script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
@@ -235,11 +236,11 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "weibo": false,
@@ -256,7 +257,7 @@ gitbook.start({
 "link": "https://github.com/mamaciasq/libro_bookdown09-faq.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "toc": {
 "collapse": "subsection"
 }
@@ -269,7 +270,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);
